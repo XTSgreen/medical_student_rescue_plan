@@ -1,0 +1,141 @@
+<!---如你所见,这是目前互联网前端开发最常见且最原始的文件形式,html文件,这行代码左右两端的大于号、小于号和横杠是html文件的注释形式--->
+<!---简单的说，前端开发就是负责创建网站或网页类应用中用户所能看到的那一部分的工程--->
+<!---例如你在bilibili.com中能看到的布局、按钮、颜色、图片等可视化界面,以及你对网站进行的点击、滑动、输入等交互过程,这些都是前端开发涵盖的部分--->
+
+<!---前端开发依赖的三种核心技术：--->
+  <!---1,HTML(HyperText Markup Language)
+规范属性：一种基于SGML的标记语言，当前由WHATWG维护的HTML Living Standard定义,W3C同步发布快照版本。其核心是定义文档的结构化语义与元素类型，通过标签构建内容层次。
+解析模型：浏览器解析 HTML 生成 DOM（文档对象模型）树,作为后续样式计算、布局和脚本执行的底层数据接口。HTML 元素支持全局属性和内容模型，确保语义化与可访问性。
+工程化角色：作为 Web 应用的骨架，与 CSSOM 结合形成渲染树，同时承载前端框架的挂载点。现代 HTML 还支持 Web Components（自定义元素、Shadow DOM）以实现组件化封装。--->
+  <!---2,CSS (Cascading Style Sheets)
+规范属性：一种声明式的样式表语言，由W3C分模块维护,如CSS2.1、CSS3各模块。其核心机制是级联与继承，通过选择器将样式规则绑定到DOM元素，控制视觉呈现。
+渲染模型：浏览器解析CSS生成CSS树，与DOM合并为渲染树，经过布局、绘制和合成最终显示。支持盒模型、浮动、定位、Flexbox与Grid布局，以及变换、过渡和关键帧动画。
+工程化角色：负责表示层的分离，实现响应式设计、主题切换和性能优化。在现代工程中常通过预处理器或 CSS-in-JS 方案增强可维护性。--->
+  <!---3,JavaScript (JS)
+规范属性：一种动态类型、基于原型的高级脚本语言，核心规范由ECMA International的TC39委员会维护，即ECMAScript标准。支持多范式：面向对象、函数式、事件驱动。
+运行时模型：在浏览器中由JavaScript引擎解释/编译执行。通过Web API与宿主环境交互。采用单线程事件循环和任务队列实现非阻塞异步编程。
+工程化角色：作为Web应用的行为层，操作 DOM 树、BOM 对象，实现动态交互与数据流控制。现代工程中广泛使用TypeScript和框架进行大规模应用开发，并通过模块化、构建工具管理依赖。
+--->
+  <!---这三者共同构成Web开发的基石：HTML 定义内容结构与语义，CSS 负责呈现与响应式布局，JavaScript 实现动态逻辑与状态管理。
+  在浏览器渲染管线中，它们依次被解析、组合并最终生成用户交互的界面。--->
+
+<!---我相信以各位医学生贫瘠的计算机知识压根就没听懂上面这三大坨都是什么东西--->
+<!---没关系，上面只是定义，下面是简明易懂的解释，就像你上了临床在按压麦氏点时不会背解剖书，而是会"对着这块按一把"--->
+  <!---
+HTML（超文本标记语言）：负责网页的结构。就像盖房子的框架，用来定义哪里是标题、哪里是段落、哪里放图片。例如 <h1> 表示一级标题，<p> 表示段落。
+CSS（层叠样式表）：负责网页的样式。就像给房子装修，用来设置颜色、字体、大小、布局、动画等。例如让标题变成红色，把导航栏固定在顶部。
+JavaScript：负责网页的行为。就像给房子装上电灯、开关，让页面“动起来”并能响应用户的操作。例如点击按钮弹出提示框、轮播图自动切换、表单验证输入是否为空
+--->
+  <!---光在这里看大概没法理解这些内容，下面我写一个示范文件--->
+  <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端开发示范文件</title>
+    <!---这是一个示范文件，展示了HTML、CSS、JavaScript的基本用法--->
+    <!---你可以在浏览器中打开这个文件，或者在类似于visual studio code等代码编辑器中安装插件”Live Server”查看其效果--->
+    <!---live server的操作方法是：右键html文件，在弹出的菜单中选择”Open with Live Server”，该文件会在你的默认浏览器中打开--->
+    <!---你也可以在这个文件中修改代码，根据需要扩展它--->
+    <!---例如添加更多的HTML元素、CSS样式、JavaScript交互--->
+    <!---你可以在这个文件中学习前端开发的基础知识，为以后的项目打下基础--->
+    <!---我希望你能喜欢它，也能在其中获得乐趣--->
+    <!---祝你早日奔向属于自己的山海！--->
+
+    <!-- CSS部分：负责样式，让页面好看 -->
+    <!---我想你能看出来各个参数，例如background-color、font-family、max-width、margin、padding、color、text-align、border-radius、box-shadow等的意义--->
+    <!---所以在这里我不做展开，另外提醒一下在css部分里不要写注释--->
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+      
+        .demo-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .color-box {
+            width: 100px;
+            height: 100px;
+            background-color: #3498db;
+            margin: 10px auto;
+            transition: background-color 0.3s;
+        }
+        
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #2ecc71;
+        }
+        
+        #message {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <!-- HTML部分：负责结构，定义页面内容 -->
+    <!---html部分看着很短对吧，这是因为它只起到框架的作用，你可以把它理解为段落的分隔符-->
+    <h1>前端开发入门示范</h1>
+    
+    <div class="demo-box">
+        <h2>1. HTML - 页面结构</h2>
+        <p>这是一个段落，用 &lt;p&gt; 标签定义。</p>
+        <p>HTML负责告诉浏览器"这里是什么内容"。</p>
+    </div>
+    
+    <div class="demo-box">
+        <h2>2. CSS - 页面样式</h2>
+        <p>下面的方块颜色由CSS控制：</p>
+        <div class="color-box" id="colorBox"></div>
+        <button onclick="changeColor()">点击换颜色</button>
+    </div>
+    
+    <div class="demo-box">
+        <h2>3. JavaScript - 页面交互</h2>
+        <button onclick="sayHello()">点击打招呼</button>
+        <p id="message"></p>
+    </div>
+    <!---上面的三个div方块对应了网页里你能看到的三个方块，其他参数也很好理解-->
+
+    <!-- JavaScript部分：负责行为，让页面能动 -->
+    <!---本节课只进行简单概念的讲述和理解，后续我们会对html、css、javascript分科进行更详细的讲解-->
+    <!---然而，因为我本人也是一名医学生，所以具体的讲解部分或许会有纰漏，欢迎大家指出-->
+    <!---在这里给大家安利一个前端课程：【3小时前端入门教程（HTML+CSS+JS）】-->
+    <!--- https://www.bilibili.com/video/BV1BT4y1W7Aw/?share_source=copy_web&vd_source=660c08fbdcf5155aa7b9a16127b57693-->
+    <script>
+        function sayHello() {
+            document.getElementById('message').textContent = '你好！欢迎学习前端开发！';
+        }
+        
+        function changeColor() {
+            var colors = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6'];
+            var randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.getElementById('colorBox').style.backgroundColor = randomColor;
+        }
+    </script>
+</body>
+</html>
