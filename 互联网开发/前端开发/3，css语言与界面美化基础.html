@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS语言与界面美化</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.8;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            color: #7f8c8d;
+            margin-top: 30px;
+        }
+        
+        h4 {
+            color: #555;
+            margin-top: 20px;
+        }
+        
+        .demo-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Consolas", "Courier New", monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+        
+        .code-tag { color: #66d9ef; }
+        .code-attr { color: #a6e22e; }
+        .code-value { color: #fd971f; }
+        .code-text { color: #f8f8f2; }
+        .code-comment { color: #75715e; }
+        .code-selector { color: #a6e22e; }
+        .code-property { color: #66d9ef; }
+        
+        .render {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            min-height: 50px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .tip {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .note {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 40px 0;
+        }
+        
+        .demo-element {
+            padding: 10px;
+            margin: 5px;
+            border: 2px solid #3498db;
+            background: #ecf0f1;
+        }
+        
+        .red-box {
+            width: 100px;
+            height: 100px;
+            background: #e74c3c;
+        }
+        
+        .blue-box {
+            width: 100px;
+            height: 100px;
+            background: #3498db;
+        }
+        
+        .green-box {
+            width: 100px;
+            height: 100px;
+            background: #2ecc71;
+        }
+        
+        .container {
+            border: 2px dashed #3498db;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .float-left {
+            float: left;
+            margin: 5px;
+        }
+        
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        .relative-box {
+            position: relative;
+            width: 200px;
+            height: 100px;
+            background: #3498db;
+            color: white;
+        }
+        
+        .absolute-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .fixed-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: #2ecc71;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sticky-box {
+            position: sticky;
+            top: 0;
+            background: #9b59b6;
+            color: white;
+            padding: 15px;
+        }
+        
+        .parent {
+            position: relative;
+            height: 200px;
+            border: 2px solid #3498db;
+            background: #ecf0f1;
+        }
+        
+        .demo-box button:hover {
+            background: #e74c3c !important;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<h1>CSS语言与界面美化</h1>
+
+<p>CSS（Cascading Style Sheets，层叠样式表）用于控制网页的外观和布局。</p>
+
+<hr>
+
+<h2>前置知识：HTML元素关系</h2>
+
+<h3>父元素与子元素</h3>
+
+<p>在HTML文档中，元素之间存在嵌套关系：</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-tag">&lt;div&gt;</span>  ← 父元素（parent）
+    <span class="code-tag">&lt;p&gt;</span>  ← 子元素（child）
+        <span class="code-tag">&lt;span&gt;</span>← 孙子元素
+    <span class="code-tag">&lt;/p&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
+</div>
+</div>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 父元素 */</span>
+<span class="code-selector">div</span> {
+    <span class="code-property">padding</span>: <span class="code-value">20px</span>;
+    <span class="code-property">border</span>: <span class="code-value">2px solid #3498db</span>;
+}
+
+<span class="code-comment">/* 子元素 */</span>
+<span class="code-selector">div &gt; p</span> {
+    <span class="code-property">color</span>: <span class="code-value">red</span>;
+}
+
+<span class="code-comment">/* 孙子元素（所有后代） */</span>
+<span class="code-selector">div p</span> {
+    <span class="code-property">color</span>: <span class="code-value">blue</span>;
+}
+</div>
+
+<div class="render">
+    <div style="padding: 20px; border: 2px solid #3498db;">
+        <p style="margin: 5px;">我是div的子元素p</p>
+        <div style="margin: 5px; padding: 10px; border: 1px dashed #aaa;">
+            我是div的子元素div（也是孙子元素）
+            <p style="margin: 5px;">我是孙子元素p</p>
+        </div>
+    </div>
+</div>
+</div>
+
+<h3>祖元素与后代元素</h3>
+
+<div class="demo-box">
+<p>祖元素（祖先）包含了子元素和孙子元素，后代元素是被嵌套在里面的所有元素。</p>
+
+<div class="code">
+<span class="code-comment">/* 后代选择器：选择div内部所有p元素 */</span>
+<span class="code-selector">div p</span> { }
+
+<span class="code-comment">/* 子选择器：只选择div的直接子元素p */</span>
+<span class="code-selector">div &gt; p</span> { }
+</div>
+</div>
+
+<h3>兄弟元素</h3>
+
+<div class="demo-box">
+<p>兄弟元素是拥有相同父元素的元素：</p>
+
+<div class="code">
+<span class="code-tag">&lt;ul&gt;</span>
+    <span class="code-tag">&lt;li&gt;</span>元素1<span class="code-tag">&lt;/li&gt;</span>  ← li元素2的哥哥
+    <span class="code-tag">&lt;li&gt;</span>元素2<span class="code-tag">&lt;/li&gt;</span>  ← li元素1的弟弟
+<span class="code-tag">&lt;/ul&gt;</span>
+</div>
+
+<div class="render">
+    <ul style="padding-left: 20px;">
+        <li>列表项1（哥哥）</li>
+        <li>列表项2（弟弟）</li>
+    </ul>
+</div>
+</div>
+
+<div class="tip">
+<strong>提示：</strong>理解元素关系对于使用CSS选择器非常重要，尤其是后代选择器（空格）和子选择器（>）的区别。
+</div>
+
+<hr>
+
+<h2>第一部分：CSS选择器</h2>
+
+<h3>什么是CSS选择器？</h3>
+
+<p>选择器用于指定要样式化的HTML元素。</p>
+
+<h3>基本选择器</h3>
+
+<div class="demo-box">
+<table>
+<tr>
+    <th>选择器</th>
+    <th>名称</th>
+    <th>示例</th>
+</tr>
+<tr>
+    <td>元素选择器</td>
+    <td>选择所有指定元素</td>
+    <td>p { }</td>
+</tr>
+<tr>
+    <td>类选择器</td>
+    <td>选择class属性值相同的元素</td>
+    <td>.classname { }</td>
+</tr>
+<tr>
+    <td>ID选择器</td>
+    <td>选择指定id的元素（唯一）</td>
+    <td>#idname { }</td>
+</tr>
+<tr>
+    <td>通配符选择器</td>
+    <td>选择所有元素</td>
+    <td>* { }</td>
+</tr>
+</table>
+</div>
+
+<h3>选择器示例</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 元素选择器：选择所有p标签 */</span>
+<span class="code-selector">p</span> {
+    <span class="code-property">color</span>: <span class="code-value">blue</span>;
+}
+
+<span class="code-comment">/* 类选择器：选择class="red"的元素 */</span>
+<span class="code-selector">.red</span> {
+    <span class="code-property">color</span>: <span class="code-value">red</span>;
+}
+
+<span class="code-comment">/* ID选择器：选择id="header"的元素 */</span>
+<span class="code-selector">#header</span> {
+    <span class="code-property">background</span>: <span class="code-value">gray</span>;
+}
+</div>
+</div>
+
+<h3>组合选择器</h3>
+
+<div class="demo-box">
+<table>
+<tr>
+    <th>选择器</th>
+    <th>名称</th>
+    <th>示例</th>
+</tr>
+<tr>
+    <td>后代选择器</td>
+    <td>选择元素内部的所有指定元素</td>
+    <td>div p { }</td>
+</tr>
+<tr>
+    <td>子选择器</td>
+    <td>选择元素的直接子元素</td>
+    <td>div > p { }</td>
+</tr>
+<tr>
+    <td>相邻兄弟选择器</td>
+    <td>选择紧邻的元素</td>
+    <td>h1 + p { }</td>
+</tr>
+<tr>
+    <td>群组选择器</td>
+    <td>同时选择多个元素</td>
+    <td>h1, h2, h3 { }</td>
+</tr>
+</table>
+</div>
+
+<h3>伪类和伪元素</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 伪类：鼠标悬停时 */</span>
+<span class="code-selector">button:hover</span> {
+    <span class="code-property">background</span>: <span class="code-value">blue</span>;
+}
+
+<span class="code-comment">/* 伪类：第一个子元素 */</span>
+<span class="code-selector">li:first-child</span> {
+    <span class="code-property">font-weight</span>: <span class="code-value">bold</span>;
+}
+
+<span class="code-comment">/* 伪元素：首字母 */</span>
+<span class="code-selector">p::first-letter</span> {
+    <span class="code-property">font-size</span>: <span class="code-value">2em</span>;
+}
+</div>
+
+<div class="render">
+    <p style="font-size: 16px;">这是一个段落，鼠标悬停在下方的按钮上查看效果：</p>
+    <button style="padding: 10px 20px; cursor: pointer; background: #3498db; color: white; border: none; border-radius: 4px;">鼠标悬停在我上面</button>
+</div>
+</div>
+
+<div class="tip">
+<strong>提示：</strong>伪类用单个冒号（:），伪元素用双冒号（::）。现代CSS推荐使用双冒号。
+</div>
+
+<hr>
+
+<h2>第二部分：CSS属性</h2>
+
+<h3>常用文本属性</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">p</span> {
+    <span class="code-property">color</span>: <span class="code-value">#333</span>;           <span class="code-comment">/* 文字颜色 */</span>
+    <span class="code-property">font-size</span>: <span class="code-value">16px</span>;         <span class="code-comment">/* 字体大小 */</span>
+    <span class="code-property">font-family</span>: <span class="code-value">Arial</span>;       <span class="code-comment">/* 字体类型 */</span>
+    <span class="code-property">font-weight</span>: <span class="code-value">bold</span>;        <span class="code-comment">/* 粗体 */</span>
+    <span class="code-property">text-align</span>: <span class="code-value">center</span>;      <span class="code-comment">/* 对齐方式 */</span>
+    <span class="code-property">line-height</span>: <span class="code-value">1.8</span>;         <span class="code-comment">/* 行高 */</span>
+    <span class="code-property">text-decoration</span>: <span class="code-value">underline</span>; <span class="code-comment">/* 下划线 */</span>
+}
+</div>
+
+<div class="render">
+    <p style="color: #333; font-size: 16px; font-family: Arial; font-weight: bold; text-align: center; line-height: 1.8; text-decoration: underline;">
+        这是一段示例文字，展示了各种文本属性的效果
+    </p>
+</div>
+</div>
+
+<h3>常用背景属性</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">div</span> {
+    <span class="code-property">background-color</span>: <span class="code-value">#f0f0f0</span>;  <span class="code-comment">/* 背景颜色 */</span>
+    <span class="code-property">background-image</span>: <span class="code-value">url(bg.jpg)</span>;   <span class="code-comment">/* 背景图片 */</span>
+    <span class="code-property">background-repeat</span>: <span class="code-value">no-repeat</span>; <span class="code-comment">/* 不重复 */</span>
+    <span class="code-property">background-position</span>: <span class="code-value">center</span>;   <span class="code-comment">/* 居中 */</span>
+}
+</div>
+
+<div class="render">
+    <div style="background-color: #3498db; color: white; padding: 20px; text-align: center;">
+        background-color: #3498db
+    </div>
+</div>
+</div>
+
+<h3>常用边框属性</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">div</span> {
+    <span class="code-property">border</span>: <span class="code-value">2px solid red</span>;      <span class="code-comment">/* 简写：宽度 样式 颜色 */</span>
+    <span class="code-property">border-width</span>: <span class="code-value">2px</span>;         <span class="code-comment">/* 边框宽度 */</span>
+    <span class="code-property">border-style</span>: <span class="code-value">solid</span>;        <span class="code-comment">/* 边框样式 */</span>
+    <span class="code-property">border-color</span>: <span class="code-value">red</span>;         <span class="code-comment">/* 边框颜色 */</span>
+    <span class="code-property">border-radius</span>: <span class="code-value">10px</span>;        <span class="code-comment">/* 圆角 */</span>
+}
+</div>
+
+<div class="render">
+    <div style="border: 2px solid #3498db; padding: 15px; margin: 5px; display: inline-block;">
+        边框示例
+    </div>
+    <div style="border: 2px dashed #e74c3c; padding: 15px; margin: 5px; display: inline-block;">
+        虚线边框
+    </div>
+    <div style="border: 2px dotted #2ecc71; padding: 15px; margin: 5px; display: inline-block;">
+        点线边框
+    </div>
+    <div style="border: 5px solid #9b59b6; border-radius: 10px; padding: 15px; margin: 5px; display: inline-block;">
+        圆角边框
+    </div>
+</div>
+</div>
+
+<h3>常用盒模型属性</h3>
+
+<div class="demo-box">
+<p>盒模型包括：内容(content) + 内边距(padding) + 边框(border) + 外边距(margin)</p>
+<div class="code">
+<span class="code-selector">div</span> {
+    <span class="code-property">width</span>: <span class="code-value">200px</span>;        <span class="code-comment">/* 宽度 */</span>
+    <span class="code-property">height</span>: <span class="code-value">100px</span>;       <span class="code-comment">/* 高度 */</span>
+    <span class="code-property">padding</span>: <span class="code-value">20px</span>;        <span class="code-comment">/* 内边距 */</span>
+    <span class="code-property">margin</span>: <span class="code-value">10px</span>;         <span class="code-comment">/* 外边距 */</span>
+    <span class="code-property">box-sizing</span>: <span class="code-value">border-box</span>; <span class="code-comment">/* 盒尺寸计算方式 */</span>
+}
+</div>
+
+<div class="render" style="display: flex; gap: 20px; align-items: flex-start;">
+    <div style="width: 150px; height: 80px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center;">
+        默认盒模型
+    </div>
+    <div style="width: 150px; height: 80px; background: #2ecc71; color: white; padding: 20px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+        border-box
+    </div>
+</div>
+</div>
+
+<div class="tip">
+<strong>提示：</strong>使用 box-sizing: border-box 可以让padding和border包含在width和height内，计算更方便。
+</div>
+
+<hr>
+
+<h2>第三部分：浮动</h2>
+
+<h3>什么是浮动？</h3>
+
+<p>浮动让元素向左或向右移动，其周围的元素也会围绕它排列。</p>
+
+<h3>浮动示例</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.box</span> {
+    <span class="code-property">float</span>: <span class="code-value">left</span>;  <span class="code-comment">/* 左浮动 */</span>
+    <span class="code-property">margin</span>: <span class="code-value">5px</span>;
+}
+
+<span class="code-comment">/* 清除浮动 */</span>
+<span class="code-selector">.clearfix</span>::after {
+    <span class="code-property">content</span>: <span class="code-value">""</span>;
+    <span class="code-property">display</span>: <span class="code-value">table</span>;
+    <span class="code-property">clear</span>: <span class="code-value">both</span>;
+}
+</div>
+
+<h4>浮动前</h4>
+<div class="render">
+    <div class="red-box" style="display: inline-block;">红色</div>
+    <div class="blue-box" style="display: inline-block;">蓝色</div>
+    <div class="green-box" style="display: inline-block;">绿色</div>
+</div>
+
+<h4>浮动后</h4>
+<div class="render">
+    <div class="container clearfix">
+        <div class="red-box float-left">红色</div>
+        <div class="blue-box float-left">蓝色</div>
+        <div class="green-box float-left">绿色</div>
+    </div>
+</div>
+</div>
+
+<h3>清除浮动</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 方法1：使用clear属性 */</span>
+<span class="code-selector">.clear</span> {
+    <span class="code-property">clear</span>: <span class="code-value">both</span>;
+}
+
+<span class="code-comment">/* 方法2：使用::after伪元素 */</span>
+<span class="code-selector">.container</span>::after {
+    <span class="code-property">content</span>: <span class="code-value">""</span>;
+    <span class="code-property">display</span>: <span class="code-value">table</span>;
+    <span class="code-property">clear</span>: <span class="code-value">both</span>;
+}
+</div>
+</div>
+
+<div class="warning">
+<strong>注意：</strong>浮动会导致元素脱离文档流，父元素高度塌陷，需要使用clearfix技巧或设置父元素overflow: hidden来解决问题。
+</div>
+
+<hr>
+
+<h2>第四部分：定位</h2>
+
+<h3>定位属性</h3>
+
+<p>position属性用于控制元素的定位方式。</p>
+
+<div class="demo-box">
+<table>
+<tr>
+    <th>值</th>
+    <th>说明</th>
+</tr>
+<tr>
+    <td>static</td>
+    <td>默认值，正常文档流定位</td>
+</tr>
+<tr>
+    <td>relative</td>
+    <td>相对定位，相对于自身原始位置定位</td>
+</tr>
+<tr>
+    <td>absolute</td>
+    <td>绝对定位，相对于最近已定位祖先元素定位</td>
+</tr>
+<tr>
+    <td>fixed</td>
+    <td>固定定位，相对于浏览器窗口定位</td>
+</tr>
+<tr>
+    <td>sticky</td>
+    <td>粘性定位，在滚动范围内是相对定位，超出后固定</td>
+</tr>
+</table>
+</div>
+
+<h3>相对定位（relative）</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.box</span> {
+    <span class="code-property">position</span>: <span class="code-value">relative</span>;
+    <span class="code-property">top</span>: <span class="code-value">20px</span>;
+    <span class="code-property">left</span>: <span class="code-value">20px</span>;
+}
+</div>
+
+<div class="render" style="height: 150px;">
+    <div style="width: 100px; height: 100px; background: #ddd; display: flex; align-items: center; justify-content: center; position: absolute;">
+        原始位置
+    </div>
+    <div class="relative-box" style="position: relative; top: 20px; left: 20px; display: flex; align-items: center; justify-content: center;">
+        相对定位后
+    </div>
+</div>
+</div>
+
+<h3>绝对定位（absolute）</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 父元素需要设置position */</span>
+<span class="code-selector">.parent</span> {
+    <span class="code-property">position</span>: <span class="code-value">relative</span>;
+}
+
+<span class="code-selector">.child</span> {
+    <span class="code-property">position</span>: <span class="code-value">absolute</span>;
+    <span class="code-property">top</span>: <span class="code-value">0</span>;
+    <span class="code-property">right</span>: <span class="code-value">0</span>;
+}
+</div>
+
+<div class="render">
+    <div class="parent" style="position: relative;">
+        父元素（relative）
+        <div class="absolute-box">
+            子元素（absolute）
+        </div>
+    </div>
+</div>
+</div>
+
+<h3>固定定位（fixed）</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.back-to-top</span> {
+    <span class="code-property">position</span>: <span class="code-value">fixed</span>;
+    <span class="code-property">bottom</span>: <span class="code-value">20px</span>;
+    <span class="code-property">right</span>: <span class="code-value">20px</span>;
+}
+</div>
+
+<div class="render">
+    <p>固定定位的元素会始终保持在浏览器窗口的指定位置，即使页面滚动也不会改变位置。</p>
+    <div class="fixed-box">
+        固定定位
+    </div>
+</div>
+</div>
+
+<h3>粘性定位（sticky）</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.sticky-header</span> {
+    <span class="code-property">position</span>: <span class="code-value">sticky</span>;
+    <span class="code-property">top</span>: <span class="code-value">0</span>;
+}
+</div>
+
+<div class="render" style="max-height: 200px; overflow-y: auto;">
+    <div class="sticky-box">
+        我是粘性标题，滚动时我会固定在顶部
+    </div>
+    <p style="padding: 10px;">内容区域...</p>
+    <p style="padding: 10px;">内容区域...</p>
+    <p style="padding: 10px;">内容区域...</p>
+    <p style="padding: 10px;">内容区域...</p>
+    <p style="padding: 10px;">内容区域...</p>
+</div>
+</div>
+
+<h3>定位的层级</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.box1</span> {
+    <span class="code-property">position</span>: <span class="code-value">absolute</span>;
+    <span class="code-property">z-index</span>: <span class="code-value">1</span>;
+}
+
+<span class="code-selector">.box2</span> {
+    <span class="code-property">position</span>: <span class="code-value">absolute</span>;
+    <span class="code-property">z-index</span>: <span class="code-value">2</span>;
+}
+</div>
+
+<div class="render" style="height: 120px; position: relative;">
+    <div style="position: absolute; top: 30px; left: 30px; width: 80px; height: 80px; background: rgba(231, 76, 60, 0.7); display: flex; align-items: center; justify-content: center; color: white;">
+        z-index: 1
+    </div>
+    <div style="position: absolute; top: 60px; left: 60px; width: 80px; height: 80px; background: rgba(52, 152, 219, 0.7); display: flex; align-items: center; justify-content: center; color: white;">
+        z-index: 2
+    </div>
+</div>
+</div>
+
+<div class="tip">
+<strong>提示：</strong>z-index值越大，元素层级越高，会显示在其他元素上方。只有position为relative/absolute/fixed/sticky时z-index才有效。
+</div>
+
+<hr>
+
+<h2>总结</h2>
+
+<p>本教程涵盖了CSS的核心知识：</p>
+
+<table>
+<tr>
+    <th>章节</th>
+    <th>知识点</th>
+</tr>
+<tr>
+    <td>第一部分</td>
+    <td>CSS选择器（元素、类、ID、组合、伪类/伪元素）</td>
+</tr>
+<tr>
+    <td>第二部分</td>
+    <td>CSS属性（文本、背景、边框、盒模型）</td>
+</tr>
+<tr>
+    <td>第三部分</td>
+    <td>浮动（float、clearfix）</td>
+</tr>
+<tr>
+    <td>第四部分</td>
+    <td>定位（relative、absolute、fixed、sticky、z-index）</td>
+</tr>
+</table>
+
+<div class="tip">
+<strong>下一步学习：</strong>现代布局技术、响应式设计、进阶css特性、过渡与css动画
+</div>
+
+</body>
+</html>

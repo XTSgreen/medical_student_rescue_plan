@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS语言与界面美化进阶</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.8;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #9b59b6;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-left: 4px solid #9b59b6;
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            color: #7f8c8d;
+            margin-top: 30px;
+        }
+        
+        h4 {
+            color: #555;
+            margin-top: 20px;
+        }
+        
+        .demo-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Consolas", "Courier New", monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+        
+        .code-tag { color: #66d9ef; }
+        .code-attr { color: #a6e22e; }
+        .code-value { color: #fd971f; }
+        .code-text { color: #f8f8f2; }
+        .code-comment { color: #75715e; }
+        .code-selector { color: #a6e22e; }
+        .code-property { color: #66d9ef; }
+        
+        .render {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            min-height: 50px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #9b59b6;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .tip {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .note {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 40px 0;
+        }
+        
+        .flex-container {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .flex-item {
+            width: 80px;
+            height: 80px;
+            background: #9b59b6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+        
+        .grid-container {
+            display: grid;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .grid-item {
+            background: #3498db;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        
+        .column-container {
+            column-count: 3;
+            column-gap: 20px;
+            margin: 10px 0;
+        }
+        
+        .column-item {
+            background: #ecf0f1;
+            padding: 10px;
+            margin-bottom: 10px;
+            break-inside: avoid;
+        }
+        
+        .transition-box {
+            width: 100px;
+            height: 100px;
+            background: #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .transition-box:hover {
+            background: #e74c3c;
+            transform: rotate(45deg) scale(1.2);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animate-box {
+            width: 80px;
+            height: 80px;
+            background: #2ecc71;
+            border-radius: 50%;
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .scroll-box {
+            height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        
+        :root {
+            --primary-color: #9b59b6;
+            --secondary-color: #3498db;
+            --text-color: #333;
+            --spacing: 20px;
+        }
+        
+        .variable-demo {
+            color: var(--text-color);
+            padding: var(--spacing);
+            background: var(--primary-color);
+        }
+        
+        .shape-box {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #9b59b6, #3498db);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        
+        .blend-box {
+            width: 200px;
+            height: 150px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%239b59b6" width="100" height="100"/></svg>');
+            background-blend-mode: multiply;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .parallax-section {
+            height: 200px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>CSS语言与界面美化进阶</h1>
+
+<p>本教程将介绍现代CSS的高级特性，包括布局技术、响应式设计、进阶特性和动画效果。</p>
+
+<hr>
+
+<h2>第一部分：现代布局技术</h2>
+
+<h3>Flexbox（弹性盒子）</h3>
+
+<p>Flexbox是一种一维布局模型，特别适合处理行或列方向的元素排列。</p>
+
+<div class="demo-box">
+<h4>基本结构</h4>
+<div class="code">
+<span class="code-comment">/* 父容器 */</span>
+<span class="code-selector">.container</span> {
+    <span class="code-property">display</span>: <span class="code-value">flex</span>;
+    <span class="code-property">flex-direction</span>: <span class="code-value">row</span>;      <span class="code-comment">/* 主轴方向 */</span>
+    <span class="code-property">justify-content</span>: <span class="code-value">center</span>;   <span class="code-comment">/* 主轴对齐 */</span>
+    <span class="code-property">align-items</span>: <span class="code-value">center</span>;     <span class="code-comment">/* 交叉轴对齐 */</span>
+    <span class="code-property">gap</span>: <span class="code-value">20px</span>;            <span class="code-comment">/* 间距 */</span>
+}
+
+<span class="code-comment">/* 子元素 */</span>
+<span class="code-selector">.item</span> {
+    <span class="code-property">flex</span>: <span class="code-value">1</span>;                <span class="code-comment">/* 占比 */</span>
+}
+</div>
+
+<div class="render">
+    <div class="flex-container" style="justify-content: center; align-items: center;">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+    </div>
+</div>
+</div>
+
+<h4>flex-direction（主轴方向）</h4>
+
+<div class="demo-box">
+<table>
+<tr>
+    <th>值</th>
+    <th>说明</th>
+</tr>
+<tr>
+    <td>row</td>
+    <td>从左到右（默认）</td>
+</tr>
+<tr>
+    <td>row-reverse</td>
+    <td>从右到左</td>
+</tr>
+<tr>
+    <td>column</td>
+    <td>从上到下</td>
+</tr>
+<tr>
+    <td>column-reverse</td>
+    <td>从下到上</td>
+</tr>
+</table>
+</div>
+
+<h4>justify-content（主轴对齐）</h4>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.container</span> {
+    <span class="code-property">justify-content</span>: <span class="code-value">flex-start</span>;    <span class="code-comment">/* 开始 */</span>
+    <span class="code-property">justify-content</span>: <span class="code-value">flex-end</span>;      <span class="code-comment">/* 结束 */</span>
+    <span class="code-property">justify-content</span>: <span class="code-value">center</span>;        <span class="code-comment">/* 居中 */</span>
+    <span class="code-property">justify-content</span>: <span class="code-value">space-between</span>; <span class="code-comment">/* 两端对齐 */</span>
+    <span class="code-property">justify-content</span>: <span class="code-value">space-around</span>;  <span class="code-comment">/* 环绕间距 */</span>
+    <span class="code-property">justify-content</span>: <span class="code-value">space-evenly</span>;  <span class="code-comment">/* 等间距 */</span>
+}
+</div>
+
+<div class="render">
+    <p>space-between（两端对齐）：</p>
+    <div class="flex-container" style="justify-content: space-between;">
+        <div class="flex-item" style="width: 60px; height: 60px;">1</div>
+        <div class="flex-item" style="width: 60px; height: 60px;">2</div>
+        <div class="flex-item" style="width: 60px; height: 60px;">3</div>
+    </div>
+</div>
+</div>
+
+<h4>align-items（交叉轴对齐）</h4>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.container</span> {
+    <span class="code-property">align-items</span>: <span class="code-value">flex-start</span>;   <span class="code-comment">/* 开始 */</span>
+    <span class="code-property">align-items</span>: <span class="code-value">flex-end</span>;     <span class="code-comment">/* 结束 */</span>
+    <span class="code-property">align-items</span>: <span class="code-value">center</span>;       <span class="code-comment">/* 居中 */</span>
+    <span class="code-property">align-items</span>: <span class="code-value">stretch</span>;       <span class="code-comment">/* 拉伸 */</span>
+    <span class="code-property">align-items</span>: <span class="code-value">baseline</span>;      <span class="code-comment">/* 基线 */</span>
+}
+</div>
+
+<div class="render">
+    <div class="flex-container" style="height: 150px; align-items: center;">
+        <div class="flex-item" style="height: auto; padding: 20px;">高度不同</div>
+        <div class="flex-item" style="height: auto; padding: 10px;">项目2</div>
+        <div class="flex-item" style="height: auto; padding: 30px;">项目3</div>
+    </div>
+</div>
+</div>
+
+<h4>flex-wrap（换行）</h4>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.container</span> {
+    <span class="code-property">flex-wrap</span>: <span class="code-value">nowrap</span>;      <span class="code-comment">/* 不换行 */</span>
+    <span class="code-property">flex-wrap</span>: <span class="code-value">wrap</span>;         <span class="code-comment">/* 换行 */</span>
+    <span class="code-property">flex-wrap</span>: <span class="code-value">wrap-reverse</span>; <span class="code-comment">/* 反向换行 */</span>
+}
+</div>
+</div>
+
+<div class="tip">
+<strong>提示：</strong>Flexbox非常适合导航菜单、卡片布局、水平垂直居中等场景。
+</div>
+
+<hr>
+
+<h3>Grid（网格布局）</h3>
+
+<p>Grid是一种二维布局模型，可以同时控制行和列。</p>
+
+<div class="demo-box">
+<h4>基本结构</h4>
+<div class="code">
+<span class="code-selector">.container</span> {
+    <span class="code-property">display</span>: <span class="code-value">grid</span>;
+    <span class="code-property">grid-template-columns</span>: <span class="code-value">1fr 1fr 1fr</span>; <span class="code-comment">/* 三列等宽 */</span>
+    <span class="code-property">grid-template-rows</span>: <span class="code-value">100px 100px</span>;    <span class="code-comment">/* 两行高度 */</span>
+    <span class="code-property">gap</span>: <span class="code-value">20px</span>;
+}
+</div>
+
+<div class="render">
+    <div class="grid-container" style="grid-template-columns: repeat(3, 1fr); grid-template-rows: 80px 80px;">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+    </div>
+</div>
+</div>
+
+<h4>fr单位（比例单位）</h4>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.container</span> {
+    <span class="code-property">grid-template-columns</span>: <span class="code-value">1fr 2fr 1fr</span>; <span class="code-comment">/* 1:2:1 比例 */</span>
+    <span class="code-property">grid-template-columns</span>: <span class="code-value">200px auto 100px</span>; <span class="code-comment">/* 固定+自适应+固定 */</span>
+    <span class="code-property">grid-template-columns</span>: <span class="code-value">repeat(3, 1fr)</span>; <span class="code-comment">/* 重复3次 */</span>
+    <span class="code-property">grid-template-columns</span>: <span class="code-value">repeat(auto-fit, minmax(200px, 1fr))</span>; <span class="code-comment">/* 自适应 */</span>
+}
+</div>
+</div>
+
+<h4>网格区域命名</h4>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.container</span> {
+    <span class="code-property">display</span>: <span class="code-value">grid</span>;
+    <span class="code-property">grid-template-areas</span>: 
+        <span class="code-value">"header header header"</span>
+        <span class="code-value">"sidebar main main"</span>
+        <span class="code-value">"footer footer footer"</span>;
+    <span class="code-property">grid-template-rows</span>: <span class="code-value">60px 1fr 40px</span>;
+}
+
+<span class="code-selector">.header</span> { <span class="code-property">grid-area</span>: <span class="code-value">header</span>; }
+<span class="code-selector">.sidebar</span> { <span class="code-property">grid-area</span>: <span class="code-value">sidebar</span>; }
+<span class="code-selector">.main</span> { <span class="code-property">grid-area</span>: <span class="code-value">main</span>; }
+<span class="code-selector">.footer</span> { <span class="code-property">grid-area</span>: <span class="code-value">footer</span>; }
+</div>
+</div>
+
+<h4>对齐方式</h4>
+
+<div class="demo-box">
+<table>
+<tr>
+    <th>属性</th>
+    <th>作用</th>
+    <th>值</th>
+</tr>
+<tr>
+    <td>justify-items</td>
+    <td>水平对齐（行内）</td>
+    <td>start | end | center | stretch</td>
+</tr>
+<tr>
+    <td>align-items</td>
+    <td>垂直对齐（行间）</td>
+    <td>start | end | center | stretch</td>
+</tr>
+<tr>
+    <td>justify-content</td>
+    <td>整个网格水平对齐</td>
+    <td>start | end | center | stretch</td>
+</tr>
+<tr>
+    <td>align-content</td>
+    <td>整个网格垂直对齐</td>
+    <td>start | end | center | stretch</td>
+</tr>
+</table>
+</div>
+
+<div class="tip">
+<strong>提示：</strong>Grid非常适合整体页面布局、相册网格、仪表盘等复杂布局。
+</div>
+
+<hr>
+
+<h3>多列布局（Multi-column）</h3>
+
+<p>CSS多列布局可以将内容分成多列显示，类似报纸排版。</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.container</span> {
+    <span class="code-property">column-count</span>: <span class="code-value">3</span>;        <span class="code-comment">/* 列数 */</span>
+    <span class="code-property">column-gap</span>: <span class="code-value">20px</span>;       <span class="code-comment">/* 列间距 */</span>
+    <span class="code-property">column-rule</span>: <span class="code-value">1px solid #ccc</span>; <span class="code-comment">/* 分隔线 */</span>
+}
+
+<span class="code-selector">.item</span> {
+    <span class="code-property">break-inside</span>: <span class="code-value">avoid</span>;  <span class="code-comment">/* 防止元素被切断 */</span>
+}
+</div>
+
+<div class="render">
+    <div class="column-container">
+        <div class="column-item">
+            <h4>第一段</h4>
+            <p>这是多列布局的示例内容。当内容足够长时，会自动分成多列显示。</p>
+        </div>
+        <div class="column-item">
+            <h4>第二段</h4>
+            <p>这种布局适合文章排版、瀑布流等场景。</p>
+        </div>
+        <div class="column-item">
+            <h4>第三段</h4>
+            <p>可以设置列数和间距，创建不同的阅读体验。</p>
+        </div>
+        <div class="column-item">
+            <h4>第四段</h4>
+            <p>使用break-inside: avoid可以防止元素被切断。</p>
+        </div>
+    </div>
+</div>
+</div>
+
+<hr>
+
+<h2>第二部分：响应式设计</h2>
+
+<h3>视口（Viewport）</h3>
+
+<p>视口meta标签是响应式设计的基础，它控制页面在移动设备上的缩放和显示。</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-value">"viewport"</span> <span class="code-attr">content</span>=<span class="code-value">"width=device-width, initial-scale=1.0"</span><span class="code-tag">&gt;</span>
+</div>
+
+<table>
+<tr>
+    <th>属性</th>
+    <th>说明</th>
+</tr>
+<tr>
+    <td>width</td>
+    <td>视口宽度，device-width表示设备宽度</td>
+</tr>
+<tr>
+    <td>initial-scale</td>
+    <td>初始缩放比例，1.0表示不缩放</td>
+</tr>
+<tr>
+    <td>maximum-scale</td>
+    <td>最大缩放比例</td>
+</tr>
+<tr>
+    <td>user-scalable</td>
+    <td>是否允许用户缩放（yes/no）</td>
+</tr>
+</table>
+</div>
+
+<h3>媒体查询（Media Queries）</h3>
+
+<p>媒体查询允许根据设备特性应用不同的样式。</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 最小宽度：屏幕宽度大于等于768px时 */</span>
+<span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">768px</span>) {
+    <span class="code-selector">.container</span> {
+        <span class="code-property">width</span>: <span class="code-value">750px</span>;
+    }
+}
+
+<span class="code-comment">/* 最大宽度：屏幕宽度小于768px时 */</span>
+<span class="code-selector">@media</span> (<span class="code-property">max-width</span>: <span class="code-value">767px</span>) {
+    <span class="code-selector">.container</span> {
+        <span class="code-property">width</span>: <span class="code-value">100%</span>;
+    }
+}
+
+<span class="code-comment">/* 横屏模式 */</span>
+<span class="code-selector">@media</span> (<span class="code-property">orientation</span>: <span class="code-value">landscape</span>) {
+    <span class="code-selector">.layout</span> {
+        <span class="code-property">flex-direction</span>: <span class="code-value">row</span>;
+    }
+}
+
+<span class="code-comment">/* 打印样式 */</span>
+<span class="code-selector">@media</span> <span class="code-value">print</span> {
+    <span class="code-selector">.no-print</span> {
+        <span class="code-property">display</span>: <span class="code-value">none</span>;
+    }
+}
+</div>
+</div>
+
+<h3>断点选择</h3>
+
+<div class="demo-box">
+<table>
+<tr>
+    <th>断点</th>
+    <th>设备类型</th>
+</tr>
+<tr>
+    <td>576px</td>
+    <td>手机（横屏）</td>
+</tr>
+<tr>
+    <td>768px</td>
+    <td>平板</td>
+</tr>
+<tr>
+    <td>992px</td>
+    <td>小笔记本</td>
+</tr>
+<tr>
+    <td>1200px</td>
+    <td>桌面显示器</td>
+</tr>
+<tr>
+    <td>1400px</td>
+    <td>大屏幕</td>
+</tr>
+</table>
+</div>
+
+<h3>移动优先思想</h3>
+
+<div class="demo-box">
+<p>移动优先（Mobile First）是一种设计理念，先为移动设备设计基础样式，再为更大屏幕添加增强样式。</p>
+
+<div class="code">
+<span class="code-comment">/* 基础样式（移动端） */</span>
+<span class="code-selector">.layout</span> {
+    <span class="code-property">flex-direction</span>: <span class="code-value">column</span>;
+}
+
+<span class="code-comment">/* 平板及以上 */</span>
+<span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">768px</span>) {
+    <span class="code-selector">.layout</span> {
+        <span class="code-property">flex-direction</span>: <span class="code-value">row</span>;
+    }
+}
+
+<span class="code-comment">/* 桌面及以上 */</span>
+<span class="code-selector">@media</span> (<span class="code-property">min-width</span>: <span class="code-value">992px</span>) {
+    <span class="code-selector">.layout</span> {
+        <span class="code-property">max-width</span>: <span class="code-value">1200px</span>;
+    }
+}
+</div>
+</div>
+
+<div class="tip">
+<strong>提示：</strong>使用相对单位（rem、em、%）配合视口单位（vw、vh）可以创建更灵活的响应式布局。
+</div>
+
+<hr>
+
+<h2>第三部分：进阶CSS特性</h2>
+
+<h3>CSS变量（自定义属性）</h3>
+
+<p>CSS变量允许定义可复用的值，方便主题切换和维护。</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 定义变量（在:root中定义全局变量） */</span>
+<span class="code-selector">:root</span> {
+    <span class="code-property">--primary-color</span>: <span class="code-value">#3498db</span>;
+    <span class="code-property">--secondary-color</span>: <span class="code-value">#2ecc71</span>;
+    <span class="code-property">--spacing</span>: <span class="code-value">20px</span>;
+    <span class="code-property">--font-size</span>: <span class="code-value">16px</span>;
+}
+
+<span class="code-comment">/* 使用变量 */</span>
+<span class="code-selector">.element</span> {
+    <span class="code-property">color</span>: <span class="code-value">var(--primary-color)</span>;
+    <span class="code-property">padding</span>: <span class="code-value">var(--spacing)</span>;
+    <span class="code-property">font-size</span>: <span class="code-value">var(--font-size)</span>;
+}
+
+<span class="code-comment">/* 变量覆盖（主题切换） */</span>
+<span class="code-selector">.dark-theme</span> {
+    <span class="code-property">--primary-color</span>: <span class="code-value">#2c3e50</span>;
+    <span class="code-property">--background</span>: <span class="code-value">#1a1a1a</span>;
+}
+</div>
+
+<div class="render">
+    <div style="background: var(--primary-color, #3498db); color: white; padding: 20px; border-radius: 5px;">
+        使用CSS变量的示例（紫色背景）
+    </div>
+</div>
+</div>
+
+<h3>CSS函数</h3>
+
+<div class="demo-box">
+<h4>calc() - 计算</h4>
+<div class="code">
+<span class="code-selector">.element</span> {
+    <span class="code-property">width</span>: <span class="code-value">calc(100% - 40px)</span>;
+    <span class="code-property">height</span>: <span class="code-value">calc(100vh - 100px)</span>;
+    <span class="code-property">font-size</span>: <span class="code-value">calc(16px + 2vw)</span>;
+}
+</div>
+
+<h4>min()、max()、clamp() - 限制范围</h4>
+<div class="code">
+<span class="code-selector">.element</span> {
+    <span class="code-property">width</span>: <span class="code-value">min(100%, 600px)</span>;    <span class="code-comment">/* 取较小值 */</span>
+    <span class="code-property">width</span>: <span class="code-value">max(200px, 50vw)</span>;     <span class="code-comment">/* 取较大值 */</span>
+    <span class="code-property">font-size</span>: <span class="code-value">clamp(14px, 2vw, 24px)</span>; <span class="code-comment">/* 限制范围 */</span>
+}
+</div>
+
+<h4>var() - 使用变量</h4>
+<div class="code">
+<span class="code-selector">.element</span> {
+    <span class="code-property">color</span>: <span class="code-value">var(--main-color)</span>;
+    <span class="code-property">background</span>: <span class="code-value">var(--bg-color, #fff)</span>; <span class="code-comment">/* 带默认值 */</span>
+}
+</div>
+
+<h4>attr() - 获取属性值</h4>
+<div class="code">
+<span class="code-selector">.tooltip</span><span class="code-tag">::after</span> {
+    <span class="code-property">content</span>: <span class="code-value">attr(data-tooltip)</span>;
+}
+</div>
+</div>
+
+<h3>形状与裁剪（clip-path）</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 多边形 */</span>
+<span class="code-selector">.polygon</span> {
+    <span class="code-property">clip-path</span>: <span class="code-value">polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)</span>;
+}
+
+<span class="code-comment">/* 圆形 */</span>
+<span class="code-selector">.circle</span> {
+    <span class="code-property">clip-path</span>: <span class="code-value">circle(50% at 50% 50%)</span>;
+}
+
+<span class="code-comment">/* 椭圆 */</span>
+<span class="code-selector">.ellipse</span> {
+    <span class="code-property">clip-path</span>: <span class="code-value">ellipse(50% 30% at 50% 50%)</span>;
+}
+
+<span class="code-comment">/* 圆角矩形 */</span>
+<span class="code-selector">.inset</span> {
+    <span class="code-property">clip-path</span>: <span class="code-value">inset(10% 20% 30% 40%)</span>;
+}
+</div>
+
+<div class="render" style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
+    <div class="shape-box" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);">
+    </div>
+    <div style="width: 150px; height: 150px; background: linear-gradient(45deg, #e74c3c, #f39c12); clip-path: circle(50% at 50% 50%);">
+    </div>
+    <div style="width: 150px; height: 150px; background: linear-gradient(45deg, #2ecc71, #3498db); clip-path: ellipse(50% 30% at 50% 50%);">
+    </div>
+</div>
+</div>
+
+<h3>混合模式与背景效果</h3>
+
+<div class="demo-box">
+<h4>background-blend-mode（背景混合模式）</h4>
+<div class="code">
+<span class="code-selector">.blend</span> {
+    <span class="code-property">background-image</span>: <span class="code-value">url(image1.jpg), url(image2.jpg)</span>;
+    <span class="code-property">background-blend-mode</span>: <span class="code-value">multiply</span>;
+}
+</div>
+
+<h4>mix-blend-mode（元素混合模式）</h4>
+<div class="code">
+<span class="code-selector">.text</span> {
+    <span class="code-property">mix-blend-mode</span>: <span class="code-value">difference</span>;
+    <span class="code-property">color</span>: <span class="code-value">white</span>;
+}
+</div>
+
+<h4>常用混合模式</h4>
+<table>
+<tr>
+    <th>模式</th>
+    <th>效果</th>
+</tr>
+<tr>
+    <td>multiply</td>
+    <td>正片叠底（变暗）</td>
+</tr>
+<tr>
+    <td>screen</td>
+    <td>滤色（变亮）</td>
+</tr>
+<tr>
+    <td>overlay</td>
+    <td>叠加</td>
+</tr>
+<tr>
+    <td>difference</td>
+    <td>差值</td>
+</tr>
+<tr>
+    <td>color-dodge</td>
+    <td>颜色减淡</td>
+</tr>
+</table>
+</div>
+
+<h3>滚动行为（scroll-behavior）</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 平滑滚动 */</span>
+<span class="code-selector">html</span> {
+    <span class="code-property">scroll-behavior</span>: <span class="code-value">smooth</span>;
+}
+
+<span class="code-comment">/* 滚动容器 */</span>
+<span class="code-selector">.scroll-container</span> {
+    <span class="code-property">overflow-y</span>: <span class="code-value">auto</span>;
+    <span class="code-property">scroll-behavior</span>: <span class="code-value">smooth</span>;
+}
+
+<span class="code-comment">/* 滚动捕捉 */</span>
+<span class="code-selector">.snap-container</span> {
+    <span class="code-property">scroll-snap-type</span>: <span class="code-value">y mandatory</span>;
+}
+
+<span class="code-selector">.snap-item</span> {
+    <span class="code-property">scroll-snap-align</span>: <span class="code-value">start</span>;
+}
+</div>
+
+<div class="render">
+    <p>带有平滑滚动的容器：</p>
+    <div class="scroll-box smooth-scroll" style="height: 120px;">
+        <p>第一段内容...</p>
+        <p>第二段内容...</p>
+        <p>第三段内容...</p>
+        <p>第四段内容...</p>
+        <p>第五段内容...</p>
+        <p>第六段内容...</p>
+        <p>底部内容</p>
+    </div>
+</div>
+</div>
+
+<hr>
+
+<h2>第四部分：过渡与CSS动画</h2>
+
+<h3>过渡（Transition）</h3>
+
+<p>过渡属性可以在元素状态改变时添加平滑的动画效果。</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.element</span> {
+    <span class="code-property">transition</span>: <span class="code-value">property duration timing-function delay</span>;
+    
+    <span class="code-comment">/* 完整写法 */</span>
+    <span class="code-property">transition</span>: <span class="code-value">all 0.3s ease 0s</span>;
+    
+    <span class="code-comment">/* 单独属性 */</span>
+    <span class="code-property">transition-property</span>: <span class="code-value">background, transform</span>;
+    <span class="code-property">transition-duration</span>: <span class="code-value">0.3s</span>;
+    <span class="code-property">transition-timing-function</span>: <span class="code-value">ease</span>;
+    <span class="code-property">transition-delay</span>: <span class="code-value">0s</span>;
+}
+</div>
+
+<h4>timing-function（时间函数）</h4>
+<table>
+<tr>
+    <th>值</th>
+    <th>效果</th>
+</tr>
+<tr>
+    <td>ease</td>
+    <td>慢-快-慢（默认）</td>
+</tr>
+<tr>
+    <td>linear</td>
+    <td>匀速</td>
+</tr>
+<tr>
+    <td>ease-in</td>
+    <td>慢-快</td>
+</tr>
+<tr>
+    <td>ease-out</td>
+    <td>快-慢</td>
+</tr>
+<tr>
+    <td>ease-in-out</td>
+    <td>慢-快-慢</td>
+</tr>
+<tr>
+    <td>cubic-bezier()</td>
+    <td>自定义贝塞尔曲线</td>
+</tr>
+</table>
+
+<div class="render" style="display: flex; gap: 20px; justify-content: center;">
+    <div class="transition-box"></div>
+    <div class="transition-box" style="transition-timing-function: linear;"></div>
+    <div class="transition-box" style="transition-timing-function: ease-in-out;"></div>
+</div>
+<p style="text-align: center; margin-top: 10px;">鼠标悬停在方块上查看效果</p>
+</div>
+</div>
+
+<h3>变换（Transform）</h3>
+
+<p>transform属性可以对元素进行旋转、缩放、倾斜、位移等变换。</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 旋转 */</span>
+<span class="code-selector">.rotate</span> {
+    <span class="code-property">transform</span>: <span class="code-value">rotate(45deg)</span>;
+}
+
+<span class="code-comment">/* 缩放 */</span>
+<span class="code-selector">.scale</span> {
+    <span class="code-property">transform</span>: <span class="code-value">scale(1.5)</span>;
+    <span class="code-property">transform</span>: <span class="code-value">scaleX(1.5)</span>;
+    <span class="code-property">transform</span>: <span class="code-value">scale(0.8, 1.2)</span>;
+}
+
+<span class="code-comment">/* 位移 */</span>
+<span class="code-selector">.translate</span> {
+    <span class="code-property">transform</span>: <span class="code-value">translate(20px, 30px)</span>;
+}
+
+<span class="code-comment">/* 倾斜 */</span>
+<span class="code-selector">.skew</span> {
+    <span class="code-property">transform</span>: <span class="code-value">skew(20deg)</span>;
+}
+
+<span class="code-comment">/* 组合变换 */</span>
+<span class="code-selector">.combined</span> {
+    <span class="code-property">transform</span>: <span class="code-value">rotate(45deg) scale(1.2) translate(10px, 0)</span>;
+}
+
+<span class="code-comment">/* 变换原点 */</span>
+<span class="code-selector">.origin</span> {
+    <span class="code-property">transform-origin</span>: <span class="code-value">center center</span>; <span class="code-comment">/* 默认 */</span>
+    <span class="code-property">transform-origin</span>: <span class="code-value">top left</span>;
+}
+</div>
+
+<div class="render" style="display: flex; gap: 30px; justify-content: center; align-items: center; height: 150px;">
+    <div style="width: 60px; height: 60px; background: #3498db; transition: transform 0.3s;" onmouseover="this.style.transform='rotate(45deg)'" onmouseout="this.style.transform='rotate(0)'">
+    </div>
+    <div style="width: 60px; height: 60px; background: #e74c3c; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.3)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <div style="width: 60px; height: 60px; background: #2ecc71; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-20px)'" onmouseout="this.style.transform='translateY(0)'">
+    </div>
+    <div style="width: 60px; height: 60px; background: #f39c12; transition: transform 0.3s;" onmouseover="this.style.transform='skew(20deg)'" onmouseout="this.style.transform='skew(0)'">
+    </div>
+</div>
+<p style="text-align: center;">鼠标悬停查看效果</p>
+</div>
+
+<h3>关键帧动画（Keyframes）</h3>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 定义关键帧 */</span>
+<span class="code-selector">@keyframes</span> <span class="code-property">myAnimation</span> {
+    <span class="code-value">from</span> {
+        <span class="code-property">opacity</span>: <span class="code-value">0</span>;
+        <span class="code-property">transform</span>: <span class="code-value">translateY(20px)</span>;
+    }
+    <span class="code-value">to</span> {
+        <span class="code-property">opacity</span>: <span class="code-value">1</span>;
+        <span class="code-property">transform</span>: <span class="code-value">translateY(0)</span>;
+    }
+}
+
+<span class="code-comment">/* 使用动画 */</span>
+<span class="code-selector">.element</span> {
+    <span class="code-property">animation</span>: <span class="code-value">name duration timing-function delay iteration-count direction</span>;
+    <span class="code-property">animation</span>: <span class="code-value">myAnimation 1s ease 0s 1 normal</span>;
+}
+</div>
+
+<h4>动画属性</h4>
+<table>
+<tr>
+    <th>属性</th>
+    <th>说明</th>
+    <th>值</th>
+</tr>
+<tr>
+    <td>animation-name</td>
+    <td>动画名称</td>
+    <td>关键帧名称</td>
+</tr>
+<tr>
+    <td>animation-duration</td>
+    <td>持续时间</td>
+    <td>1s, 500ms</td>
+</tr>
+<tr>
+    <td>animation-timing-function</td>
+    <td>时间函数</td>
+    <td>ease, linear, cubic-bezier()</td>
+</tr>
+<tr>
+    <td>animation-delay</td>
+    <td>延迟</td>
+    <td>1s, -0.5s（负值表示立即开始但从中间播放）</td>
+</tr>
+<tr>
+    <td>animation-iteration-count</td>
+    <td>播放次数</td>
+    <td>1, 2, infinite</td>
+</tr>
+<tr>
+    <td>animation-direction</td>
+    <td>播放方向</td>
+    <td>normal, reverse, alternate, alternate-reverse</td>
+</tr>
+<tr>
+    <td>animation-fill-mode</td>
+    <td>填充模式</td>
+    <td>none, forwards, backwards, both</td>
+</tr>
+</table>
+
+<div class="render" style="display: flex; gap: 20px; justify-content: center; align-items: center; height: 120px;">
+    <div class="animate-box"></div>
+    <div style="width: 80px; height: 80px; background: #e74c3c; animation: bounce 1s infinite alternate;"></div>
+    <div style="width: 80px; height: 80px; background: #3498db; animation: bounce 0.5s infinite;"></div>
+</div>
+</div>
+
+<h3>常用动画示例</h3>
+
+<div class="demo-box">
+<h4>淡入动画</h4>
+<div class="code">
+<span class="code-selector">@keyframes</span> <span class="code-property">fadeIn</span> {
+    <span class="code-value">from</span> { <span class="code-property">opacity</span>: <span class="code-value">0</span>; }
+    <span class="code-value">to</span> { <span class="code-property">opacity</span>: <span class="code-value">1</span>; }
+}
+
+<span class="code-selector">.fade-in</span> {
+    <span class="code-property">animation</span>: <span class="code-value">fadeIn 1s ease forwards</span>;
+}
+</div>
+
+<h4>闪烁动画</h4>
+<div class="code">
+<span class="code-selector">@keyframes</span> <span class="code-property">blink</span> {
+    <span class="code-value">0%, 100%</span> { <span class="code-property">opacity</span>: <span class="code-value">1</span>; }
+    <span class="code-value">50%</span> { <span class="code-property">opacity</span>: <span class="code-value">0</span>; }
+}
+
+<span class="code-selector">.blink</span> {
+    <span class="code-property">animation</span>: <span class="code-value">blink 1s infinite</span>;
+}
+</div>
+
+<h4>加载动画</h4>
+<div class="code">
+<span class="code-selector">@keyframes</span> <span class="code-property">spin</span> {
+    <span class="code-value">from</span> { <span class="code-property">transform</span>: <span class="code-value">rotate(0deg)</span>; }
+    <span class="code-value">to</span> { <span class="code-property">transform</span>: <span class="code-value">rotate(360deg)</span>; }
+}
+
+<span class="code-selector">.loader</span> {
+    <span class="code-property">animation</span>: <span class="code-value">spin 1s linear infinite</span>;
+}
+</div>
+</div>
+
+<h3>性能优化</h3>
+
+<div class="demo-box">
+<div class="tip">
+<strong>提示：</strong>CSS动画性能主要取决于动画的属性选择
+</div>
+
+<table>
+<tr>
+    <th>推荐属性</th>
+    <th>不推荐属性</th>
+</tr>
+<tr>
+    <td>transform</td>
+    <td>width, height, padding, margin</td>
+</tr>
+<tr>
+    <td>opacity</td>
+    <td>background-color, color</td>
+</tr>
+<tr>
+    <td>translate</td>
+    <td>left, top, right, bottom</td>
+</tr>
+<tr>
+    <td>scale</td>
+    <td>font-size</td>
+</tr>
+</table>
+
+<div class="code">
+<span class="code-comment">/* 性能好的动画 */</span>
+<span class="code-selector">.good</span> {
+    <span class="code-property">transform</span>: <span class="code-value">translateX(100px)</span>;
+    <span class="code-property">opacity</span>: <span class="code-value">0.5</span>;
+}
+
+<span class="code-comment">/* 使用will-change提前通知浏览器 */</span>
+<span class="code-selector">.animated</span> {
+    <span class="code-property">will-change</span>: <span class="code-value">transform, opacity</span>;
+}
+
+<span class="code-comment">/* 动画暂停 */</span>
+<span class="code-selector">.paused</span> {
+    <span class="code-property">animation-play-state</span>: <span class="code-value">paused</span>;
+}
+</div>
+</div>
+
+<div class="warning">
+<strong>注意：</strong>避免同时动画太多元素，使用transform和opacity可以提升动画流畅度，在这里不做展开
+</div>
+
+<hr>
+
+<h2>总结</h2>
+
+<p>本教程涵盖了CSS进阶的核心知识：</p>
+
+<table>
+<tr>
+    <th>章节</th>
+    <th>知识点</th>
+</tr>
+<tr>
+    <td>第一部分</td>
+    <td>Flexbox弹性布局、Grid网格布局、多列布局</td>
+</tr>
+<tr>
+    <td>第二部分</td>
+    <td>视口、媒体查询、移动优先响应式设计</td>
+</tr>
+<tr>
+    <td>第三部分</td>
+    <td>CSS变量、CSS函数、形状裁剪、混合模式、滚动行为</td>
+</tr>
+<tr>
+    <td>第四部分</td>
+    <td>过渡、变换、关键帧动画、性能优化</td>
+</tr>
+</table>
+
+<div class="tip">
+<strong>下一步学习：</strong>CSS预处理器、现代CSS特性、css框架与库、最佳实践与性能优化
+</div>
+
+</body>
+</html>

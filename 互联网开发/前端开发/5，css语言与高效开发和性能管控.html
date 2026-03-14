@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS语言与高效开发和性能管控</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.8;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #e67e22;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-left: 4px solid #e67e22;
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            color: #7f8c8d;
+            margin-top: 30px;
+        }
+        
+        h4 {
+            color: #555;
+            margin-top: 20px;
+        }
+        
+        .demo-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Consolas", "Courier New", monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+        
+        .code-tag { color: #66d9ef; }
+        .code-attr { color: #a6e22e; }
+        .code-value { color: #fd971f; }
+        .code-text { color: #f8f8f2; }
+        .code-comment { color: #75715e; }
+        .code-selector { color: #a6e22e; }
+        .code-property { color: #66d9ef; }
+        
+        .render {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            min-height: 50px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #e67e22;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .tip {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .note {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 40px 0;
+        }
+        
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .framework-card {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .framework-card:hover {
+            border-color: #e67e22;
+            transform: translateY(-3px);
+        }
+        
+        .framework-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .bem-example {
+            margin: 10px 0;
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 5px;
+        }
+        
+        .bem-block {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .bem-block__element {
+            background: #2ecc71;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 3px;
+        }
+        
+        .bem-block--modifier {
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .container-query {
+            container-type: inline-size;
+            container-name: card;
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 8px;
+        }
+        
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        @container card (min-width: 300px) {
+            .card {
+                display: flex;
+                gap: 15px;
+            }
+        }
+        
+        .logical-box {
+            margin-inline-start: 20px;
+            margin-block-start: 10px;
+            padding-inline: 15px;
+            border: 2px solid #e67e22;
+        }
+        
+        .has-example {
+            padding: 15px;
+            background: #ecf0f1;
+        }
+        
+        .has-example:has(.highlight) {
+            background: #ffeaa7;
+        }
+        
+        .highlight {
+            background: #e67e22;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        
+        .nested-example {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .nested-example ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nested-example li {
+            padding: 8px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 3px;
+        }
+        
+        .nested-example li:hover {
+            background: #e67e22;
+            color: white;
+        }
+        
+        .tool-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            background: #e67e22;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>CSS语言与高效开发和性能管控</h1>
+
+<p>本教程将介绍CSS的高效开发方法和性能优化技巧，包括预处理器的使用、现代CSS特性、主流框架以及性能最佳实践。</p>
+
+<hr>
+
+<h2>第一部分：CSS预处理器</h2>
+
+<p>CSS预处理器扩展了CSS的功能，提供了变量、嵌套、混合宏等编程特性。</p>
+
+<h3>Sass/SCSS</h3>
+
+<p>Sass（Syntactically Awesome Style Sheets）是最流行的CSS预处理器，有两种语法：SCSS（推荐）和Sass（缩进语法）。</p>
+
+<div class="demo-box">
+<h4>变量（Variables）</h4>
+<div class="code">
+<span class="code-comment">// SCSS 语法</span>
+<span class="code-selector">$primary-color</span>: <span class="code-value">#3498db</span>;
+<span class="code-selector">$font-stack</span>: <span class="code-value">"Helvetica", sans-serif</span>;
+
+<span class="code-selector">body</span> {
+    <span class="code-property">color</span>: <span class="code-value">$primary-color</span>;
+    <span class="code-property">font-family</span>: <span class="code-value">$font-stack</span>;
+}
+</div>
+</div>
+
+<div class="demo-box">
+<h4>嵌套（Nesting）</h4>
+<div class="code">
+<span class="code-selector">nav</span> {
+    <span class="code-property">ul</span> {
+        <span class="code-property">margin</span>: <span class="code-value">0</span>;
+        <span class="code-property">padding</span>: <span class="code-value">0</span>;
+        
+        <span class="code-selector">li</span> {
+            <span class="code-property">display</span>: <span class="code-value">inline-block</span>;
+            
+            <span class="code-selector">a</span> {
+                <span class="code-property">text-decoration</span>: <span class="code-value">none</span>;
+                <span class="code-property">color</span>: <span class="code-value">white</span>;
+                
+                <span class="code-selector">&:hover</span> {
+                    <span class="code-property">color</span>: <span class="code-value">#3498db</span>;
+                }
+            }
+        }
+    }
+}
+</div>
+
+<div class="render">
+    <nav style="background: #2c3e50; padding: 10px;">
+        <ul style="list-style: none; margin: 0; padding: 0;">
+            <li style="display: inline-block; margin-right: 15px;"><a href="javascript:void(0)" style="color: white; text-decoration: none;">首页</a></li>
+            <li style="display: inline-block; margin-right: 15px;"><a href="javascript:void(0)" style="color: white; text-decoration: none;">关于</a></li>
+            <li style="display: inline-block;"><a href="javascript:void(0)" style="color: white; text-decoration: none;">联系</a></li>
+        </ul>
+    </nav>
+</div>
+</div>
+
+<div class="demo-box">
+<h4>混合宏（Mixins）</h4>
+<div class="code">
+<span class="code-comment">// 定义混合宏</span>
+<span class="code-selector">@mixin</span> <span class="code-property">flex-center</span> {
+    <span class="code-property">display</span>: <span class="code-value">flex</span>;
+    <span class="code-property">justify-content</span>: <span class="code-value">center</span>;
+    <span class="code-property">align-items</span>: <span class="code-value">center</span>;
+}
+
+<span class="code-comment">// 带参数的混合宏</span>
+<span class="code-selector">@mixin</span> <span class="code-property">border-radius</span>($<span class="code-value">radius</span>) {
+    <span class="code-property">border-radius</span>: <span class="code-value">$radius</span>;
+}
+
+<span class="code-comment">// 使用混合宏</span>
+<span class="code-selector">.box</span> {
+    <span class="code-property">@include</span> <span class="code-value">flex-center</span>;
+    <span class="code-property">@include</span> <span class="code-value">border-radius(10px)</span>;
+}
+</div>
+</div>
+
+<div class="demo-box">
+<h4>继承（Extend）</h4>
+<div class="code">
+<span class="code-selector">%message</span> {
+    <span class="code-property">padding</span>: <span class="code-value">10px</span>;
+    <span class="code-property">border-radius</span>: <span class="code-value">5px</span>;
+    <span class="code-property">color</span>: <span class="code-value">white</span>;
+}
+
+<span class="code-selector">.success</span> {
+    <span class="code-property">@extend</span> <span class="code-value">%message</span>;
+    <span class="code-property">background</span>: <span class="code-value">#2ecc71</span>;
+}
+
+<span class="code-selector">.error</span> {
+    <span class="code-property">@extend</span> <span class="code-value">%message</span>;
+    <span class="code-property">background</span>: <span class="code-value">#e74c3c</span>;
+}
+</div>
+</div>
+
+<div class="demo-box">
+<h4>运算和函数</h4>
+<div class="code">
+<span class="code-comment">// 运算</span>
+<span class="code-selector">.container</span> {
+    <span class="code-property">width</span>: <span class="code-value">100%</span>;
+    <span class="code-property">padding</span>: <span class="code-value">20px</span> * <span class="code-value">2</span>;
+}
+
+<span class="code-comment">// 内置函数</span>
+<span class="code-selector">.box</span> {
+    <span class="code-property">color</span>: <span class="code-value">darken(#3498db, 20%)</span>;
+    <span class="code-property">width</span>: <span class="code-value">floor(100px / 3)</span>;
+}
+</div>
+</div>
+
+<div class="tip">
+<strong>说明：</strong>Sass/SCSS是预处理器语法，不能直接在浏览器中运行，需要先编译成普通CSS。上述代码展示的是Sass的语法示例，实际使用需要通过构建工具或命令行进行编译。
+</div>
+
+<hr>
+
+<h3>Less</h3>
+
+<p>Less是一种类似于Sass的CSS预处理器，语法稍有不同。</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">// Less 变量</span>
+<span class="code-selector">@primary</span>: <span class="code-value">#3498db</span>;
+
+<span class="code-comment">// Less 混合</span>
+<span class="code-selector">.flex-center</span> {
+    <span class="code-property">display</span>: <span class="code-value">flex</span>;
+    <span class="code-property">justify-content</span>: <span class="code-value">center</span>;
+    <span class="code-property">align-items</span>: <span class="code-value">center</span>;
+}
+
+<span class="code-comment">// 嵌套</span>
+<span class="code-selector">ul</span> {
+    <span class="code-selector">&gt; li</span> {
+        <span class="code-property">display</span>: <span class="code-value">inline-block</span>;
+    }
+}
+</div>
+</div>
+
+<hr>
+
+<h3>PostCSS</h3>
+
+<p>PostCSS是一个用JavaScript插件转换CSS的工具，可以实现自动添加前缀、CSS linting、CSS Next等功能。</p>
+
+<div class="demo-box">
+<h4>常用插件</h4>
+<table>
+<tr>
+    <th>插件</th>
+    <th>功能</th>
+</tr>
+<tr>
+    <td>autoprefixer</td>
+    <td>自动添加浏览器前缀</td>
+</tr>
+<tr>
+    <td>cssnano</td>
+    <td>CSS压缩和优化</td>
+</tr>
+<tr>
+    <td>postcss-preset-env</td>
+    <td>使用现代CSS语法</td>
+</tr>
+<tr>
+    <td>stylelint</td>
+    <td>CSS代码检查</td>
+</tr>
+</table>
+</div>
+
+<div class="demo-box">
+<h4>配置示例</h4>
+<div class="code">
+<span class="code-comment">// postcss.config.js</span>
+<span class="code-selector">module.exports</span> = {
+    <span class="code-property">plugins</span>: [
+        <span class="code-value">require('autoprefixer')</span>,
+        <span class="code-value">require('cssnano')</span>({
+            <span class="code-property">preset</span>: <span class="code-value">'default'</span>,
+        })
+    ]
+}
+</div>
+</div>
+
+<hr>
+
+<h3>CSS模块化（CSS Modules）</h3>
+
+<p>CSS模块化通过将CSS类名哈希化，实现作用域隔离，避免全局样式冲突。这需要配合构建工具（Webpack、Vite）使用。</p>
+
+<div class="demo-box">
+<h4>工作原理</h4>
+<div class="code">
+<span class="code-comment">/* 原始CSS文件 Button.module.css */</span>
+<span class="code-selector">.button</span> {
+    <span class="code-property">padding</span>: <span class="code-value">10px 20px</span>;
+    <span class="code-property">border-radius</span>: <span class="code-value">5px</span>;
+}
+
+<span class="code-selector">.primary</span> {
+    <span class="code-property">background</span>: <span class="code-value">#3498db</span>;
+}
+</div>
+
+<div class="code">
+<span class="code-comment">/* 编译后，类名会变成类似这样的哈希值： */</span>
+<span class="code-selector">.Button_button__1a2b3</span> {
+    <span class="code-property">padding</span>: <span class="code-value">10px 20px</span>;
+}
+
+<span class="code-selector">.Button_primary__4c5d6</span> {
+    <span class="code-property">background</span>: <span class="code-value">#3498db</span>;
+}
+</div>
+</div>
+
+<div class="tip">
+<strong>说明：</strong>由于CSS模块化需要构建工具才能工作，在这个静态HTML中无法展示实际效果。上述示例展示的是编译前后的概念对比。
+</div>
+
+<hr>
+
+<h2>第二部分：现代CSS特性</h2>
+
+<h3>容器查询（Container Queries）</h3>
+
+<p>容器查询允许根据父容器的大小来应用样式，而不是仅根据视口大小。</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">/* 定义容器 */</span>
+<span class="code-selector">.card-container</span> {
+    <span class="code-property">container-type</span>: <span class="code-value">inline-size</span>;
+    <span class="code-property">container-name</span>: <span class="code-value">card</span>;
+}
+
+<span class="code-comment">/* 容器查询 */</span>
+<span class="code-selector">@container card</span> (<span class="code-property">min-width</span>: <span class="code-value">300px</span>) {
+    <span class="code-selector">.card</span> {
+        <span class="code-property">display</span>: <span class="code-value">flex</span>;
+        <span class="code-property">flex-direction</span>: <span class="code-value">row</span>;
+    }
+}
+</div>
+
+<div class="render">
+    <div class="container-query">
+        <div class="card">
+            <div style="flex: 1;">
+                <h4 style="margin: 0 0 10px 0;">卡片标题</h4>
+                <p style="margin: 0;">调整浏览器窗口宽度，观察卡片布局变化（宽度大于300px时变为横向布局）。</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<hr>
+
+<h3>子网格（Subgrid）</h3>
+
+<p>子网格允许嵌套网格继承父网格的轨道，实现更好的对齐。</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-selector">.parent-grid</span> {
+    <span class="code-property">display</span>: <span class="code-value">grid</span>;
+    <span class="code-property">grid-template-columns</span>: <span class="code-value">1fr 1fr</span>;
+    <span class="code-property">gap</span>: <span class="code-value">20px</span>;
+}
+
+<span class="code-selector">.child-grid</span> {
+    <span class="code-property">display</span>: <span class="code-value">grid</span>;
+    <span class="code-property">grid-template-columns</span>: <span class="code-value">subgrid</span>; <span class="code-comment">/* 继承父网格轨道 */</span>
+}
+</div>
+</div>
+
+<div class="note">
+<strong>注意：</strong>子网格目前浏览器支持度有限，需要较新版本的浏览器才能使用。
+</div>
+
+<hr>
+
+<h3>逻辑属性与值（Logical Properties）</h3>
+
+<p>逻辑属性不依赖于物理方向（如左/右），而是依赖于文档的流向（行首/行尾），更适合多语言场景。</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">// 物理属性（固定方向）</span>
+<span class="code-selector">.box</span> {
+    <span class="code-property">margin-left</span>: <span class="code-value">20px</span>;
+    <span class="code-property">padding-right</span>: <span class="code-value">15px</span>;
+}
+
+<span class="code-comment">// 逻辑属性（适应文字方向）</span>
+<span class="code-selector">.box</span> {
+    <span class="code-property">margin-inline-start</span>: <span class="code-value">20px</span>;
+    <span class="code-property">padding-inline-end</span>: <span class="code-value">15px</span>;
+}
+
+<span class="code-comment">// 其他逻辑属性</span>
+<span class="code-selector">.text</span> {
+    <span class="code-property">text-align</span>: <span class="code-value">start</span>;  <span class="code-comment">/* 而不是 left */</span>
+    <span class="code-property">border-inline</span>: <span class="code-value">1px solid #ccc</span>;
+    <span class="code-property">margin-block</span>: <span class="code-value">10px</span>;
+    <span class="code-property">width</span>: <span class="code-value">100cqw</span>;   <span class="code-comment">/* 容器宽度单位 */</span>
+    <span class="code-property">height</span>: <span class="code-value">100cqh</span>;  <span class="code-comment">/* 容器高度单位 */</span>
+}
+</div>
+
+<div class="render">
+    <div class="logical-box">
+        <p>这是一个使用逻辑属性的盒子（margin-inline-start: 20px）。</p>
+        <p>在从左到右的文字方向下等同于 margin-left，在从右到左的语言下等同于 margin-right。</p>
+    </div>
+</div>
+</div>
+
+<hr>
+
+<h3>:has() 选择器</h3>
+
+<p>:has() 是CSS的父选择器，可以根据子元素的状态来选择父元素。</p>
+
+<div class="demo-box">
+<div class="code">
+<span class="code-comment">// 选择包含特定子元素的父元素</span>
+<span class="code-selector">.card:has(.highlight)</span> {
+    <span class="code-property">background</span>: <span class="code-value">#ffeaa7</span>;
+}
+
+<span class="code-comment">// 选择特定子元素被 hover 的父元素</span>
+<span class="code-selector">.container:has(.item:hover)</span> {
+    <span class="code-property">border-color</span>: <span class="code-value">#3498db</span>;
+}
+
+<span class="code-comment">// 选择特定子元素是第一个的父元素</span>
+<span class="code-selector">.list:has(li:first-child)</span> {
+    <span class="code-property">padding-top</span>: <span class="code-value">20px</span>;
+}
+</div>
+
+<div class="render">
+    <div class="has-example">
+        <p>普通段落（无highlight类）</p>
+        <p class="highlight">这是highlight元素</p>
+        <p>另一个普通段落</p>
+    </div>
+    <p style="font-size: 12px; color: #666; margin-top: 10px;">上面的盒子因为包含 .highlight 元素，背景变成了黄色</p>
+</div>
+</div>
+
+<hr>
+
+<h3>原生CSS嵌套</h3>
+
+<p>现代CSS支持原生嵌套语法，无需预处理器也能写嵌套样式。以下示例展示了等效的普通写法：</p>
+
+<div class="demo-box">
+<h4>嵌套写法（需构建工具或现代浏览器）</h4>
+<div class="code">
+<span class="code-comment">/* 原生CSS嵌套 */</span>
+<span class="code-selector">.parent</span> {
+    <span class="code-property">color</span>: <span class="code-value">#333</span>;
+    
+    <span class="code-selector">&amp;.child</span> {
+        <span class="code-property">color</span>: <span class="code-value">blue</span>;
+    }
+    
+    <span class="code-selector">.child</span> {
+        <span class="code-property">font-size</span>: <span class="code-value">16px</span>;
+        
+        <span class="code-selector">&amp;:hover</span> {
+            <span class="code-property">color</span>: <span class="code-value">red</span>;
+        }
+    }
+}
+</div>
+
+<h4>等效的普通CSS写法</h4>
+<div class="code">
+<span class="code-selector">.parent</span> { <span class="code-property">color</span>: <span class="code-value">#333</span>; }
+<span class="code-selector">.parent.child</span> { <span class="code-property">color</span>: <span class="code-value">blue</span>; }
+<span class="code-selector">.parent .child</span> { <span class="code-property">font-size</span>: <span class="code-value">16px</span>; }
+<span class="code-selector">.parent .child:hover</span> { <span class="code-property">color</span>: <span class="code-value">red</span>; }
+</div>
+
+<div class="render nested-example">
+    <ul>
+        <li>列表项1 - 鼠标悬停变橙色</li>
+        <li>列表项2</li>
+        <li>列表项3</li>
+    </ul>
+</div>
+</div>
+
+<div class="tip">
+<strong>说明：</strong>原生CSS嵌套已在现代浏览器（Chrome 112+、Firefox 112+、Safari 16.4+）中得到支持。上面的交互效果使用的是等效的普通CSS写法实现的。
+</div>
+
+<hr>
+
+<h3>其他新特性</h3>
+
+<div class="demo-box">
+<h4>CSS Scroll Snap（滚动捕捉）</h4>
+<div class="code">
+<span class="code-selector">.container</span> {
+    <span class="code-property">scroll-snap-type</span>: <span class="code-value">x mandatory</span>;
+    <span class="code-property">overflow-x</span>: <span class="code-value">auto</span>;
+    <span class="code-property">display</span>: <span class="code-value">flex</span>;
+}
+
+<span class="code-selector">.item</span> {
+    <span class="code-property">scroll-snap-align</span>: <span class="code-value">center</span>;
+    <span class="code-property">flex</span>: <span class="code-value">0 0 200px</span>;
+}
+</div>
+
+<h4>CSS @layer（层叠图层）</h4>
+<div class="code">
+<span class="code-comment">/* 定义图层 */</span>
+<span class="code-selector">@layer</span> <span class="code-value">reset</span>, <span class="code-value">framework</span>, <span class="code-value">custom</span>;
+
+<span class="code-comment">/* 在不同图层中定义样式 */</span>
+<span class="code-selector">@layer</span> <span class="code-value">reset</span> {
+    <span class="code-selector">*</span> { <span class="code-property">margin</span>: <span class="code-value">0</span>; }
+}
+
+<span class="code-selector">@layer</span> <span class="code-value">custom</span> {
+    <span class="code-selector">body</span> { <span class="code-property">font-size</span>: <span class="code-value">16px</span>; }
+}
+</div>
+
+<h4>CSS @property（自定义属性类型）</h4>
+<div class="code">
+<span class="code-comment">/* 定义带类型的CSS变量 */</span>
+<span class="code-selector">@property</span> --progress {
+    <span class="code-property">syntax</span>: <span class="code-value">'&lt;percentage&gt;'</span>;
+    <span class="code-property">inherits</span>: <span class="code-value">false</span>;
+    <span class="code-property">initial-value</span>: <span class="code-value">0%</span>;
+}
+
+<span class="code-selector">.bar</span> {
+    <span class="code-property">background</span>: <span class="code-value">var(--progress)</span>;
+    <span class="code-property">transition</span>: <span class="code-value">--progress 0.5s</span>;
+}
+</div>
+</div>
+
+<hr>
+
+<h2>第三部分：CSS框架与库</h2>
+
+<h3>主流CSS框架对比</h3>
+
+<div class="framework-grid">
+    <div class="framework-card">
+        <div class="framework-icon">B</div>
+        <h4>Bootstrap</h4>
+        <p>最流行的响应式框架，组件丰富</p>
+    </div>
+    <div class="framework-card">
+        <div class="framework-icon">T</div>
+        <h4>Tailwind CSS</h4>
+        <p>原子化CSS，灵活定制</p>
+    </div>
+    <div class="framework-card">
+        <div class="framework-icon">U</div>
+        <h4>Bulma</h4>
+        <p>现代、轻量、Flexbox驱动</p>
+    </div>
+    <div class="framework-card">
+        <div class="framework-icon">F</div>
+        <h4>Foundation</h4>
+        <p>企业级、响应式、最专业</p>
+    </div>
+</div>
+
+<div class="demo-box">
+<h4>Bootstrap 5</h4>
+<p>完整的UI框架，提供预制组件和响应式网格系统。</p>
+<div class="code">
+<span class="code-tag">&lt;link</span> <span class="code-attr">href</span>=<span class="code-value">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"</span> <span class="code-attr">rel</span>=<span class="code-value">"stylesheet"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 使用组件 --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">class</span>=<span class="code-value">"btn btn-primary"</span><span class="code-tag">&gt;</span>主要按钮<span class="code-tag">&lt;/button&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"container"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"row"</span><span class="code-tag">&gt;</span>
+        <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"col-md-6"</span><span class="code-tag">&gt;</span>列1<span class="code-tag">&lt;/div&gt;</span>
+        <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"col-md-6"</span><span class="code-tag">&gt;</span>列2<span class="code-tag">&lt;/div&gt;</span>
+    <span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
+</div>
+
+<div class="render">
+    <button class="btn btn-primary" style="background: #0d6efd; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">主要按钮</button>
+    <button class="btn btn-secondary" style="background: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-left: 10px;">次要按钮</button>
+</div>
+</div>
+
+<div class="demo-box">
+<h4>Tailwind CSS</h4>
+<p>实用优先的原子化CSS框架，通过工具类组合构建界面。</p>
+<div class="code">
+<span class="code-comment">/* 安装 */</span>
+<span class="code-selector">npm</span> install -D tailwindcss
+npx tailwindcss init
+
+<span class="code-comment">/* 配置 tailwind.config.js */</span>
+<span class="code-selector">module.exports</span> = {
+    <span class="code-property">content</span>: [<span class="code-value">"./src/**/*.{html,js}"</span>],
+    <span class="code-property">theme</span>: { <span class="code-property">extend</span>: {} },
+    <span class="code-property">plugins</span>: [],
+}
+
+<span class="code-comment">/* 使用工具类 */</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"flex items-center justify-between p-4 bg-white shadow-md rounded-lg"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;h1</span> <span class="code-attr">class</span>=<span class="code-value">"text-2xl font-bold text-gray-800"</span><span class="code-tag">&gt;</span>标题<span class="code-tag">&lt;/h1&gt;</span>
+    <span class="code-tag">&lt;button</span> <span class="code-attr">class</span>=<span class="code-value">"px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"</span><span class="code-tag">&gt;</span>按钮<span class="code-tag">&lt;/button&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
+</div>
+
+<div class="render">
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 8px;">
+        <h3 style="margin: 0; font-size: 20px; font-weight: bold; color: #333;">标题</h3>
+        <button style="padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">按钮</button>
+    </div>
+</div>
+</div>
+
+<div class="demo-box">
+<h4>Bulma</h4>
+<p>基于Flexbox的现代CSS框架，简洁优雅。</p>
+<div class="code">
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-value">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-value">"https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"</span><span class="code-tag">&gt;</span>
+
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"columns"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"column"</span><span class="code-tag">&gt;</span>第一列<span class="code-tag">&lt;/div&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"column"</span><span class="code-tag">&gt;</span>第二列<span class="code-tag">&lt;/div&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"column"</span><span class="code-tag">&gt;</span>第三列<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
+</div>
+</div>
+
+<div class="tip">
+<strong>选择建议：</strong>
+<ul>
+    <li><strong>Bootstrap</strong>：需要快速开发、喜欢组件化开发</li>
+    <li><strong>Tailwind CSS</strong>：追求高度定制、喜欢原子化CSS</li>
+    <li><strong>Bulma</strong>：喜欢简洁、纯CSS（无JS依赖）</li>
+    <li><strong>Foundation</strong>：企业级应用、需要无障碍支持</li>
+</ul>
+</div>
+
+<hr>
+
+<h2>第四部分：性能优化与最佳实践</h2>
+
+<h3>CSS方法论</h3>
+
+<div class="demo-box">
+<h4>BEM（Block Element Modifier）</h4>
+<p>BEM是一种命名规范，将页面分为块（Block）、元素（Element）和修饰符（Modifier）。</p>
+
+<div class="code">
+<span class="code-comment">/* Block（块） */</span>
+<span class="code-selector">.card</span> { }
+
+<span class="code-comment">/* Element（元素） */</span>
+<span class="code-selector">.card__title</span> { }
+<span class="code-selector">.card__content</span> { }
+<span class="code-selector">.card__button</span> { }
+
+<span class="code-comment">/* Modifier（修饰符） */</span>
+<span class="code-selector">.card--featured</span> { }
+<span class="code-selector">.card__button--primary</span> { }
+<span class="code-selector">.card__button--disabled</span> { }
+</div>
+
+<div class="render bem-example">
+    <div class="bem-block">
+        .card（块）
+        <div class="bem-block__element">
+            .card__title（元素）
+        </div>
+        <div class="bem-block__element" style="background: #e74c3c;">
+            .card--featured（修饰符）应用时
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="demo-box">
+<h4>SMACSS（可扩展模块化架构CSS）</h4>
+<p>将CSS分为基础（Base）、布局（Layout）、模块（Module）、状态（State）和主题（Theme）五类。</p>
+
+<div class="code">
+<span class="code-comment">/* Base - 基础样式 */</span>
+<span class="code-selector">body</span>, <span class="code-selector">p</span> { <span class="code-property">margin</span>: <span class="code-value">0</span>; }
+
+<span class="code-comment">/* Layout - 布局样式 */</span>
+<span class="code-selector">.l-header</span>, <span class="code-selector">.l-footer</span> { }
+<span class="code-selector">.l-sidebar</span> { }
+
+<span class="code-comment">/* Module - 模块样式 */</span>
+<span class="code-selector">.btn</span>, <span class="code-selector">.card</span> { }
+
+<span class="code-comment">/* State - 状态样式 */</span>
+<span class="code-selector">.is-active</span>, <span class="code-selector">.is-hidden</span> { }
+
+<span class="code-comment">/* Theme - 主题样式 */</span>
+<span class="code-selector">.theme-dark</span> { }
+</div>
+</div>
+
+<div class="demo-box">
+<h4>OOCSS（面向对象CSS）</h4>
+<p>将CSS抽象为可复用的"对象"（类），强调结构与样式分离。</p>
+
+<div class="code">
+<span class="code-comment">/* 避免 */</span>
+<span class="code-selector">.btn-red</span> {
+    <span class="code-property">padding</span>: <span class="code-value">10px 20px</span>;
+    <span class="code-property">background</span>: <span class="code-value">red</span>;
+    <span class="code-property">border-radius</span>: <span class="code-value">5px</span>;
+}
+
+<span class="code-comment">/* 推荐：分离结构与样式 */</span>
+<span class="code-selector">.btn</span> {
+    <span class="code-property">padding</span>: <span class="code-value">10px 20px</span>;
+    <span class="code-property">border-radius</span>: <span class="code-value">5px</span>;
+}
+<span class="code-selector">.btn-danger</span> { <span class="code-property">background</span>: <span class="code-value">red</span>; }
+<span class="code-selector">.btn-primary</span> { <span class="code-property">background</span>: <span class="code-value">blue</span>; }
+
+<span class="code-comment">/* 媒体对象 */</span>
+<span class="code-selector">.media</span> { <span class="code-property">display</span>: <span class="code-value">flex</span>; <span class="code-property">align-items</span>: <span class="code-value">flex-start</span>; }
+<span class="code-selector">.media__img</span> { <span class="code-property">margin-right</span>: <span class="code-value">10px</span>; }
+<span class="code-selector">.media__body</span> { <span class="code-property">flex</span>: <span class="code-value">1</span>; }
+</div>
+</div>
+
+<hr>
+
+<h3>可维护性与可扩展性</h3>
+
+<div class="demo-box">
+<h4>最佳实践</h4>
+<ul>
+    <li>使用CSS变量管理颜色和间距</li>
+    <li>避免使用ID选择器（优先级过高）</li>
+    <li>保持选择器简短（不超过3层）</li>
+    <li>使用em/rem代替px（除边框和阴影外）</li>
+    <li>将媒体查询放在相关样式附近</li>
+</ul>
+</div>
+
+<hr>
+
+<h3>性能优化</h3>
+
+<div class="demo-box">
+<h4>渲染性能</h4>
+<table>
+<tr>
+    <th>优化项</th>
+    <th>推荐做法</th>
+    <th>避免</th>
+</tr>
+<tr>
+    <td>选择器</td>
+    <td>使用类选择器</td>
+    <td>通配符*、属性选择器</td>
+</tr>
+<tr>
+    <td>动画</td>
+    <td>transform、opacity</td>
+    <td>width、height、left</td>
+</tr>
+<tr>
+    <td>渲染</td>
+    <td>will-change提前通知</td>
+    <td>频繁更改布局属性</td>
+</tr>
+<tr>
+    <td>合成层</td>
+    <td>使用GPU加速</td>
+    <td>过度使用z-index</td>
+</tr>
+</table>
+</div>
+
+<div class="demo-box">
+<h4>加载性能</h4>
+<div class="code">
+<span class="code-comment">/* 1. 关键CSS内联，非关键CSS异步加载 */</span>
+<span class="code-tag">&lt;style&gt;</span>
+    <span class="code-comment">/* 关键CSS */</span>
+<span class="code-tag">&lt;/style&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-value">"preload"</span> <span class="code-attr">href</span>=<span class="code-value">"styles.css"</span> <span class="code-attr">as</span>=<span class="code-value">"style"</span> <span class="code-attr">onload</span>=<span class="code-value">"this.onload=null;this.rel='stylesheet'"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">/* 2. 使用content-visibility优化长页面 */</span>
+<span class="code-selector">.lazy-section</span> {
+    <span class="code-property">content-visibility</span>: <span class="code-value">auto</span>;
+    <span class="code-property">contain-intrinsic-size</span>: <span class="code-value">1000px</span>;
+}
+
+<span class="code-comment">/* 3. 减少重排重绘 */</span>
+<span class="code-selector">.batch</span> {
+    <span class="code-property">transform</span>: <span class="code-value">translateX(100px)</span>;
+    <span class="code-property">opacity</span>: <span class="code-value">0.5</span>;
+}
+</div>
+</div>
+
+<div class="demo-box">
+<h4>文件优化</h4>
+<ul>
+    <li><strong>压缩CSS</strong>：使用cssnano、clean-css等工具</li>
+    <li><strong>移除未使用CSS</strong>：使用PurifyCSS、uncss</li>
+    <li><strong>合并文件</strong>：减少HTTP请求</li>
+    <li><strong>使用CDN</strong>：加速资源加载</li>
+    <li><strong>缓存策略</strong>：设置长期缓存</li>
+</ul>
+</div>
+
+<hr>
+
+<h3>调试与相关工具</h3>
+
+<div class="demo-box">
+<h4>浏览器开发者工具</h4>
+
+<div class="tool-card">
+    <div class="tool-icon">Elements</div>
+    <div>
+        <strong>Elements 面板</strong>
+        <p>检查和编辑DOM元素、实时修改CSS样式</p>
+    </div>
+</div>
+
+<div class="tool-card">
+    <div class="tool-icon">Styles</div>
+    <div>
+        <strong>Styles 面板</strong>
+        <p>查看CSS优先级、添加/删除规则、启用/禁用属性</p>
+    </div>
+</div>
+
+<div class="tool-card">
+    <div class="tool-icon">Computed</div>
+    <div>
+        <strong>Computed 面板</strong>
+        <p>查看元素最终计算后的样式，了解盒模型</p>
+    </div>
+</div>
+
+<div class="tool-card">
+    <div class="tool-icon">Layout</div>
+    <div>
+        <strong>Layout 面板</strong>
+        <p>查看Flexbox和Grid的调试覆盖层</p>
+    </div>
+</div>
+</div>
+
+<div class="demo-box">
+<h4>在线工具</h4>
+<table>
+<tr>
+    <th>工具</th>
+    <th>用途</th>
+    <th>网址</th>
+</tr>
+<tr>
+    <td>Can I Use</td>
+    <td>查询浏览器兼容性</td>
+    <td>caniuse.com</td>
+</tr>
+<tr>
+    <td>CSS Validator</td>
+    <td>CSS代码验证</td>
+    <td>jigsaw.w3.org/css-validator</td>
+</tr>
+<tr>
+    <td>Autoprefixer</td>
+    <td>自动添加前缀</td>
+    <td>autoprefixer.github.io</td>
+</tr>
+<tr>
+    <td>BEM Cheat Sheet</td>
+    <td>BEM命名参考</td>
+    <td>getbem.com</td>
+</tr>
+</table>
+</div>
+
+<div class="demo-box">
+<h4>VS Code 扩展推荐</h4>
+<ul>
+    <li><strong>Live Server</strong> - 本地开发服务器</li>
+    <li><strong>CSS Peek</strong> - 查看CSS定义</li>
+    <li><strong>Stylelint</strong> - 代码检查</li>
+    <li><strong>Tailwind CSS IntelliSense</strong> - Tailwind智能提示</li>
+    <li><strong>SCSS IntelliSense</strong> - SCSS变量补全</li>
+</ul>
+</div>
+
+<div class="tip">
+<strong>调试技巧：</strong>
+<ul>
+    <li>使用Ctrl+Shift+P打开命令面板，输入 "Toggle Animations" 暂停动画</li>
+    <li>在Elements面板中右键点击元素，选择 "Force element state" 强制触发状态</li>
+    <li>使用 "Shift+点击" 重新加载页面，保留缓存</li>
+</ul>
+</div>
+
+<hr>
+
+<h2>总结</h2>
+
+<p>本教程涵盖了CSS高效开发和性能管控的核心知识：</p>
+
+<table>
+<tr>
+    <th>章节</th>
+    <th>知识点</th>
+</tr>
+<tr>
+    <td>第一部分</td>
+    <td>Sass/SCSS、Less、PostCSS、CSS模块化</td>
+</tr>
+<tr>
+    <td>第二部分</td>
+    <td>容器查询、子网格、逻辑属性、:has()、原生嵌套</td>
+</tr>
+<tr>
+    <td>第三部分</td>
+    <td>Bootstrap、Tailwind CSS、Bulma、Foundation</td>
+</tr>
+<tr>
+    <td>第四部分</td>
+    <td>BEM、SMACSS、OOCSS方法论，性能优化，调试工具</td>
+</tr>
+</table>
+
+<div class="tip">
+<strong>持续学习：</strong>CSS不断发展，建议关注CSS Working Group的最新提案和浏览器更新。
+</div>
+
+</body>
+</html>
