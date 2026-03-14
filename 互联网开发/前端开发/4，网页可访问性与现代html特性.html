@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网页可访问性与现代HTML特性</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.8;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #e67e22;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-left: 4px solid #e67e22;
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            color: #7f8c8d;
+            margin-top: 30px;
+        }
+        
+        h4 {
+            color: #555;
+            margin-top: 20px;
+        }
+        
+        .demo-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Consolas", "Courier New", monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+        
+        .code-tag { color: #66d9ef; }
+        .code-attr { color: #a6e22e; }
+        .code-value { color: #fd971f; }
+        .code-text { color: #f8f8f2; }
+        .code-comment { color: #75715e; }
+        .code-property { color: #66d9ef; }
+        .code-selector { color: #a6e22e; }
+        
+        .render {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .tip {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .note {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        button:hover {
+            background: #2980b9;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 40px 0;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #3498db;
+            color: white;
+            padding: 8px;
+            z-index: 100;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        .focus-demo button:focus {
+            outline: 3px solid #e74c3c;
+            outline-offset: 2px;
+        }
+        
+        .aria-demo [role="button"] {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .aria-demo [role="button"]:focus {
+            outline: 3px solid #e74c3c;
+        }
+        
+        .tab-demo .tab-list {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .tab-demo .tab-button {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .tab-demo .tab-button[aria-selected="true"] {
+            border-bottom-color: #3498db;
+            font-weight: bold;
+        }
+        
+        .tab-demo .tab-button:focus {
+            outline: 2px solid #3498db;
+        }
+        
+        .tab-demo .tab-panel {
+            display: none;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .tab-demo .tab-panel[aria-hidden="false"] {
+            display: block;
+        }
+        
+        .template-demo {
+            border: 2px solid #3498db;
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+        }
+        
+        .shadow-demo {
+            border: 2px solid #9b59b6;
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+        }
+        
+        .editable-demo [contenteditable="true"] {
+            border: 2px dashed #3498db;
+            padding: 10px;
+            background: #f9f9f9;
+            min-height: 50px;
+        }
+        
+        .style-demo {
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #3498db;
+        }
+        
+        .inline-style {
+            background: #ffeaa7;
+            color: #d63031;
+            padding: 5px 10px;
+        }
+        
+        .script-demo {
+            background: #dfe6e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>网页可访问性与现代HTML特性</h1>
+
+<h2>第一部分：可访问性/ARIA与国际化</h2>
+
+<h3>可访问性基础</h3>
+
+<div class="demo-box">
+<p>网页可访问性（Web Accessibility）确保所有用户，包括残障人士，都能平等地访问和使用网页内容。</p>
+
+<h4>为什么需要可访问性？</h4>
+<ul>
+    <li><strong>法律要求</strong>：许多国家有相关的无障碍法规</li>
+    <li><strong>用户体验</strong>：良好的可访问性设计对所有用户都有益</li>
+    <li><strong>SEO优化</strong>：搜索引擎更好地理解页面内容</li>
+    <li><strong>扩大受众</strong>：覆盖更多用户群体</li>
+</ul>
+
+<h4>可访问性基本原则</h4>
+<table>
+<tr>
+    <th>原则</th>
+    <th>说明</th>
+</tr>
+<tr>
+    <td>可感知性</td>
+    <td>内容必须对用户是可感知的</td>
+</tr>
+<tr>
+    <td>可操作性</td>
+    <td>用户界面组件必须是可操作的</td>
+</tr>
+<tr>
+    <td>可理解性</td>
+    <td>界面信息必须是可理解的</td>
+</tr>
+<tr>
+    <td>健壮性</td>
+    <td>内容必须足够健壮，能被各种用户代理解释</td>
+</tr>
+</table>
+
+<h4>基本可访问性实践</h4>
+<div class="code">
+<span class="code-comment">&lt;!-- 1. 使用语义化标签 --&gt;</span>
+<span class="code-tag">&lt;header&gt;</span><span class="code-tag">&lt;/header&gt;</span>
+<span class="code-tag">&lt;nav&gt;</span><span class="code-tag">&lt;/nav&gt;</span>
+<span class="code-tag">&lt;main&gt;</span><span class="code-tag">&lt;/main&gt;</span>
+<span class="code-tag">&lt;button&gt;</span><span class="code-tag">&lt;/button&gt;</span>
+
+<span class="code-comment">&lt;!-- 2. 为图片添加alt属性 --&gt;</span>
+<span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-value">"photo.jpg"</span> <span class="code-attr">alt</span>=<span class="code-value">"一只可爱的橘猫"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 3. 确保足够的颜色对比度 --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">style</span>=<span class="code-value">"color: #333; background: #fff;"</span><span class="code-tag">&gt;</span>可读性好的文字<span class="code-tag">&lt;/div&gt;</span>
+
+<span class="code-comment">&lt;!-- 4. 提供清晰的焦点样式 --&gt;</span>
+<span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"#"</span> <span class="code-attr">style</span>=<span class="code-value">"outline: 3px solid orange;"</span><span class="code-tag">&gt;</span>可聚焦的链接<span class="code-tag">&lt;/a&gt;</span>
+
+<span class="code-comment">&lt;!-- 5. 提供跳过导航的链接 --&gt;</span>
+<span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"#main-content"</span> <span class="code-attr">class</span>=<span class="code-value">"skip-link"</span><span class="code-tag">&gt;</span>跳到主要内容<span class="code-tag">&lt;/a&gt;</span>
+</div>
+
+<div class="render">
+    <p>示例：可访问的按钮和链接</p>
+    <button>普通按钮</button>
+    <a href="javascript:void(0)" style="margin-left: 10px; color: #3498db;">可聚焦的链接</a>
+</div>
+
+<div class="tip">
+<strong>提示：</strong>使用 <strong>Tab</strong> 键可以在页面元素间切换焦点，这是很多用户导航网页的方式。
+</div>
+</div>
+
+<hr>
+
+<h3>ARIA角色与属性</h3>
+
+<div class="demo-box">
+<p>ARIA（Accessible Rich Internet Applications）为HTML提供额外的语义信息，帮助辅助技术（如屏幕阅读器）理解页面内容。</p>
+
+<h4>ARIA角色（role）</h4>
+<p>角色告诉浏览器元素的作用是什么。</p>
+
+<div class="code">
+<span class="code-tag">&lt;div</span> <span class="code-attr">role</span>=<span class="code-value">"banner"</span><span class="code-tag">&gt;</span>页眉<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">role</span>=<span class="code-value">"navigation"</span><span class="code-tag">&gt;</span>导航区域<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">role</span>=<span class="code-value">"main"</span><span class="code-tag">&gt;</span>主要内容<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">role</span>=<span class="code-value">"button"</span><span class="code-tag">&gt;</span>点击我<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">role</span>=<span class="code-value">"alert"</span><span class="code-tag">&gt;</span>重要提示<span class="code-tag">&lt;/div&gt;</span>
+</div>
+
+<div class="render aria-demo">
+    <p>使用 role="button" 的元素：</p>
+    <div role="button" tabindex="0">点击我（使用div模拟的按钮）</div>
+</div>
+
+<h4>常用ARIA属性</h4>
+<table>
+<tr>
+    <th>属性</th>
+    <th>说明</th>
+    <th>示例</th>
+</tr>
+<tr>
+    <td>aria-label</td>
+    <td>为元素提供可访问名称</td>
+    <td>&lt;button aria-label="关闭"&gt;×&lt;/button&gt;</td>
+</tr>
+<tr>
+    <td>aria-describedby</td>
+    <td>关联描述性文本</td>
+    <td>&lt;input aria-describedby="hint"&gt;</td>
+</tr>
+<tr>
+    <td>aria-hidden</td>
+    <td>隐藏元素不读</td>
+    <td>&lt;span aria-hidden="true"&gt;图标&lt;/span&gt;</td>
+</tr>
+<tr>
+    <td>aria-expanded</td>
+    <td>指示展开/收起状态</td>
+    <td>&lt;button aria-expanded="false"&gt;菜单&lt;/button&gt;</td>
+</tr>
+<tr>
+    <td>aria-selected</td>
+    <td>指示选中状态</td>
+    <td>&lt;tab aria-selected="true"&gt;选中&lt;/tab&gt;</td>
+</tr>
+<tr>
+    <td>aria-pressed</td>
+    <td>指示按下状态</td>
+    <td>&lt;button aria-pressed="false"&gt;切换按钮&lt;/button&gt;</td>
+</tr>
+<tr>
+    <td>aria-current</td>
+    <td>指示当前项</td>
+    <td>&lt;a aria-current="page"&gt;当前页&lt;/a&gt;</td>
+</tr>
+</table>
+
+<h4>aria-label 使用示例</h4>
+<div class="code">
+<span class="code-comment">&lt;!-- 搜索按钮只有图标，需要aria-label --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">aria-label</span>=<span class="code-value">"搜索"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;svg&gt;</span>...<span class="code-tag">&lt;/svg&gt;</span>
+<span class="code-tag">&lt;/button&gt;</span>
+
+<span class="code-comment">&lt;!-- 关闭按钮 --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">aria-label</span>=<span class="code-value">"关闭对话框"</span><span class="code-tag">&gt;</span>×<span class="code-tag">&lt;/button&gt;</span>
+</div>
+
+<div class="render">
+    <button aria-label="搜索" style="padding: 10px 15px;">🔍</button>
+    <button aria-label="关闭对话框" style="padding: 10px 15px; margin-left: 10px;">×</button>
+</div>
+
+<h4>无障碍树形菜单示例</h4>
+<div class="code">
+<span class="code-tag">&lt;ul</span> <span class="code-attr">role</span>=<span class="code-value">"tree"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;li</span> <span class="code-attr">role</span>=<span class="code-value">"treeitem"</span> <span class="code-attr">aria-expanded</span>=<span class="code-value">"true"</span><span class="code-tag">&gt;</span>文件夹
+        <span class="code-tag">&lt;ul&gt;</span>
+            <span class="code-tag">&lt;li</span> <span class="code-attr">role</span>=<span class="code-value">"treeitem"</span><span class="code-tag">&gt;</span>文件1<span class="code-tag">&lt;/li&gt;</span>
+            <span class="code-tag">&lt;li</span> <span class="code-attr">role</span>=<span class="code-value">"treeitem"</span><span class="code-tag">&gt;</span>文件2<span class="code-tag">&lt;/li&gt;</span>
+        <span class="code-tag">&lt;/ul&gt;</span>
+    <span class="code-tag">&lt;/li&gt;</span>
+<span class="code-tag">&lt;/ul&gt;</span>
+</div>
+
+<div class="tip">
+<strong>重要：</strong>ARIA只是补充，不能替代语义化HTML。优先使用原生HTML元素（如 &lt;button&gt;、&lt;nav&gt;），只在必要时使用ARIA。
+</div>
+</div>
+
+<hr>
+
+<h3>国际化（lang属性与字符编码）</h3>
+
+<div class="demo-box">
+<p>国际化（i18n）确保网页能被不同语言和地区的用户正确理解。</p>
+
+<h4>lang 属性声明</h4>
+<p>使用 lang 属性告诉浏览器和辅助技术页面的主语言。</p>
+
+<div class="code">
+<span class="code-comment">&lt;!-- 声明页面语言为中文 --&gt;</span>
+<span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-value">"zh-CN"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 英文页面 --&gt;</span>
+<span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-value">"en"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 部分内容使用不同语言 --&gt;</span>
+<span class="code-tag">&lt;p&gt;</span>
+    你好世界！
+    <span class="code-tag">&lt;span</span> <span class="code-attr">lang</span>=<span class="code-value">"en"</span><span class="code-tag">&gt;</span>Hello World!<span class="code-tag">&lt;/span&gt;</span>
+<span class="code-tag">&lt;/p&gt;</span>
+</div>
+
+<h4>常用语言代码</h4>
+<table>
+<tr>
+    <th>语言</th>
+    <th>代码</th>
+</tr>
+<tr>
+    <td>中文（简体）</td>
+    <td>zh-CN</td>
+</tr>
+<tr>
+    <td>中文（繁体）</td>
+    <td>zh-TW</td>
+</tr>
+<tr>
+    <td>英语</td>
+    <td>en</td>
+</tr>
+<tr>
+    <td>日语</td>
+    <td>ja</td>
+</tr>
+<tr>
+    <td>韩语</td>
+    <td>ko</td>
+</tr>
+<tr>
+    <td>法语</td>
+    <td>fr</td>
+</tr>
+<tr>
+    <td>德语</td>
+    <td>de</td>
+</tr>
+</table>
+
+<h4>字符编码（charset）</h4>
+<p>声明正确的字符编码，确保文字正确显示。</p>
+
+<div class="code">
+<span class="code-comment">&lt;!-- 推荐：UTF-8，支持所有语言 --&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">charset</span>=<span class="code-value">"UTF-8"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 旧式写法（不推荐） --&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">http-equiv</span>=<span class="code-value">"Content-Type"</span> 
+      <span class="code-attr">content</span>=<span class="code-value">"text/html; charset=UTF-8"</span><span class="code-tag">&gt;</span>
+</div>
+
+<h4>方向性（dir属性）</h4>
+<p>用于从右到左阅读的语言（如阿拉伯语、希伯来语）。</p>
+
+<div class="code">
+<span class="code-comment">&lt;!-- 从左到右（默认） --&gt;</span>
+<span class="code-tag">&lt;p</span> <span class="code-attr">dir</span>=<span class="code-value">"ltr"</span><span class="code-tag">&gt;</span>中文English<span class="code-tag">&lt;/p&gt;</span>
+
+<span class="code-comment">&lt;!-- 从右到左 --&gt;</span>
+<span class="code-tag">&lt;p</span> <span class="code-attr">dir</span>=<span class="code-value">"rtl"</span><span class="code-tag">&gt;</span>مرحبا<span class="code-tag">&lt;/p&gt;</span>
+
+<span class="code-comment">&lt;!-- 自动检测（浏览器决定） --&gt;</span>
+<span class="code-tag">&lt;p</span> <span class="code-attr">dir</span>=<span class="code-value">"auto"</span><span class="code-tag">&gt;</span>内容<span class="code-tag">&lt;/p&gt;</span>
+</div>
+
+<div class="note">
+<strong>提示：</strong>始终使用 &lt;meta charset="UTF-8"&gt; 并保存文件为UTF-8编码，这样可以避免大多数乱码问题。
+</div>
+</div>
+
+<hr>
+
+<h2>第二部分：现代HTML特性与Web组件</h2>
+
+<h3>自定义元素（Custom Elements）</h3>
+
+<div class="demo-box">
+<p>自定义元素允许创建自定义的HTML标签，是Web组件的核心技术之一。</p>
+
+<h4>定义自定义元素</h4>
+<div class="code">
+<span class="code-comment">// 定义一个自定义元素</span>
+<span class="code-tag">class</span> <span class="code-property">MyElement</span> <span class="code-tag">extends</span> <span class="code-property">HTMLElement</span> {
+    <span class="code-property">connectedCallback</span>() {
+        <span class="code-tag">this</span>.innerHTML = <span class="code-value">'&lt;h2&gt;我的自定义元素&lt;/h2&gt;'</span>;
+    }
+}
+
+<span class="code-comment">// 注册自定义元素</span>
+customElements.define(<span class="code-value">'my-element'</span>, MyElement);
+</div>
+
+<div class="code">
+<span class="code-comment">// 使用自定义元素</span>
+<span class="code-tag">&lt;my-element&gt;&lt;/my-element&gt;</span>
+</div>
+
+<div class="render">
+    <p>自定义元素示例（由JavaScript创建）：</p>
+    <div id="custom-element-demo"></div>
+    <script>
+        class MyElement extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = '<div style="background: #3498db; color: white; padding: 15px; border-radius: 5px;">这是我的自定义元素！</div>';
+            }
+        }
+        customElements.define('my-element-demo', MyElement);
+    </script>
+    <my-element-demo></my-element-demo>
+</div>
+
+<h4>生命周期回调</h4>
+<table>
+<tr>
+    <th>回调</th>
+    <th>调用时机</th>
+</tr>
+<tr>
+    <td>connectedCallback</td>
+    <td>元素被添加到DOM</td>
+</tr>
+<tr>
+    <td>disconnectedCallback</td>
+    <td>元素从DOM移除</td>
+</tr>
+<tr>
+    <td>attributeChangedCallback</td>
+    <td>属性变化时</td>
+</tr>
+<tr>
+    <td>adoptedCallback</td>
+    <td>移动到新文档时</td>
+</tr>
+</table>
+</div>
+
+<hr>
+
+<h3>模板与插槽</h3>
+
+<div class="demo-box">
+<h4>&lt;template&gt; 元素</h4>
+<p>&lt;template&gt; 用于定义可复用的HTML片段，不会被渲染。</p>
+
+<div class="code">
+<span class="code-comment">&lt;!-- 定义模板 --&gt;</span>
+<span class="code-tag">&lt;template</span> <span class="code-attr">id</span>=<span class="code-value">"my-template"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"card"</span><span class="code-tag">&gt;</span>
+        <span class="code-tag">&lt;h2&gt;</span><span class="code-tag">&lt;/h2&gt;</span>
+        <span class="code-tag">&lt;p&gt;</span><span class="code-tag">&lt;/p&gt;</span>
+    <span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/template&gt;</span>
+
+<span class="code-comment">&lt;!-- 使用模板 --&gt;</span>
+<span class="code-tag">&lt;script&gt;</span>
+    <span class="code-tag">const</span> template = document.getElementById(<span class="code-value">'my-template'</span>);
+    <span class="code-tag">const</span> clone = template.content.cloneNode(<span class="code-value">true</span>);
+    document.body.appendChild(clone);
+<span class="code-tag">&lt;/script&gt;</span>
+</div>
+
+<div class="render template-demo">
+    <p>模板示例：</p>
+    <template id="card-template">
+        <div style="background: #3498db; color: white; padding: 15px; border-radius: 5px; margin: 10px 0;">
+            <h3 style="margin: 0 0 10px 0;">模板标题</h3>
+            <p style="margin: 0;">这是模板中的内容</p>
+        </div>
+    </template>
+    <button onclick="useTemplate()">点击使用模板</button>
+    <div id="template-output"></div>
+    <script>
+        function useTemplate() {
+            const template = document.getElementById('card-template');
+            const clone = template.content.cloneNode(true);
+            document.getElementById('template-output').appendChild(clone);
+        }
+    </script>
+</div>
+
+<h4>&lt;slot&gt; 插槽</h4>
+<p>插槽允许在自定义元素中插入自定义内容。</p>
+
+<div class="code">
+<span class="code-comment">// 定义带插槽的自定义元素</span>
+<span class="code-tag">class</span> <span class="code-property">MyCard</span> <span class="code-tag">extends</span> <span class="code-property">HTMLElement</span> {
+    <span class="code-property">connectedCallback</span>() {
+        <span class="code-tag">this</span>.innerHTML = `
+            <span class="code-tag">&lt;div</span> <span class="code-attr">style</span>=<span class="code-value">"border: 1px solid #ddd; padding: 15px;"</span><span class="code-tag">&gt;</span>
+                <span class="code-tag">&lt;h2&gt;</span><span class="code-tag">&lt;slot</span> <span class="code-attr">name</span>=<span class="code-value">"title"</span><span class="code-tag">&gt;</span>默认标题<span class="code-tag">&lt;/slot&gt;</span><span class="code-tag">&lt;/h2&gt;</span>
+                <span class="code-tag">&lt;p&gt;</span><span class="code-tag">&lt;slot&gt;</span>默认内容<span class="code-tag">&lt;/slot&gt;</span><span class="code-tag">&lt;/p&gt;</span>
+            <span class="code-tag">&lt;/div&gt;</span>
+        `;
+    }
+}
+customElements.define(<span class="code-value">'my-card'</span>, MyCard);
+</div>
+
+<div class="code">
+<span class="code-comment">&lt;!-- 使用带插槽的自定义元素 --&gt;</span>
+<span class="code-tag">&lt;my-card&gt;</span>
+    <span class="code-tag">&lt;span</span> <span class="code-attr">slot</span>=<span class="code-value">"title"</span><span class="code-tag">&gt;</span>自定义标题<span class="code-tag">&lt;/span&gt;</span>
+    这是插入的内容
+<span class="code-tag">&lt;/my-card&gt;</span>
+</div>
+
+<div class="note">
+<strong>提示：</strong>模板和插槽是Web组件的三大基础技术之二，另一个是Shadow DOM。
+</div>
+</div>
+
+<hr>
+
+<h3>Shadow DOM</h3>
+
+<div class="demo-box">
+<p>Shadow DOM 允许将隐藏的DOM树附加到元素上，实现样式和结构的封装。</p>
+
+<h4>什么是Shadow DOM？</h4>
+<ul>
+    <li>隔离样式：组件样式不会影响外部</li>
+    <li>隔离DOM：组件内部结构不会与外部冲突</li>
+    <li>私有实现：隐藏实现细节</li>
+</ul>
+
+<h4>创建Shadow DOM</h4>
+<div class="code">
+<span class="code-tag">const</span> host = document.getElementById(<span class="code-value">'host-element'</span>);
+<span class="code-tag">const</span> shadow = host.attachShadow({<span class="code-property">mode</span>: <span class="code-value">'open'</span>});
+
+shadow.innerHTML = <span class="code-value">`
+    &lt;style&gt;
+        .inner { color: blue; font-weight: bold; }
+    &lt;/style&gt;
+    &lt;div class="inner"&gt;这是Shadow DOM中的内容&lt;/div&gt;
+`</span>;
+</div>
+
+<div class="render shadow-demo">
+    <p>Shadow DOM 示例：</p>
+    <div id="shadow-host">外部内容</div>
+    <script>
+        const host = document.getElementById('shadow-host');
+        const shadow = host.attachShadow({mode: 'open'});
+        shadow.innerHTML = `
+            <style>
+                .inner { 
+                    background: #9b59b6; 
+                    color: white; 
+                    padding: 15px; 
+                    border-radius: 5px;
+                    font-weight: bold;
+                }
+            </style>
+            <div class="inner">这是 Shadow DOM 中的内容（与外部样式隔离）</div>
+        `;
+    </script>
+</div>
+
+<div class="tip">
+<strong>说明：</strong>很多原生HTML元素（如 &lt;video&gt;、&lt;input&gt;、&lt;select&gt;）内部都使用Shadow DOM实现，这就是为什么有时很难用CSS自定义它们的原因。
+</div>
+</div>
+
+<hr>
+
+<h3>可编辑内容</h3>
+
+<div class="demo-box">
+<p>contenteditable 属性让任意元素变为可编辑。</p>
+
+<div class="code">
+<span class="code-comment">&lt;!-- 让段落变为可编辑 --&gt;</span>
+<span class="code-tag">&lt;p</span> <span class="code-attr">contenteditable</span>=<span class="code-value">"true"</span><span class="code-tag">&gt;</span>
+    点击这里编辑文本
+<span class="code-tag">&lt;/p&gt;</span>
+
+<span class="code-comment">&lt;!-- 整个区域可编辑 --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">contenteditable</span>=<span class="code-value">"true"</span> 
+     <span class="code-attr">style</span>=<span class="code-value">"border: 1px solid #ccc; padding: 10px;"</span><span class="code-tag">&gt;</span>
+    编辑这个区域的内容
+<span class="code-tag">&lt;/div&gt;</span>
+</div>
+
+<div class="render editable-demo">
+    <p>可编辑内容示例（点击文本可以编辑）：</p>
+    <p contenteditable="true" style="border: 2px dashed #3498db; padding: 10px; background: #f9f9f9;">
+        点击这里编辑这段文本...
+    </p>
+    <div contenteditable="true" style="border: 2px dashed #3498db; padding: 10px; background: #f9f9f9; min-height: 50px;">
+        整个区域都可以编辑，尝试在这里输入文字！
+    </div>
+</div>
+
+<h4>相关JavaScript属性</h4>
+<div class="code">
+<span class="code-comment">// 检测元素是否可编辑</span>
+element.isContentEditable
+
+<span class="code-comment">// 获取/设置编辑权限</span>
+element.contentEditable = <span class="code-value">"true"</span>;  <span class="code-comment">// 启用</span>
+element.contentEditable = <span class="code-value">"false"</span>; <span class="code-comment">// 禁用</span>
+element.contentEditable = <span class="code-value">"inherit"</span>; <span class="code-comment">// 继承父元素</span>
+</div>
+
+<div class="note">
+<strong>提示：</strong>contenteditable 与 &lt;textarea&gt; 或 &lt;input&gt; 不同，它允许丰富的HTML内容编辑，但需要自己处理保存逻辑。
+</div>
+</div>
+
+<hr>
+
+<h2>第三部分：HTML与CSS/JS集成</h2>
+
+<h3>内联样式与样式表</h3>
+
+<div class="demo-box">
+<h4>1. 内联样式（inline style）</h4>
+<p>直接写在元素的 style 属性中。</p>
+
+<div class="code">
+<span class="code-tag">&lt;p</span> <span class="code-attr">style</span>=<span class="code-value">"color: red; font-size: 16px;"</span><span class="code-tag">&gt;</span>红色文字<span class="code-tag">&lt;/p&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">style</span>=<span class="code-value">"background: blue; padding: 20px;"</span><span class="code-tag">&gt;</span>蓝色背景<span class="code-tag">&lt;/div&gt;</span>
+</div>
+
+<div class="render">
+    <p style="color: red; font-size: 16px;">红色文字（内联样式）</p>
+    <div style="background: #3498db; color: white; padding: 20px;">蓝色背景（内联样式）</div>
+</div>
+
+<h4>2. 内部样式表（internal style）</h4>
+<p>写在 &lt;head&gt; 的 &lt;style&gt; 标签中。</p>
+
+<div class="code">
+<span class="code-tag">&lt;style&gt;</span>
+    <span class="code-selector">.highlight</span> {
+        <span class="code-property">background</span>: <span class="code-value">yellow</span>;
+        <span class="code-property">padding</span>: <span class="code-value">5px</span>;
+    }
+<span class="code-tag">&lt;/style&gt;</span>
+</div>
+
+<h4>3. 外部样式表（external style）</h4>
+<p>单独的 .css 文件，通过 &lt;link&gt; 引入。</p>
+
+<div class="code">
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-value">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-value">"styles.css"</span><span class="code-tag">&gt;</span>
+</div>
+
+<h4>样式优先级</h4>
+<table>
+<tr>
+    <th>方式</th>
+    <th>优先级</th>
+    <th>示例</th>
+</tr>
+<tr>
+    <td>!important</td>
+    <td>最高</td>
+    <td>color: red !important;</td>
+</tr>
+<tr>
+    <td>内联样式</td>
+    <td>高</td>
+    <td>&lt;p style="..."&gt;</td>
+</tr>
+<tr>
+    <td>ID选择器</td>
+    <td>中</td>
+    <td>#header { }</td>
+</tr>
+<tr>
+    <td>类/属性/伪类</td>
+    <td>中低</td>
+    <td>.btn { }</td>
+</tr>
+<tr>
+    <td>元素选择器</td>
+    <td>低</td>
+    <td>p { }</td>
+</tr>
+</table>
+
+<div class="tip">
+<strong>最佳实践：</strong>优先使用外部样式表，保持HTML和CSS分离，提高代码可维护性。
+</div>
+</div>
+
+<hr>
+
+<h3>脚本嵌入</h3>
+
+<div class="demo-box">
+<h4>1. 内部脚本（inline script）</h4>
+<p>直接在HTML中嵌入JavaScript代码。</p>
+
+<div class="code">
+<span class="code-tag">&lt;script&gt;</span>
+    <span class="code-tag">function</span> <span class="code-property">sayHello</span>() {
+        alert(<span class="code-value">'你好！'</span>);
+    }
+<span class="code-tag">&lt;/script&gt;</span>
+
+<span class="code-tag">&lt;button</span> <span class="code-attr">onclick</span>=<span class="code-value">"sayHello()"</span><span class="code-tag">&gt;</span>点击我<span class="code-tag">&lt;/button&gt;</span>
+</div>
+
+<h4>2. 外部脚本（external script）</h4>
+<p>引用单独的 .js 文件。</p>
+
+<div class="code">
+<span class="code-tag">&lt;script</span> <span class="code-attr">src</span>=<span class="code-value">"app.js"</span><span class="code-tag">&gt;</span><span class="code-tag">&lt;/script&gt;</span>
+</div>
+
+<h4>脚本加载位置</h4>
+<div class="code">
+<span class="code-comment">&lt;!-- 放在body末尾（推荐） --&gt;</span>
+<span class="code-tag">&lt;body&gt;</span>
+    <span class="code-tag">&lt;!-- HTML内容 --&gt;</span>
+    <span class="code-tag">&lt;script</span> <span class="code-attr">src</span>=<span class="code-value">"app.js"</span><span class="code-tag">&gt;</span><span class="code-tag">&lt;/script&gt;</span>
+<span class="code-tag">&lt;/body&gt;</span>
+
+<span class="code-comment">&lt;!-- 使用 defer（推荐） --&gt;</span>
+<span class="code-tag">&lt;head&gt;</span>
+    <span class="code-tag">&lt;script</span> <span class="code-attr">defer</span> <span class="code-attr">src</span>=<span class="code-value">"app.js"</span><span class="code-tag">&gt;</span><span class="code-tag">&lt;/script&gt;</span>
+<span class="code-tag">&lt;/head&gt;</span>
+
+<span class="code-comment">&lt;!-- 使用 async --&gt;</span>
+<span class="code-tag">&lt;head&gt;</span>
+    <span class="code-tag">&lt;script</span> <span class="code-attr">async</span> <span class="code-attr">src</span>=<span class="code-value">"app.js"</span><span class="code-tag">&gt;</span><span class="code-tag">&lt;/script&gt;</span>
+<span class="code-tag">&lt;/head&gt;</span>
+</div>
+
+<h4>defer vs async</h4>
+<table>
+<tr>
+    <th>属性</th>
+    <th>行为</th>
+    <th>适用场景</th>
+</tr>
+<tr>
+    <td>defer</td>
+    <td>等HTML解析完成后执行，按顺序</td>
+    <td>大多数脚本</td>
+</tr>
+<tr>
+    <td>async</td>
+    <td>下载完立即执行，不阻塞HTML</td>
+    <td>独立脚本（如统计）</td>
+</tr>
+<tr>
+    <td>无属性</td>
+    <td>阻塞HTML解析</td>
+    <td>尽量避免</td>
+</tr>
+</table>
+
+<div class="render script-demo">
+    <p>点击按钮测试脚本：</p>
+    <button onclick="alert('你好！这是内联脚本的效果')">内联脚本</button>
+    <button id="external-btn" style="margin-left: 10px;">外部脚本效果</button>
+    <script>
+        document.getElementById('external-btn').addEventListener('click', function() {
+            alert('这是通过addEventListener添加的事件！');
+        });
+    </script>
+</div>
+</div>
+
+<hr>
+
+<h3>事件处理</h3>
+
+<div class="demo-box">
+<h4>1. HTML属性方式（不推荐）</h4>
+<div class="code">
+<span class="code-tag">&lt;button</span> <span class="code-attr">onclick</span>=<span class="code-value">"handleClick()"</span><span class="code-tag">&gt;</span>点击<span class="code-tag">&lt;/button&gt;</span>
+</div>
+
+<h4>2. DOM属性方式</h4>
+<div class="code">
+<span class="code-tag">&lt;button</span> <span class="code-attr">id</span>=<span class="code-value">"myBtn"</span><span class="code-tag">&gt;</span>点击<span class="code-tag">&lt;/button&gt;</span>
+
+<span class="code-tag">&lt;script&gt;</span>
+    <span class="code-tag">const</span> btn = document.getElementById(<span class="code-value">'myBtn'</span>);
+    btn.onclick = <span class="code-tag">function</span>() {
+        alert(<span class="code-value">'点击了！'</span>);
+    };
+<span class="code-tag">&lt;/script&gt;</span>
+</div>
+
+<h4>3. addEventListener 方式（推荐）</h4>
+<div class="code">
+<span class="code-tag">&lt;button</span> <span class="code-attr">id</span>=<span class="code-value">"myBtn2"</span><span class="code-tag">&gt;</span>点击<span class="code-tag">&lt;/button&gt;</span>
+
+<span class="code-tag">&lt;script&gt;</span>
+    <span class="code-tag">const</span> btn = document.getElementById(<span class="code-value">'myBtn2'</span>);
+    
+    <span class="code-comment">// 添加事件监听</span>
+    btn.addEventListener(<span class="code-value">'click'</span>, <span class="code-tag">function</span>(event) {
+        console.log(<span class="code-value">'点击了！'</span>, event);
+    });
+    
+    <span class="code-comment">// 添加多个监听器</span>
+    btn.addEventListener(<span class="code-value">'click'</span>, () => {
+        alert(<span class="code-value">'第二个监听器'</span>);
+    });
+<span class="code-tag">&lt;/script&gt;</span>
+</div>
+
+<div class="render">
+    <p>事件处理示例：</p>
+    <button id="demo-btn">点击测试事件</button>
+    <button id="demo-btn2" style="margin-left: 10px;">多事件监听器</button>
+    <p id="event-output" style="margin-top: 10px; min-height: 20px; color: #666;">点击按钮查看效果...</p>
+    <script>
+        document.getElementById('demo-btn').addEventListener('click', function() {
+            document.getElementById('event-output').textContent = '按钮被点击了！';
+        });
+        
+        let clickCount = 0;
+        document.getElementById('demo-btn2').addEventListener('click', function() {
+            clickCount++;
+            document.getElementById('event-output').textContent = '点击次数：' + clickCount;
+        });
+    </script>
+</div>
+
+<h4>常用事件类型</h4>
+<table>
+<tr>
+    <th>类别</th>
+    <th>事件</th>
+    <th>说明</th>
+</tr>
+<tr>
+    <td>鼠标</td>
+    <td>click, dblclick, mouseenter, mouseleave, mousemove</td>
+    <td>鼠标操作</td>
+</tr>
+<tr>
+    <td>键盘</td>
+    <td>keydown, keyup, keypress</td>
+    <td>键盘操作</td>
+</tr>
+<tr>
+    <td>表单</td>
+    <td>submit, change, input, focus, blur</td>
+    <td>表单操作</td>
+</tr>
+<tr>
+    <td>文档</td>
+    <td>DOMContentLoaded, load, resize, scroll</td>
+    <td>文档状态</td>
+</tr>
+<tr>
+    <td>触摸</td>
+    <td>touchstart, touchmove, touchend</td>
+    <td>触屏设备</td>
+</tr>
+</table>
+
+<div class="tip">
+<strong>最佳实践：</strong>使用 addEventListener 而非 onclick，可以添加多个监听器，更灵活，且更容易管理内存。
+</div>
+</div>
+
+<hr>
+
+<p style="text-align: center; color: #666;">
+    以上是网页可访问性与现代HTML特性的全部内容
+</p>
+
+</body>
+</html>

@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML语言进阶教程</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.8;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #9b59b6;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-left: 4px solid #9b59b6;
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            color: #7f8c8d;
+            margin-top: 30px;
+        }
+        
+        h4 {
+            color: #555;
+            margin-top: 20px;
+        }
+        
+        .demo-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Consolas", "Courier New", monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+        
+        .code-tag { color: #66d9ef; }
+        .code-attr { color: #a6e22e; }
+        .code-value { color: #fd971f; }
+        .code-text { color: #f8f8f2; }
+        .code-comment { color: #75715e; }
+        .code-property { color: #66d9ef; }
+        .code-selector { color: #a6e22e; }
+        
+        .render {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .tip {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .note {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        label {
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+        }
+        
+        input, select, textarea {
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 200px;
+        }
+        
+        textarea {
+            width: 300px;
+            height: 80px;
+        }
+        
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        button:hover {
+            background: #2980b9;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 40px 0;
+        }
+        
+        .semantic-demo {
+            border: 2px solid #3498db;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .semantic-demo header { background: #e8f4f8; padding: 10px; }
+        .semantic-demo nav { background: #f0f0f0; padding: 10px; }
+        .semantic-demo main { background: #fff; padding: 10px; }
+        .semantic-demo article { background: #f9f9f9; padding: 10px; margin: 10px 0; }
+        .semantic-demo section { background: #f5f5f5; padding: 10px; margin: 10px 0; }
+        .semantic-demo aside { background: #fff3cd; padding: 10px; }
+        .semantic-demo footer { background: #343a40; color: white; padding: 10px; }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-bar .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .meter {
+            width: 100%;
+            height: 25px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .meter meter {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .gallery figure {
+            margin: 0;
+            text-align: center;
+        }
+        
+        .gallery img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            background: #ddd;
+        }
+        
+        .details-demo summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 10px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+        }
+        
+        .details-demo details {
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border: 1px solid #ddd;
+        }
+        
+        .iframe-demo {
+            width: 100%;
+            height: 200px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+        }
+        
+        .canvas-demo {
+            border: 2px solid #3498db;
+            background: white;
+        }
+        
+        .svg-demo {
+            border: 2px solid #3498db;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+<h1>HTML语言进阶教程</h1>
+
+<h2>第一部分：HTML5 语义化结构</h2>
+
+<p>HTML5 引入了许多语义化标签，使文档结构更清晰，更有利于搜索引擎优化和辅助技术理解。</p>
+
+<h3>文档结构标签</h3>
+
+<div class="demo-box">
+<h4>&lt;header&gt; - 页眉</h4>
+<p>用于定义页面或章节的头部内容，通常包含标题、导航链接等。</p>
+<div class="code">
+<span class="code-tag">&lt;header&gt;</span>
+    <span class="code-tag">&lt;h1&gt;</span><span class="code-text">网站标题</span><span class="code-tag">&lt;/h1&gt;</span>
+    <span class="code-tag">&lt;nav&gt;</span><span class="code-text">导航菜单</span><span class="code-tag">&lt;/nav&gt;</span>
+<span class="code-tag">&lt;/header&gt;</span>
+</div>
+
+<h4>&lt;nav&gt; - 导航</h4>
+<p>用于定义导航链接区域。</p>
+<div class="code">
+<span class="code-tag">&lt;nav&gt;</span>
+    <span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"/home"</span><span class="code-tag">&gt;</span><span class="code-text">首页</span><span class="code-tag">&lt;/a&gt;</span>
+    <span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"/about"</span><span class="code-tag">&gt;</span><span class="code-text">关于</span><span class="code-tag">&lt;/a&gt;</span>
+<span class="code-tag">&lt;/nav&gt;</span>
+</div>
+
+<h4>&lt;main&gt; - 主内容</h4>
+<p>用于定义页面的主内容区域，一个页面只能有一个 &lt;main&gt; 元素。</p>
+<div class="code">
+<span class="code-tag">&lt;main&gt;</span>
+    <span class="code-tag">&lt;h1&gt;</span><span class="code-text">文章标题</span><span class="code-tag">&lt;/h1&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span><span class="code-text">文章内容...</span><span class="code-tag">&lt;/p&gt;</span>
+<span class="code-tag">&lt;/main&gt;</span>
+</div>
+
+<h4>&lt;article&gt; - 文章</h4>
+<p>用于定义独立的、可分发的内容单元，如博客文章、新闻报道等。</p>
+<div class="code">
+<span class="code-tag">&lt;article&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span><span class="code-text">文章标题</span><span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span><span class="code-text">文章内容...</span><span class="code-tag">&lt;/p&gt;</span>
+<span class="code-tag">&lt;/article&gt;</span>
+</div>
+
+<h4>&lt;section&gt; - 章节</h4>
+<p>用于将相关内容分组，通常配合标题使用。</p>
+<div class="code">
+<span class="code-tag">&lt;section&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span><span class="code-text">章节标题</span><span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span><span class="code-text">章节内容...</span><span class="code-tag">&lt;/p&gt;</span>
+<span class="code-tag">&lt;/section&gt;</span>
+</div>
+
+<h4>&lt;aside&gt; - 侧边栏</h4>
+<p>用于定义与主内容相关但可独立的辅助信息。</p>
+<div class="code">
+<span class="code-tag">&lt;aside&gt;</span>
+    <span class="code-tag">&lt;h3&gt;</span><span class="code-text">相关文章</span><span class="code-tag">&lt;/h3&gt;</span>
+    <span class="code-tag">&lt;ul&gt;</span>
+        <span class="code-tag">&lt;li&gt;</span><span class="code-text">链接1</span><span class="code-tag">&lt;/li&gt;</span>
+        <span class="code-tag">&lt;li&gt;</span><span class="code-text">链接2</span><span class="code-tag">&lt;/li&gt;</span>
+    <span class="code-tag">&lt;/ul&gt;</span>
+<span class="code-tag">&lt;/aside&gt;</span>
+</div>
+
+<h4>&lt;footer&gt; - 页脚</h4>
+<p>用于定义页面或章节的底部内容，通常包含版权信息、联系方式等。</p>
+<div class="code">
+<span class="code-tag">&lt;footer&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span><span class="code-text">&copy; 2024 公司名称</span><span class="code-tag">&lt;/p&gt;</span>
+<span class="code-tag">&lt;/footer&gt;</span>
+</div>
+
+<h4>综合示例</h4>
+<div class="render semantic-demo">
+    <header style="background: #e8f4f8; padding: 10px; margin-bottom: 10px;">
+        <strong>header</strong> - 页眉区域
+    </header>
+    <nav style="background: #f0f0f0; padding: 10px; margin-bottom: 10px;">
+        <strong>nav</strong> - 导航区域
+    </nav>
+    <main style="background: #fff; padding: 10px; margin-bottom: 10px;">
+        <strong>main</strong> - 主内容区域
+        <article style="background: #f9f9f9; padding: 10px; margin-top: 10px;">
+            <strong>article</strong> - 文章内容
+        </article>
+        <section style="background: #f5f5f5; padding: 10px; margin-top: 10px;">
+            <strong>section</strong> - 章节内容
+        </section>
+    </main>
+    <aside style="background: #fff3cd; padding: 10px; margin-bottom: 10px;">
+        <strong>aside</strong> - 侧边栏
+    </aside>
+    <footer style="background: #343a40; color: white; padding: 10px;">
+        <strong>footer</strong> - 页脚区域
+    </footer>
+</div>
+</div>
+
+<div class="tip">
+<strong>注意：</strong>&lt;article&gt; 和 &lt;section&gt; 的区别：article 更强调独立性（一篇文章），section 更强调相关性（一章内容）。但两者都可以嵌套使用。
+</div>
+
+<hr>
+
+<h3>分组内容标签</h3>
+
+<div class="demo-box">
+<h4>&lt;figure&gt; 和 &lt;figcaption&gt; - 图片组</h4>
+<p>用于将媒体内容及其标题组合在一起。</p>
+<div class="code">
+<span class="code-tag">&lt;figure&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-value">"image.jpg"</span> <span class="code-attr">alt</span>=<span class="code-value">"图片描述"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;figcaption&gt;</span><span class="code-text">图片标题说明</span><span class="code-tag">&lt;/figcaption&gt;</span>
+<span class="code-tag">&lt;/figure&gt;</span>
+</div>
+
+<div class="render">
+    <figure>
+        <div style="width: 100%; height: 80px; background: #3498db; display: flex; align-items: center; justify-content: center; color: white;">
+            [图片区域]
+        </div>
+        <figcaption style="text-align: center; font-style: italic; color: #666;">
+            图1：示例图片说明
+        </figcaption>
+    </figure>
+</div>
+
+<h4>&lt;details&gt; 和 &lt;summary&gt; - 折叠内容</h4>
+<p>用于创建可折叠的详细信息区域。</p>
+<div class="code">
+<span class="code-tag">&lt;details&gt;</span>
+    <span class="code-tag">&lt;summary&gt;</span><span class="code-text">点击展开/收起</span><span class="code-tag">&lt;/summary&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span><span class="code-text">这里是隐藏的详细内容...</span><span class="code-tag">&lt;/p&gt;</span>
+<span class="code-tag">&lt;/details&gt;</span>
+</div>
+
+<div class="render details-demo">
+    <details>
+        <summary>点击展开/收起</summary>
+        <p>这里是隐藏的详细内容，可以包含任意HTML元素。</p>
+        <ul>
+            <li>列表项1</li>
+            <li>列表项2</li>
+        </ul>
+    </details>
+</div>
+
+<h4>&lt;div&gt; - 无语义容器</h4>
+<p>&lt;div&gt; 是最通用的容器，没有任何语义含义，仅用于布局和样式控制。</p>
+<div class="code">
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"container"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"header"</span><span class="code-tag">&gt;</span><span class="code-text">头部</span><span class="code-tag">&lt;/div&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"content"</span><span class="code-tag">&gt;</span><span class="code-text">内容</span><span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
+</div>
+</div>
+
+<div class="note">
+<strong>提示：</strong>语义化标签的主要优势：
+1. <strong>SEO</strong>：搜索引擎能更好理解页面结构
+2. <strong>可访问性</strong>：屏幕阅读器能更准确解读内容
+3. <strong>代码可读性</strong>：开发者更容易理解代码
+4. <strong>维护性</strong>：便于团队协作和后期维护
+</div>
+
+<hr>
+
+<h3>进度与度量标签</h3>
+
+<div class="demo-box">
+<h4>&lt;progress&gt; - 进度条</h4>
+<p>用于显示任务的完成进度。</p>
+<div class="code">
+<span class="code-comment">&lt;!-- 不确定进度的进度条 --&gt;</span>
+<span class="code-tag">&lt;progress&gt;</span><span class="code-tag">&lt;/progress&gt;</span>
+
+<span class="code-comment">&lt;!-- 确定进度的进度条 --&gt;</span>
+<span class="code-tag">&lt;progress</span> <span class="code-attr">value</span>=<span class="code-value">"70"</span> <span class="code-attr">max</span>=<span class="code-value">"100"</span><span class="code-tag">&gt;</span><span class="code-tag">&lt;/progress&gt;</span>
+</div>
+
+<div class="render">
+    <p>加载中（不确定进度）：</p>
+    <progress></progress>
+    <p>下载进度（70%）：</p>
+    <progress value="70" max="100" style="width: 100%; height: 20px;"></progress>
+</div>
+
+<h4>&lt;meter&gt; - 度量衡</h4>
+<p>用于显示已知范围内的标量值，如磁盘使用量、评分等。</p>
+<div class="code">
+<span class="code-tag">&lt;meter</span> <span class="code-attr">value</span>=<span class="code-value">"2"</span> <span class="code-attr">min</span>=<span class="code-value">"0"</span> <span class="code-attr">max</span>=<span class="code-value">"10"</span><span class="code-tag">&gt;</span><span class="code-text">2 out of 10</span><span class="code-tag">&lt;/meter&gt;</span>
+
+<span class="code-tag">&lt;meter</span> <span class="code-attr">value</span>=<span class="code-value">"0.5"</span><span class="code-tag">&gt;</span><span class="code-text">50%</span><span class="code-tag">&lt;/meter&gt;</span>
+</div>
+
+<div class="render">
+    <p>磁盘使用量：</p>
+    <meter value="50" min="0" max="100" style="width: 100%; height: 20px;"></meter>
+    <p>评分（6/10）：</p>
+    <meter value="6" min="0" max="10" style="width: 100%; height: 20px;"></meter>
+    <p>低值（黄色）：</p>
+    <meter value="2" min="0" max="10" low="3" high="7" style="width: 100%; height: 20px;"></meter>
+    <p>高值（红色）：</p>
+    <meter value="8" min="0" max="10" low="3" high="7" style="width: 100%; height: 20px;"></meter>
+</div>
+
+<div class="tip">
+<strong>注意：</strong>&lt;progress&gt; 用于显示"进行中"的任务，而 &lt;meter&gt; 用于显示已知范围内的静态值。
+<hr>由于浏览器的原生渲染行为，low/high区域默认选择了黄色，无法通过css进行修改，我这里偷个小懒不改了，哎嘿
+
+</div>
+</div>
+
+<hr>
+
+<h2>第二部分：高级表单与 HTML5 输入类型</h2>
+
+<h3>HTML5 输入类型</h3>
+
+<div class="demo-box">
+<p>HTML5 新增了许多输入类型，提供了更好的数据验证和用户体验。</p>
+
+<table>
+<tr>
+    <th>输入类型</th>
+    <th>说明</th>
+    <th>示例</th>
+</tr>
+<tr>
+    <td>email</td>
+    <td>电子邮件地址</td>
+    <td><input type="email" placeholder="example@mail.com" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>url</td>
+    <td>网址</td>
+    <td><input type="url" placeholder="https://example.com" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>tel</td>
+    <td>电话号码</td>
+    <td><input type="tel" placeholder="138-0000-0000" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>search</td>
+    <td>搜索框</td>
+    <td><input type="search" placeholder="搜索..." style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>number</td>
+    <td>数字</td>
+    <td><input type="number" min="0" max="100" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>range</td>
+    <td>范围滑块</td>
+    <td><input type="range" min="0" max="100" value="50" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>color</td>
+    <td>颜色选择器</td>
+    <td><input type="color" value="#3498db"></td>
+</tr>
+<tr>
+    <td>date</td>
+    <td>日期</td>
+    <td><input type="date" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>time</td>
+    <td>时间</td>
+    <td><input type="time" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>datetime-local</td>
+    <td>本地日期时间</td>
+    <td><input type="datetime-local" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>month</td>
+    <td>月份</td>
+    <td><input type="month" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>week</td>
+    <td>周</td>
+    <td><input type="week" style="width: 150px;"></td>
+</tr>
+</table>
+
+<h4>代码示例</h4>
+<div class="code">
+<span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-value">"email"</span> <span class="code-attr">placeholder</span>=<span class="code-value">"请输入邮箱"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-value">"number"</span> <span class="code-attr">min</span>=<span class="code-value">"0"</span> <span class="code-attr">max</span>=<span class="code-value">"100"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-value">"range"</span> <span class="code-attr">min</span>=<span class="code-value">"0"</span> <span class="code-attr">max</span>=<span class="code-value">"100"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-value">"color"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-value">"date"</span><span class="code-tag">&gt;</span>
+</div>
+</div>
+
+<hr>
+
+<h3>表单属性</h3>
+
+<div class="demo-box">
+
+<h4>常用表单属性</h4>
+<table>
+<tr>
+    <th>属性</th>
+    <th>说明</th>
+    <th>示例</th>
+</tr>
+<tr>
+    <td>placeholder</td>
+    <td>输入提示</td>
+    <td><input type="text" placeholder="请输入内容" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>required</td>
+    <td>必填项</td>
+    <td><input type="text" required style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>readonly</td>
+    <td>只读</td>
+    <td><input type="text" value="只读内容" readonly style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>disabled</td>
+    <td>禁用</td>
+    <td><input type="text" value="禁用内容" disabled style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>autocomplete</td>
+    <td>自动完成</td>
+    <td><input type="text" autocomplete="on" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>pattern</td>
+    <td>验证正则</td>
+    <td><input type="text" pattern="[A-Za-z]{3}" title="3个字母" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>min / max</td>
+    <td>最小/最大值</td>
+    <td><input type="number" min="0" max="100" style="width: 150px;"></td>
+</tr>
+<tr>
+    <td>step</td>
+    <td>步长</td>
+    <td><input type="number" step="0.1" style="width: 150px;"></td>
+</tr>
+</table>
+
+<h4>代码示例</h4>
+<div class="code">
+<span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-value">"text"</span> <span class="code-attr">placeholder</span>=<span class="code-value">"请输入用户名"</span> <span class="code-attr">required</span><span class="code-tag">&gt;</span>
+
+<span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-value">"number"</span> <span class="code-attr">min</span>=<span class="code-value">"0"</span> <span class="code-attr">max</span>=<span class="code-value">"100"</span> <span class="code-attr">step</span>=<span class="code-value">"10"</span><span class="code-tag">&gt;</span>
+
+<span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-value">"text"</span> <span class="code-attr">pattern</span>=<span class="code-value">"[0-9]{11}"</span> <span class="code-attr">title</span>=<span class="code-value">"请输入11位手机号"</span><span class="code-tag">&gt;</span>
+</div>
+</div>
+
+<div class="note">
+<strong>提示：</strong>required 属性会在提交时自动验证，pattern 属性使用正则表达式进行验证。
+</div>
+
+<hr>
+
+<h3>数据列表 &lt;datalist&gt;</h3>
+
+<div class="demo-box">
+<p>&lt;datalist&gt; 为输入框提供预定义的建议选项。</p>
+
+<div class="code">
+<span class="code-tag">&lt;input</span> <span class="code-attr">list</span>=<span class="code-value">"browsers"</span> <span class="code-attr">name</span>=<span class="code-value">"browser"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;datalist</span> <span class="code-attr">id</span>=<span class="code-value">"browsers"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;option</span> <span class="code-attr">value</span>=<span class="code-value">"Chrome"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;option</span> <span class="code-attr">value</span>=<span class="code-value">"Firefox"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;option</span> <span class="code-attr">value</span>=<span class="code-value">"Safari"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;option</span> <span class="code-attr">value</span>=<span class="code-value">"Edge"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;/datalist&gt;</span>
+</div>
+
+<div class="render">
+    <label>选择浏览器：</label>
+    <input list="browsers" name="browser" style="width: 200px;">
+    <datalist id="browsers">
+        <option value="Chrome">
+        <option value="Firefox">
+        <option value="Safari">
+        <option value="Edge">
+    </datalist>
+</div>
+</div>
+
+<hr>
+
+<h3>输出元素 &lt;output&gt;</h3>
+
+<div class="demo-box">
+<p>&lt;output&gt; 用于显示计算结果或用户操作的输出。</p>
+
+<div class="code">
+<span class="code-tag">&lt;form</span> <span class="code-attr">oninput</span>=<span class="code-value">"result.value = parseInt(a.value) + parseInt(b.value)"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-value">"number"</span> <span class="code-attr">id</span>=<span class="code-value">"a"</span> <span class="code-attr">value</span>=<span class="code-value">"0"</span><span class="code-tag">&gt;</span> +
+    <span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-value">"number"</span> <span class="code-attr">id</span>=<span class="code-value">"b"</span> <span class="code-attr">value</span>=<span class="code-value">"0"</span><span class="code-tag">&gt;</span> =
+    <span class="code-tag">&lt;output</span> <span class="code-attr">name</span>=<span class="code-value">"result"</span><span class="code-tag">&gt;</span><span class="code-tag">&lt;/output&gt;</span>
+<span class="code-tag">&lt;/form&gt;</span>
+</div>
+
+<div class="render">
+    <form oninput="result.value = parseInt(a.value) + parseInt(b.value)">
+        <input type="number" id="a" value="10" style="width: 60px;"> + 
+        <input type="number" id="b" value="20" style="width: 60px;"> = 
+        <output name="result" style="font-weight: bold; font-size: 18px;">30</output>
+    </form>
+</div>
+</div>
+
+<hr>
+
+<h2>第三部分：嵌入内容</h2>
+
+<h3>&lt;iframe&gt; 嵌入页面</h3>
+
+<div class="demo-box">
+<p>&lt;iframe&gt; 用于在当前页面中嵌入另一个页面。</p>
+
+<div class="code">
+<span class="code-tag">&lt;iframe</span> 
+    <span class="code-attr">src</span>=<span class="code-value">"https://www.example.com"</span>
+    <span class="code-attr">width</span>=<span class="code-value">"600"</span>
+    <span class="code-attr">height</span>=<span class="code-value">"400"</span>
+    <span class="code-attr">title</span>=<span class="code-value">"示例页面"</span>
+    <span class="code-attr">frameborder</span>=<span class="code-value">"0"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;/iframe&gt;</span>
+</div>
+
+<div class="render">
+    <p>这是一个iframe嵌入示例：</p>
+    <iframe src="https://zh.wikipedia.org/wiki/HTML5" width="100%" height="200" title="维基百科HTML5页面" style="border: 2px solid #3498db;"></iframe>
+</div>
+
+<h4>常用属性</h4>
+<table>
+<tr>
+    <th>属性</th>
+    <th>说明</th>
+</tr>
+<tr>
+    <td>src</td>
+    <td>嵌入页面的URL</td>
+</tr>
+<tr>
+    <td>width/height</td>
+    <td>iframe的宽高</td>
+</tr>
+<tr>
+    <td>frameborder</td>
+    <td>边框（0或1）</td>
+</tr>
+<tr>
+    <td>allowfullscreen</td>
+    <td>允许全屏</td>
+</tr>
+<tr>
+    <td>sandbox</td>
+    <td>安全沙箱限制</td>
+</tr>
+</table>
+
+<div class="tip">
+<strong>安全提示：</strong>使用 sandbox 属性可以限制iframe的行为，提高安全性。例如：sandbox="allow-same-origin allow-scripts" 只允许同源和脚本。
+</div>
+</div>
+
+<hr>
+
+<h3>Canvas 与 SVG</h3>
+
+<div class="demo-box">
+<h4>&lt;canvas&gt; - 画布</h4>
+<p>canvas 是HTML5新增的元素，通过JavaScript绘制图形、动画等。</p>
+
+<div class="code">
+<span class="code-tag">&lt;canvas</span> <span class="code-attr">id</span>=<span class="code-value">"myCanvas"</span> <span class="code-attr">width</span>=<span class="code-value">"400"</span> <span class="code-attr">height</span>=<span class="code-value">"200"</span><span class="code-tag">&gt;</span>
+    您的浏览器不支持 canvas
+<span class="code-tag">&lt;/canvas&gt;</span>
+
+<span class="code-tag">&lt;script&gt;</span>
+    <span class="code-tag">var</span> canvas = <span class="code-tag">document</span>.getElementById(<span class="code-value">'myCanvas'</span>);
+    <span class="code-tag">var</span> ctx = canvas.getContext(<span class="code-value">'2d'</span>);
+    ctx.fillStyle = <span class="code-value">'#3498db'</span>;
+    ctx.fillRect(<span class="code-value">10</span>, <span class="code-value">10</span>, <span class="code-value">150</span>, <span class="code-value">100</span>);
+    ctx.fillStyle = <span class="code-value">'#e74c3c'</span>;
+    ctx.beginPath();
+    ctx.arc(<span class="code-value">300</span>, <span class="code-value">60</span>, <span class="code-value">40</span>, <span class="code-value">0</span>, Math.PI * <span class="code-value">2</span>);
+    ctx.fill();
+<span class="code-tag">&lt;/script&gt;</span>
+</div>
+
+<div class="render">
+    <canvas id="myCanvas" width="400" height="150" style="border: 2px solid #3498db; background: white;">
+        您的浏览器不支持 canvas
+    </canvas>
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#3498db';
+        ctx.fillRect(20, 20, 100, 80);
+        ctx.fillStyle = '#2ecc71';
+        ctx.fillRect(140, 20, 100, 80);
+        ctx.fillStyle = '#e74c3c';
+        ctx.beginPath();
+        ctx.arc(320, 60, 40, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#9b59b6';
+        ctx.font = '20px Arial';
+        ctx.fillText('Canvas 绘图示例', 130, 130);
+    </script>
+</div>
+
+<h4>&lt;svg&gt; - 可缩放矢量图形</h4>
+<p>SVG 使用XML格式定义矢量图形，可以无限缩放而不失真。</p>
+
+<div class="code">
+<span class="code-tag">&lt;svg</span> <span class="code-attr">width</span>=<span class="code-value">"200"</span> <span class="code-attr">height</span>=<span class="code-value">"150"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;rect</span> <span class="code-attr">x</span>=<span class="code-value">"10"</span> <span class="code-attr">y</span>=<span class="code-value">"10"</span> <span class="code-attr">width</span>=<span class="code-value">"80"</span> <span class="code-attr">height</span>=<span class="code-value">"60"</span> 
+          <span class="code-attr">fill</span>=<span class="code-value">"#3498db"</span> <span class="code-attr">rx</span>=<span class="code-value">"10"</span><span class="code-tag">/&gt;</span>
+    <span class="code-tag">&lt;circle</span> <span class="code-attr">cx</span>=<span class="code-value">"150"</span> <span class="code-attr">cy</span>=<span class="code-value">"40"</span> <span class="code-attr">r</span>=<span class="code-value">"30"</span> 
+          <span class="code-attr">fill</span>=<span class="code-value">"#e74c3c"</span><span class="code-tag">/&gt;</span>
+    <span class="code-tag">&lt;text</span> <span class="code-attr">x</span>=<span class="code-value">"50"</span> <span class="code-attr">y</span>=<span class="code-value">"130"</span><span class="code-tag">&gt;</span>SVG 示例<span class="code-tag">&lt;/text&gt;</span>
+<span class="code-tag">&lt;/svg&gt;</span>
+</div>
+
+<div class="render">
+    <svg width="300" height="120" style="border: 2px solid #3498db; background: white;">
+        <rect x="20" y="20" width="80" height="60" fill="#3498db" rx="10" />
+        <circle cx="150" cy="50" r="30" fill="#2ecc71" />
+        <circle cx="220" cy="50" r="20" fill="#e74c3c" />
+        <polygon points="260,80 280,50 300,80" fill="#9b59b6" />
+        <text x="80" y="110" font-size="16" fill="#333">SVG 矢量图形</text>
+    </svg>
+</div>
+</div>
+
+<div class="note">
+<strong>Canvas vs SVG 对比：</strong>
+<ul>
+    <li><strong>Canvas</strong>：位图，适合大量图形、游戏、动画，像素操作</li>
+    <li><strong>SVG</strong>：矢量图，适合图标、图表、UI元素，可缩放不失真</li>
+</ul>
+</div>
+
+<hr>
+
+<h2>第四部分：元数据与 SEO 基础</h2>
+
+<h3>文档元数据</h3>
+
+<div class="demo-box">
+<p>元数据用于描述网页的信息，帮助浏览器和搜索引擎理解页面内容。</p>
+
+<h4>&lt;meta&gt; 标签</h4>
+<div class="code">
+<span class="code-comment">&lt;!-- 字符编码 --&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">charset</span>=<span class="code-value">"UTF-8"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 视口设置（响应式） --&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-value">"viewport"</span> 
+      <span class="code-attr">content</span>=<span class="code-value">"width=device-width, initial-scale=1.0"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 页面描述 --&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-value">"description"</span> 
+      <span class="code-attr">content</span>=<span class="code-value">"这是一个关于Web开发的教程网站"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 关键词（已被大多数搜索引擎忽略） --&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-value">"keywords"</span> 
+      <span class="code-attr">content</span>=<span class="code-value">"HTML, CSS, JavaScript, Web开发"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 作者 --&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-value">"author"</span> 
+      <span class="code-attr">content</span>=<span class="code-value">"张三"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 页面刷新 --&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">http-equiv</span>=<span class="code-value">"refresh"</span> 
+      <span class="code-attr">content</span>=<span class="code-value">"30"</span><span class="code-tag">&gt;</span>
+</div>
+
+<h4>&lt;link&gt; 标签 - 链接资源</h4>
+<div class="code">
+<span class="code-comment">&lt;!-- 引入CSS --&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-value">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-value">"style.css"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 引入图标 --&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-value">"icon"</span> <span class="code-attr">href</span>=<span class="code-value">"favicon.ico"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 预连接外部域 --&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-value">"preconnect"</span> <span class="code-attr">href</span>=<span class="code-value">"https://fonts.googleapis.com"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 预加载资源 --&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-value">"preload"</span> <span class="code-attr">href</span>=<span class="code-value">"image.png"</span> <span class="code-attr">as</span>=<span class="code-value">"image"</span><span class="code-tag">&gt;</span>
+</div>
+
+<h4>&lt;title&gt; - 页面标题</h4>
+<div class="code">
+<span class="code-tag">&lt;title&gt;</span><span class="code-text">网站名称 - 页面标题</span><span class="code-tag">&lt;/title&gt;</span>
+</div>
+
+<div class="tip">
+<strong>重要：</strong>&lt;title&gt; 标签是搜索引擎优化最重要的元素之一，应该包含主要关键词，长度控制在50-60个字符以内。
+</div>
+</div>
+
+<hr>
+
+<h3>SEO 相关知识</h3>
+
+<div class="demo-box">
+<h4>语义化HTML对SEO的影响</h4>
+<p>搜索引擎通过分析HTML结构来理解页面内容，语义化标签可以帮助搜索引擎更好地索引页面。</p>
+
+<table>
+<tr>
+    <th>标签</th>
+    <th>SEO意义</th>
+</tr>
+<tr>
+    <td>&lt;title&gt;</td>
+    <td>显示在搜索结果标题，极其重要</td>
+</tr>
+<tr>
+    <td>&lt;h1&gt; - &lt;h6&gt;</td>
+    <td>定义内容层次结构，&lt;h1&gt;最重要</td>
+</tr>
+<tr>
+    <td>&lt;meta name="description"&gt;</td>
+    <td>显示在搜索结果摘要中</td>
+</tr>
+<tr>
+    <td>&lt;header&gt;</td>
+    <td>页面头部信息权重较高</td>
+</tr>
+<tr>
+    <td>&lt;nav&gt;</td>
+    <td>帮助理解网站导航结构</td>
+</tr>
+<tr>
+    <td>&lt;main&gt;</td>
+    <td>明确主要内容区域</td>
+</tr>
+<tr>
+    <td>&lt;article&gt;</td>
+    <td>独立内容，利于索引</td>
+</tr>
+<tr>
+    <td>&lt;alt&gt; 属性</td>
+    <td>图片SEO的关键属性</td>
+</tr>
+</table>
+
+<h4>图片优化</h4>
+<div class="code">
+<span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-value">"product.jpg"</span>
+      <span class="code-attr">alt</span>=<span class="code-value">"药物产品图片"</span>
+      <span class="code-attr">title</span>=<span class="code-value">"点击查看详情"</span>
+      <span class="code-attr">loading</span>=<span class="code-value">"lazy"</span>
+      <span class="code-attr">width</span>=<span class="code-value">"800"</span>
+      <span class="code-attr">height</span>=<span class="code-value">"600"</span><span class="code-tag">&gt;</span>
+</div>
+
+<ul>
+    <li><strong>alt</strong>：图片的替代文字，搜索引擎能识别图片内容</li>
+    <li><strong>title</strong>：鼠标悬停时显示的文字</li>
+    <li><strong>loading="lazy"</strong>：延迟加载，提高页面性能</li>
+    <li><strong>width/height</strong>：避免页面布局跳动</li>
+</ul>
+
+<h4>链接优化</h4>
+<div class="code">
+<span class="code-comment">&lt;!-- 好的链接写法 --&gt;</span>
+<span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"/products/medicine"</span> 
+   <span class="code-attr">title</span>=<span class="code-value">"查看我们的药品系列"</span><span class="code-tag">&gt;</span>
+    药品系列
+<span class="code-tag">&lt;/a&gt;</span>
+</div>
+</div>
+
+
+<p style="text-align: center; color: #666;">
+    以上是HTML语言进阶教程的全部内容
+</p>
+
+</body>
+</html>
