@@ -176,14 +176,14 @@ jobs:
           </head>
           <body>
               <div class="header">
-                  <h1>🎓 医学生逃亡计划</h1>
+                  <h1>医学生逃亡计划</h1>
                   <p>R语言与生信分析完整教程 | 医学生自救指南</p>
               </div>
               
               <div class="container">
                   <!-- R Language Tutorials -->
                   <div class="card">
-                      <h2>📚 R语言教程</h2>
+                      <h2>R语言教程</h2>
                       <ul>
                           <li><a href="R语言教程/R语言基础.html">1. R语言基础</a></li>
                           <li><a href="R语言教程/R语言数据清洗与预处理.html">2. 数据清洗与预处理</a></li>
@@ -198,9 +198,9 @@ jobs:
                   
                   <!-- Bioinformatics Documentation -->
                   <div class="card">
-                      <h2>🔬 生物信息技术</h2>
+                      <h2>生物信息技术</h2>
                       <ul>
-                          <li><a href="生物信息技术/index.html">📖 完整文档索引</a></li>
+                          <li><a href="生物信息技术/index.html">完整文档索引</a></li>
                           <li><a href="生物信息技术/001计算机基础初步/计算机基础初步.html">1. 计算机基础初步</a></li>
                           <li><a href="生物信息技术/002生物信息资源/002生物信息资源.html">2. 生物信息资源</a></li>
                           <li><a href="生物信息技术/003序列分析与比对/序列分析与比对.html">3. 序列分析与比对</a></li>
@@ -212,23 +212,23 @@ jobs:
                       </ul>
                   </div>
                   
-                  <!-- About -->
+                  <!-- Internet Development -->
                   <div class="card">
-                      <h2>ℹ️ 关于本项目</h2>
+                      <h2>互联网开发</h2>
                       <ul>
-                          <li>📝 项目名称：医学生逃亡计划</li>
-                          <li>👥 目标群体：医学生 / 生物信息学初学者</li>
-                          <li>💡 内容涵盖：R语言、生物信息学、互联网开发</li>
-                          <li>🔄 更新方式：自动部署</li>
-                          <li>⏱️ 构建时间：< 1 分钟</li>
-                          <li>✨ 特点：使用预编译HTML，极速稳定</li>
+                          <li><a href="#">1. HTML 基础</a></li>
+                          <li><a href="#">2. CSS 样式设计</a></li>
+                          <li><a href="#">3. JavaScript 交互</a></li>
+                          <li><a href="#">4. 前端页面布局</a></li>
+                          <li><a href="#">5. GitHub Pages 部署</a></li>
+                          <li><a href="#">6. 静态站点维护</a></li>
                       </ul>
                   </div>
               </div>
               
               <div class="footer">
                   <p>© 2024-2025 Medical Student Rescue Plan | Powered by GitHub Pages</p>
-                  <p>🚀 使用预编译HTML文件，无需运行时构建</p>
+                  <p>使用预编译HTML文件，更新可能延迟</p>
               </div>
           </body>
           </html>

@@ -10,5 +10,6 @@
     "r.lsp.promptToInstall": false,
     "editor.wrappingIndent": "none",
     "writerHelper.plugin.lineAsParagraph": true,
-    "writerHelper.plugin.markdownFormatting": true
+    "writerHelper.plugin.markdownFormatting": true,
+    "liveServer.settings.port": 5501
 }
