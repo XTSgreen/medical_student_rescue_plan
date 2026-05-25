@@ -95,144 +95,144 @@ jobs:
           
           # Create a simple index page if not exists
           cat > site/index.html << 'EOF'
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>医学生逃亡计划 - R语言与生信分析</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .header {
-            text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-        .header p {
-            margin: 10px 0 0 0;
-            opacity: 0.9;
-        }
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-        .card h2 {
-            color: #667eea;
-            margin-top: 0;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 10px;
-        }
-        .card ul {
-            list-style: none;
-            padding: 0;
-        }
-        .card li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .card li:last-child {
-            border-bottom: none;
-        }
-        .card a {
-            color: #333;
-            text-decoration: none;
-            display: block;
-        }
-        .card a:hover {
-            color: #667eea;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #666;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>🎓 医学生逃亡计划</h1>
-        <p>R语言与生信分析完整教程 | 医学生自救指南</p>
-    </div>
-    
-    <div class="container">
-        <!-- R Language Tutorials -->
-        <div class="card">
-            <h2>📚 R语言教程</h2>
-            <ul>
-                <li><a href="R语言教程/R语言基础.html">1. R语言基础</a></li>
-                <li><a href="R语言教程/R语言数据清洗与预处理.html">2. 数据清洗与预处理</a></li>
-                <li><a href="R语言教程/R语言与数据可视化.html">3. 数据可视化</a></li>
-                <li><a href="R语言教程/R语言统计分析.html">4. 统计分析</a></li>
-                <li><a href="R语言教程/R语言统计与建模.html">5. 统计建模</a></li>
-                <li><a href="R语言教程/R语言与机器学习（上）.html">6. 机器学习（上）</a></li>
-                <li><a href="R语言教程/R语言与机器学习（下）.html">7. 机器学习（下）</a></li>
-                <li><a href="R语言教程/R语言与深度学习（上）.html">8. 深度学习</a></li>
-            </ul>
-        </div>
-        
-        <!-- Bioinformatics Documentation -->
-        <div class="card">
-            <h2>🔬 生物信息技术</h2>
-            <ul>
-                <li><a href="生物信息技术/index.html">📖 完整文档索引</a></li>
-                <li><a href="生物信息技术/001计算机基础初步/计算机基础初步.html">1. 计算机基础初步</a></li>
-                <li><a href="生物信息技术/002生物信息资源/002生物信息资源.html">2. 生物信息资源</a></li>
-                <li><a href="生物信息技术/003序列分析与比对/序列分析与比对.html">3. 序列分析与比对</a></li>
-                <li><a href="生物信息技术/004基因组学分析/基因组学分析.html">4. 基因组学分析</a></li>
-                <li><a href="生物信息技术/005转录组学分析/转录组学分析.html">5. 转录组学分析</a></li>
-                <li><a href="生物信息技术/006表观遗传学分析/表观遗传学分析.html">6. 表观遗传学分析</a></li>
-                <li><a href="生物信息技术/007蛋白质组学与代谢组学/蛋白质组学与代谢组学.html">7. 蛋白质组学与代谢组学</a></li>
-                <li><a href="生物信息技术/008系统生物学与网络分析/系统生物学与网络分析.html">8. 系统生物学与网络分析</a></li>
-            </ul>
-        </div>
-        
-        <!-- About -->
-        <div class="card">
-            <h2>ℹ️ 关于本项目</h2>
-            <ul>
-                <li>📝 项目名称：医学生逃亡计划</li>
-                <li>👥 目标群体：医学生 / 生物信息学初学者</li>
-                <li>💡 内容涵盖：R语言、生物信息学、互联网开发</li>
-                <li>🔄 更新方式：自动部署</li>
-                <li>⏱️ 构建时间：< 1 分钟</li>
-                <li>✨ 特点：使用预编译HTML，极速稳定</li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="footer">
-        <p>© 2024-2025 Medical Student Rescue Plan | Powered by GitHub Pages</p>
-        <p>🚀 使用预编译HTML文件，无需运行时构建</p>
-    </div>
-</body>
-</html>
-EOF
+          <!DOCTYPE html>
+          <html lang="zh-CN">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>医学生逃亡计划 - R语言与生信分析</title>
+              <style>
+                  body {
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                      max-width: 1200px;
+                      margin: 0 auto;
+                      padding: 20px;
+                      background-color: #f5f5f5;
+                  }
+                  .header {
+                      text-align: center;
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      color: white;
+                      padding: 40px 20px;
+                      border-radius: 10px;
+                      margin-bottom: 30px;
+                  }
+                  .header h1 {
+                      margin: 0;
+                      font-size: 2.5em;
+                  }
+                  .header p {
+                      margin: 10px 0 0 0;
+                      opacity: 0.9;
+                  }
+                  .container {
+                      display: grid;
+                      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                      gap: 20px;
+                  }
+                  .card {
+                      background: white;
+                      border-radius: 10px;
+                      padding: 25px;
+                      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                      transition: transform 0.2s;
+                  }
+                  .card:hover {
+                      transform: translateY(-5px);
+                      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                  }
+                  .card h2 {
+                      color: #667eea;
+                      margin-top: 0;
+                      border-bottom: 2px solid #667eea;
+                      padding-bottom: 10px;
+                  }
+                  .card ul {
+                      list-style: none;
+                      padding: 0;
+                  }
+                  .card li {
+                      padding: 8px 0;
+                      border-bottom: 1px solid #eee;
+                  }
+                  .card li:last-child {
+                      border-bottom: none;
+                  }
+                  .card a {
+                      color: #333;
+                      text-decoration: none;
+                      display: block;
+                  }
+                  .card a:hover {
+                      color: #667eea;
+                  }
+                  .footer {
+                      text-align: center;
+                      margin-top: 40px;
+                      padding: 20px;
+                      color: #666;
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="header">
+                  <h1>🎓 医学生逃亡计划</h1>
+                  <p>R语言与生信分析完整教程 | 医学生自救指南</p>
+              </div>
+              
+              <div class="container">
+                  <!-- R Language Tutorials -->
+                  <div class="card">
+                      <h2>📚 R语言教程</h2>
+                      <ul>
+                          <li><a href="R语言教程/R语言基础.html">1. R语言基础</a></li>
+                          <li><a href="R语言教程/R语言数据清洗与预处理.html">2. 数据清洗与预处理</a></li>
+                          <li><a href="R语言教程/R语言与数据可视化.html">3. 数据可视化</a></li>
+                          <li><a href="R语言教程/R语言统计分析.html">4. 统计分析</a></li>
+                          <li><a href="R语言教程/R语言统计与建模.html">5. 统计建模</a></li>
+                          <li><a href="R语言教程/R语言与机器学习（上）.html">6. 机器学习（上）</a></li>
+                          <li><a href="R语言教程/R语言与机器学习（下）.html">7. 机器学习（下）</a></li>
+                          <li><a href="R语言教程/R语言与深度学习（上）.html">8. 深度学习</a></li>
+                      </ul>
+                  </div>
+                  
+                  <!-- Bioinformatics Documentation -->
+                  <div class="card">
+                      <h2>🔬 生物信息技术</h2>
+                      <ul>
+                          <li><a href="生物信息技术/index.html">📖 完整文档索引</a></li>
+                          <li><a href="生物信息技术/001计算机基础初步/计算机基础初步.html">1. 计算机基础初步</a></li>
+                          <li><a href="生物信息技术/002生物信息资源/002生物信息资源.html">2. 生物信息资源</a></li>
+                          <li><a href="生物信息技术/003序列分析与比对/序列分析与比对.html">3. 序列分析与比对</a></li>
+                          <li><a href="生物信息技术/004基因组学分析/基因组学分析.html">4. 基因组学分析</a></li>
+                          <li><a href="生物信息技术/005转录组学分析/转录组学分析.html">5. 转录组学分析</a></li>
+                          <li><a href="生物信息技术/006表观遗传学分析/表观遗传学分析.html">6. 表观遗传学分析</a></li>
+                          <li><a href="生物信息技术/007蛋白质组学与代谢组学/蛋白质组学与代谢组学.html">7. 蛋白质组学与代谢组学</a></li>
+                          <li><a href="生物信息技术/008系统生物学与网络分析/系统生物学与网络分析.html">8. 系统生物学与网络分析</a></li>
+                      </ul>
+                  </div>
+                  
+                  <!-- About -->
+                  <div class="card">
+                      <h2>ℹ️ 关于本项目</h2>
+                      <ul>
+                          <li>📝 项目名称：医学生逃亡计划</li>
+                          <li>👥 目标群体：医学生 / 生物信息学初学者</li>
+                          <li>💡 内容涵盖：R语言、生物信息学、互联网开发</li>
+                          <li>🔄 更新方式：自动部署</li>
+                          <li>⏱️ 构建时间：< 1 分钟</li>
+                          <li>✨ 特点：使用预编译HTML，极速稳定</li>
+                      </ul>
+                  </div>
+              </div>
+              
+              <div class="footer">
+                  <p>© 2024-2025 Medical Student Rescue Plan | Powered by GitHub Pages</p>
+                  <p>🚀 使用预编译HTML文件，无需运行时构建</p>
+              </div>
+          </body>
+          </html>
+          EOF
           
           echo "   ✅ Created beautiful index page"
 
