@@ -35,7 +35,7 @@ jobs:
           # Copy R Language Tutorials (9 HTML files)
           # ============================================
           echo ""
-          echo "📚 [1/3] Copying R Language Tutorials..."
+          echo "📚 [1/4] Copying R Language Tutorials..."
           if [ -d "R语言与生信分析/R语言" ]; then
             mkdir -p "site/R语言教程"
             
@@ -74,7 +74,7 @@ jobs:
           # Copy Bioinformatics Documentation (Sphinx HTML)
           # ============================================
           echo ""
-          echo "🔬 [2/3] Copying Bioinformatics Documentation..."
+          echo "🔬 [2/4] Copying Bioinformatics Documentation..."
           if [ -d "R语言与生信分析/生物信息技术/_build/html" ]; then
             mkdir -p "site/生物信息技术"
             
@@ -88,10 +88,27 @@ jobs:
           fi
           
           # ============================================
+          # Copy Internet Development tutorials
+          # ============================================
+          echo ""
+          echo "💻 [3/4] Copying Internet Development Tutorials..."
+          if [ -d "互联网开发" ]; then
+            mkdir -p "site/互联网开发"
+            
+            # Copy internet development HTML output
+            cp -r "互联网开发"/* "site/互联网开发/" 2>/dev/null
+            
+            WEB_COUNT=$(find "site/互联网开发" -name "*.html" | wc -l)
+            echo "   📊 Total: $WEB_COUNT Internet Development HTML files copied"
+          else
+            echo "   ⚠️ Internet development directory not found"
+          fi
+          
+          # ============================================
           # Copy main site assets if exists
           # ============================================
           echo ""
-          echo "🌐 [3/3] Preparing main site structure..."
+          echo "🌐 [4/4] Preparing main site structure..."
           
           # Create a simple index page if not exists
           cat > site/index.html << 'EOF'
@@ -216,12 +233,12 @@ jobs:
                   <div class="card">
                       <h2>互联网开发</h2>
                       <ul>
-                          <li><a href="#">1. HTML 基础</a></li>
-                          <li><a href="#">2. CSS 样式设计</a></li>
-                          <li><a href="#">3. JavaScript 交互</a></li>
-                          <li><a href="#">4. 前端页面布局</a></li>
-                          <li><a href="#">5. GitHub Pages 部署</a></li>
-                          <li><a href="#">6. 静态站点维护</a></li>
+                          <li><a href="互联网开发/前端开发/001，前端开发.html">1. 前端开发</a></li>
+                          <li><a href="互联网开发/前端开发/002，html语言的简单应用与网页框架结构.html">2. HTML 语言的简单应用与网页框架结构</a></li>
+                          <li><a href="互联网开发/前端开发/005，css语言与界面美化基础.html">3. CSS 语言与界面美化基础</a></li>
+                          <li><a href="互联网开发/前端开发/008，javascript基础.html">4. JavaScript 基础</a></li>
+                          <li><a href="互联网开发/前端开发/010，javascript与ES6新特性.html">5. JavaScript 与 ES6 新特性</a></li>
+                          <li><a href="互联网开发/前端开发/011，javascript中的异步编程与错误调试.html">6. JavaScript 中的异步编程与错误调试</a></li>
                       </ul>
                   </div>
               </div>
@@ -249,6 +266,7 @@ jobs:
             HTML_FILES=$(find site -name '*.html' | wc -l)
             R_HTML=$(find site/R语言教程 -name '*.html' 2>/dev/null | wc -l)
             BIO_HTML=$(find site/生物信息技术 -name '*.html' 2>/dev/null | wc -l)
+            WEB_HTML=$(find site/互联网开发 -name '*.html' 2>/dev/null | wc -l)
             
             echo "✅ Site directory: READY"
             echo "📊 Statistics:"
@@ -256,6 +274,7 @@ jobs:
             echo "   • HTML files: $HTML_FILES"
             echo "     - R Language tutorials: $R_HTML files"
             echo "     - Bioinformatics docs: $BIO_HTML files"
+            echo "     - Internet development: $WEB_HTML files"
             echo ""
             echo "📂 Content structure:"
             ls -la site/
