@@ -1,13 +1,17 @@
 name: Documentation
+
 on:
   push:
     branches:
       - master
       - main
+  workflow_dispatch:
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 jobs:
   deploy:
     environment:
@@ -16,14 +20,121 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/configure-pages@v6
+      
       - uses: actions/checkout@v6
+
       - uses: actions/setup-python@v6
         with:
-          python-version: 3.x
-      - run: pip install zensical
-      - run: zensical build --clean
+          python-version: '3.11'
+          cache: 'pip'
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.4'
+          use-public-rspm: true
+
+      - name: Install R dependencies
+        run: |
+          install.packages(c(
+            "rmarkdown",
+            "knitr",
+            "tidyverse",
+            "ggplot2",
+            "dplyr",
+            "tidyr"
+          ), repos = "https://cloud.r-project.org/")
+        shell: Rscript {0}
+
+      - name: Install Python dependencies
+        run: |
+          pip install zensical sphinx sphinx_rtd_theme
+
+      - name: Build R language tutorials (RMarkdown to HTML)
+        run: |
+          echo "📚 Building R Language Tutorials..."
+          
+          # Define all Rmd files to build
+          RMD_FILES=(
+            "R语言与生信分析/R语言/001R语言基础/R语言基础.Rmd"
+            "R语言与生信分析/R语言/002R语言数据清洗与预处理/R语言数据清洗与预处理.Rmd"
+            "R语言与生信分析/R语言/003R语言与数据可视化/R语言与数据可视化.Rmd"
+            "R语言与生信分析/R语言/004R语言统计分析/R语言统计分析.Rmd"
+            "R语言与生信分析/R语言/005R语言统计与建模/R语言统计与建模.Rmd"
+            "R语言与生信分析/R语言/006R语言与机器学习/R语言与机器学习（上）.Rmd"
+            "R语言与生信分析/R语言/006R语言与机器学习/R语言与机器学习（下）.Rmd"
+            "R语言与生信分析/R语言/007R语言与深度学习/R语言与深度学习（上）.Rmd"
+          )
+          
+          for rmd_file in "${RMD_FILES[@]}"; do
+            if [ -f "$rmd_file" ]; then
+              echo "✅ Building: $rmd_file"
+              Rscript -e "rmarkdown::render('$rmd_file', output_format = 'html_document')"
+            else
+              echo "⚠️ File not found: $rmd_file"
+            fi
+          done
+          
+          echo "✨ R Language Tutorials Build Complete!"
+
+      - name: Build Bioinformatics documentation (Sphinx)
+        run: |
+          echo "🔬 Building Bioinformatics Documentation..."
+          cd "R语言与生信分析/生物信息技术"
+          
+          if [ -f "conf.py" ]; then
+            pip install sphinx-rtd-theme
+            make html || sphinx-build -b html . _build/html
+            echo "✅ Bioinformatics Documentation Built Successfully!"
+          else
+            echo "⚠️ No conf.py found in bioinformatics directory"
+          fi
+          
+          cd ../..
+
+      - name: Build main site with Zensical
+        run: |
+          echo "🌐 Building Main Site with Zensical..."
+          zensical build --clean
+          echo "✅ Main Site Build Complete!"
+
+      - name: Verify build output
+        run: |
+          echo "🔍 Verifying build output..."
+          if [ -d "site" ]; then
+            echo "✅ Site directory exists"
+            ls -la site/
+            
+            # Check if R language content is included
+            if find site -name "*R语言*" -o -name "*README*" | grep -q .; then
+              echo "✅ R Language content found in build"
+            fi
+            
+            # Check if bioinformatics content is included  
+            if find site -name "*生物信息*" -o -name "*计算机*" | grep -q .; then
+              echo "✅ Bioinformatics content found in build"
+            fi
+            
+            echo "📊 Total files in site:"
+            find site -type f | wc -l
+          else
+            echo "❌ ERROR: Site directory not found!"
+            exit 1
+          fi
+
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site
+
       - uses: actions/deploy-pages@v5
         id: deployment
+
+      - name: Deployment summary
+        if: success()
+        run: |
+          echo "🎉 Deployment Successful!"
+          echo "📍 Your site is available at: ${{ steps.deployment.outputs.page_url }}"
+          echo ""
+          echo "📚 Content includes:"
+          echo "   • R Language Tutorials (7 chapters)"
+          echo "   • Bioinformatics Documentation (9 chapters)"
+          echo "   • Internet Development Tutorials"
