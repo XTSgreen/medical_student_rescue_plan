@@ -1,0 +1,1390 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>系统生物学与网络分析 &mdash; 生物信息技术教程  文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7d86a446"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="综合性使用范例与场景意义解析" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html" />
+    <link rel="prev" title="蛋白质组学与代谢组学综合范例" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6%E7%A4%BA%E4%BE%8B.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            生物信息技术教程
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../test.html">测试文档</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../test.html#id2">第一章</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../test.html#id3">第一节</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../test.html#id4">第二节</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html">计算机与编程基础</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#linux">Linux 操作系统</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id2">Linux发行版选择</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id3">文件系统结构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id4">用户与权限管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id5">进程管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id6">磁盘与文件管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id7">文本编辑器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id8">环境变量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id9">压缩与归档</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id10">远程访问</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id11">管道与重定向</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id14">查找与过滤</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id17">计划任务</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#shell">Shell 脚本编程</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#glob">通配符与glob模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id20">变量与数组</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id21">条件判断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id22">循环</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id25">函数定义与调用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id26">输入输出</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id27">特殊变量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id28">作业控制与后台运行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id29">调试技巧</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id30">常用单行命令</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id31">环境与包管理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#conda-mamba">Conda / Mamba 安装与配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id32">环境创建、激活、导出</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id33">频道管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id34">虚拟环境与隔离</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id35">容器化基础</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#python">Python编程基础</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id36">Python的基本语法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id37">数据类型与结构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id38">控制流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id39">函数定义与调用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id40">模块与包</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id41">文件操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id42">异常处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id43">面向对象编程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id44">生物信息学常用库</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id45">正则表达式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id46">正则表达式基础</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id47">分组与捕获</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#pythonre">Python的re模块</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id48">生物信息学应用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id49">版本控制</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#git">Git基础概念</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id50">基本操作流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id51">远程仓库操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id52">分支管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id53">协作工作流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id54">Git在生物信息学中的应用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id55">容器化技术</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#docker">Docker基础</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#docker-compose">Docker Compose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#singularity">Singularity容器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id56">容器化生物信息学流程</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id57">集群作业调度</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id58">作业调度系统概述</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#slurm">Slurm调度系统</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#pbs">PBS调度系统</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id59">作业脚本编写</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id60">生物信息学集群应用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id61">数据格式与处理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id62">序列文件格式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id63">比对文件格式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id64">变异数据格式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id65">注释文件格式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id66">数据库基础</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id67">关系型数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#sqlitemysql">SQLite与MySQL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#nosql">NoSQL数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id68">生物信息学数据库应用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id69">统计学基础</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id70">描述性统计</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id71">概率分布</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id72">假设检验</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id73">多重检验校正</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id74">机器学习基础</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id75">机器学习概述</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id76">特征选择与降维</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id77">常用算法介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id78">生物信息学应用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#api">网络基础与API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id79">网络基础概念</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#restful-api">RESTful API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id80">Python网络请求</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id81">生物信息学API应用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id82">数据可视化</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id83">可视化基础</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#matplotlib">Matplotlib基础</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#seaborn">Seaborn高级可视化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id84">基因组可视化</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id85">生物信息学常用工具</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id86">序列比对工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id87">变异检测工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id88">表达分析工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id89">功能注释工具</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id90">流程管理与自动化</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id91">流程设计原则</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#snakemake">Snakemake流程管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#nextflow">Nextflow流程管理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id92">科学计算与高性能计算</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id93">并行计算基础</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#gpu">GPU计算</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../001%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%88%9D%E6%AD%A5.html#id94">分布式计算</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html">生物信息资源与工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id2">关键术语解释</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id3">国际主要数据中心</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id4">核心数据库分类</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id5">核酸序列数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id6">蛋白质序列数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id7">结构数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id8">基因组数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id9">转录调控数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id10">代谢通路数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id11">表达数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id12">互作数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id13">物种特异性数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#rna">非编码RNA数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id14">疾病与药物基因组学数据库</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id15">数据检索与提交</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#entrez">Entrez系统检索</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#blast">BLAST序列搜索</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id16">数据提交工具</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id17">生物本体与术语库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90/002%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E8%B5%84%E6%BA%90.html#id18">数据标准与交换格式</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html">序列分析与比对</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id2">序列特征解析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#gc">碱基组成与GC含量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id3">序列长度分布</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id4">重复序列识别</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id5">简单序列与低复杂度区域</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#cpg">CpG岛预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id6">开放阅读框预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id7">信号肽预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id8">跨膜结构域预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id9">亚细胞定位预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id10">等电点与分子量计算</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id11">疏水性图谱</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id12">抗原表位预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#rna">RNA二级结构特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#dna">DNA弯曲度与曲率</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id13">序列复杂度与模糊碱基</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id14">序列转换</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id15">双序列比对</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id16">算法基础</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id17">打分矩阵</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id18">空位罚分</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id19">启发式比对</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id20">比对工具与参数</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id21">多序列比对</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id22">算法与方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id23">代表性工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id24">比对后处理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id25">序列基序发现</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id26">基序表示模型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id27">基序发现算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id28">代表性工具与数据库</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id29">分子进化分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id30">进化模型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id31">系统发育树构建</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id32">进化分析工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id33">进化假设检验</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id34">进化历史重建</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id35">序列比较的特殊应用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id36">直系同源与旁系同源判定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id37">全基因组比对与共线性分析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id38">系统发育足迹分析与增强子识别</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id39">宏条形码与短读长比对</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id40">比对性能与统计</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id41">比对得分标准化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id42">统计显著性估计</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id43">比对敏感性与特异性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../003%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9/%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E4%B8%8E%E6%AF%94%E5%AF%B9.html#id44">比对评估基准</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html">基因组学分析</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id2">高通量测序技术</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#sanger">第一代测序（Sanger测序）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#illumina">第二代测序（Illumina测序）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id3">第三代测序（单分子实时测序）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id4">第四代测序（纳米孔测序）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id5">测序平台对比</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id6">双端测序与单端测序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id7">测序深度与覆盖度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id8">文库构建类型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id9">捕获测序与扩增子测序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#barcode-index">多重测序与Barcode/Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id10">测序质量控制指标</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id11">测序数据预处理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id12">原始数据质量评估</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id13">质量控制与修剪</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id14">去除接头</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id15">修剪低质量碱基</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id16">去除短读长</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id17">去除重复读段</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id18">污染检测及去除</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id19">测序错误的统计与校正</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id20">过滤宿主来源序列</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id21">质量转换格式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id22">高通量测序数据比对到参考基因组</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id23">比对算法基础</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id24">短读长比对工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id25">长读长比对工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id26">比对参数优化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id27">比对后处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id28">比对质量评估</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id29">比对结果过滤</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id30">比对可视化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id31">多比对读段处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id32">嵌合体比对检测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id33">比对格式及压缩与索引</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id34">基因组组装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id35">组装基础概念</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id36">短读长组装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id37">长读长组装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id38">混合组装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id39">组装评估</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id40">基因组注释</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id41">重复序列注释</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id42">基因结构注释</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id43">功能注释</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id44">注释质量评估与工作流</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id45">变异检测</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id46">变异类型与表示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id47">种系变异检测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id48">体细胞变异检测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id49">结构变异检测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id50">变异过滤与质控</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id51">变异注释与优先级排序</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id52">比较基因组学</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id53">基因组比对</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id54">核心与泛基因组分析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id55">基因组重排与结构进化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id56">直系同源与旁系同源</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id57">比较基因组学可视化</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id58">泛基因组学</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id59">泛基因组概念</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id60">重复序列分析与转座子生物学</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id61">转座子活性评估</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id62">转座子家族进化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#te">TE插入时间估计</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id63">TE对基因表达的调控影响</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#terna">TE衍生的小非编码RNA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id64">全基因组转座子图谱构建</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id65">转座子相关的结构变异</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id66">单倍型分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id67">单倍型分型概念</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id68">分型工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id69">单体型的变异调用与评估</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id70">单倍型解析组装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id71">单倍型特异性表达</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id72">单倍型网络分析</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id73">基因组学分析流程与工作流</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#wgs">典型WGS分析流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#gatk">GATK最佳实践</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#sentieon">Sentieon商业加速流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id74">工作流语言实现</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id75">容器化流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id76">云平台执行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id77">流程性能调优</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id78">基因组学分析的伦理与数据安全</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id79">人与保护物种基因组数据的访问控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id80">去标识化方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id81">二次使用同意规范</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id82">基因组数据库的受控访问</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#icmje">告知同意书与ICMJE要求</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id83">族群特有的变异与隐私</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../004%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id84">基因组数据的匿名分享风险</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html">转录组学分析</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#rna-seq">5.1 RNA-seq 实验设计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id2">5.2 RNA-seq 数据预处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id3">5.3 比对到参考基因组与转录组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id4">5.4 转录本定量</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id5">5.4.1 基于比对的定量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id6">5.4.2 基于比对的轻量定量（伪比对）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id7">5.4.3 归一化方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id8">5.5 差异表达分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id9">5.5.1 经典工具与方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#deseq2">5.5.2 DESeq2 详解（关键步骤）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#edger">5.5.3 edgeR 详解（关键步骤）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#limma-voom">5.5.4 limma-voom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id10">5.5.5 差异表达后处理</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id11">5.6 功能富集分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#ora">5.6.1 过表示分析（ORA）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#gsea">5.6.2 基因集富集分析（GSEA）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id12">5.6.3 其它富集方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id13">5.7 可变剪接分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id14">5.7.1 剪接事件类型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id15">5.7.2 基于比对的剪接检测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id16">5.7.3 基于组装的方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id17">5.7.4 剪接定量指标</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#rna">5.8 非编码RNA分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#rna-lncrna">5.8.1 长链非编码RNA（lncRNA）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#rna-mirna">5.8.2 微小RNA（miRNA）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id18">5.8.3 其它非编码RNA</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id19">5.9 单细胞转录组学</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id20">5.9.1 单细胞RNA-seq预处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id21">5.9.2 质量控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id22">5.9.3 归一化与批次校正</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id23">5.9.4 降维与可视化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id24">5.9.5 聚类与细胞类型注释</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id25">5.9.6 轨迹推断与伪时间分析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id26">5.9.7 细胞-细胞相互作用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id27">5.9.8 单细胞多组学整合</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#de-novo">5.10 转录本从头组装（de novo 转录组组装）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id28">5.11 等位基因特异性表达</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id29">5.12 RNA编辑分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id30">5.13 融合基因检测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id31">5.14 转录组进化分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id32">5.15 空间转录组学</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id33">5.16 时序RNA-seq分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90.html#id34">5.17 RNA-seq分析工作流与最佳实践</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html">转录组学综合性使用范例</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id2">范例一：病原感染后宿主转录组响应（差异表达 + 功能富集 + 可变剪接）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id3">范例二：癌症亚型分类与生物标志物发现（单细胞转录组 + 差异表达）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#de-novo">范例三：非模式昆虫的转录组从头组装与环境适应（de novo 组装 + 功能注释）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#lncrna-lncrna">范例四：lncRNA 在心肌分化中的功能研究（lncRNA 分析 + 共表达网络）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../005%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90/%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id4">范例五：胶质瘤中异常可变剪接与药物敏感性（可变剪接 + 差异剪接 + 功能关联）</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html">表观遗传学分析</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#dna">6.1 DNA甲基化分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id2">6.1.1 甲基化检测技术</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id3">6.1.2 甲基化数据分析流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id4">6.1.3 甲基化功能解析</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id5">6.2 染色质可及性分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id6">6.2.1 检测技术</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#atac-seq">6.2.2 ATAC-seq 数据分析</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id7">6.3 组蛋白修饰分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#chip-seq">6.3.1 ChIP-seq 基础</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id8">6.3.2 ChIP-seq 数据分析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id9">6.3.3 组蛋白修饰的功能解读</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id10">6.4 染色质互作分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id11">6.4.1 染色质构象捕获技术</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#hi-c">6.4.2 Hi-C 数据分析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id12">6.4.3 环与互作注释</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id13">6.5 表观转录组学</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id14">6.6 表观遗传重编程与发育</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#ewas">6.7 表观基因组关联研究（EWAS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id15">6.8 表观遗传时钟与衰老</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id16">6.9 染色质动力学与蛋白-DNA相互作用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id17">6.10 表观编辑与干扰</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90.html#id18">6.11 表观遗传数据分析的最佳实践</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html">表观遗传学综合性使用范例</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#dna-wgbs-ewas">范例一：癌症中DNA甲基化异常与预后标志物（WGBS + 差异甲基化 + EWAS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#atac-seqrna-seq">范例二：利用ATAC-seq和RNA-seq揭示免疫细胞活化时的染色质重塑</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#hi-c-capture-hi-c-gwas">范例三：Hi-C鉴定疾病相关增强子-启动子环路（Capture Hi-C + GWAS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#chip-seq">范例四：组蛋白修饰图谱描绘早期胚胎发育的表观重编程（ChIP-seq）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../006%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90/%E8%A1%A8%E8%A7%82%E9%81%97%E4%BC%A0%E5%AD%A6%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#ewas">范例五：表观遗传时钟预测衰老速度（EWAS + 公共甲基化数据）</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6.html">蛋白质组学与代谢组学</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6.html#id2">7.1 蛋白质组学基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6.html#id3">7.2 蛋白质组数据分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6.html#id4">7.3 蛋白质结构预测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6.html#ptm">7.4 翻译后修饰（PTM）组学</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6.html#id5">7.5 代谢组学分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6.html#id6">7.6 多组学整合分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6.html#id7">7.7 蛋白质-代谢物相互作用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6.html#id8">7.8 空间蛋白质组学与代谢组学</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6.html#id9">7.9 蛋白质组学与代谢组学中的机器学习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6.html#id10">7.10 蛋白质组与代谢组学工作流</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6%E7%A4%BA%E4%BE%8B.html">蛋白质组学与代谢组学综合范例</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6%E7%A4%BA%E4%BE%8B.html#id2">范例一：乳腺癌细胞药物处理的蛋白质组与磷酸化组学联合分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6%E7%A4%BA%E4%BE%8B.html#lc-ms">范例二：非靶向代谢组学鉴定糖尿病生物标志物（LC-MS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6%E7%A4%BA%E4%BE%8B.html#tcga">范例三：多组学整合揭示肝癌亚型（TCGA数据）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6%E7%A4%BA%E4%BE%8B.html#maldi">范例四：阿尔茨海默病患者脑组织空间蛋白质组学（MALDI成像）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6%E7%A4%BA%E4%BE%8B.html#alphafold2">范例五：蛋白质结构预测指导药物靶点发现（AlphaFold2 + 分子对接）</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">系统生物学与网络分析</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">8.1 生物网络基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">8.2 网络构建方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">8.3 网络分析工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">8.4 动态建模基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">8.5 通路与网络富集分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">8.6 大规模网络与系统生物学数据库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">8.7 网络医学与疾病网络</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">8.8 单细胞与空间网络分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">8.9 网络比较与进化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">8.10 网络分析的统计学与机器学习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html">综合性使用范例与场景意义解析</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#wgcna">范例一：从转录组数据构建共表达网络识别乳腺癌模块（WGCNA）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id2">数据预处理与质量控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id3">软阈值选择与无标度网络检验</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id4">构建邻接矩阵与拓扑重叠矩阵</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id5">动态剪树与模块识别</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id6">模块与临床性状的关联分析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#hub">Hub基因鉴定与功能富集分析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id7">生存分析与预后价值验证</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#chip-seq-genie3">范例二：从ChIP-seq和表达数据重建基因调控网络（GENIE3）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id8">数据准备与预处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#genie3">运行GENIE3算法推断调控网络</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id9">网络过滤与阈值选择</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id10">网络验证与性能评估</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id11">网络可视化与模块检测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id12">顺式调控元件富集分析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id13">动态模拟与布尔网络建模</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id14">范例三：基于网络药理学预测中药成分的靶点与机制（药物-靶点网络）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#admet">活性成分筛选与ADMET评价</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id15">靶点预测与疾病基因收集</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id16">构建成分-靶点-疾病网络</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#ppi">PPI网络构建与模块分析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id17">通路富集与功能注释</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id18">分子对接验证与网络可视化</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#p53-mdm2-ode">范例四：使用动态建模研究p53-MDM2振荡（ODE建模）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id19">模型构建与生物学假设</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id20">数值模拟与振荡行为重现</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id21">分岔分析与参数敏感性研究</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id22">干预预测与实验验证设计</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#cellchat">范例五：利用细胞通讯网络分析揭示肿瘤免疫微环境（CellChat）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id23">数据准备与细胞类型注释</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id24">CellChat对象创建与预处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id25">细胞间通讯网络推断</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id26">全局通信网络可视化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id27">信号通路水平的分析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id28">免疫检查点信号子网络分析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html#id29">空间验证与整合分析</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">生物信息技术教程</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">系统生物学与网络分析</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/008系统生物学与网络分析/系统生物学与网络分析.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>系统生物学与网络分析<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>系统生物学是一门从整体层面研究生物系统的学科，它将生物体内的基因、蛋白质、代谢物等分子视为相互关联的网络，通过数学建模和计算分析揭示生命活动的系统性规律。与传统的还原论方法不同，系统生物学强调&quot;整体大于部分之和&quot;的理念，认为理解单个分子的功能不足以预测整个系统的行为。生物网络作为系统生物学的核心研究对象，为理解细胞信号转导、代谢调控、疾病发生机制等复杂生物学过程提供了强大的分析框架。本章将从网络理论基础开始，系统介绍生物网络的构建方法、分析工具、动态建模技术以及在疾病研究和药物发现中的应用。</p>
+<section id="id2">
+<h2>8.1 生物网络基础<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>### 8.1.1 网络理论与图论基础</p>
+<p>图论是研究网络的数学基础，它将复杂系统抽象为由节点（node/vertex）和边（edge/link）组成的图结构。在生物网络中，节点通常代表生物分子（如基因、蛋白质、代谢物），而边代表分子间的相互作用或关系（如物理结合、调控关系、功能相关性）。理解图论的基本概念是进行网络分析的前提。</p>
+<p><strong>图的基本元素</strong></p>
+<p>图可以分为有向图和无向图。有向图的边具有方向性，例如转录因子对靶基因的调控关系；无向图的边没有方向，例如蛋白质-蛋白质相互作用。根据边是否带有权重，图还可以分为加权图和无权图。加权图的边可以表示相互作用的强度或置信度，这在生物网络中尤为重要，因为不同分子间的相互作用强度差异很大。</p>
+<p><strong>邻接矩阵与边列表</strong></p>
+<p>网络数据可以用两种主要格式存储。邻接矩阵是一个N×N的方阵，其中N是节点数，矩阵元素A[i,j]表示节点i和j之间是否有边（无权图）或边的权重（加权图）。邻接矩阵的优点是便于进行矩阵运算，缺点是对于稀疏网络（大多数生物网络都是稀疏的）会占用大量存储空间。边列表是一种更紧凑的存储格式，每行记录一条边的两个端点（及可选的权重），适合大规模网络的存储和处理。</p>
+<p><strong>路径、连通分量、圈、树</strong></p>
+<p>路径是从一个节点到另一个节点经过的边序列。最短路径是两个节点间边数最少的路径，它是衡量网络中节点距离的重要指标。连通分量是网络中互相可达的节点集合，如果一个网络只有一个连通分量，则称该网络是连通的。圈是起点和终点相同的路径，不含圈的连通图称为树。在生物网络中，树结构常见于进化树和层级调控网络。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- 网络基本概念演示 ----</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 创建无向图</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)])</span>
+
+<span class="c1"># 邻接矩阵</span>
+<span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;邻接矩阵:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">)</span>
+
+<span class="c1"># 边列表</span>
+<span class="n">edge_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">边列表:&quot;</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">)</span>
+
+<span class="c1"># 基本统计</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">节点数: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;边数: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;是否连通: </span><span class="si">{</span><span class="n">nx</span><span class="o">.</span><span class="n">is_connected</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;直径: </span><span class="si">{</span><span class="n">nx</span><span class="o">.</span><span class="n">diameter</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>度分布、平均度、度中心性</strong></p>
+<p>节点的度（degree）是指与该节点相连的边数。在有向图中，度分为入度（in-degree）和出度（out-degree）。度分布是网络中所有节点度的概率分布，它是刻画网络拓扑结构的重要特征。许多生物网络呈现幂律度分布（power-law distribution），即少数节点具有很高的度（hub节点），而大多数节点的度较低，这种网络称为无标度网络（scale-free network）。平均度是网络中所有节点度的平均值，它反映了网络的连接密度。度中心性（degree centrality）是标准化的度值，用于衡量节点在网络中的重要性。</p>
+<p><strong>聚类系数（全局、局部）</strong></p>
+<p>聚类系数衡量网络中节点聚集的程度。节点的局部聚类系数定义为该节点的邻居之间实际存在的边数与可能存在的最大边数之比。全局聚类系数是所有节点局部聚类系数的平均值，或者定义为网络中闭合三元组（三角形）的比例。生物网络通常具有较高的聚类系数，表明功能相关的分子倾向于形成紧密连接的模块。</p>
+<p><strong>网络直径与平均最短路径</strong></p>
+<p>网络直径是网络中任意两个节点间最短路径的最大值，它反映了网络的最大&quot;跨度&quot;。平均最短路径是所有节点对之间最短路径的平均长度。小世界网络（small-world network）是一类具有高聚类系数和短平均路径的网络，许多生物网络都表现出小世界特性，这使得信号可以在网络中快速传播。</p>
+<p><strong>模块度（modularity）</strong></p>
+<p>模块度是衡量网络社区结构强度的指标，它定义为网络中社区内部边的比例减去在随机网络中期望的社区内部边的比例。模块度的取值范围通常在[-0.5, 1]之间，值越大表示社区结构越明显。模块度优化是社区检测算法的核心思想。</p>
+<p><strong>网络密度与稀疏性</strong></p>
+<p>网络密度定义为实际存在的边数与可能存在的最大边数之比。密度为1的网络称为完全图，其中任意两个节点都有边相连。大多数生物网络是稀疏的，密度远小于1，这是因为生物系统通过稀疏连接实现了高效的信息传递和调控。</p>
+<p><strong>二分图（bipartite graph）</strong></p>
+<p>二分图是一类特殊的图，其节点可以分为两个不相交的集合，所有边都连接不同集合中的节点。在生物网络中，药物-靶点网络、miRNA-靶基因网络都是典型的二分图。二分图的投影可以将一种类型的节点转换为同质网络。</p>
+<p><strong>超图（hypergraph）</strong></p>
+<p>超图是图的推广，其中一条超边可以连接任意数量的节点。在生物网络中，蛋白质复合物、代谢反应（涉及多个底物和产物）都可以用超图表示。超图能够更准确地描述多元关系，但其分析和可视化更加复杂。</p>
+<p>### 8.1.2 常见生物网络类型</p>
+<p>生物网络根据节点类型和边的含义可以分为多种类型，每种网络都反映了生物系统的不同层面。</p>
+<p><strong>蛋白质-蛋白质相互作用网络（PPI）</strong></p>
+<p>PPI网络是最基础的生物网络类型，节点是蛋白质，边代表蛋白质间的物理相互作用。PPI网络揭示了细胞内蛋白质如何通过相互作用形成复合物和信号通路。PPI网络通常是无向的，因为物理结合是双向的。PPI数据主要来源于酵母双杂交（Y2H）、亲和纯化-质谱（AP-MS）等高通量实验，以及文献挖掘。STRING数据库整合了多种来源的PPI数据，为每个相互作用提供置信度评分。</p>
+<p><strong>基因调控网络（GRN）</strong></p>
+<p>GRN描述了转录因子与其靶基因之间的调控关系，是有向网络。节点包括转录因子和靶基因，有向边从转录因子指向靶基因，表示调控关系。GRN的构建可以基于ChIP-seq实验（识别转录因子结合位点）或从表达数据推断（如GENIE3、ARACNE等算法）。GRN对于理解细胞分化、发育过程和疾病机制至关重要。</p>
+<p><strong>代谢网络（代谢物-反应-酶）</strong></p>
+<p>代谢网络描述了细胞内代谢反应及其相互关系，是一种复杂的网络类型。节点可以是代谢物、反应或酶，边代表参与关系或转化关系。代谢网络通常表示为二分图或超图，因为一个反应涉及多个底物和产物。代谢网络分析可以预测代谢通量、识别必需基因、设计代谢工程策略。KEGG和MetaCyc是常用的代谢网络数据库。</p>
+<p><strong>信号转导网络</strong></p>
+<p>信号转导网络描述了细胞信号从受体到效应器的传递过程，是有向网络。节点是信号分子（如受体、激酶、转录因子），边是信号传递关系。信号网络具有层次结构，通常从膜受体开始，经过一系列激酶级联反应，最终影响转录因子活性。Pathway Commons和SignaLink数据库提供了信号通路网络数据。</p>
+<p><strong>共表达网络（基因/蛋白质）</strong></p>
+<p>共表达网络基于基因或蛋白质表达数据构建，边表示表达模式的相关性。常用的构建方法包括Pearson相关、Spearman相关和WGCNA（加权基因共表达网络分析）。共表达网络假设共表达的基因可能参与相同的功能模块或生物学过程。WGCNA是应用最广泛的共表达网络分析方法，它可以识别共表达模块并关联表型特征。</p>
+<p><strong>转录因子-靶基因网络</strong></p>
+<p>这是GRN的一种具体形式，明确区分转录因子节点和靶基因节点。这种网络可以表示为二分图，便于分析转录因子的调控范围和靶基因的调控者。数据库如TRRUST、ENCODE提供了转录因子-靶基因关系数据。</p>
+<p><strong>miRNA-靶基因网络</strong></p>
+<p>miRNA通过结合mRNA的3'UTR区域调控基因表达，这种调控关系可以表示为二分图。节点是miRNA和mRNA，边代表miRNA对mRNA的靶向调控。miRNA-靶基因网络分析有助于理解转录后调控机制。TargetScan、miRDB等数据库提供了miRNA靶点预测结果。</p>
+<p><strong>代谢物-代谢物相关网络</strong></p>
+<p>基于代谢组学数据构建，边表示代谢物浓度之间的相关性。这种网络可以揭示代谢通路之间的关联和代谢调控机制。与代谢网络不同，代谢物-代谢物相关网络不直接反映生化反应关系，而是反映代谢物浓度的协同变化模式。</p>
+<p><strong>疾病-基因关联网络</strong></p>
+<p>疾病-基因关联网络将疾病和基因作为节点，边表示基因与疾病的关联。这种网络可以揭示疾病的分子基础和疾病之间的遗传关系。DisGeNET、OMIM等数据库整合了疾病-基因关联数据。通过分析疾病-基因网络，可以发现共享遗传基础的疾病簇，为疾病分类和药物重定位提供依据。</p>
+<p><strong>药物-靶点网络</strong></p>
+<p>药物-靶点网络描述药物与其作用靶点之间的关系，是典型的二分图。节点包括药物和蛋白质靶点，边代表药物-靶点相互作用。这种网络分析可以揭示药物的作用机制、预测药物副作用、发现药物重定位机会。DrugBank、TTD（Therapeutic Target Database）是常用的药物-靶点数据库。</p>
+<p><strong>表型-基因型网络</strong></p>
+<p>表型-基因型网络连接表型特征与基因变异，边表示基因变异对表型的影响。这种网络整合了GWAS、QTL等遗传学数据，有助于理解复杂性状的遗传结构。HPO（Human Phenotype Ontology）数据库提供了人类表型术语及其与疾病的关联。</p>
+<p><strong>同源网络（相似性网络）</strong></p>
+<p>同源网络基于序列相似性或功能相似性构建，边表示节点间的相似程度。蛋白质同源网络可以用于功能注释和进化分析。序列相似性网络（SSN）是分析蛋白质家族多样性的有力工具。</p>
+<p><strong>竞争性内源RNA网络（ceRNA）</strong></p>
+<p>ceRNA假说认为mRNA、lncRNA、circRNA等转录本可以通过竞争结合miRNA来相互调控。ceRNA网络将各种RNA作为节点，边代表竞争miRNA结合位点的关系。这种网络分析有助于理解转录后调控的复杂性。</p>
+</section>
+<section id="id3">
+<h2>8.2 网络构建方法<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>### 8.2.1 基于实验数据的网络构建</p>
+<p><strong>PPI网络（从数据库导入：STRING，BioGRID，IntAct）</strong></p>
+<p>从数据库导入PPI数据是最直接的网络构建方式。STRING数据库整合了实验验证、数据库 pathway、基因共邻域、基因融合、共表达、文献挖掘等多种来源的PPI信息，为每个相互作用提供置信度评分。BioGRID专注于文献挖掘的物理相互作用和遗传相互作用。IntAct存储了分子相互作用数据库（IMEx）联盟整理的实验验证相互作用。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- 从STRING数据库获取PPI网络 ----</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># STRING API 示例 (获取TP53的相互作用蛋白)</span>
+<span class="n">protein_id</span> <span class="o">=</span> <span class="s2">&quot;9606.ENSP00000269305&quot;</span>  <span class="c1"># TP53的STRING ID</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://string-db.org/api/json/network?identifiers=</span><span class="si">{</span><span class="n">protein_id</span><span class="si">}</span><span class="s2">&amp;required_score=700&quot;</span>
+
+<span class="c1"># 实际使用时需要网络连接</span>
+<span class="c1"># response = requests.get(url)</span>
+<span class="c1"># ppi_data = response.json()</span>
+
+<span class="c1"># 模拟PPI数据</span>
+<span class="n">ppi_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;protein1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;TP53&#39;</span><span class="p">,</span> <span class="s1">&#39;TP53&#39;</span><span class="p">,</span> <span class="s1">&#39;TP53&#39;</span><span class="p">,</span> <span class="s1">&#39;MDM2&#39;</span><span class="p">,</span> <span class="s1">&#39;MDM2&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;protein2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;MDM2&#39;</span><span class="p">,</span> <span class="s1">&#39;CDKN1A&#39;</span><span class="p">,</span> <span class="s1">&#39;BAX&#39;</span><span class="p">,</span> <span class="s1">&#39;CDKN1A&#39;</span><span class="p">,</span> <span class="s1">&#39;RB1&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.999</span><span class="p">,</span> <span class="mf">0.998</span><span class="p">,</span> <span class="mf">0.997</span><span class="p">,</span> <span class="mf">0.856</span><span class="p">,</span> <span class="mf">0.743</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PPI网络示例:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ppi_data</span><span class="p">)</span>
+
+<span class="c1"># 构建NetworkX图</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_pandas_edgelist</span><span class="p">(</span><span class="n">ppi_data</span><span class="p">,</span> <span class="s1">&#39;protein1&#39;</span><span class="p">,</span> <span class="s1">&#39;protein2&#39;</span><span class="p">,</span>
+                             <span class="n">edge_attr</span><span class="o">=</span><span class="s1">&#39;score&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">网络节点数: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;网络边数: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>酵母双杂交（Y2H）数据构建</strong></p>
+<p>酵母双杂交是检测蛋白质相互作用的经典方法，通过报告基因的表达检测两个蛋白质是否在酵母细胞内相互作用。Y2H数据的优点是高通量、系统性强，缺点是假阳性率较高（因为蛋白质在非生理环境下表达）且难以检测膜蛋白相互作用。Y2H数据通常表示为无向网络。</p>
+<p><strong>亲和纯化-质谱（AP-MS）数据</strong></p>
+<p>AP-MS通过免疫沉淀富集目标蛋白及其相互作用伙伴，然后用质谱鉴定复合物成分。与Y2H不同，AP-MS检测的是蛋白质复合物，数据通常表示为诱饵蛋白与猎物蛋白的关系。AP-MS数据分析需要区分特异性相互作用和非特异性结合，常用工具包括SAINT、MiST等。</p>
+<p><strong>共免疫沉淀（co-IP）网络</strong></p>
+<p>co-IP是验证蛋白质相互作用的金标准方法，通过抗体富集目标蛋白及其结合伙伴。co-IP数据通常规模较小但质量高，适合验证高通量筛选的结果。</p>
+<p><strong>基因调控网络（从ChIP-seq，Y1H，DAP-seq）</strong></p>
+<p>ChIP-seq（染色质免疫沉淀测序）可以全基因组范围内识别转录因子结合位点，是构建GRN的主要数据源。ChIP-seq数据提供了转录因子与DNA区域的物理结合信息，需要结合motif分析和基因注释确定靶基因。Y1H（酵母单杂交）检测转录因子与DNA片段的结合，适合系统筛选转录因子的靶点。DAP-seq（DNA亲和纯化测序）是一种体外方法，可以高通量检测转录因子结合位点。</p>
+<p><strong>代谢网络（从基因组注释重建，如ModelSEED，KEGG）</strong></p>
+<p>基因组尺度代谢网络重建（GENRE）从基因组注释出发，推断生物体可能具有的代谢反应。ModelSEED是一个自动化重建平台，可以快速生成代谢网络模型。KEGG提供了人工整理的代谢通路数据。重建的代谢网络需要经过gap filling、质量平衡检验和实验验证才能用于通量预测。</p>
+<p><strong>信号网络（文献挖掘，Pathway Commons）</strong></p>
+<p>信号网络数据主要来源于文献挖掘和数据库整理。Pathway Commons整合了多个通路数据库（如Reactome、KEGG、WikiPathways）的数据，提供标准化的通路网络格式。文献挖掘使用自然语言处理技术从科学文献中提取分子相互作用信息。</p>
+<p>### 8.2.2 基于组学数据推断网络</p>
+<p><strong>共表达网络构建（WGCNA，Pearson/Spearman相关）</strong></p>
+<p>共表达网络从基因表达数据推断基因间的功能关联。Pearson相关系数衡量线性相关性，Spearman相关系数衡量单调相关性。WGCNA（加权基因共表达网络分析）是最广泛应用的共表达网络方法，它使用软阈值将相关矩阵转换为邻接矩阵，然后识别共表达模块。</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- WGCNA共表达网络构建示例 ----</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">WGCNA</span><span class="p">)</span>
+
+<span class="c1"># 模拟表达数据</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">2024</span><span class="p">)</span>
+<span class="n">n_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1000</span>
+<span class="n">n_samples</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">30</span>
+<span class="n">expr_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n_genes</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_samples</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_genes</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">expr_data</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Gene_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_genes</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">expr_data</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Sample_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_samples</span><span class="p">)</span>
+
+<span class="c1"># 注入共表达模式</span>
+<span class="n">module_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">50</span>
+<span class="n">expr_data</span><span class="p">[</span><span class="n">module_genes</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="o">:</span><span class="m">30</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">expr_data</span><span class="p">[</span><span class="n">module_genes</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="o">:</span><span class="m">30</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span>
+
+<span class="c1"># 选择软阈值</span>
+<span class="n">powers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">)</span>
+<span class="n">sft</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pickSoftThreshold</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">expr_data</span><span class="p">),</span><span class="w"> </span><span class="n">powerVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">powers</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;推荐软阈值:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sft</span><span class="o">$</span><span class="n">powerEstimate</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="c1"># 构建邻接矩阵和拓扑重叠矩阵</span>
+<span class="n">soft_power</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">sft</span><span class="o">$</span><span class="n">powerEstimate</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">sft</span><span class="o">$</span><span class="n">powerEstimate</span><span class="p">)</span>
+<span class="n">adjacency</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">adjacency</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">expr_data</span><span class="p">),</span><span class="w"> </span><span class="n">power</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">soft_power</span><span class="p">)</span>
+<span class="n">TOM</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">TOMsimilarity</span><span class="p">(</span><span class="n">adjacency</span><span class="p">)</span>
+
+<span class="c1"># 层次聚类识别模块</span>
+<span class="n">gene_tree</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">hclust</span><span class="p">(</span><span class="nf">as.dist</span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">TOM</span><span class="p">),</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;average&quot;</span><span class="p">)</span>
+<span class="n">dynamic_modules</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cutreeDynamic</span><span class="p">(</span><span class="n">dendro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gene_tree</span><span class="p">,</span>
+<span class="w">                                  </span><span class="n">distM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">TOM</span><span class="p">,</span>
+<span class="w">                                  </span><span class="n">deepSplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span>
+<span class="w">                                  </span><span class="n">minClusterSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
+
+<span class="c1"># 模块颜色</span>
+<span class="n">module_colors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">labels2colors</span><span class="p">(</span><span class="n">dynamic_modules</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;检测到的模块数:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">module_colors</span><span class="p">)),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;各模块基因数:\n&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">table</span><span class="p">(</span><span class="n">module_colors</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>部分相关与偏相关网络（GeneNet，SPACE）</strong></p>
+<p>部分相关和偏相关可以去除第三方变量的影响，揭示直接的相关关系。GeneNet包使用收缩估计方法计算偏相关系数，适用于高维数据。SPACE算法使用稀疏偏相关估计，可以处理变量数大于样本数的情况。</p>
+<p><strong>互信息网络（ARACNE，MINDy，CLR）</strong></p>
+<p>互信息可以捕捉非线性关系，比相关系数更通用。ARACNE（Algorithm for the Reconstruction of Accurate Cellular Networks）使用互信息和数据处理不等式（DPI）去除间接关系。CLR（Context Likelihood of Relatedness）考虑互信息的背景分布。MINDy（Modifier of INteractions using DYnamic models）可以识别调控因子的修饰作用。</p>
+<p><strong>贝叶斯网络（BN，BANJO，Bayesialab）</strong></p>
+<p>贝叶斯网络是一种概率图模型，可以表示变量间的因果关系。贝叶斯网络的学习包括结构学习（确定网络拓扑）和参数学习（确定条件概率分布）。BANJO是专门用于推断基因调控网络的贝叶斯网络工具。Bayesialab提供图形化界面和丰富的分析功能。贝叶斯网络的优点是可以推断因果关系，缺点是计算复杂度高，难以处理大规模网络。</p>
+<p><strong>布尔网络（Boolean networks）</strong></p>
+<p>布尔网络将基因状态简化为开（1）或关（0），通过布尔逻辑函数描述基因间的调控关系。布尔网络适合建模大规模调控网络，可以分析稳态（attractor）和网络动力学。BoolNet是R语言中分析布尔网络的常用工具。</p>
+<p><strong>微分方程网络（ODE-based）</strong></p>
+<p>常微分方程（ODE）模型可以描述分子浓度的连续变化，是最详细的动力学模型。ODE模型的参数（如反应速率常数）需要从实验数据估计。虽然ODE模型可以精确描述系统行为，但参数估计和模型验证的困难限制了其应用规模。</p>
+<p><strong>回归模型网络（GENIE3，GRNBoost2，Tigress）</strong></p>
+<p>回归模型将调控推断转化为特征选择问题，每个基因的表达作为目标变量，其他基因作为预测变量。GENIE3使用随机森林回归，在DREAM挑战赛中表现优异。GRNBoost2使用梯度提升树，速度更快。Tigress使用L1正则化回归，适合高维数据。</p>
+<p><strong>基于树的网络（Random Forest，Extra-Trees）</strong></p>
+<p>随机森林和极端随机树（Extra-Trees）可以用于推断基因调控关系，通过特征重要性评分识别调控因子。这类方法的优点是可以处理非线性关系和交互效应，缺点是难以区分相关性和因果关系。</p>
+<p><strong>因果推断网络（PC算法，FCI，LiNGAM）</strong></p>
+<p>因果推断方法试图从观测数据中识别因果关系。PC算法基于条件独立性检验构建因果骨架，然后确定边的方向。FCI（Fast Causal Inference）可以处理潜在混杂因素。LiNGAM（Linear Non-Gaussian Acyclic Model）假设数据服从非高斯分布，可以唯一识别因果方向。</p>
+<p><strong>时序网络推断（DBN，TDBN）</strong></p>
+<p>动态贝叶斯网络（DBN）是贝叶斯网络的时间扩展，可以建模时间序列数据中的因果关系。TDBN（Time-Delayed Bayesian Network）考虑时间延迟效应。时序网络推断需要足够的时间点数据，在单细胞轨迹分析中有重要应用。</p>
+<p><strong>单细胞网络推断（SCENIC，SCODE，PIDC）</strong></p>
+<p>单细胞RNA-seq数据为网络推断提供了新机遇和挑战。SCENIC结合转录因子motif分析和共表达模块识别，推断单细胞水平的调控网络。SCODE使用ODE模型推断时序单细胞数据的调控网络。PIDC（Partial Information Decomposition and Context）利用信息论方法分析单细胞数据的异质性。</p>
+<p>### 8.2.3 网络整合与融合</p>
+<p><strong>多源网络合并（投票，加权合并）</strong></p>
+<p>整合多个来源的网络可以提高网络的完整性和可靠性。投票方法保留在多个来源中都出现的边。加权合并根据来源的可靠性对边进行加权。整合时需要注意不同来源的覆盖范围和假阳性率差异。</p>
+<p><strong>网络对齐（Network alignment，IsoRank，NetAligner）</strong></p>
+<p>网络对齐寻找不同网络间节点和子结构的对应关系，用于比较物种间的网络保守性。IsoRank基于节点相似性和拓扑相似性进行全局对齐。NetAligner使用局部对齐策略，适合发现保守的功能模块。</p>
+<p><strong>相似性网络融合（SNF）</strong></p>
+<p>SNF（Similarity Network Fusion）是一种多组学数据整合方法，它将不同组学数据转换为样本相似性网络，然后通过迭代过程融合这些网络。SNF可以保留各数据类型的互补信息，在癌症亚型分类中表现优异。</p>
+<p><strong>异构网络构建（包含多种节点类型）</strong></p>
+<p>异构网络包含多种类型的节点和边，可以整合不同层次的生物信息。例如，一个异构网络可以同时包含基因、疾病、药物、通路等节点类型。异构网络分析需要考虑节点类型对网络性质的影响。</p>
+<p><strong>多层网络（multilayer network）</strong></p>
+<p>多层网络将同一组节点在不同层面上的关系表示为多个网络层。例如，基因可以在PPI层、共表达层、遗传互作层等多个层面上建立连接。多层网络分析可以揭示不同类型关系之间的相互作用。</p>
+</section>
+<section id="id4">
+<h2>8.3 网络分析工具<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>### 8.3.1 网络可视化与探索</p>
+<p><strong>Cytoscape（核心平台，含大量App）</strong></p>
+<p>Cytoscape是最广泛使用的生物网络可视化和分析平台，它提供了丰富的布局算法、样式定制和导出功能。Cytoscape的核心优势是其插件生态系统，用户可以通过安装App扩展功能。常用的App包括：ClueGO（功能富集）、MCODE（模块检测）、CytoHubba（hub节点识别）、stringApp（STRING数据导入）、CyREST（编程接口）等。Cytoscape支持导入多种网络格式（SIF, GML, XGMML等），并可以与R和Python集成。</p>
+<p><strong>Gephi（大规模网络布局）</strong></p>
+<p>Gephi是专注于大规模网络可视化的开源平台，它提供了多种力导向布局算法，可以处理数十万节点的网络。Gephi的界面直观，支持实时调整布局参数和过滤网络。Gephi适合探索性网络分析，但在生物网络特定的分析功能上不如Cytoscape丰富。</p>
+<p><strong>igraph（R/Python，静态/交互）</strong></p>
+<p>igraph是一个高效的跨平台网络分析库，提供了R和Python接口。igraph实现了数百种网络分析算法，包括中心性计算、社区检测、随机图生成等。igraph的优点是速度快、功能全面，缺点是可视化功能相对简单。igraph适合在脚本中进行自动化网络分析。</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- igraph网络分析示例 ----</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">igraph</span><span class="p">)</span>
+
+<span class="c1"># 创建随机网络</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">2024</span><span class="p">)</span>
+<span class="n">g</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">barabasi.game</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">power</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">directed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+
+<span class="c1"># 计算中心性</span>
+<span class="n">deg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">degree</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="n">bet</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">betweenness</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="n">clo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">closeness</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="n">eig</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">eigen_centrality</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">$</span><span class="n">vector</span>
+
+<span class="c1"># 创建结果数据框</span>
+<span class="n">centrality_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Degree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Betweenness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bet</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Closeness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clo</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Eigenvector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eig</span>
+<span class="p">)</span>
+
+<span class="c1"># 识别hub节点 (度最高的前5个)</span>
+<span class="n">hub_nodes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="n">deg</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">]</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Hub节点 (度最高的5个):\n&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">centrality_df</span><span class="p">[</span><span class="n">hub_nodes</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+
+<span class="c1"># 社区检测 (Louvain算法)</span>
+<span class="n">communities</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cluster_louvain</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n检测到的社区数:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">communities</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;模块度:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">modularity</span><span class="p">(</span><span class="n">communities</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="c1"># 可视化</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">communities</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">,</span>
+<span class="w">     </span><span class="n">vertex.size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deg</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span>
+<span class="w">     </span><span class="n">vertex.label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;网络社区结构&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>networkX（Python）</strong></p>
+<p>NetworkX是Python中最流行的网络分析库，它提供了丰富的网络算法和灵活的数据结构。NetworkX的优点是易于使用、文档完善、与Python科学计算生态系统（NumPy, Pandas, Matplotlib）无缝集成。NetworkX适合教学和中小规模网络分析，对于超大规模网络可能需要使用graph-tool或GPU加速库。</p>
+<p><strong>graph-tool（Python，高性能）</strong></p>
+<p>graph-tool是用C++实现的Python网络分析库，性能远超NetworkX和igraph。graph-tool使用模板元编程和OpenMP并行化，可以高效处理百万级节点的网络。graph-tool实现了先进的统计推断方法用于社区检测和网络分析。</p>
+<p><strong>Ggplot2中的ggnetwork（R）</strong></p>
+<p>ggnetwork将网络可视化集成到ggplot2语法中，使得网络图可以与其他ggplot2图形组合。ggnetwork适合创建出版质量的网络图，但交互功能有限。</p>
+<p><strong>VisNetwork（R/Shiny交互）</strong></p>
+<p>visNetwork是R中的交互式网络可视化包，基于JavaScript库vis.js。visNetwork支持缩放、拖拽、节点选择等交互功能，特别适合在Shiny应用中展示网络。</p>
+<p><strong>BioLayout Express(3D)</strong></p>
+<p>BioLayout Express3D是一个专门用于生物网络的3D可视化工具，支持大规模网络的布局和聚类分析。BioLayout特别适合可视化复杂的PPI网络和共表达网络。</p>
+<p><strong>NAViGaTOR</strong></p>
+<p>NAViGaTOR是一个功能强大的网络可视化和分析平台，支持2D和3D可视化、高级布局算法和多种分析功能。NAViGaTOR特别适合可视化大规模生物网络。</p>
+<p>### 8.3.2 网络拓扑分析</p>
+<p><strong>度分布拟合（幂律，指数截断）</strong></p>
+<p>度分布是网络的基本统计特征。许多生物网络呈现幂律度分布 P(k) ~ k^(-γ)，其中γ通常在2-3之间。幂律分布表明网络中存在hub节点，这是无标度网络的标志。有些网络的度分布更符合指数截断的幂律分布 P(k) ~ k^(-γ) exp(-k/kc)，这表明hub节点的度有上限。度分布拟合可以使用最大似然估计和Kolmogorov-Smirnov检验。</p>
+<p><strong>中心性分析（度，介数，紧密，特征向量，PageRank，HITS）</strong></p>
+<p>中心性指标用于量化节点在网络中的重要性。度中心性（degree centrality）最简单，直接使用节点的度。介数中心性（betweenness centrality）衡量节点作为最短路径桥梁的重要性。紧密中心性（closeness centrality）衡量节点到其他节点的平均距离。特征向量中心性（eigenvector centrality）考虑邻居的重要性。PageRank是Google搜索算法的核心，适用于有向网络。HITS算法区分hub节点（指向多个权威节点）和权威节点（被多个hub指向）。在生物网络中，不同的中心性指标可能识别出不同类型的重要节点。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- 多种中心性指标计算 ----</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 创建模拟PPI网络</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2024</span><span class="p">)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barabasi_albert_graph</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">2024</span><span class="p">)</span>
+
+<span class="c1"># 计算多种中心性</span>
+<span class="n">centralities</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Degree&#39;</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">),</span>
+    <span class="s1">&#39;Betweenness&#39;</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">),</span>
+    <span class="s1">&#39;Closeness&#39;</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">),</span>
+    <span class="s1">&#39;Eigenvector&#39;</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">eigenvector_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span>
+    <span class="s1">&#39;PageRank&#39;</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">pagerank</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># 创建数据框</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">centralities</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Node&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span>
+
+<span class="c1"># 各中心性排名前5的节点</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;各中心性指标Top 5节点:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cent</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Degree&#39;</span><span class="p">,</span> <span class="s1">&#39;Betweenness&#39;</span><span class="p">,</span> <span class="s1">&#39;Closeness&#39;</span><span class="p">,</span> <span class="s1">&#39;Eigenvector&#39;</span><span class="p">,</span> <span class="s1">&#39;PageRank&#39;</span><span class="p">]:</span>
+    <span class="n">top5</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">cent</span><span class="p">)[</span><span class="s1">&#39;Node&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cent</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">top5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 中心性相关性</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">中心性指标相关性矩阵:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Degree&#39;</span><span class="p">,</span> <span class="s1">&#39;Betweenness&#39;</span><span class="p">,</span> <span class="s1">&#39;Closeness&#39;</span><span class="p">,</span> <span class="s1">&#39;Eigenvector&#39;</span><span class="p">,</span> <span class="s1">&#39;PageRank&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>聚类系数与传递性</strong></p>
+<p>聚类系数衡量网络的聚集程度。全局聚类系数（传递性）定义为闭合三元组的比例。平均局部聚类系数是所有节点聚类系数的平均值。生物网络通常具有较高的聚类系数，表明功能相关的分子倾向于形成紧密连接的模块。</p>
+<p><strong>网络鲁棒性分析（节点/边移除模拟）</strong></p>
+<p>网络鲁棒性分析通过模拟节点或边的移除来评估网络的抗干扰能力。随机移除模拟随机错误，靶向移除（优先移除高度节点）模拟针对性攻击。无标度网络对随机错误具有鲁棒性，但对靶向攻击非常脆弱。在生物网络中，鲁棒性分析可以识别必需基因和脆弱环节。</p>
+<p><strong>网络同配性（assortativity）</strong></p>
+<p>同配性系数衡量节点是否倾向于与相似度的节点连接。度同配性系数为正表示高度节点倾向于连接高度节点（同配），为负表示高度节点倾向于连接低度节点（异配）。大多数生物网络是异配的，这有利于hub节点整合来自不同模块的信息。</p>
+<p><strong>网络熵</strong></p>
+<p>网络熵是信息论在网络分析中的应用，可以衡量网络的复杂性和不确定性。图的熵定义为基于度分布的香农熵。网络熵可以用于比较不同网络的复杂性，或分析网络在不同条件下的变化。</p>
+<p><strong>网络谱分析（拉普拉斯特征值）</strong></p>
+<p>网络拉普拉斯矩阵的特征值（谱）包含丰富的拓扑信息。拉普拉斯矩阵L = D - A，其中D是度矩阵，A是邻接矩阵。拉普拉斯特征值可以用于分析网络的连通性、社区结构、同步能力等。Fiedler值（第二小特征值）反映了网络的代数连通性。</p>
+<p>### 8.3.3 网络模块与社区发现</p>
+<p><strong>模块检测算法（Louvain，Leiden，Walktrap，Infomap，边介数聚类）</strong></p>
+<p>社区检测是将网络划分为若干内部紧密连接、外部稀疏连接的子网络的过程。Louvain算法通过最大化模块度进行贪婪优化，速度快但可能产生次优解。Leiden算法是Louvain的改进版本，保证发现良好连接的社区。Walktrap基于随机游走的距离进行层次聚类。Infomap使用信息论方法，将网络上的随机游走编码为压缩描述。边介数聚类（Girvan-Newman算法）通过迭代移除高介数边来发现社区。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- 社区检测算法比较 ----</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 创建具有社区结构的网络</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2024</span><span class="p">)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">random_partition_graph</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">2024</span><span class="p">)</span>
+
+<span class="c1"># Louvain算法</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">networkx.algorithms.community</span><span class="w"> </span><span class="kn">import</span> <span class="n">louvain_communities</span>
+<span class="n">louvain_parts</span> <span class="o">=</span> <span class="n">louvain_communities</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">2024</span><span class="p">)</span>
+<span class="n">louvain_mod</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">louvain_parts</span><span class="p">)</span>
+
+<span class="c1"># 标签传播算法</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">networkx.algorithms.community</span><span class="w"> </span><span class="kn">import</span> <span class="n">label_propagation_communities</span>
+<span class="n">label_parts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">label_propagation_communities</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+<span class="n">label_mod</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">label_parts</span><span class="p">)</span>
+
+<span class="c1"># 贪婪模块度优化</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">networkx.algorithms.community</span><span class="w"> </span><span class="kn">import</span> <span class="n">greedy_modularity_communities</span>
+<span class="n">greedy_parts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">greedy_modularity_communities</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+<span class="n">greedy_mod</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">greedy_parts</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;社区检测算法比较:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Louvain: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">louvain_parts</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个社区, 模块度 = </span><span class="si">{</span><span class="n">louvain_mod</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;标签传播: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">label_parts</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个社区, 模块度 = </span><span class="si">{</span><span class="n">label_mod</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;贪婪优化: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">greedy_parts</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个社区, 模块度 = </span><span class="si">{</span><span class="n">greedy_mod</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>层次聚类网络</strong></p>
+<p>层次聚类可以构建网络的嵌套社区结构，表示为树状图（dendrogram）。凝聚方法从每个节点作为一个社区开始，逐步合并最相似的社区。分裂方法从整个网络开始，逐步分割社区。层次聚类可以揭示网络的多尺度组织结构。</p>
+<p><strong>核心-外围结构分析</strong></p>
+<p>核心-外围结构将网络节点分为核心节点（彼此紧密连接）和外围节点（与核心连接但彼此不连接）。核心-外围结构在社交网络和生物网络中都很常见。检测方法包括块模型拟合和核心-外围中心性计算。</p>
+<p><strong>双聚类（biclustering）</strong></p>
+<p>双聚类同时对网络邻接矩阵的行和列进行聚类，发现具有相似连接模式的节点子集。双聚类特别适合分析二分图和基因表达数据。</p>
+<p><strong>基于网络的功能模块富集（clusterProfiler对模块内基因）</strong></p>
+<p>网络模块检测后，可以对模块内的基因进行功能富集分析，推断模块的生物学功能。clusterProfiler包可以对基因列表进行GO、KEGG、Reactome等数据库的富集分析。模块的功能注释有助于理解网络的生物学意义。</p>
+<p><strong>模块保守性分析（跨物种网络比较）</strong></p>
+<p>模块保守性分析比较不同物种间网络模块的相似性，可以识别进化上保守的功能模块。保守模块通常对应重要的生物学功能。分析时需要考虑物种间的直系同源基因映射。</p>
+<p>### 8.3.4 网络节点与边的功能注释</p>
+<p><strong>节点功能富集（模块内的GO/KEGG）</strong></p>
+<p>对网络节点或模块进行功能富集分析是理解网络生物学意义的关键步骤。常用的方法包括超几何检验、GSEA等。富集结果可以用气泡图、条形图、网络图等方式可视化。</p>
+<p><strong>Hub基因/蛋白识别（高中心性）</strong></p>
+<p>Hub节点是网络中高度连接的节点，在生物网络中通常对应重要的功能分子。识别hub节点可以使用度中心性或其他中心性指标。在PPI网络中，hub蛋白往往是必需蛋白。在共表达网络中，hub基因可能是关键调控因子。</p>
+<p><strong>Bottleneck节点识别（介数中心性）</strong></p>
+<p>Bottleneck节点是网络中高介数中心性的节点，它们控制信息在网络中的流动。在生物网络中，bottleneck节点可能是信号转导的关键节点，其突变可能导致严重的表型效应。</p>
+<p><strong>必需基因/蛋白识别（基于网络必需性）</strong></p>
+<p>必需基因是敲除后导致生物体无法存活的基因。网络分析可以预测必需基因：hub节点和bottleneck节点更可能是必需的。网络必需性分析可以指导药物靶点选择。</p>
+<p><strong>预测未连接节点间可能边（链路预测）</strong></p>
+<p>链路预测根据网络拓扑结构预测缺失的相互作用。常用方法包括共同邻居、Jaccard系数、Adamic-Adar指数、优先连接、随机游走等。链路预测可以指导实验验证，发现新的相互作用。</p>
+<p><strong>节点重要性排序（多种中心性综合）</strong></p>
+<p>综合多种中心性指标可以对节点进行更全面的重要性评估。方法包括简单排序、加权组合、机器学习等。节点重要性排序在疾病基因优先级排序和药物靶点发现中有重要应用。</p>
+</section>
+<section id="id5">
+<h2>8.4 动态建模基础<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>### 8.4.1 确定性建模</p>
+<p><strong>常微分方程（ODE）模型</strong></p>
+<p>常微分方程（ODE）是描述连续时间动力系统的标准方法，在系统生物学中用于建模分子浓度的动态变化。ODE模型的一般形式为 dx/dt = f(x, p)，其中x是状态变量（如分子浓度），p是参数（如反应速率常数）。ODE模型的优点是可以精确描述系统行为，缺点是需要知道反应机制和参数值。在生物网络中，ODE模型常用于建模信号转导通路和代谢通路。</p>
+<p><strong>质量作用动力学（Mass action）</strong></p>
+<p>质量作用定律是化学反应动力学的基础，它指出反应速率与反应物浓度的乘积成正比。对于反应 A + B → C，速率方程为 v = k[A][B]，其中k是速率常数。质量作用动力学适用于基元反应，是构建复杂动力学模型的基本单元。</p>
+<p><strong>米氏动力学（Michaelis-Menten）</strong></p>
+<p>米氏方程描述酶催化反应的动力学，是生物化学中最常用的动力学模型。对于酶反应 E + S ⇌ ES → E + P，米氏方程为 v = Vmax[S]/(Km + [S])，其中Vmax是最大反应速率，Km是米氏常数（反应速率达到Vmax/2时的底物浓度）。米氏方程假设底物浓度远高于酶浓度，且ES复合物达到稳态。米氏动力学简化了复杂的酶反应机制，广泛应用于代谢网络建模。</p>
+<p><strong>希尔方程（Hill equation，协同性）</strong></p>
+<p>希尔方程描述具有协同效应的结合反应，如血红蛋白与氧的结合。希尔方程为 Y = [L]^n/(Kd + [L]^n)，其中Y是结合比例，[L]是配体浓度，n是希尔系数（衡量协同程度）。n &gt; 1表示正协同（一个配体结合促进后续结合），n &lt; 1表示负协同，n = 1退化为简单结合。希尔方程常用于建模转录因子与DNA的结合和受体-配体相互作用。</p>
+<p><strong>稳态分析与敏感性分析</strong></p>
+<p>稳态是系统在长时间后达到的平衡状态，此时 dx/dt = 0。稳态分析是理解系统长期行为的关键。敏感性分析研究参数变化对系统行为的影响，包括局部敏感性（参数小幅变化）和全局敏感性（参数大范围变化）。敏感性分析可以识别关键参数，指导实验设计和模型简化。</p>
+<p><strong>分岔分析（bifurcation analysis）</strong></p>
+<p>分岔分析研究参数变化如何改变系统的定性行为，如稳态的数量和稳定性。分岔点是系统行为发生质变的参数值。常见的分岔类型包括鞍结分岔（稳态的产生或消失）、跨临界分岔（稳态稳定性的交换）、霍普夫分岔（稳态失稳产生振荡）。分岔分析可以揭示生物系统的多稳态和振荡行为。</p>
+<p><strong>参数估计与拟合（实验数据）</strong></p>
+<p>参数估计是从实验数据确定模型参数的过程。常用方法包括最小二乘法、最大似然估计、贝叶斯推断等。参数估计面临的挑战包括参数不可识别性（多个参数组合产生相同的模型行为）、数据噪声和模型不确定性。全局优化算法（如遗传算法、粒子群优化）可以避免陷入局部最优。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- ODE模型示例：简单信号转导 ----</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">signal_transduction</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    简单信号转导模型:</span>
+<span class="sd">    S -&gt; X -&gt; Y (磷酸化级联)</span>
+<span class="sd">    S: 信号 (恒定)</span>
+<span class="sd">    X: 中间蛋白</span>
+<span class="sd">    Y: 输出蛋白</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># 恒定信号</span>
+
+    <span class="c1"># ODE方程</span>
+    <span class="n">dXdt</span> <span class="o">=</span> <span class="n">k1</span> <span class="o">*</span> <span class="n">S</span> <span class="o">-</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">X</span>
+    <span class="n">dYdt</span> <span class="o">=</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">X</span> <span class="o">-</span> <span class="n">k3</span> <span class="o">*</span> <span class="n">Y</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">dXdt</span><span class="p">,</span> <span class="n">dYdt</span><span class="p">]</span>
+
+<span class="c1"># 参数</span>
+<span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span>
+
+<span class="c1"># 初始条件</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 时间点</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># 求解ODE</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">signal_transduction</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="p">))</span>
+
+<span class="c1"># 稳态分析</span>
+<span class="n">X_ss</span> <span class="o">=</span> <span class="n">k1</span> <span class="o">/</span> <span class="n">k2</span>
+<span class="n">Y_ss</span> <span class="o">=</span> <span class="n">k1</span> <span class="o">/</span> <span class="n">k3</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;稳态值: X = </span><span class="si">{</span><span class="n">X_ss</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, Y = </span><span class="si">{</span><span class="n">Y_ss</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;响应时间: X = </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">k2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, Y = </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">k3</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>### 8.4.2 随机建模</p>
+<p><strong>化学主方程（CME）</strong></p>
+<p>化学主方程（CME）是描述化学反应系统随机性质的精确方法。CME给出系统处于每个可能状态的概率随时间的演化。对于具有N个分子的系统，CME涉及N维状态空间，计算复杂度极高。CME适用于分子数目较少的系统，如基因表达调控。</p>
+<p><strong>Gillespie 随机模拟算法（SSA）</strong></p>
+<p>Gillespie算法是精确模拟CME的随机方法，它通过生成随机数确定下一个反应发生的时间和类型。Gillespie算法的优点是精确，缺点是计算量大（每个反应事件都需要更新）。Gillespie算法适用于分子数目较少、反应事件较少的系统。</p>
+<p><strong>随机微分方程（SDE）</strong></p>
+<p>随机微分方程在ODE基础上加入随机噪声项，描述系统的随机涨落。常用的SDE形式是朗之万方程 dx = f(x)dt + g(x)dW，其中dW是维纳过程增量。SDE适用于分子数目中等（可以近似为连续变量）但随机涨落不可忽略的系统。</p>
+<p><strong>τ-跳跃方法（tau-leaping）</strong></p>
+<p>τ-跳跃方法是Gillespie算法的加速近似，它假设在时间间隔τ内，各反应发生的次数服从泊松分布。τ-跳跃方法可以跳过多个反应事件，大幅提高计算效率，适用于反应事件频繁的系统。τ的选择需要在精度和效率之间平衡。</p>
+<p><strong>生灭过程（birth-death process）</strong></p>
+<p>生灭过程是一类特殊的随机过程，状态只能转移到相邻状态。在生物系统中，基因表达可以用生灭过程建模：出生对应转录/翻译，死亡对应mRNA/蛋白质降解。生灭过程有解析解，可以精确计算稳态分布和动态性质。</p>
+<p><strong>福克-普朗克方程简介</strong></p>
+<p>福克-普朗克方程描述随机过程的概率密度函数随时间的演化，是CME的连续近似。福克-普朗克方程可以从SDE推导得到，适用于分子数目较大的系统。求解福克-普朗克方程可以得到系统状态的概率分布。</p>
+<p>### 8.4.3 逻辑与离散建模</p>
+<p><strong>布尔网络（BoolNet，CellNOpt）</strong></p>
+<p>布尔网络将基因状态简化为开（1，表达）或关（0，不表达），通过布尔逻辑函数描述基因间的调控关系。布尔网络的优点是简单、易于分析大规模网络，缺点是丢失了连续的定量信息。BoolNet是R语言中分析布尔网络的常用工具，支持网络构建、状态转移分析、吸引子识别等。CellNOpt用于从实验数据推断信号网络的布尔模型。</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- 布尔网络分析示例 ----</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">BoolNet</span><span class="p">)</span>
+
+<span class="c1"># 定义布尔网络 (细胞周期简化模型)</span>
+<span class="c1"># 网络定义: gene, update rule</span>
+<span class="n">network</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">loadNetwork</span><span class="p">(</span><span class="nf">textConnection</span><span class="p">(</span><span class="s">&quot;</span>
+<span class="s">targets, factors</span>
+<span class="s">CyclinD, (!p27 &amp; GrowthFactor) | CyclinD</span>
+<span class="s">p27, !CyclinD &amp; !CyclinE</span>
+<span class="s">CyclinE, CyclinD &amp; !p27</span>
+<span class="s">Rb, !CyclinE &amp; !CyclinD</span>
+<span class="s">E2F, !Rb</span>
+<span class="s">&quot;</span><span class="p">))</span>
+
+<span class="c1"># 获取状态转移图</span>
+<span class="n">attr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">getAttractors</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
+
+<span class="c1"># 识别吸引子</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;检测到的吸引子:\n&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
+
+<span class="c1"># 计算状态空间大小</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n状态空间大小:&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">^</span><span class="n">network</span><span class="o">$</span><span class="n">genes</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="c1"># 模拟轨迹</span>
+<span class="n">initial_state</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">  </span><span class="c1"># CyclinD, p27, CyclinE, Rb, E2F</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">network</span><span class="o">$</span><span class="n">genes</span>
+<span class="n">trajectory</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">simulateNetwork</span><span class="p">(</span><span class="n">network</span><span class="p">,</span><span class="w"> </span><span class="n">initial_state</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n轨迹前10步:\n&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>逻辑稳态分析</strong></p>
+<p>逻辑稳态分析研究布尔网络的长期行为。稳态（steady state）是不随时间变化的状态，吸引子（attractor）是系统最终收敛的状态集合。吸引子可以对应细胞类型或疾病状态。分析吸引子有助于理解细胞分化和状态转换。</p>
+<p><strong>异步/同步更新策略</strong></p>
+<p>布尔网络的更新策略决定了状态转移的方式。同步更新中，所有节点同时更新，状态转移是确定性的。异步更新中，每次随机选择一个节点更新，状态转移是随机的。同步更新可能导致不切实际的振荡，异步更新更符合生物学实际但分析更复杂。</p>
+<p><strong>吸引子（attractor）分析与陷阱状态</strong></p>
+<p>吸引子是布尔网络中系统最终收敛的状态集合。单稳态吸引子是一个固定状态，循环吸引子是一组周期性重复的状态。陷阱状态是一旦进入就无法离开的状态集合。吸引子分析可以揭示网络的多稳态特性，对应细胞的多种表型。</p>
+<p><strong>布尔网络模型推断（从表达数据，REVEAL，Best-Fit）</strong></p>
+<p>从实验数据推断布尔网络是逆向工程问题。REVEAL算法使用互信息最小化原则推断网络。Best-Fit算法寻找与实验数据一致的最简单网络。推断算法需要足够的状态转换数据，通常需要扰动实验（如基因敲除）来识别因果关系。</p>
+<p><strong>贝叶斯网络的时间片扩展（DBN）</strong></p>
+<p>动态贝叶斯网络（DBN）是贝叶斯网络的时间扩展，可以建模时间序列数据中的因果关系。DBN在每个时间片有一个网络快照，时间片之间通过转移概率连接。DBN可以学习时序调控关系，适用于时间序列表达数据分析。</p>
+<p>### 8.4.4 建模工具与资源</p>
+<p><strong>COPASI（ODE，随机模拟）</strong></p>
+<p>COPASI（Complex Pathway Simulator）是一个功能强大的系统生物学建模平台，支持ODE和随机模拟。COPASI提供图形化界面，无需编程即可构建和分析模型。COPASI的功能包括稳态分析、时间过程模拟、参数扫描、敏感性分析、参数估计等。COPASI支持SBML格式，可以与其他工具互操作。</p>
+<p><strong>CellDesigner（图形化建模SBML）</strong></p>
+<p>CellDesigner是一个图形化的生物网络建模工具，专门用于绘制和分析生化反应网络。CellDesigner使用标准化的图形符号表示分子和反应，支持SBML格式导出。CellDesigner可以与仿真引擎集成，进行动力学模拟。</p>
+<p><strong>VCell（多尺度建模）</strong></p>
+<p>Virtual Cell（VCell）是一个基于Web的系统生物学建模平台，支持从分子到细胞的多尺度建模。VCell的特点是可以结合几何信息进行空间建模，支持反应-扩散方程。VCell适合建模具有空间异质性的生物过程。</p>
+<p><strong>SBML（标准格式）</strong></p>
+<p>系统生物学标记语言（SBML）是生物网络模型的标准交换格式。SBML使用XML描述模型的结构（物种、反应、参数等）和数学规则。SBML使得模型可以在不同工具之间共享和复用。几乎所有主流系统生物学工具都支持SBML导入导出。</p>
+<p><strong>BioModels 数据库（已发表模型）</strong></p>
+<p>BioModels数据库是一个存储已发表生物模型的公共仓库，所有模型都以SBML格式存储并提供注释。BioModels涵盖代谢、信号转导、基因调控等多种模型类型。研究人员可以从BioModels下载模型进行复用和扩展。</p>
+<p><strong>Tellurium（Python ODE环境）</strong></p>
+<p>Tellurium是一个Python包，集成了ODE求解、随机模拟和模型分析功能。Tellurium使用Antimony语言描述模型，语法简洁易学。Tellurium适合在Jupyter notebook中进行交互式建模和分析。</p>
+<p><strong>PySB（基于规则的建模）</strong></p>
+<p>PySB是一个Python框架，支持基于规则的生物网络建模。规则建模允许用简洁的语法描述复杂的分子相互作用组合，避免状态空间爆炸。PySB适合建模信号转导网络，其中蛋白质的多个修饰状态产生大量组合。</p>
+<p><strong>SimBiology（MATLAB工具箱）</strong></p>
+<p>SimBiology是MATLAB的系统生物学工具箱，提供图形化界面和编程接口。SimBiology支持模型构建、参数估计、敏感性分析、剂量响应分析等功能。SimBiology适合与MATLAB的其他工具箱（如优化、统计）集成使用。</p>
+</section>
+<section id="id6">
+<h2>8.5 通路与网络富集分析<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p><strong>通路拓扑富集（考虑基因在通路中的位置和连接度）</strong></p>
+<p>传统的通路富集分析将基因视为独立集合，忽略了基因在通路中的位置和相互作用。拓扑富集分析考虑基因在通路网络中的拓扑位置，如是否为hub节点、是否位于关键分支点。SPIA（Signaling Pathway Impact Analysis）和Pathway-Express是常用的拓扑富集方法。拓扑富集可以更准确地识别受影响的通路。</p>
+<p><strong>网络基序（network motif）富集（Feed-forward loop，单输入模块等）</strong></p>
+<p>网络基序是网络中出现的频率显著高于随机网络的子图模式。常见的生物网络基序包括前馈环（feed-forward loop，FFL）、单输入模块（SIM）、双扇（bi-fan）等。基序富集分析可以揭示网络的设计原则和功能模块。FFL在转录调控网络中常见，可以实现信号延迟和脉冲响应。</p>
+<p><strong>通路串扰分析（crosstalk analysis）</strong></p>
+<p>通路串扰分析研究不同通路之间的相互作用和信号传递。串扰可以通过共享分子、物理相互作用或调控关系发生。串扰分析有助于理解信号整合和通路协调。方法包括识别共享基因、构建通路网络、分析通路间的功能关系。</p>
+<p><strong>基于网络传播的基因优先级排序（NetScore，RWR）</strong></p>
+<p>网络传播方法利用网络拓扑结构对基因进行优先级排序。给定一组种子基因（如疾病相关基因），网络传播算法在整个网络上扩散信号，计算每个基因的得分。随机游走重启（RWR）是常用的网络传播方法，它模拟随机游走者在网络上的移动，以概率r重启到种子节点。NetScore是另一种网络传播方法，考虑节点的度归一化。</p>
+<p><strong>网络收缩（network contraction）与子网络提取</strong></p>
+<p>网络收缩是将大型网络简化为更小表示的过程，保留关键拓扑特征。子网络提取是从大型网络中提取与特定研究问题相关的部分，如疾病相关基因的邻域。收缩和提取可以降低计算复杂度，聚焦关键区域。</p>
+<p><strong>基于网络的距离度量（Graph distance，diffusion kernel）</strong></p>
+<p>网络距离度量量化节点间的相似性或距离。图距离（最短路径长度）是最简单的度量。扩散核（diffusion kernel）考虑所有路径，通过矩阵指数计算。网络距离可以用于基因功能预测、疾病基因优先级排序等。</p>
+</section>
+<section id="id7">
+<h2>8.6 大规模网络与系统生物学数据库<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p><strong>STRING（PPI + 其他关联）</strong></p>
+<p>STRING数据库是最全面的蛋白质相互作用数据库，整合了实验验证、数据库pathway、基因共邻域、基因融合、共表达、文献挖掘等多种来源的相互作用信息。STRING为每个相互作用提供置信度评分（0-1），用户可以根据阈值筛选高置信度相互作用。STRING还提供功能富集分析和网络可视化功能。STRING覆盖了数千个物种，是PPI网络分析的首选数据源。</p>
+<p><strong>KEGG Pathway（通路网络）</strong></p>
+<p>KEGG（Kyoto Encyclopedia of Genes and Genomes）是一个综合性的生物信息资源，其中KEGG Pathway提供了人工整理的代谢和信号通路图。KEGG通路图以图形方式展示分子相互作用和反应网络，支持基因映射和通路富集分析。KEGG通路是通路分析的标准参考。</p>
+<p><strong>Reactome（通路层级网络）</strong></p>
+<p>Reactome是一个开源的生物学通路数据库，专注于人类生物学过程。Reactome通路具有层次结构，从高层生物过程分解到具体的分子事件。Reactome提供详细的文献注释和证据，支持通路富集分析和通路拓扑分析。</p>
+<p><strong>BioGRID（遗传与物理互作）</strong></p>
+<p>BioGRID数据库收集了文献挖掘的蛋白质相互作用和遗传相互作用数据。BioGRID区分物理相互作用（如Y2H、AP-MS）和遗传相互作用（如合成致死、抑制）。遗传相互作用数据对于理解基因功能冗余和通路备份特别有价值。</p>
+<p><strong>CORUM（蛋白复合物）</strong></p>
+<p>CORUM数据库提供了哺乳动物蛋白质复合物的全面注释，包括复合物组成、功能描述、亚细胞定位等。蛋白质复合物是PPI网络中的紧密连接模块，CORUM数据可以用于验证PPI预测和注释网络模块。</p>
+<p><strong>Pathway Commons（综合通路）</strong></p>
+<p>Pathway Commons整合了多个通路数据库（Reactome、KEGG、WikiPathways、PhosphoSitePlus等）的数据，提供统一的查询接口和标准化的数据格式。Pathway Commons支持通路网络查询、可视化和分析。</p>
+<p><strong>SignaLink（信号通路网络）</strong></p>
+<p>SignaLink数据库专注于信号转导通路，提供详细的通路注释和多层调控信息。SignaLink整合了转录调控、miRNA调控和信号后修饰等信息，支持信号网络的系统分析。</p>
+<p><strong>RegulonDB（大肠杆菌调控网络）</strong></p>
+<p>RegulonDB是大肠杆菌基因调控网络的综合数据库，包含转录因子、启动子、操纵子、转录单元等详细信息。RegulonDB是原核生物调控网络研究的金标准资源。</p>
+<p><strong>NCBI Gene（基因-疾病-通路关联）</strong></p>
+<p>NCBI Gene数据库提供基因的基本信息，包括序列、功能注释、相关疾病、参与的通路等。NCBI Gene整合了多个数据库的信息，是基因信息查询的起点。</p>
+<p><strong>HumanBase（上下文特异性网络）</strong></p>
+<p>HumanBase（原名GIANT）提供组织特异性和条件特异性的基因功能网络。HumanBase使用机器学习方法整合多种数据类型，预测特定组织中的基因功能关联。HumanBase对于理解基因在不同组织中的功能差异很有帮助。</p>
+<p><strong>GIANT（组织特异性网络）</strong></p>
+<p>GIANT（Genome-scale Integrated Analysis of gene Networks in Tissues）是HumanBase的核心数据集，提供数百种人类组织的基因功能网络预测。GIANT网络可以用于疾病基因优先级排序和功能预测。</p>
+</section>
+<section id="id8">
+<h2>8.7 网络医学与疾病网络<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p><strong>疾病-基因关联网络（DisGeNET，OMIM，ClinVar）</strong></p>
+<p>疾病-基因关联网络是网络医学的基础，它将疾病与相关基因连接起来。DisGeNET是一个综合性的疾病-基因关联数据库，整合了GWAS、文献挖掘、专家注释等多种来源的数据。OMIM（Online Mendelian Inheritance in Man）是人类遗传疾病的权威数据库，提供详细的疾病表型和基因型信息。ClinVar存储临床相关的基因变异及其与疾病的关联。疾病-基因网络分析可以揭示疾病的分子基础，发现共享遗传基础的疾病簇。</p>
+<p><strong>疾病-表型网络（HPO，Orphanet）</strong></p>
+<p>疾病-表型网络连接疾病与表型特征，有助于理解疾病的临床表现和异质性。HPO（Human Phenotype Ontology）提供了标准化的表型术语及其层次关系，支持表型相似性计算和疾病诊断。Orphanet专注于罕见病，提供疾病、基因、表型的综合信息。疾病-表型网络可以用于疾病诊断辅助和表型驱动的基因发现。</p>
+<p><strong>药物-靶点网络（DrugBank，TTD）</strong></p>
+<p>药物-靶点网络描述药物与其作用靶点之间的关系，是药物重定位和副作用预测的重要资源。DrugBank提供了详细的药物信息，包括化学结构、靶点、代谢途径、药物相互作用等。TTD（Therapeutic Target Database）专注于治疗靶点，提供靶点-药物-疾病的三方关联。药物-靶点网络分析可以揭示药物的作用机制，发现多靶点药物和药物重定位机会。</p>
+<p><strong>疾病相似性网络（基于共享基因，表型）</strong></p>
+<p>疾病相似性网络基于疾病间共享的基因或表型构建，可以揭示疾病之间的潜在关联。相似性度量包括Jaccard系数、语义相似性、网络距离等。疾病相似性网络可以用于疾病分类、药物重定位和并发症预测。相似的疾病可能对相同的治疗方案有响应。</p>
+<p><strong>网络扩散预测新药物适应症</strong></p>
+<p>网络扩散方法可以预测药物的新适应症。给定药物靶点和疾病基因，网络扩散算法在网络中传播信号，计算药物与疾病之间的网络距离或关联得分。如果药物靶点与疾病基因在网络中接近，则该药物可能对该疾病有效。这种方法已经成功预测了多个药物重定位案例。</p>
+<p><strong>疾病模块与药物模块重叠分析</strong></p>
+<p>疾病模块是疾病相关基因在网络中形成的紧密连接区域，药物模块是药物靶点形成的网络区域。如果疾病模块与药物模块在网络中重叠或接近，则该药物可能对该疾病有效。模块重叠分析是网络药理学的核心方法之一，可以系统性地评估药物-疾病关联。</p>
+<p><strong>网络药理学（详见专项10.5，但列出基础的网络分析）</strong></p>
+<p>网络药理学从网络视角理解药物作用，强调药物的多靶点作用和网络效应。基础的网络药理学分析包括：构建药物-靶点网络、分析靶点在网络中的位置、预测药物副作用、发现药物组合等。网络药理学为复杂疾病的治疗提供了新思路。</p>
+<p><strong>网络随机游走进行药物重定位</strong></p>
+<p>随机游走是药物重定位的常用方法。从药物靶点出发，随机游走在网络上传播信号，计算每个疾病基因的访问概率。高访问概率的疾病基因对应的疾病可能是药物的新适应症。随机游走重启（RWR）方法可以平衡局部和全局网络信息，提高预测准确性。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- 网络药物重定位示例 ----</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 模拟PPI网络</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2024</span><span class="p">)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barabasi_albert_graph</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">2024</span><span class="p">)</span>
+
+<span class="c1"># 模拟药物靶点和疾病基因</span>
+<span class="n">drug_targets</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">103</span><span class="p">]</span>  <span class="c1"># 药物靶点</span>
+<span class="n">disease_genes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">267</span><span class="p">]</span>  <span class="c1"># 疾病相关基因</span>
+
+<span class="c1"># 随机游走重启 (RWR)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">random_walk_with_restart</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed_nodes</span><span class="p">,</span> <span class="n">restart_prob</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">p0</span><span class="p">[</span><span class="n">seed_nodes</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">seed_nodes</span><span class="p">)</span>
+
+    <span class="c1"># 转移矩阵</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_array</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">degree</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">degree</span><span class="p">[</span><span class="n">degree</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 避免除零</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">A</span> <span class="o">/</span> <span class="n">degree</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="c1"># 迭代</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">p0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+        <span class="n">p_new</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">restart_prob</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">p</span> <span class="o">+</span> <span class="n">restart_prob</span> <span class="o">*</span> <span class="n">p0</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">p_new</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p_new</span>
+
+    <span class="k">return</span> <span class="n">p</span>
+
+<span class="c1"># 计算药物靶点的网络传播得分</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">random_walk_with_restart</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">drug_targets</span><span class="p">)</span>
+
+<span class="c1"># 评估疾病基因的得分</span>
+<span class="n">disease_scores</span> <span class="o">=</span> <span class="n">scores</span><span class="p">[</span><span class="n">disease_genes</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;药物靶点对疾病基因的网络传播得分:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">gene</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">disease_genes</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  基因 </span><span class="si">{</span><span class="n">gene</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">disease_scores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 判断药物重定位潜力</span>
+<span class="n">avg_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">disease_scores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">平均疾病基因得分: </span><span class="si">{</span><span class="n">avg_score</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;重定位潜力: </span><span class="si">{</span><span class="s1">&#39;高&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">avg_score</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.001</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;低&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h2>8.8 单细胞与空间网络分析<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p><strong>单细胞共表达网络（hdWGCNA，scWGCNA）</strong></p>
+<p>单细胞RNA-seq数据为共表达网络分析提供了新机遇。hdWGCNA（high-dimensional WGCNA）扩展了传统WGCNA方法，专门针对单细胞数据的高维度和稀疏性进行优化。scWGCNA是另一个单细胞共表达网络工具，可以识别细胞类型特异性的共表达模块。单细胞共表达网络分析可以揭示不同细胞类型的基因调控程序。</p>
+<p><strong>细胞-细胞通讯网络（CellChat，NicheNet，CellPhoneDB）</strong></p>
+<p>细胞-细胞通讯网络描述不同细胞类型之间通过配体-受体相互作用进行的信号传递。CellChat是一个全面的细胞通讯分析工具，提供配体-受体对注释、信号流分析和可视化功能。NicheNet专注于分析细胞微环境中的信号传递，可以预测配体对靶基因的调控。CellPhoneDB使用统计方法识别显著的配体-受体相互作用。这些工具在肿瘤微环境、发育生物学等领域有广泛应用。</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- CellChat细胞通讯分析示例 ----</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">CellChat</span><span class="p">)</span>
+
+<span class="c1"># 模拟单细胞数据</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">2024</span><span class="p">)</span>
+<span class="n">n_cells</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1000</span>
+<span class="n">n_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2000</span>
+
+<span class="c1"># 创建模拟表达矩阵</span>
+<span class="n">expr_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rpois</span><span class="p">(</span><span class="n">n_genes</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_cells</span><span class="p">,</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">),</span>
+<span class="w">                      </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_genes</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">expr_matrix</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Gene_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_genes</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">expr_matrix</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;Cell_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">n_cells</span><span class="p">)</span>
+
+<span class="c1"># 模拟细胞类型标签</span>
+<span class="n">cell_types</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;T_cell&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;B_cell&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Macrophage&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Cancer&quot;</span><span class="p">),</span>
+<span class="w">                     </span><span class="n">n_cells</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="c1"># 创建CellChat对象</span>
+<span class="n">cellchat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">createCellChat</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expr_matrix</span><span class="p">,</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">cell_types</span><span class="p">))</span>
+
+<span class="c1"># 加载配体-受体数据库</span>
+<span class="n">cellchat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">setIdent</span><span class="p">(</span><span class="n">cellchat</span><span class="p">,</span><span class="w"> </span><span class="n">ident.use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cell_types&quot;</span><span class="p">)</span>
+
+<span class="c1"># 模拟通讯分析结果</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;细胞类型分布:\n&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">table</span><span class="p">(</span><span class="n">cell_types</span><span class="p">))</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;\n细胞通讯分析流程:\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;1. 识别过表达的配体-受体对\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;2. 推断细胞-细胞通讯网络\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;3. 信号流分析和可视化\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;4. 比较不同条件下的通讯差异\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>配体-受体网络的可视化</strong></p>
+<p>配体-受体网络可视化是细胞通讯分析的重要环节。常用的可视化方法包括弦图（chord diagram）展示细胞类型间的通讯强度、网络图展示配体-受体对、热图展示通讯得分矩阵等。CellChat提供了多种可视化函数，可以生成出版质量的图形。</p>
+<p><strong>空间邻近网络（空间转录组中相邻细胞的互作推断）</strong></p>
+<p>空间转录组技术保留了细胞的空间位置信息，使得可以推断空间邻近细胞之间的相互作用。空间邻近网络基于细胞的物理距离构建，相邻细胞更可能发生直接相互作用。结合配体-受体分析，可以识别空间特异性的细胞通讯模式。</p>
+<p><strong>单细胞调控网络推断（SCENIC+，Pando）</strong></p>
+<p>SCENIC+是SCENIC的增强版本，用于从单细胞数据推断基因调控网络。SCENIC+结合了转录因子motif分析和共表达模块识别，可以识别细胞类型特异性的调控因子。Pando是一个新的单细胞调控网络推断工具，使用多模态数据（如ATAC-seq和RNA-seq）提高推断准确性。</p>
+<p><strong>从单细胞数据推断细胞状态转换网络（CellRouter，STEMNET）</strong></p>
+<p>细胞状态转换网络描述细胞在分化或响应刺激过程中的状态变化轨迹。CellRouter使用网络流算法推断细胞状态转换路径，可以识别关键的过渡状态和调控因子。STEMNET专门用于干细胞分化研究，可以推断分化轨迹和分支点。这些工具在发育生物学和疾病研究中具有重要应用。</p>
+</section>
+<section id="id10">
+<h2>8.9 网络比较与进化<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p><strong>跨物种网络比对（NetAlign，IsoRankN）</strong></p>
+<p>跨物种网络比对是比较不同物种生物网络的重要方法，可以识别进化上保守的网络模块和功能。IsoRankN是IsoRank的多网络扩展版本，可以同时比对多个物种的网络。NetAlign使用局部比对策略，适合发现保守的功能模块。网络比对需要考虑物种间的直系同源基因映射。</p>
+<p><strong>网络保守性评估（保守的子网络）</strong></p>
+<p>网络保守性评估比较不同物种间网络模块的相似性。保守的子网络通常对应重要的生物学功能，在进化上受到选择压力。评估方法包括比较模块的拓扑结构、功能注释和基因组成。保守性分析可以揭示生物系统的核心设计原则。</p>
+<p><strong>网络演化模型（复制-发散，优先连接）</strong></p>
+<p>网络演化模型解释生物网络如何通过进化过程形成。复制-发散模型认为新基因通过基因复制产生，然后与原基因的功能逐渐分化，导致网络增长。优先连接模型（preferential attachment）认为新节点倾向于连接高度节点，产生无标度网络。这些模型可以解释生物网络的拓扑特征。</p>
+<p><strong>直系同源基因的网络映射</strong></p>
+<p>直系同源基因是在物种分化时产生的同源基因，通常保留相似的功能。将直系同源基因映射到不同物种的网络中，可以比较网络结构和功能。OrthoDB、Ensembl Compara等数据库提供直系同源基因信息。</p>
+<p><strong>网络基因丢失与获得分析</strong></p>
+<p>基因丢失和获得是基因组进化的重要过程，会影响网络结构。基因丢失可能导致网络连接的减少，基因获得（如基因复制、水平基因转移）可能导致新连接的产生。分析网络基因丢失与获得可以理解生物网络的进化动力学。</p>
+</section>
+<section id="id11">
+<h2>8.10 网络分析的统计学与机器学习<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p><strong>网络重连随机化（Erdős–Rényi，保留度序列）</strong></p>
+<p>网络随机化是评估网络性质显著性的基础方法。Erdős–Rényi模型生成具有相同节点数和边数的随机网络。保留度序列的随机化（配置模型）保持每个节点的度不变，只随机化边的连接方式。比较真实网络与随机网络的性质，可以评估网络特征的显著性。</p>
+<p><strong>网络显著性检验（排列检验）</strong></p>
+<p>网络显著性检验使用排列检验评估网络特征的统计显著性。例如，可以检验网络模块度是否显著高于随机网络，或检验特定基因集在网络中是否显著聚集。排列检验通过多次随机化网络并计算统计量，构建零分布，然后计算p值。</p>
+<p><strong>网络回归（network regression，例如针对网络属性的线性模型）</strong></p>
+<p>网络回归将网络属性作为响应变量或预测变量，建立统计模型。例如，可以建立线性模型预测节点度与基因表达的关系，或使用网络特征预测疾病状态。网络回归需要考虑网络数据的依赖性，使用适当的方法（如置换检验）进行统计推断。</p>
+<p><strong>图嵌入（node2vec，GraphSAGE，GCN，Graph Attention Networks）</strong></p>
+<p>图嵌入将网络节点映射到低维向量空间，保留网络结构信息。node2vec使用随机游走生成节点序列，然后用Word2Vec方法学习嵌入。GraphSAGE通过采样邻居和聚合特征学习节点嵌入，可以处理动态网络。图卷积网络（GCN）将卷积操作扩展到图结构，可以学习节点分类和图分类任务。图注意力网络（GAT）使用注意力机制聚合邻居信息，可以学习不同邻居的重要性。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- 图嵌入示例：node2vec ----</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Word2Vec</span>
+
+<span class="c1"># 创建网络</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2024</span><span class="p">)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span>
+
+<span class="c1"># 模拟随机游走</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">random_walk</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">walk_length</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">walk</span> <span class="o">=</span> <span class="p">[</span><span class="n">start_node</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">walk_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">walk</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">current</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="c1"># 简化：均匀随机选择</span>
+        <span class="n">next_node</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
+        <span class="n">walk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">next_node</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">walk</span>
+
+<span class="c1"># 生成随机游走序列</span>
+<span class="n">walks</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>  <span class="c1"># 每个节点10次游走</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+        <span class="n">walk</span> <span class="o">=</span> <span class="n">random_walk</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">walk_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="n">walks</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">walk</span><span class="p">])</span>
+
+<span class="c1"># 训练Word2Vec模型</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span><span class="n">walks</span><span class="p">,</span> <span class="n">vector_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 获取节点嵌入</span>
+<span class="n">node_embeddings</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    <span class="n">node_embeddings</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="p">)]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;网络节点数: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;嵌入维度: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">node_embeddings</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">节点0的嵌入向量 (前10维):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">node_embeddings</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>图神经网络在药物靶点预测中的应用</strong></p>
+<p>图神经网络（GNN）在药物靶点预测中表现出色。GNN可以整合蛋白质序列、结构、相互作用网络等多种信息，预测药物-靶点相互作用。常用的方法包括：将蛋白质-配体复合物建模为图，用GNN预测结合亲和力；将药物-靶点网络建模为异构图，用GNN预测新的相互作用。GNN的端到端学习能力使其能够自动学习有用的特征表示。</p>
+<p><strong>链路预测的机器学习方法</strong></p>
+<p>链路预测使用机器学习方法预测网络中缺失的边。特征工程方法提取节点相似性特征（如共同邻居、Jaccard系数、Adamic-Adar指数），然后用分类器预测边的存在。深度学习方法（如图自编码器、GNN）可以自动学习特征表示。链路预测在PPI网络补全、药物-靶点预测等任务中有重要应用。</p>
+<p>---</p>
+<p>本章系统介绍了系统生物学与网络分析的理论基础和实践方法。从图论基础到网络构建、从拓扑分析到动态建模、从数据库资源到前沿应用，涵盖了生物网络研究的完整流程。系统生物学方法为理解复杂生物系统提供了整体视角，网络分析工具使得研究者能够从海量组学数据中提取有意义的生物学洞察。随着单细胞技术、空间组学和人工智能的发展，系统生物学将在精准医疗和药物发现中发挥越来越重要的作用。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="../007%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E4%B8%8E%E4%BB%A3%E8%B0%A2%E7%BB%84%E5%AD%A6%E7%A4%BA%E4%BE%8B.html" class="btn btn-neutral float-left" title="蛋白质组学与代谢组学综合范例" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="%E7%B3%BB%E7%BB%9F%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B.html" class="btn btn-neutral float-right" title="综合性使用范例与场景意义解析" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2025, Medical Student Rescue Plan。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
