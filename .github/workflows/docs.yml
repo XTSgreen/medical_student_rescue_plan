@@ -28,7 +28,7 @@ jobs:
 
       - name: Copy R Language Tutorials (HTML)
         run: |
-          echo "📚 Copying R Language Tutorials..."
+          echo " Copying R Language Tutorials..."
           
           if [ -d "R语言与生信分析/R语言" ]; then
             mkdir -p "site/R语言教程"
@@ -52,12 +52,12 @@ jobs:
                "site/R语言教程/" 2>/dev/null
             
             R_COUNT=$(find "site/R语言教程" -name "*.html" | wc -l)
-            echo "   ✅ Copied $R_COUNT R tutorial files"
+            echo "    Copied $R_COUNT R tutorial files"
           fi
 
       - name: Copy Bioinformatics Documentation (Sphinx HTML)
         run: |
-          echo "🔬 Copying Bioinformatics Documentation..."
+          echo " Copying Bioinformatics Documentation..."
           
           if [ -d "R语言与生信分析/生物信息技术/_build/html" ]; then
             mkdir -p "site/bio"
@@ -66,59 +66,83 @@ jobs:
             cp -r "R语言与生信分析/生物信息技术/_build/html"/* "site/bio/" 2>/dev/null
             
             BIO_COUNT=$(find "site/bio" -name "*.html" | wc -l)
-            echo "   ✅ Copied $BIO_INFO files"
+            echo "    Copied $BIO_INFO files"
           fi
 
-      - name: Set Sphinx-style homepage
+      - name: Copy Web Development Tutorials (HTML)
         run: |
-          echo "📖 Setting up Sphinx-style homepage..."
+          echo " Copying Web Development Tutorials..."
           
-          # Use bioinformatics index.html as main page (Sphinx style)
-          if [ -f "site/bio/index.html" ]; then
+          if [ -d "互联网开发/前端开发" ]; then
+            mkdir -p "site/互联网开发/前端开发"
+            
+            # Copy all frontend development HTML files
+            cp "互联网开发/前端开发/001，前端开发.html" \
+               "site/互联网开发/前端开发/" 2>/dev/null
+            cp "互联网开发/前端开发/002，html语言的简单应用与网页框架结构.html" \
+               "site/互联网开发/前端开发/" 2>/dev/null
+            cp "互联网开发/前端开发/003，html语言与网页框架进阶.html" \
+               "site/互联网开发/前端开发/" 2>/dev/null
+            cp "互联网开发/前端开发/004，网页可访问性与现代html特性.html" \
+               "site/互联网开发/前端开发/" 2>/dev/null
+            cp "互联网开发/前端开发/005，css语言与界面美化基础.html" \
+               "site/互联网开发/前端开发/" 2>/dev/null
+            cp "互联网开发/前端开发/006，css语言与界面美化进阶.html" \
+               "site/互联网开发/前端开发/" 2>/dev/null
+            cp "互联网开发/前端开发/007，css语言与高效开发和性能管控.html" \
+               "site/互联网开发/前端开发/" 2>/dev/null
+            cp "互联网开发/前端开发/008，javascript基础.html" \
+               "site/互联网开发/前端开发/" 2>/dev/null
+            cp "互联网开发/前端开发/009，javascript核心深入与基础拓展.html" \
+               "site/互联网开发/前端开发/" 2>/dev/null
+            cp "互联网开发/前端开发/010，javascript与ES6新特性.html" \
+               "site/互联网开发/前端开发/" 2>/dev/null
+            cp "互联网开发/前端开发/011，javascript中的异步编程与错误调试.html" \
+               "site/互联网开发/前端开发/" 2>/dev/null
+            
+            FRONTEND_COUNT=$(find "site/互联网开发/前端开发" -name "*.html" | wc -l)
+            echo "    Copied $FRONTEND_COUNT frontend files"
+          fi
+          
+          if [ -d "互联网开发/后端开发" ]; then
+            mkdir -p "site/互联网开发/后端开发"
+            
+            # Copy backend development files
+            cp "互联网开发/后端开发/1，前端范例.html" \
+               "site/互联网开发/后端开发/" 2>/dev/null
+            
+            BACKEND_COUNT=$(find "site/互联网开发/后端开发" -name "*.html" | wc -l)
+            echo "    Copied $BACKEND_COUNT backend files"
+          fi
+
+      - name: Set Project Homepage (Sphinx style)
+        run: |
+          echo " Setting up project homepage..."
+          
+          # Use custom project homepage if exists, otherwise fallback to bio index
+          if [ -f "project-index.html" ]; then
+            cp "project-index.html" "site/index.html"
+            echo "    Using custom project homepage"
+          elif [ -f "site/bio/index.html" ]; then
             cp "site/bio/index.html" "site/index.html"
-            echo "   ✅ Using Sphinx documentation as homepage"
+            echo "    Using bio index as fallback"
           else
-            echo "   ⚠️ Fallback: creating simple index"
-            cat > site/index.html << 'EOF'
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>医学生逃亡计划</title>
-</head>
-<body>
-<div role="main">
+            echo "    ERROR: No homepage available"
+            exit 1
+          fi
 
-<h1>医学生逃亡计划</h1>
-
-<p>R语言与生信分析完整教程</p>
-
-<div class="section" id="r-language-tutorials">
-<h2><a class="toc-backref" href="#id1">R语言教程</a></h2>
-<ul class="simple">
-<li><a class="reference internal" href="R语言教程/R语言基础.html">R语言基础</a></li>
-<li><a class="reference internal" href="R语言教程/R语言数据清洗与预处理.html">数据清洗与预处理</a></li>
-<li><a class="reference internal" href="R语言教程/R语言与数据可视化.html">数据可视化</a></li>
-<li><a class="reference internal" href="R语言教程/R语言统计分析.html">统计分析</a></li>
-<li><a class="reference internal" href="R语言教程/R语言统计与建模.html">统计建模</a></li>
-<li><a class="reference internal" href="R语言教程/R语言与机器学习（上）.html">机器学习（上）</a></li>
-<li><a class="reference internal" href="R语言教程/R语言与机器学习（下）.html">机器学习（下）</a></li>
-<li><a class="reference internal" href="R语言教程/R语言与深度学习（上）.html">深度学习</a></li>
-</ul>
-</div>
-
-<div class="section" id="bioinformatics">
-<h2><a class="toc-backref" href="#id2">生物信息技术</a></h2>
-<ul class="simple">
-<li><a class="reference internal" href="bio/index.html">完整文档索引</a></li>
-</ul>
-</div>
-
-</div>
-</body>
-</html>
-EOF
+      - name: Copy Sphinx static assets (CSS/JS/fonts)
+        run: |
+          echo " Copying Sphinx theme assets..."
+          
+          # Copy _static directory for Sphinx styling
+          if [ -d "site/bio/_static" ]; then
+            cp -r "site/bio/_static" "site/_static"
+            
+            STATIC_FILES=$(find "site/_static" -type f | wc -l)
+            echo "    Copied $STATIC_FILES static files (CSS, JS, fonts)"
+          else
+            echo "    WARNING: No _static directory found"
           fi
 
       - name: Verify deployment
@@ -130,13 +154,13 @@ EOF
           
           if [ -f "site/index.html" ]; then
             TOTAL_HTML=$(find site -name '*.html' | wc -l)
-            echo "✅ Homepage: Ready (Sphinx style)"
-            echo "📊 Total HTML files: $TOTAL_HTML"
+            echo " Homepage: Ready (Sphinx style)"
+            echo " Total HTML files: $TOTAL_HTML"
             echo ""
             echo "Content:"
             find site -maxdepth 2 -name "*.html" -type f | head -15
           else
-            echo "❌ ERROR: No homepage found"
+            echo " ERROR: No homepage found"
             exit 1
           fi
 
@@ -150,6 +174,6 @@ EOF
       - name: Deployment complete
         if: success()
         run: |
-          echo "✅ Deployment successful!"
-          echo "📍 URL: ${{ steps.deployment.outputs.page_url }}"
-          echo "📖 Style: reStructuredText + Sphinx"
+          echo " Deployment successful!"
+          echo " URL: ${{ steps.deployment.outputs.page_url }}"
+          echo " Style: reStructuredText + Sphinx"
