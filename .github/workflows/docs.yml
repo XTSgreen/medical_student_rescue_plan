@@ -23,300 +23,133 @@ jobs:
 
       - uses: actions/checkout@v6
 
-      - name: Create site directory and copy all content
+      - name: Create site directory
+        run: mkdir -p site
+
+      - name: Copy R Language Tutorials (HTML)
         run: |
-          echo "🚀 Starting ultra-fast deployment..."
-          echo "   Using pre-built HTML files only!"
+          echo "📚 Copying R Language Tutorials..."
           
-          # Create site directory
-          mkdir -p site
-          
-          # ============================================
-          # Copy R Language Tutorials (9 HTML files)
-          # ============================================
-          echo ""
-          echo "📚 [1/4] Copying R Language Tutorials..."
           if [ -d "R语言与生信分析/R语言" ]; then
             mkdir -p "site/R语言教程"
             
-            # Copy all HTML files from R language tutorials
+            # Copy all HTML files
             cp "R语言与生信分析/R语言/001R语言基础/R语言基础.html" \
-               "site/R语言教程/" 2>/dev/null && echo "   ✅ R语言基础"
+               "site/R语言教程/" 2>/dev/null
             cp "R语言与生信分析/R语言/002R语言数据清洗与预处理/R语言数据清洗与预处理.html" \
-               "site/R语言教程/" 2>/dev/null && echo "   ✅ 数据清洗与预处理"
+               "site/R语言教程/" 2>/dev/null
             cp "R语言与生信分析/R语言/003R语言与数据可视化/R语言与数据可视化.html" \
-               "site/R语言教程/" 2>/dev/null && echo "   ✅ 数据可视化"
+               "site/R语言教程/" 2>/dev/null
             cp "R语言与生信分析/R语言/004R语言统计分析/R语言统计分析.html" \
-               "site/R语言教程/" 2>/dev/null && echo "   ✅ 统计分析"
+               "site/R语言教程/" 2>/dev/null
             cp "R语言与生信分析/R语言/005R语言统计与建模/R语言统计与建模.html" \
-               "site/R语言教程/" 2>/dev/null && echo "   ✅ 统计建模"
+               "site/R语言教程/" 2>/dev/null
             cp "R语言与生信分析/R语言/006R语言与机器学习/R语言与机器学习（上）.html" \
-               "site/R语言教程/" 2>/dev/null && echo "   ✅ 机器学习(上)"
+               "site/R语言教程/" 2>/dev/null
             cp "R语言与生信分析/R语言/006R语言与机器学习/R语言与机器学习（下）.html" \
-               "site/R语言教程/" 2>/dev/null && echo "   ✅ 机器学习(下)"
+               "site/R语言教程/" 2>/dev/null
             cp "R语言与生信分析/R语言/007R语言与深度学习/R语言与深度学习（上）.html" \
-               "site/R语言教程/" 2>/dev/null && echo "   ✅ 深度学习"
-            
-            # Copy README.md index files for navigation
-            for dir in "R语言与生信分析/R语言"/*/; do
-              if [ -f "${dir}README.md" ]; then
-                cp "${dir}README.md" "site/R语言教程/"
-              fi
-            done
+               "site/R语言教程/" 2>/dev/null
             
             R_COUNT=$(find "site/R语言教程" -name "*.html" | wc -l)
-            echo "   📊 Total: $R_COUNT R Language HTML files copied"
-          else
-            echo "   ⚠️ R language directory not found"
+            echo "   ✅ Copied $R_COUNT R tutorial files"
           fi
-          
-          # ============================================
-          # Copy Bioinformatics Documentation (Sphinx HTML)
-          # ============================================
-          echo ""
-          echo "🔬 [2/4] Copying Bioinformatics Documentation..."
-          if [ -d "R语言与生信分析/生物信息技术/_build/html" ]; then
-            mkdir -p "site/生物信息技术"
-            
-            # Copy entire bioinformatics HTML output
-            cp -r "R语言与生信分析/生物信息技术/_build/html"/* "site/生物信息技术/" 2>/dev/null
-            
-            BIO_COUNT=$(find "site/生物信息技术" -name "*.html" | wc -l)
-            echo "   📊 Total: $BIO_COUNT Bioinformatics HTML files copied"
-          else
-            echo "   ⚠️ Bioinformatics directory not found"
-          fi
-          
-          # ============================================
-          # Copy Internet Development tutorials
-          # ============================================
-          echo ""
-          echo "💻 [3/4] Copying Internet Development Tutorials..."
-          if [ -d "互联网开发" ]; then
-            mkdir -p "site/互联网开发"
-            
-            # Copy internet development HTML output
-            cp -r "互联网开发"/* "site/互联网开发/" 2>/dev/null
-            
-            WEB_COUNT=$(find "site/互联网开发" -name "*.html" | wc -l)
-            echo "   📊 Total: $WEB_COUNT Internet Development HTML files copied"
-          else
-            echo "   ⚠️ Internet development directory not found"
-          fi
-          
-          # ============================================
-          # Copy main site assets if exists
-          # ============================================
-          echo ""
-          echo "🌐 [4/4] Preparing main site structure..."
-          
-          # Create a simple index page if not exists
-          cat > site/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html lang="zh-CN">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>医学生逃亡计划 - R语言与生信分析</title>
-              <style>
-                  body {
-                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                      max-width: 1200px;
-                      margin: 0 auto;
-                      padding: 20px;
-                      background-color: #f5f5f5;
-                  }
-                  .header {
-                      text-align: center;
-                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                      color: white;
-                      padding: 40px 20px;
-                      border-radius: 10px;
-                      margin-bottom: 30px;
-                  }
-                  .header h1 {
-                      margin: 0;
-                      font-size: 2.5em;
-                  }
-                  .header p {
-                      margin: 10px 0 0 0;
-                      opacity: 0.9;
-                  }
-                  .container {
-                      display: grid;
-                      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                      gap: 20px;
-                  }
-                  .card {
-                      background: white;
-                      border-radius: 10px;
-                      padding: 25px;
-                      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-                      transition: transform 0.2s;
-                  }
-                  .card:hover {
-                      transform: translateY(-5px);
-                      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-                  }
-                  .card h2 {
-                      color: #667eea;
-                      margin-top: 0;
-                      border-bottom: 2px solid #667eea;
-                      padding-bottom: 10px;
-                  }
-                  .card ul {
-                      list-style: none;
-                      padding: 0;
-                  }
-                  .card li {
-                      padding: 8px 0;
-                      border-bottom: 1px solid #eee;
-                  }
-                  .card li:last-child {
-                      border-bottom: none;
-                  }
-                  .card a {
-                      color: #333;
-                      text-decoration: none;
-                      display: block;
-                  }
-                  .card a:hover {
-                      color: #667eea;
-                  }
-                  .footer {
-                      text-align: center;
-                      margin-top: 40px;
-                      padding: 20px;
-                      color: #666;
-                  }
-              </style>
-          </head>
-          <body>
-              <div class="header">
-                  <h1>医学生逃亡计划</h1>
-                  <p>R语言与生信分析完整教程 | 医学生自救指南</p>
-              </div>
-              
-              <div class="container">
-                  <!-- R Language Tutorials -->
-                  <div class="card">
-                      <h2>R语言教程</h2>
-                      <ul>
-                          <li><a href="R语言教程/R语言基础.html">1. R语言基础</a></li>
-                          <li><a href="R语言教程/R语言数据清洗与预处理.html">2. 数据清洗与预处理</a></li>
-                          <li><a href="R语言教程/R语言与数据可视化.html">3. 数据可视化</a></li>
-                          <li><a href="R语言教程/R语言统计分析.html">4. 统计分析</a></li>
-                          <li><a href="R语言教程/R语言统计与建模.html">5. 统计建模</a></li>
-                          <li><a href="R语言教程/R语言与机器学习（上）.html">6. 机器学习（上）</a></li>
-                          <li><a href="R语言教程/R语言与机器学习（下）.html">7. 机器学习（下）</a></li>
-                          <li><a href="R语言教程/R语言与深度学习（上）.html">8. 深度学习</a></li>
-                      </ul>
-                  </div>
-                  
-                  <!-- Bioinformatics Documentation -->
-                  <div class="card">
-                      <h2>生物信息技术</h2>
-                      <ul>
-                          <li><a href="生物信息技术/index.html">完整文档索引</a></li>
-                          <li><a href="生物信息技术/001计算机基础初步/计算机基础初步.html">1. 计算机基础初步</a></li>
-                          <li><a href="生物信息技术/002生物信息资源/002生物信息资源.html">2. 生物信息资源</a></li>
-                          <li><a href="生物信息技术/003序列分析与比对/序列分析与比对.html">3. 序列分析与比对</a></li>
-                          <li><a href="生物信息技术/004基因组学分析/基因组学分析.html">4. 基因组学分析</a></li>
-                          <li><a href="生物信息技术/005转录组学分析/转录组学分析.html">5. 转录组学分析</a></li>
-                          <li><a href="生物信息技术/006表观遗传学分析/表观遗传学分析.html">6. 表观遗传学分析</a></li>
-                          <li><a href="生物信息技术/007蛋白质组学与代谢组学/蛋白质组学与代谢组学.html">7. 蛋白质组学与代谢组学</a></li>
-                          <li><a href="生物信息技术/008系统生物学与网络分析/系统生物学与网络分析.html">8. 系统生物学与网络分析</a></li>
-                      </ul>
-                  </div>
-                  
-                  <!-- Internet Development -->
-                  <div class="card">
-                      <h2>互联网开发</h2>
-                      <ul>
-                          <li><a href="互联网开发/前端开发/001，前端开发.html">1. 前端开发</a></li>
-                          <li><a href="互联网开发/前端开发/002，html语言的简单应用与网页框架结构.html">2. HTML 语言的简单应用与网页框架结构</a></li>
-                          <li><a href="互联网开发/前端开发/005，css语言与界面美化基础.html">3. CSS 语言与界面美化基础</a></li>
-                          <li><a href="互联网开发/前端开发/008，javascript基础.html">4. JavaScript 基础</a></li>
-                          <li><a href="互联网开发/前端开发/010，javascript与ES6新特性.html">5. JavaScript 与 ES6 新特性</a></li>
-                          <li><a href="互联网开发/前端开发/011，javascript中的异步编程与错误调试.html">6. JavaScript 中的异步编程与错误调试</a></li>
-                      </ul>
-                  </div>
-              </div>
-              
-              <div class="footer">
-                  <p>© 2024-2025 Medical Student Rescue Plan | Powered by GitHub Pages</p>
-                  <p>使用预编译HTML文件，更新可能延迟</p>
-              </div>
-          </body>
-          </html>
-          EOF
-          
-          echo "   ✅ Created beautiful index page"
 
-      - name: Final verification
+      - name: Copy Bioinformatics Documentation (Sphinx HTML)
+        run: |
+          echo "🔬 Copying Bioinformatics Documentation..."
+          
+          if [ -d "R语言与生信分析/生物信息技术/_build/html" ]; then
+            mkdir -p "site/bio"
+            
+            # Copy all bioinformatics content
+            cp -r "R语言与生信分析/生物信息技术/_build/html"/* "site/bio/" 2>/dev/null
+            
+            BIO_COUNT=$(find "site/bio" -name "*.html" | wc -l)
+            echo "   ✅ Copied $BIO_INFO files"
+          fi
+
+      - name: Set Sphinx-style homepage
+        run: |
+          echo "📖 Setting up Sphinx-style homepage..."
+          
+          # Use bioinformatics index.html as main page (Sphinx style)
+          if [ -f "site/bio/index.html" ]; then
+            cp "site/bio/index.html" "site/index.html"
+            echo "   ✅ Using Sphinx documentation as homepage"
+          else
+            echo "   ⚠️ Fallback: creating simple index"
+            cat > site/index.html << 'EOF'
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医学生逃亡计划</title>
+</head>
+<body>
+<div role="main">
+
+<h1>医学生逃亡计划</h1>
+
+<p>R语言与生信分析完整教程</p>
+
+<div class="section" id="r-language-tutorials">
+<h2><a class="toc-backref" href="#id1">R语言教程</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="R语言教程/R语言基础.html">R语言基础</a></li>
+<li><a class="reference internal" href="R语言教程/R语言数据清洗与预处理.html">数据清洗与预处理</a></li>
+<li><a class="reference internal" href="R语言教程/R语言与数据可视化.html">数据可视化</a></li>
+<li><a class="reference internal" href="R语言教程/R语言统计分析.html">统计分析</a></li>
+<li><a class="reference internal" href="R语言教程/R语言统计与建模.html">统计建模</a></li>
+<li><a class="reference internal" href="R语言教程/R语言与机器学习（上）.html">机器学习（上）</a></li>
+<li><a class="reference internal" href="R语言教程/R语言与机器学习（下）.html">机器学习（下）</a></li>
+<li><a class="reference internal" href="R语言教程/R语言与深度学习（上）.html">深度学习</a></li>
+</ul>
+</div>
+
+<div class="section" id="bioinformatics">
+<h2><a class="toc-backref" href="#id2">生物信息技术</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="bio/index.html">完整文档索引</a></li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>
+EOF
+          fi
+
+      - name: Verify deployment
         run: |
           echo ""
           echo "========================================="
-          echo "🔍 FINAL VERIFICATION REPORT"
+          echo "Deployment Summary"
           echo "========================================="
-          echo ""
           
-          if [ -d "site" ] && [ "$(ls -A site)" ]; then
-            TOTAL_FILES=$(find site -type f | wc -l)
-            HTML_FILES=$(find site -name '*.html' | wc -l)
-            R_HTML=$(find site/R语言教程 -name '*.html' 2>/dev/null | wc -l)
-            BIO_HTML=$(find site/生物信息技术 -name '*.html' 2>/dev/null | wc -l)
-            WEB_HTML=$(find site/互联网开发 -name '*.html' 2>/dev/null | wc -l)
-            
-            echo "✅ Site directory: READY"
-            echo "📊 Statistics:"
-            echo "   • Total files: $TOTAL_FILES"
-            echo "   • HTML files: $HTML_FILES"
-            echo "     - R Language tutorials: $R_HTML files"
-            echo "     - Bioinformatics docs: $BIO_HTML files"
-            echo "     - Internet development: $WEB_HTML files"
+          if [ -f "site/index.html" ]; then
+            TOTAL_HTML=$(find site -name '*.html' | wc -l)
+            echo "✅ Homepage: Ready (Sphinx style)"
+            echo "📊 Total HTML files: $TOTAL_HTML"
             echo ""
-            echo "📂 Content structure:"
-            ls -la site/
-            echo ""
-            
-            if [ "$HTML_FILES" -gt 0 ] && [ "$R_HTML" -ge 8 ]; then
-              echo "🎉 SUCCESS! Ready for deployment!"
-              exit 0
-            else
-              echo "⚠️ Warning: Some content may be missing"
-              exit 0
-            fi
+            echo "Content:"
+            find site -maxdepth 2 -name "*.html" -type f | head -15
           else
-            echo "❌ ERROR: Site directory is empty or missing!"
+            echo "❌ ERROR: No homepage found"
             exit 1
           fi
 
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site
-          retention-days: 7
 
       - uses: actions/deploy-pages@v5
         id: deployment
 
-      - name: Deployment success summary
+      - name: Deployment complete
         if: success()
         run: |
-          echo "╔══════════════════════════════════════╗"
-          echo "║  🎉 DEPLOYMENT SUCCESSFUL! 🎉         ║"
-          echo "╠══════════════════════════════════════╣"
-          echo "║                                      ║"
-          echo "║  📍 Your site is live at:             ║"
-          echo "║  ${{ steps.deployment.outputs.page_url }}"
-          echo "║                                      ║"
-          echo "║  📚 Content deployed:                 ║"
-          echo "║  • R Language Tutorials (8 chapters)  ║"
-          echo "║  • Bioinformatics Docs (16+ pages)    ║"
-          echo "║  • Beautiful custom homepage           ║"
-          echo "║                                      ║"
-          echo "║  ⚡ Build time: ~30 seconds           ║"
-          echo "║  💡 Method: Pre-built HTML files      ║"
-          echo "║  🔄 Auto-update: On git push          ║"
-          echo "║                                      ║"
-          echo "╚══════════════════════════════════════╝"
+          echo "✅ Deployment successful!"
+          echo "📍 URL: ${{ steps.deployment.outputs.page_url }}"
+          echo "📖 Style: reStructuredText + Sphinx"
