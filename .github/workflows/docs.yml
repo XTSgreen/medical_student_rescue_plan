@@ -29,28 +29,28 @@ jobs:
       - name: Copy R Language Tutorials (HTML)
         run: |
           echo " Copying R Language Tutorials..."
-          
-          if [ -d "R语言与生信分析/R语言" ]; then
+
+          if [ -d "code/R语言与生信分析/R语言" ]; then
             mkdir -p "site/R语言教程"
-            
+
             # Copy all HTML files
-            cp "R语言与生信分析/R语言/001R语言基础/R语言基础.html" \
+            cp "code/R语言与生信分析/R语言/001R语言基础/R语言基础.html" \
                "site/R语言教程/" 2>/dev/null
-            cp "R语言与生信分析/R语言/002R语言数据清洗与预处理/R语言数据清洗与预处理.html" \
+            cp "code/R语言与生信分析/R语言/002R语言数据清洗与预处理/R语言数据清洗与预处理.html" \
                "site/R语言教程/" 2>/dev/null
-            cp "R语言与生信分析/R语言/003R语言与数据可视化/R语言与数据可视化.html" \
+            cp "code/R语言与生信分析/R语言/003R语言与数据可视化/R语言与数据可视化.html" \
                "site/R语言教程/" 2>/dev/null
-            cp "R语言与生信分析/R语言/004R语言统计分析/R语言统计分析.html" \
+            cp "code/R语言与生信分析/R语言/004R语言统计分析/R语言统计分析.html" \
                "site/R语言教程/" 2>/dev/null
-            cp "R语言与生信分析/R语言/005R语言统计与建模/R语言统计与建模.html" \
+            cp "code/R语言与生信分析/R语言/005R语言统计与建模/R语言统计与建模.html" \
                "site/R语言教程/" 2>/dev/null
-            cp "R语言与生信分析/R语言/006R语言与机器学习/R语言与机器学习（上）.html" \
+            cp "code/R语言与生信分析/R语言/006R语言与机器学习/R语言与机器学习（上）.html" \
                "site/R语言教程/" 2>/dev/null
-            cp "R语言与生信分析/R语言/006R语言与机器学习/R语言与机器学习（下）.html" \
+            cp "code/R语言与生信分析/R语言/006R语言与机器学习/R语言与机器学习（下）.html" \
                "site/R语言教程/" 2>/dev/null
-            cp "R语言与生信分析/R语言/007R语言与深度学习/R语言与深度学习（上）.html" \
+            cp "code/R语言与生信分析/R语言/007R语言与深度学习/R语言与深度学习（上）.html" \
                "site/R语言教程/" 2>/dev/null
-            
+
             R_COUNT=$(find "site/R语言教程" -name "*.html" | wc -l)
             echo "    Copied $R_COUNT R tutorial files"
           fi
@@ -59,11 +59,11 @@ jobs:
         run: |
           echo " Copying Bioinformatics Documentation..."
           
-          if [ -d "R语言与生信分析/生物信息技术/_build/html" ]; then
+          if [ -d "code/R语言与生信分析/生物信息技术/_build/html" ]; then
             mkdir -p "site/bio"
-            
+
             # Copy all bioinformatics content
-            cp -r "R语言与生信分析/生物信息技术/_build/html"/* "site/bio/" 2>/dev/null
+            cp -r "code/R语言与生信分析/生物信息技术/_build/html"/* "site/bio/" 2>/dev/null
             
             BIO_COUNT=$(find "site/bio" -name "*.html" | wc -l)
             echo "    Copied $BIO_INFO files"
@@ -73,42 +73,42 @@ jobs:
         run: |
           echo " Copying Web Development Tutorials..."
           
-          if [ -d "互联网开发/前端开发" ]; then
+          if [ -d "code/互联网开发/前端开发" ]; then
             mkdir -p "site/互联网开发/前端开发"
-            
+
             # Copy all frontend development HTML files
-            cp "互联网开发/前端开发/001，前端开发.html" \
+            cp "code/互联网开发/前端开发/001，前端开发.html" \
                "site/互联网开发/前端开发/" 2>/dev/null
-            cp "互联网开发/前端开发/002，html语言的简单应用与网页框架结构.html" \
+            cp "code/互联网开发/前端开发/002，html语言的简单应用与网页框架结构.html" \
                "site/互联网开发/前端开发/" 2>/dev/null
-            cp "互联网开发/前端开发/003，html语言与网页框架进阶.html" \
+            cp "code/互联网开发/前端开发/003，html语言与网页框架进阶.html" \
                "site/互联网开发/前端开发/" 2>/dev/null
-            cp "互联网开发/前端开发/004，网页可访问性与现代html特性.html" \
+            cp "code/互联网开发/前端开发/004，网页可访问性与现代html特性.html" \
                "site/互联网开发/前端开发/" 2>/dev/null
-            cp "互联网开发/前端开发/005，css语言与界面美化基础.html" \
+            cp "code/互联网开发/前端开发/005，css语言与界面美化基础.html" \
                "site/互联网开发/前端开发/" 2>/dev/null
-            cp "互联网开发/前端开发/006，css语言与界面美化进阶.html" \
+            cp "code/互联网开发/前端开发/006，css语言与界面美化进阶.html" \
                "site/互联网开发/前端开发/" 2>/dev/null
-            cp "互联网开发/前端开发/007，css语言与高效开发和性能管控.html" \
+            cp "code/互联网开发/前端开发/007，css语言与高效开发和性能管控.html" \
                "site/互联网开发/前端开发/" 2>/dev/null
-            cp "互联网开发/前端开发/008，javascript基础.html" \
+            cp "code/互联网开发/前端开发/008，javascript基础.html" \
                "site/互联网开发/前端开发/" 2>/dev/null
-            cp "互联网开发/前端开发/009，javascript核心深入与基础拓展.html" \
+            cp "code/互联网开发/前端开发/009，javascript核心深入与基础拓展.html" \
                "site/互联网开发/前端开发/" 2>/dev/null
-            cp "互联网开发/前端开发/010，javascript与ES6新特性.html" \
+            cp "code/互联网开发/前端开发/010，javascript与ES6新特性.html" \
                "site/互联网开发/前端开发/" 2>/dev/null
-            cp "互联网开发/前端开发/011，javascript中的异步编程与错误调试.html" \
+            cp "code/互联网开发/前端开发/011，javascript中的异步编程与错误调试.html" \
                "site/互联网开发/前端开发/" 2>/dev/null
             
             FRONTEND_COUNT=$(find "site/互联网开发/前端开发" -name "*.html" | wc -l)
             echo "    Copied $FRONTEND_COUNT frontend files"
           fi
           
-          if [ -d "互联网开发/后端开发" ]; then
+          if [ -d "code/互联网开发/后端开发" ]; then
             mkdir -p "site/互联网开发/后端开发"
-            
+
             # Copy backend development files
-            cp "互联网开发/后端开发/1，前端范例.html" \
+            cp "code/互联网开发/后端开发/1，前端范例.html" \
                "site/互联网开发/后端开发/" 2>/dev/null
             
             BACKEND_COUNT=$(find "site/互联网开发/后端开发" -name "*.html" | wc -l)
