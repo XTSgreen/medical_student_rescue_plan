@@ -1,0 +1,258 @@
+/* ============================================================
+ * 正文排版（docsify 浅色风格）
+ * 标题、段落、列表、引用、表格的视觉节奏
+ * ============================================================ */
+
+.vp-doc {
+  color: var(--text-primary);
+  font-size: var(--fs-base);
+  line-height: 1.8;
+}
+
+/* ---------- 标题层级 ---------- */
+.vp-doc h1 {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-6);
+  padding-bottom: var(--space-3);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.vp-doc h2 {
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  margin: var(--space-7) 0 var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  position: relative;
+}
+
+/* h2 前加绿色小标记 */
+.vp-doc h2::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 1.1em;
+  background: var(--color-accent);
+  margin-right: 0.6em;
+  vertical-align: -0.15em;
+  border-radius: 2px;
+}
+
+.vp-doc h3 {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  margin: var(--space-6) 0 var(--space-3);
+  color: var(--text-primary);
+}
+
+.vp-doc h4 {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  margin: var(--space-5) 0 var(--space-2);
+  color: var(--text-secondary);
+}
+
+.vp-doc h5,
+.vp-doc h6 {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  margin: var(--space-4) 0 var(--space-2);
+  color: var(--text-secondary);
+}
+
+/* 标题锚点 */
+.vp-doc .header-anchor {
+  color: var(--color-accent) !important;
+  opacity: 0;
+  margin-left: 0.4em;
+  transition: opacity var(--transition-fast);
+  text-decoration: none !important;
+}
+.vp-doc h1:hover .header-anchor,
+.vp-doc h2:hover .header-anchor,
+.vp-doc h3:hover .header-anchor,
+.vp-doc h4:hover .header-anchor,
+.vp-doc h5:hover .header-anchor,
+.vp-doc h6:hover .header-anchor {
+  opacity: 1;
+}
+
+/* ---------- 段落 ---------- */
+.vp-doc p {
+  margin: 0 0 var(--space-4);
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+/* 段落首字下沉（仅特定容器启用） */
+.vp-doc .drop-cap > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-size: 3.4em;
+  line-height: 0.85;
+  font-weight: 600;
+  margin: 0.1em 0.12em 0 0;
+  color: var(--color-accent);
+}
+
+/* ---------- 列表 ---------- */
+.vp-doc ul,
+.vp-doc ol {
+  margin: 0 0 var(--space-4);
+  padding-left: 1.5em;
+}
+.vp-doc li {
+  margin: var(--space-2) 0;
+  line-height: 1.75;
+}
+.vp-doc li::marker {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.vp-doc ul ul,
+.vp-doc ol ol,
+.vp-doc ul ol,
+.vp-doc ol ul {
+  margin: var(--space-2) 0;
+}
+
+/* ---------- 引用 ---------- */
+.vp-doc blockquote {
+  margin: var(--space-5) 0;
+  padding: var(--space-3) var(--space-5);
+  background: var(--bg-admonition);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  color: var(--text-secondary);
+  font-style: normal;
+}
+.vp-doc blockquote p {
+  margin: var(--space-2) 0;
+}
+.vp-doc blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- 行内代码 ---------- */
+.vp-doc :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--bg-code);
+  color: var(--color-accent-strong);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  font-weight: 500;
+}
+
+/* ---------- 代码块 ---------- */
+.vp-doc div[class*="language-"] {
+  margin: var(--space-5) 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md) !important;
+  background: var(--bg-code) !important;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.vp-doc div[class*="language-"] .language-name,
+.vp-doc div[class*="language-"] .copy {
+  color: var(--text-tertiary) !important;
+}
+
+.vp-doc div[class*="language-"] pre {
+  margin: 0 !important;
+  padding: var(--space-4) var(--space-5) !important;
+  background: transparent !important;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+}
+
+/* 代码行号 */
+.vp-doc div[class*="language-"].line-numbers-mode .line-numbers {
+  border-right: 1px solid var(--border-color) !important;
+  color: var(--text-tertiary) !important;
+}
+
+/* ---------- 表格 ---------- */
+.vp-doc table {
+  width: 100%;
+  margin: var(--space-5) 0;
+  border-collapse: collapse;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  font-size: var(--fs-sm);
+}
+.vp-doc thead {
+  background: var(--bg-code-header);
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color-strong);
+}
+.vp-doc thead th {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-weight: 600;
+  border: none;
+}
+.vp-doc tbody tr {
+  border-top: 1px solid var(--border-color);
+  transition: background var(--transition-fast);
+}
+.vp-doc tbody tr:hover {
+  background: var(--bg-hover);
+}
+.vp-doc tbody td {
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  color: var(--text-primary);
+}
+
+/* ---------- 水平线 ---------- */
+.vp-doc hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border-color-strong) 50%,
+    transparent 100%
+  );
+  margin: var(--space-7) 0;
+}
+
+/* ---------- 图片 ---------- */
+.vp-doc img {
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: block;
+  margin: var(--space-4) auto;
+}
+
+/* ---------- 链接 ---------- */
+.vp-doc a {
+  color: var(--color-link);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(3, 102, 214, 0.2);
+  transition: all var(--transition-fast);
+}
+.vp-doc a:hover {
+  color: var(--color-link-hover);
+  border-bottom-color: var(--color-link-hover);
+}
+
+/* ---------- 强调 ---------- */
+.vp-doc strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.vp-doc em {
+  color: var(--text-secondary);
+  font-style: italic;
+}

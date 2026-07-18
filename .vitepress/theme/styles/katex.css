@@ -1,0 +1,25 @@
+/* ============================================================
+ * KaTeX 样式补充（docsify 浅色风格）
+ * 与 MathJax 视觉对齐：块级公式同样有左侧绿色边框
+ * ============================================================ */
+
+.katex-display {
+  margin: var(--space-5) 0 !important;
+  padding: var(--space-4) var(--space-5) !important;
+  background: var(--bg-math);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.katex {
+  font-size: 1.05em;
+  color: var(--text-primary);
+}
+
+/* 行内 KaTeX */
+.katex-inline {
+  padding: 0 0.15em;
+}

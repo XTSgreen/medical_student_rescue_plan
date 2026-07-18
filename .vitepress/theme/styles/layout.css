@@ -1,0 +1,197 @@
+/* ============================================================
+ * 布局结构（docsify 风格）
+ * 顶部白色导航 / 白色侧边栏 / 白色内容区 / 简洁页脚
+ * ============================================================ */
+
+/* ---------- 顶部导航栏（浅色） ---------- */
+.VPNavBar {
+  background: var(--bg-content) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  backdrop-filter: saturate(180%) blur(8px);
+}
+
+.VPNavBar .title {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  font-size: var(--fs-md) !important;
+}
+
+.VPNavBar .title .clip {
+  color: var(--color-accent-strong) !important;
+}
+
+/* 顶部导航链接 */
+.VPNavBarMenuLink {
+  color: var(--text-secondary) !important;
+  font-weight: 500 !important;
+  transition: color var(--transition-fast) !important;
+}
+.VPNavBarMenuLink:hover,
+.VPNavBarMenuLink.active {
+  color: var(--color-accent-strong) !important;
+  background: transparent !important;
+}
+
+/* 顶部搜索框 */
+.VPNavBarSearch {
+  flex-shrink: 0;
+}
+.DocSearch-Button {
+  background: var(--bg-code) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-secondary) !important;
+}
+.DocSearch-Button:hover {
+  background: var(--bg-hover) !important;
+  border-color: var(--color-accent) !important;
+}
+.DocSearch-Button .DocSearch-Search-Icon {
+  color: var(--text-tertiary) !important;
+}
+
+/* 社交链接图标 */
+.VPSocialLink .icon {
+  color: var(--text-tertiary) !important;
+  transition: color var(--transition-fast) !important;
+}
+.VPSocialLink:hover .icon {
+  color: var(--color-accent-strong) !important;
+}
+
+/* 主题切换按钮 */
+.VPNavBarAppearance button {
+  color: var(--text-secondary) !important;
+}
+
+/* ---------- 主体布局 ---------- */
+.VPDoc.has-sidebar .VPDocMain {
+  padding: 0 !important;
+}
+
+.VPDocMain .container {
+  max-width: 100% !important;
+}
+
+/* 内容容器 */
+.VPDoc.has-sidebar .content-container {
+  max-width: var(--content-max-width) !important;
+  padding: 2.5rem 2rem 4rem !important;
+}
+
+/* ---------- 侧边栏（白色 docsify 风格） ---------- */
+.VPSidebar {
+  background: var(--bg-sidebar) !important;
+  border-right: 1px solid var(--border-color) !important;
+  width: var(--sidebar-width) !important;
+}
+
+.VPSidebar .curtain {
+  display: none !important;
+}
+
+/* 侧边栏导航项 */
+.VPSidebarItem .text {
+  font-size: var(--fs-sm) !important;
+  color: var(--text-secondary) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+/* 顶层模块标题（互联网开发 / R语言与生信 / 人工智能的数学基础） */
+.VPSidebarItem.level-0 > .item > .text {
+  font-size: var(--fs-base) !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding-bottom: var(--space-2) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  margin-bottom: var(--space-2) !important;
+}
+
+/* 激活的侧边栏项 */
+.VPSidebarItem.active > .item > .text {
+  color: var(--color-accent-strong) !important;
+  font-weight: 600 !important;
+}
+
+.VPSidebarItem.active > .item {
+  background: var(--bg-sidebar-active) !important;
+  border-left: 3px solid var(--color-accent) !important;
+}
+
+.VPSidebarItem .item:hover {
+  background: var(--bg-sidebar-hover) !important;
+  border-radius: var(--radius-sm);
+}
+
+.VPSidebarItem .item {
+  padding-left: var(--space-4) !important;
+  padding-right: var(--space-3) !important;
+  border-left: 3px solid transparent !important;
+  border-radius: 0 !important;
+  transition: all var(--transition-fast) !important;
+}
+
+/* ---------- 顶部 hero 区（首页用） ----------
+ * docsify 风格不用大色块 hero，因此隐藏默认 hero 渐变背景
+ */
+.VPHome .VPHero {
+  background: var(--bg-page) !important;
+  color: var(--text-primary);
+  padding: 3rem 2rem 2rem !important;
+}
+
+.VPHome .VPHero .name,
+.VPHome .VPHero .text,
+.VPHome .VPHero .tagline {
+  color: var(--text-primary) !important;
+}
+
+.VPHome .VPHero .name {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent-strong) 0%,
+    var(--color-accent) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------- 内容区头 ---------- */
+.VPDoc h1 {
+  font-size: var(--fs-2xl) !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  border-bottom: 2px solid var(--color-accent) !important;
+  padding-bottom: var(--space-3) !important;
+  margin-top: 0 !important;
+  margin-bottom: var(--space-6) !important;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- 页脚 ---------- */
+.VPDocFooter {
+  border-top: 1px solid var(--border-color) !important;
+  padding-top: var(--space-5) !important;
+  margin-top: var(--space-7) !important;
+}
+
+.VPDocFooter .prev-next .pager-link {
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.VPDocFooter .prev-next .pager-link:hover {
+  border-color: var(--color-accent) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- outline 右侧目录 ---------- */
+.VPDocOutlineDropdown button {
+  background: var(--bg-code) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+}

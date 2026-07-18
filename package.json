@@ -1,0 +1,22 @@
+{
+  "name": "ai-math-foundation",
+  "version": "0.1.0",
+  "description": "人工智能的数理基础 - 医学生自救计划数理基础章节",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.5.0",
+    "markdown-it-mathjax3": "^4.3.2",
+    "markdown-it-texmath": "^1.0.0",
+    "katex": "^0.16.11",
+    "three": "^0.169.0",
+    "@types/three": "^0.169.0",
+    "@vueuse/core": "^11.2.0",
+    "vue": "^3.5.13"
+  }
+}

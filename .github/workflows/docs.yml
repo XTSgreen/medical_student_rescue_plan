@@ -1,179 +1,69 @@
-name: Documentation
+# ============================================================
+# VitePress 站点构建并部署到 GitHub Pages
+# 仓库：XTSgreen/medical_student_rescue_plan
+# 部署 URL：https://xtsgreen.github.io/medical_student_rescue_plan/
+# 参考：https://vitepress.dev/guide/deploy#github-pages
+# ============================================================
+
+name: Deploy VitePress site to Pages
 
 on:
   push:
     branches:
-      - master
       - main
+      - master
   workflow_dispatch:
 
+# 允许 GitHub Pages 部署所需权限
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# 同一时刻只允许一次部署，避免并发覆盖
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
+  # ---------- 构建任务 ----------
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 启用 lastUpdated 时间戳所需完整历史
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm  # 缓存 npm 依赖加速构建
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build with VitePress
+        run: npm run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .vitepress/dist
+
+  # ---------- 部署任务 ----------
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/configure-pages@v6
-
-      - uses: actions/checkout@v6
-
-      - name: Create site directory
-        run: mkdir -p site
-
-      - name: Copy R Language Tutorials (HTML)
-        run: |
-          echo " Copying R Language Tutorials..."
-
-          if [ -d "code/R语言与生信分析/R语言" ]; then
-            mkdir -p "site/R语言教程"
-
-            # Copy all HTML files
-            cp "code/R语言与生信分析/R语言/001R语言基础/R语言基础.html" \
-               "site/R语言教程/" 2>/dev/null
-            cp "code/R语言与生信分析/R语言/002R语言数据清洗与预处理/R语言数据清洗与预处理.html" \
-               "site/R语言教程/" 2>/dev/null
-            cp "code/R语言与生信分析/R语言/003R语言与数据可视化/R语言与数据可视化.html" \
-               "site/R语言教程/" 2>/dev/null
-            cp "code/R语言与生信分析/R语言/004R语言统计分析/R语言统计分析.html" \
-               "site/R语言教程/" 2>/dev/null
-            cp "code/R语言与生信分析/R语言/005R语言统计与建模/R语言统计与建模.html" \
-               "site/R语言教程/" 2>/dev/null
-            cp "code/R语言与生信分析/R语言/006R语言与机器学习/R语言与机器学习（上）.html" \
-               "site/R语言教程/" 2>/dev/null
-            cp "code/R语言与生信分析/R语言/006R语言与机器学习/R语言与机器学习（下）.html" \
-               "site/R语言教程/" 2>/dev/null
-            cp "code/R语言与生信分析/R语言/007R语言与深度学习/R语言与深度学习（上）.html" \
-               "site/R语言教程/" 2>/dev/null
-
-            R_COUNT=$(find "site/R语言教程" -name "*.html" | wc -l)
-            echo "    Copied $R_COUNT R tutorial files"
-          fi
-
-      - name: Copy Bioinformatics Documentation (Sphinx HTML)
-        run: |
-          echo " Copying Bioinformatics Documentation..."
-          
-          if [ -d "code/R语言与生信分析/生物信息技术/_build/html" ]; then
-            mkdir -p "site/bio"
-
-            # Copy all bioinformatics content
-            cp -r "code/R语言与生信分析/生物信息技术/_build/html"/* "site/bio/" 2>/dev/null
-            
-            BIO_COUNT=$(find "site/bio" -name "*.html" | wc -l)
-            echo "    Copied $BIO_INFO files"
-          fi
-
-      - name: Copy Web Development Tutorials (HTML)
-        run: |
-          echo " Copying Web Development Tutorials..."
-          
-          if [ -d "code/互联网开发/前端开发" ]; then
-            mkdir -p "site/互联网开发/前端开发"
-
-            # Copy all frontend development HTML files
-            cp "code/互联网开发/前端开发/001，前端开发.html" \
-               "site/互联网开发/前端开发/" 2>/dev/null
-            cp "code/互联网开发/前端开发/002，html语言的简单应用与网页框架结构.html" \
-               "site/互联网开发/前端开发/" 2>/dev/null
-            cp "code/互联网开发/前端开发/003，html语言与网页框架进阶.html" \
-               "site/互联网开发/前端开发/" 2>/dev/null
-            cp "code/互联网开发/前端开发/004，网页可访问性与现代html特性.html" \
-               "site/互联网开发/前端开发/" 2>/dev/null
-            cp "code/互联网开发/前端开发/005，css语言与界面美化基础.html" \
-               "site/互联网开发/前端开发/" 2>/dev/null
-            cp "code/互联网开发/前端开发/006，css语言与界面美化进阶.html" \
-               "site/互联网开发/前端开发/" 2>/dev/null
-            cp "code/互联网开发/前端开发/007，css语言与高效开发和性能管控.html" \
-               "site/互联网开发/前端开发/" 2>/dev/null
-            cp "code/互联网开发/前端开发/008，javascript基础.html" \
-               "site/互联网开发/前端开发/" 2>/dev/null
-            cp "code/互联网开发/前端开发/009，javascript核心深入与基础拓展.html" \
-               "site/互联网开发/前端开发/" 2>/dev/null
-            cp "code/互联网开发/前端开发/010，javascript与ES6新特性.html" \
-               "site/互联网开发/前端开发/" 2>/dev/null
-            cp "code/互联网开发/前端开发/011，javascript中的异步编程与错误调试.html" \
-               "site/互联网开发/前端开发/" 2>/dev/null
-            
-            FRONTEND_COUNT=$(find "site/互联网开发/前端开发" -name "*.html" | wc -l)
-            echo "    Copied $FRONTEND_COUNT frontend files"
-          fi
-          
-          if [ -d "code/互联网开发/后端开发" ]; then
-            mkdir -p "site/互联网开发/后端开发"
-
-            # Copy backend development files
-            cp "code/互联网开发/后端开发/1，前端范例.html" \
-               "site/互联网开发/后端开发/" 2>/dev/null
-            
-            BACKEND_COUNT=$(find "site/互联网开发/后端开发" -name "*.html" | wc -l)
-            echo "    Copied $BACKEND_COUNT backend files"
-          fi
-
-      - name: Set Project Homepage (Sphinx style)
-        run: |
-          echo " Setting up project homepage..."
-          
-          # Use custom project homepage if exists, otherwise fallback to bio index
-          if [ -f "project-index.html" ]; then
-            cp "project-index.html" "site/index.html"
-            echo "    Using custom project homepage"
-          elif [ -f "site/bio/index.html" ]; then
-            cp "site/bio/index.html" "site/index.html"
-            echo "    Using bio index as fallback"
-          else
-            echo "    ERROR: No homepage available"
-            exit 1
-          fi
-
-      - name: Copy Sphinx static assets (CSS/JS/fonts)
-        run: |
-          echo " Copying Sphinx theme assets..."
-          
-          # Copy _static directory for Sphinx styling
-          if [ -d "site/bio/_static" ]; then
-            cp -r "site/bio/_static" "site/_static"
-            
-            STATIC_FILES=$(find "site/_static" -type f | wc -l)
-            echo "    Copied $STATIC_FILES static files (CSS, JS, fonts)"
-          else
-            echo "    WARNING: No _static directory found"
-          fi
-
-      - name: Verify deployment
-        run: |
-          echo ""
-          echo "========================================="
-          echo "Deployment Summary"
-          echo "========================================="
-          
-          if [ -f "site/index.html" ]; then
-            TOTAL_HTML=$(find site -name '*.html' | wc -l)
-            echo " Homepage: Ready (Sphinx style)"
-            echo " Total HTML files: $TOTAL_HTML"
-            echo ""
-            echo "Content:"
-            find site -maxdepth 2 -name "*.html" -type f | head -15
-          else
-            echo " ERROR: No homepage found"
-            exit 1
-          fi
-
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: site
-
-      - uses: actions/deploy-pages@v5
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
         id: deployment
-
-      - name: Deployment complete
-        if: success()
-        run: |
-          echo " Deployment successful!"
-          echo " URL: ${{ steps.deployment.outputs.page_url }}"
-          echo " Style: reStructuredText + Sphinx"
