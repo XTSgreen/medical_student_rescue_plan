@@ -1,9 +1,3 @@
-/* ============================================================
- * 布局结构（docsify 风格）
- * 顶部白色导航 / 白色侧边栏 / 白色内容区 / 简洁页脚
- * ============================================================ */
-
-/* ---------- 顶部导航栏（浅色） ---------- */
 .VPNavBar {
   background: var(--bg-content) !important;
   border-bottom: 1px solid var(--border-color) !important;
@@ -20,7 +14,6 @@
   color: var(--color-accent-strong) !important;
 }
 
-/* 顶部导航链接 */
 .VPNavBarMenuLink {
   color: var(--text-secondary) !important;
   font-weight: 500 !important;
@@ -32,7 +25,6 @@
   background: transparent !important;
 }
 
-/* 顶部搜索框 */
 .VPNavBarSearch {
   flex-shrink: 0;
 }
@@ -50,7 +42,6 @@
   color: var(--text-tertiary) !important;
 }
 
-/* 社交链接图标 */
 .VPSocialLink .icon {
   color: var(--text-tertiary) !important;
   transition: color var(--transition-fast) !important;
@@ -59,12 +50,10 @@
   color: var(--color-accent-strong) !important;
 }
 
-/* 主题切换按钮 */
 .VPNavBarAppearance button {
   color: var(--text-secondary) !important;
 }
 
-/* ---------- 主体布局 ---------- */
 .VPDoc.has-sidebar .VPDocMain {
   padding: 0 !important;
 }
@@ -73,13 +62,44 @@
   max-width: 100% !important;
 }
 
-/* 内容容器 */
+.VPContent.has-sidebar {
+  padding-left: var(--vp-sidebar-width) !important;
+}
+
+@media (min-width: 1440px) {
+  .VPSidebar {
+    padding-left: 0 !important;
+    width: var(--vp-sidebar-width) !important;
+  }
+
+  .VPContent.has-sidebar {
+    padding-left: var(--vp-sidebar-width) !important;
+    padding-right: 0 !important;
+  }
+
+  .VPNavBar.has-sidebar .title {
+    padding-left: var(--vp-sidebar-width) !important;
+    width: var(--vp-sidebar-width) !important;
+  }
+
+  .VPNavBar.has-sidebar .content {
+    padding-left: var(--vp-sidebar-width) !important;
+  }
+
+  .VPNavBar.has-sidebar .divider {
+    padding-left: var(--vp-sidebar-width) !important;
+  }
+
+  .VPLocalNav.has-sidebar {
+    padding-left: var(--vp-sidebar-width) !important;
+  }
+}
+
 .VPDoc.has-sidebar .content-container {
   max-width: var(--content-max-width) !important;
   padding: 2.5rem 2rem 4rem !important;
 }
 
-/* ---------- 侧边栏（白色 docsify 风格） ---------- */
 .VPSidebar {
   background: var(--bg-sidebar) !important;
   border-right: 1px solid var(--border-color) !important;
@@ -90,14 +110,12 @@
   display: none !important;
 }
 
-/* 侧边栏导航项 */
 .VPSidebarItem .text {
   font-size: var(--fs-sm) !important;
   color: var(--text-secondary) !important;
   transition: all var(--transition-fast) !important;
 }
 
-/* 顶层模块标题（互联网开发 / R语言与生信 / 人工智能的数学基础） */
 .VPSidebarItem.level-0 > .item > .text {
   font-size: var(--fs-base) !important;
   font-weight: 600 !important;
@@ -109,7 +127,6 @@
   margin-bottom: var(--space-2) !important;
 }
 
-/* 激活的侧边栏项 */
 .VPSidebarItem.active > .item > .text {
   color: var(--color-accent-strong) !important;
   font-weight: 600 !important;
@@ -133,9 +150,6 @@
   transition: all var(--transition-fast) !important;
 }
 
-/* ---------- 顶部 hero 区（首页用） ----------
- * docsify 风格不用大色块 hero，因此隐藏默认 hero 渐变背景
- */
 .VPHome .VPHero {
   background: var(--bg-page) !important;
   color: var(--text-primary);
@@ -159,7 +173,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* ---------- 内容区头 ---------- */
 .VPDoc h1 {
   font-size: var(--fs-2xl) !important;
   font-weight: 700 !important;
@@ -171,7 +184,6 @@
   letter-spacing: -0.02em;
 }
 
-/* ---------- 页脚 ---------- */
 .VPDocFooter {
   border-top: 1px solid var(--border-color) !important;
   padding-top: var(--space-5) !important;
@@ -189,7 +201,6 @@
   box-shadow: var(--shadow-sm);
 }
 
-/* ---------- outline 右侧目录 ---------- */
 .VPDocOutlineDropdown button {
   background: var(--bg-code) !important;
   border: 1px solid var(--border-color) !important;

@@ -1,29 +1,17 @@
-/* ============================================================
- * 设计变量
- * 风格参考：https://datawhalechina.github.io/math-for-ai/#/
- *   - 浅色 docsify 风格
- *   - 白底为主，灰色辅助，绿色为强调色（参考 Vue 风格）
- *   - 不使用暗色主题
- * ============================================================ */
-
 :root {
-  /* ---------- 强调色（参考 docsify + Vue 绿） ---------- */
   --color-accent: #42b983;
   --color-accent-hover: #3aa776;
   --color-accent-soft: rgba(66, 185, 131, 0.12);
   --color-accent-text: #2c8f5f;
   --color-accent-strong: #1f7a4a;
 
-  /* 链接蓝（参考 docsify 默认） */
   --color-link: #0366d6;
   --color-link-hover: #0255b3;
 
-  /* 主色：深灰，用于顶部导航栏文字 */
   --color-primary: #2c3e50;
   --color-primary-light: #3a4f63;
   --color-primary-soft: #5a6b7c;
 
-  /* ---------- 中性色（docsify 风格的浅色主题） ---------- */
   --bg-page: #ffffff;
   --bg-content: #ffffff;
   --bg-sidebar: #ffffff;
@@ -46,7 +34,6 @@
   --border-color-strong: #cbd0d8;
   --border-color-accent: #42b983;
 
-  /* ---------- 语义色 ---------- */
   --color-info: #1976d2;
   --color-success: #2e7d32;
   --color-warning: #ed6c02;
@@ -59,7 +46,6 @@
   --bg-danger-soft: #ffebee;
   --bg-tip-soft: #f3e5f5;
 
-  /* ---------- 字体 ---------- */
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
     "Microsoft YaHei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
@@ -68,7 +54,6 @@
   --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas,
     "Microsoft YaHei", monospace;
 
-  /* ---------- 字号阶梯（rem 基准 16px） ---------- */
   --fs-xs: 0.75rem;
   --fs-sm: 0.875rem;
   --fs-base: 1rem;
@@ -78,7 +63,6 @@
   --fs-2xl: 2.25rem;
   --fs-3xl: 3rem;
 
-  /* ---------- 间距 ---------- */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -88,28 +72,24 @@
   --space-7: 3rem;
   --space-8: 4rem;
 
-  /* ---------- 圆角 ---------- */
   --radius-sm: 3px;
   --radius-md: 6px;
   --radius-lg: 10px;
   --radius-xl: 14px;
   --radius-full: 9999px;
 
-  /* ---------- 阴影（极轻、docsify 风格） ---------- */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08);
   --shadow-focus: 0 0 0 3px rgba(66, 185, 131, 0.25);
 
-  /* ---------- 布局 ---------- */
   --content-max-width: 820px;
   --sidebar-width: 290px;
   --layout-gap: 2rem;
 
-  /* ---------- 过渡 ---------- */
+  --vp-sidebar-width: var(--sidebar-width);
+
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* 不再提供 .dark 主题：始终使用浅色，与 docsify 风格一致 */
