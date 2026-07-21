@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import mathjax3 from 'markdown-it-mathjax3'
+import container from 'markdown-it-container'
 
 // ============================================================
 // 全局 VitePress 配置
@@ -9,6 +10,48 @@ import mathjax3 from 'markdown-it-mathjax3'
 //   - 主页右侧显示 README，左侧显示层层递进的章节目录
 //   - 顶部三大模块：互联网开发 / R语言与生信分析 / 人工智能的数学基础
 // ============================================================
+
+// ============================================================
+// 自定义 admonition 容器类型
+// 用法（在 markdown 中）：
+//   ::: note 书写规范提示
+//   内容支持完整 markdown：$...$ 公式、`code`、**bold**、列表等
+//   :::
+// 渲染为 <div class="admonition note"><p class="title">书写规范提示</p>...</div>
+// CSS 类已定义于 theme/styles/components.css
+// 说明：对于 VitePress 已注册的内置容器（tip/info/warning/danger），
+// 这里覆盖其渲染规则，输出 .admonition 类 HTML 而非 .custom-block 类
+// ============================================================
+const admonitionTypes = [
+  'note',
+  'tip',
+  'info',
+  'warning',
+  'danger',
+  'success',
+  'key-idea'
+]
+
+function registerAdmonitionContainers(md: any) {
+  admonitionTypes.forEach(type => {
+    md.use(container, type, {
+      render(tokens: any[], idx: number, _options: any, env: any) {
+        const token = tokens[idx]
+        if (token.nesting === 1) {
+          // 开标签：从 token.info 中提取标题
+          // token.info 形如 " note 标题文本"，需剥掉类型名前缀
+          const info = token.info.trim().slice(type.length).trim()
+          const title = info ? md.renderInline(info, { references: env.references }) : ''
+          if (title.trim()) {
+            return `<div class="admonition ${type}"><p class="title">${title}</p>\n`
+          }
+          return `<div class="admonition ${type}">\n`
+        }
+        return '</div>\n'
+      }
+    })
+  })
+}
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -37,7 +80,7 @@ export default defineConfig({
     }
   },
 
-  // MarkDown 扩展：MathJax 3
+  // MarkDown 扩展：MathJax 3 + 自定义 admonition 容器
   markdown: {
     config(md) {
       md.use(mathjax3, {
@@ -54,6 +97,9 @@ export default defineConfig({
           }
         }
       })
+      // 注册自定义 admonition 容器（::: note / ::: tip / ::: key-idea 等）
+      // 必须在 mathjax3 之后注册，确保容器内的 $...$ 公式能被 MathJax 处理
+      registerAdmonitionContainers(md)
     },
     theme: { light: 'github-light', dark: 'github-light' },
     lineNumbers: true
@@ -121,9 +167,9 @@ export default defineConfig({
                 { text: '003 · R 语言与数据可视化', link: '/code/R语言与生信分析/R语言/003-r语言与数据可视化' },
                 { text: '004 · R 语言统计分析', link: '/code/R语言与生信分析/R语言/004-r语言统计分析' },
                 { text: '005 · R 语言统计与建模', link: '/code/R语言与生信分析/R语言/005-r语言统计与建模' },
-                { text: '006 · R 语言与机器学习（上）', link: '/code/R语言与生信分析/R语言/006-r语言与机器学习上' },
-                { text: '006 · R 语言与机器学习（下）', link: '/code/R语言与生信分析/R语言/006-r语言与机器学习下' },
-                { text: '007 · R 语言与深度学习（上）', link: '/code/R语言与生信分析/R语言/007-r语言与深度学习上' }
+                { text: '006 · R 语言与机器学习', link: '/code/R语言与生信分析/R语言/006-r语言与机器学习' },
+                { text: '007 · 深度学习（上）：基础与核心架构', link: '/code/R语言与生信分析/R语言/007-r语言与深度学习上' },
+                { text: '008 · 深度学习（下）：生成模型与前沿架构', link: '/code/R语言与生信分析/R语言/008-r语言与深度学习下' }
               ]
             },
             {
