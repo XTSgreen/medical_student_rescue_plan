@@ -1,7 +1,3 @@
-/* ============================================================
- * 基础排版（docsify 浅色风格）
- * 字体、行距、阅读节奏
- * ============================================================ */
 
 * {
   box-sizing: border-box;
@@ -24,12 +20,12 @@ body {
   font-feature-settings: "kern", "liga", "calt";
 }
 
-/* 中文字体兜底优化 */
+/* 中文字体优化 */
 :lang(zh), :lang(zh-CN) {
   font-feature-settings: "kern", "liga", "calt", "palt";
 }
 
-/* 滚动条美化（浅色） */
+/* 滚动条美化 */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -52,7 +48,7 @@ body {
   color: var(--text-primary);
 }
 
-/* 链接（默认蓝色，docsify 风格） */
+/* 链接 */
 a {
   color: var(--color-link);
   text-decoration: none;
@@ -72,7 +68,7 @@ a:hover {
   border-radius: var(--radius-sm);
 }
 
-/* 减少动效（无障碍） */
+/* 减少动效 */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

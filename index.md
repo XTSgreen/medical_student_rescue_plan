@@ -10,35 +10,8 @@ aside: false
 
 ## 项目概览
 
-本教程目前包含 **三大模块**，左侧侧边栏可以层层展开，按章节阅读。
+本教程目前包含三大模块，左侧侧边栏可以层层展开，按章节阅读。
 
-<a class="module-card" href="/code/互联网开发/">
-  <h3>互联网开发</h3>
-  <p>HTML、CSS、JavaScript 三大基石，从前端网页结构、样式设计、交互逻辑到后端开发的全流程入门。适合零基础入门互联网开发方向。</p>
-  <div class="module-meta">
-    <span>前端开发 · 11 节</span>
-    <span>后端开发 · 1 节</span>
-  </div>
-</a>
-
-<a class="module-card" href="/code/R语言与生信分析/">
-  <h3>R 语言与生信分析</h3>
-  <p>R 语言基础、数据清洗、可视化、统计建模、机器学习全链路；以及面向生物信息学的计算机基础、序列分析、组学分析等专题。</p>
-  <div class="module-meta">
-    <span>R 语言 · 7 章</span>
-    <span>生物信息技术 · 8 章</span>
-  </div>
-</a>
-
-<a class="module-card" href="/code/人工智能的数理基础/">
-  <h3>人工智能的数学基础</h3>
-  <p>面向 AI 的数理基础教程，覆盖线性代数、概率与统计、最优化三大方向。包含 3D 交互演示与公式推导，配套 Python 代码示例。</p>
-  <div class="module-meta">
-    <span>线性代数 · 8 节</span>
-    <span>概率与统计 · 4 节</span>
-    <span>最优化 · 4 节</span>
-  </div>
-</a>
 
 ## 项目介绍
 
@@ -48,14 +21,13 @@ aside: false
 
 ### 技术栈
 
-- **教程站点**：[VitePress](https://vitepress.dev/) 构建的静态文档站点
-- **数学公式**：MathJax 3 渲染 LaTeX 公式
-- **交互演示**：Three.js 实现 3D 数理概念演示
-- **R 语言教程**：R Markdown 格式
-- **生物信息教程**：reStructuredText 格式
-- **互联网开发教程**：原生 HTML 文件
+**教程站点**：[VitePress](https://vitepress.dev/) 构建的静态文档站点9
 
-### 交流方式
+**数学公式**：MathJax 3 
+
+**交互演示**：Three.js 实现 
+
+**教程文本文件**：.md
 
 - QQ 群：965751576
 
