@@ -85,15 +85,15 @@
         </div>
         <div class="output-row" :class="orthogonalClass">
           <span class="label">验证 a·e ≈ 0</span>
-          <span class="value">{{ aDotE.toFixed(6) }} {{ orthogonalOk ? '✓' : '✗' }}</span>
+          <span class="value">{{ aDotE.toFixed(6) }} {{ orthogonalOk ? '对' : '错' }}</span>
         </div>
         <div class="output-row" :class="decompositionClass">
           <span class="label">分解验证 b = p + e</span>
-          <span class="value">{{ decompositionOk ? '✓ 一致' : '✗ 不一致' }}</span>
+          <span class="value">{{ decompositionOk ? '一致' : '不一致' }}</span>
         </div>
         <div class="output-row" :class="pythagoreanClass">
           <span class="label">勾股验证 ‖b‖² ≈ ‖p‖² + ‖e‖²</span>
-          <span class="value">{{ pythagoreanError.toFixed(6) }} {{ pythagoreanOk ? '✓' : '✗' }}</span>
+          <span class="value">{{ pythagoreanError.toFixed(6) }} {{ pythagoreanOk ? '对' : '错' }}</span>
         </div>
       </template>
       <template v-else>
@@ -131,21 +131,21 @@
         </div>
         <div class="output-row" :class="orthogonalClass">
           <span class="label">验证 n·p ≈ 0</span>
-          <span class="value">{{ nDotP.toFixed(6) }} {{ orthogonalOk ? '✓' : '✗' }}</span>
+          <span class="value">{{ nDotP.toFixed(6) }} {{ orthogonalOk ? '对' : '错' }}</span>
         </div>
         <div class="output-row" :class="decompositionClass">
           <span class="label">分解验证 b = p + e</span>
-          <span class="value">{{ decompositionOk ? '✓ 一致' : '✗ 不一致' }}</span>
+          <span class="value">{{ decompositionOk ? '一致' : '不一致' }}</span>
         </div>
         <div class="output-row" :class="pythagoreanClass">
           <span class="label">勾股验证 ‖b‖² ≈ ‖p‖² + ‖e‖²</span>
-          <span class="value">{{ pythagoreanError.toFixed(6) }} {{ pythagoreanOk ? '✓' : '✗' }}</span>
+          <span class="value">{{ pythagoreanError.toFixed(6) }} {{ pythagoreanOk ? '对' : '错' }}</span>
         </div>
       </template>
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 投影公式</p>
+      <p class="formula-title">投影公式</p>
       <template v-if="mode === 'line'">
         <p class="formula-line">p = (a·b / a·a) · a &nbsp; ⇒ &nbsp; e = b − p &nbsp; ⊥ &nbsp; a</p>
         <p class="formula-line">P = a aᵀ / (aᵀa) 是秩 1 投影矩阵，满足 P² = P 且 Pᵀ = P</p>
@@ -287,9 +287,9 @@ const pythagoreanClass = computed(() => ({
 
 const tipText = computed(() => {
   if (mode.value === 'line') {
-    return '拖拽黄色球体改变向量 b。红色箭头是 b 在 a 上的投影 p，橙色虚线是误差 e = b − p。白色小方块标记直角顶点——a 与 e 始终正交，这是投影的几何本质。可观察"分解验证 b = p + e"始终为 ✓，且勾股关系 ‖b‖² ≈ ‖p‖² + ‖e‖² 成立。'
+    return '拖拽黄色球体改变向量 b。红色箭头是 b 在 a 上的投影 p，橙色虚线是误差 e = b − p。白色小方块标记直角顶点——a 与 e 始终正交，这是投影的几何本质。可观察"分解验证 b = p + e"始终成立，且勾股关系 ‖b‖² ≈ ‖p‖² + ‖e‖² 成立。'
   }
-  return '拖拽黄色球体改变向量 b。红色箭头是 b 在平面上的投影 p，橙色虚线是误差 e = (b·n)n（沿法向量）。注意白色直角标记：p 与 e 始终正交。可观察"分解验证 b = p + e"始终为 ✓。'
+  return '拖拽黄色球体改变向量 b。红色箭头是 b 在平面上的投影 p，橙色虚线是误差 e = (b·n)n（沿法向量）。注意白色直角标记：p 与 e 始终正交。可观察"分解验证 b = p + e"始终成立。'
 })
 
 function setPreset(p: Mode) {
@@ -372,10 +372,10 @@ function initScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
 
@@ -390,7 +390,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -766,7 +766,7 @@ onMounted(() => {
       animationId = requestAnimationFrame(animate)
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('VectorProjectionDemo init error:', e)
   }

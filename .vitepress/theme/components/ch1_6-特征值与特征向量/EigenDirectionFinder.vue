@@ -129,15 +129,15 @@
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 特征方向探索</p>
+      <p class="formula-title">特征方向探索</p>
       <p class="formula-line">特征方程：<span class="math">A&#119972; = λ&#119972;</span></p>
       <p class="formula-line">共线性条件（2D 叉积为零）：<span class="math">v × (A·v) = v<sub>x</sub>·(A·v)<sub>y</sub> − v<sub>y</sub>·(A·v)<sub>x</sub> = 0</span></p>
       <p class="formula-line">特征值估计（Rayleigh 商）：<span class="math">λ = (v · A·v) / (v · v) = v · A·v</span>（因为 |v| = 1）</p>
       <p class="formula-line hint-line" v-if="!hasRealEigenvalues">
-        ⚠ 此矩阵判别式 Δ &lt; 0，无实特征方向，无论如何拖拽都无法锁定
+        此矩阵判别式 Δ &lt; 0，无实特征方向，无论如何拖拽都无法锁定
       </p>
       <p class="formula-line hint-line" v-else-if="isRepeated">
-        ⚠ 此矩阵为缺陷矩阵（重根但仅 1 个独立特征向量），仅能锁定 1 个方向
+        此矩阵为缺陷矩阵（重根但仅 1 个独立特征向量），仅能锁定 1 个方向
       </p>
     </div>
 
@@ -315,9 +315,9 @@ const phiDisplay = computed(() => {
 })
 
 const statusText = computed(() => {
-  if (!hasRealEigenvalues.value) return '✗ 此矩阵无实特征方向'
-  if (isLocked.value) return `✓ 找到特征方向（λ = ${lockedLambda.value.toFixed(3)}）`
-  return '✗ 探索中'
+  if (!hasRealEigenvalues.value) return '此矩阵无实特征方向'
+  if (isLocked.value) return `找到特征方向（λ = ${lockedLambda.value.toFixed(3)}）`
+  return '探索中'
 })
 
 const tipText = computed(() => {
@@ -482,10 +482,10 @@ function initScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
 
@@ -508,7 +508,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -804,7 +804,7 @@ onMounted(() => {
     initScene()
     if (renderer) animationId = requestAnimationFrame(animate)
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('EigenDirectionFinder init error:', e)
   }

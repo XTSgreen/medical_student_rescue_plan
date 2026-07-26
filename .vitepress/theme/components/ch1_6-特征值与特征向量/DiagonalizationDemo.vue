@@ -21,9 +21,9 @@
         <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
 
         <div v-if="!isDiagonalizable" class="warning-banner" :class="warningClass">
-          <span v-if="hasComplexEigenvalues">⚠ 复特征值（Δ&lt;0）：实数范围内不可对角化，A 含旋转分量</span>
-          <span v-else-if="isDefective">⚠ 缺陷矩阵：几何重数 &lt; 代数重数，缺少一个固有轴</span>
-          <span v-else>⚠ 当前矩阵不可对角化</span>
+          <span v-if="hasComplexEigenvalues">复特征值（Δ&lt;0）：实数范围内不可对角化，A 含旋转分量</span>
+          <span v-else-if="isDefective">缺陷矩阵：几何重数 &lt; 代数重数，缺少一个固有轴</span>
+          <span v-else>当前矩阵不可对角化</span>
         </div>
 
         <div class="step-info">
@@ -45,11 +45,11 @@
         </div>
 
         <div class="anim-buttons">
-          <button class="play-btn" @click="play" :disabled="isPlaying || currentStep >= 3 || !canAnimate">▶ 播放解耦动画</button>
-          <button @click="pause" :disabled="!isPlaying && !morphAnim.active">⏸ 暂停</button>
-          <button @click="stepBackward" :disabled="isPlaying || currentStep <= 0 || !canAnimate">⏮ 单步后退</button>
-          <button @click="stepForward" :disabled="isPlaying || currentStep >= 3 || !canAnimate">⏭ 单步前进</button>
-          <button @click="resetAnimation" :disabled="currentStep === 0 && !isPlaying">↺ 重置</button>
+          <button class="play-btn" @click="play" :disabled="isPlaying || currentStep >= 3 || !canAnimate">播放解耦动画</button>
+          <button @click="pause" :disabled="!isPlaying && !morphAnim.active">暂停</button>
+          <button @click="stepBackward" :disabled="isPlaying || currentStep <= 0 || !canAnimate">单步后退</button>
+          <button @click="stepForward" :disabled="isPlaying || currentStep >= 3 || !canAnimate">单步前进</button>
+          <button @click="resetAnimation" :disabled="currentStep === 0 && !isPlaying">重置</button>
         </div>
 
         <div class="color-legend">
@@ -118,7 +118,7 @@
           </div>
           <div class="invariant-row" :class="{ highlight: delta >= 0, danger: delta < 0 }">
             <span class="inv-label">判别式 Δ = tr²−4det</span>
-            <span class="inv-val">{{ delta.toFixed(3) }} {{ delta >= 0 ? '✓ 实根' : '✗ 复根' }}</span>
+            <span class="inv-val">{{ delta.toFixed(3) }} {{ delta >= 0 ? '实根' : '复根' }}</span>
           </div>
           <div class="invariant-row">
             <span class="inv-label">p(λ) = λ² − tr·λ + det</span>
@@ -199,7 +199,7 @@
 
         <div class="conclusion-box" :class="conclusionClass">
           <template v-if="isDiagonalizable">
-            <p class="conclusion-title">✅ 可对角化 A = P D P⁻¹</p>
+            <p class="conclusion-title">可对角化 A = P D P⁻¹</p>
             <div class="conclusion-matrices">
               <div class="cm-item">
                 <span class="cm-label">P (列为特征向量)</span>
@@ -215,16 +215,16 @@
               </div>
               <div class="cm-item" v-else>
                 <span class="cm-label">P⁻¹</span>
-                <span class="cm-val">⚠ P 不可逆（特征向量线性相关）</span>
+                <span class="cm-val">P 不可逆（特征向量线性相关）</span>
               </div>
               <div class="cm-item" :class="{ ok: pdpInvOk === true, fail: pdpInvOk === false }">
                 <span class="cm-label">验证 A = P·D·P⁻¹</span>
-                <span class="cm-val">{{ pdpInvOk === null ? '—' : (pdpInvOk ? '✓ 成立' : '✗ 不成立') }}</span>
+                <span class="cm-val">{{ pdpInvOk === null ? '—' : (pdpInvOk ? '成立' : '不成立') }}</span>
               </div>
             </div>
           </template>
           <template v-else>
-            <p class="conclusion-title">❌ 不可对角化</p>
+            <p class="conclusion-title">不可对角化</p>
             <div class="conclusion-warning">
               <p v-if="hasComplexEigenvalues">
                 复特征值：A 含旋转分量，实数范围内无法对角化。<br/>
@@ -261,21 +261,21 @@
         </div>
         <div class="output-row" :class="{ ok: av1Ok === true, fail: av1Ok === false }">
           <span class="label">验证 A·v₁ = λ₁·v₁</span>
-          <span class="value">{{ av1Display }} {{ av1Ok === null ? '—' : (av1Ok ? '✓' : '✗') }}</span>
+          <span class="value">{{ av1Display }} {{ av1Ok === null ? '—' : (av1Ok ? '对' : '错') }}</span>
         </div>
         <div class="output-row" :class="{ ok: av2Ok === true, fail: av2Ok === false }">
           <span class="label">验证 A·v₂ = λ₂·v₂</span>
-          <span class="value">{{ av2Display }} {{ av2Ok === null ? '—' : (av2Ok ? '✓' : '✗') }}</span>
+          <span class="value">{{ av2Display }} {{ av2Ok === null ? '—' : (av2Ok ? '对' : '错') }}</span>
         </div>
         <div class="output-row" :class="{ ok: pdpInvOk === true, fail: pdpInvOk === false }">
           <span class="label">验证 P·D·P⁻¹ = A</span>
-          <span class="value">{{ pdpInvDisplay }} {{ pdpInvOk === null ? '—' : (pdpInvOk ? '✓' : '✗') }}</span>
+          <span class="value">{{ pdpInvDisplay }} {{ pdpInvOk === null ? '—' : (pdpInvOk ? '对' : '错') }}</span>
         </div>
       </div>
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 对角化公式</p>
+      <p class="formula-title">对角化公式</p>
       <p class="formula-line">特征方程：det(A − λI) = 0 ⇒ λ² − tr(A)·λ + det(A) = 0</p>
       <p class="formula-line">对角化：A = P·D·P⁻¹，P = [v₁ | v₂]，D = diag(λ₁, λ₂)</p>
       <p class="formula-line">幂次简化：A<sup>k</sup> = P·D<sup>k</sup>·P⁻¹</p>
@@ -659,7 +659,7 @@ const sm = computed<{
       step2: { status: 'fail', text: '无实特征向量，GM=0' },
       step3: { status: 'fail', text: 'AM ≠ GM（无实根）' },
       step4: { status: 'fail', text: `0 < 2 个线性无关特征向量` },
-      conclusion: { status: 'fail', text: '❌ 不可对角化（复特征值）' }
+      conclusion: { status: 'fail', text: '不可对角化（复特征值）' }
     }
   }
   const infos = eigenInfos.value
@@ -671,18 +671,18 @@ const sm = computed<{
     const amEqGm = info.geoMult === info.algMult
     const nIndependent = info.geoMult === 2
     const conclusion: StateNode = nIndependent
-      ? { status: 'pass', text: '✅ 可对角化（A=λI，任意方向都是特征方向）' }
-      : { status: 'fail', text: '❌ 不可对角化（缺陷矩阵，GM=1<AM=2）' }
+      ? { status: 'pass', text: '可对角化（A=λI，任意方向都是特征方向）' }
+      : { status: 'fail', text: '不可对角化（缺陷矩阵，GM=1<AM=2）' }
     return {
       step1: { status: amOk ? 'pass' : 'fail', text: `λ=${info.value.toFixed(3)} (重根)，AM=2` },
       step2: { status: gmOk ? 'pass' : 'fail', text: `dim N(A−λI)=${info.geoMult}，GM=${info.geoMult}` },
       step3: {
         status: amEqGm ? 'pass' : 'fail',
-        text: `GM=${info.geoMult} ${amEqGm ? '=' : '<'} AM=2 ${amEqGm ? '✓' : '✗'}`
+        text: `GM=${info.geoMult} ${amEqGm ? '=' : '<'} AM=2 ${amEqGm ? '对' : '错'}`
       },
       step4: {
         status: nIndependent ? 'pass' : 'fail',
-        text: `${info.geoMult} ${nIndependent ? '=' : '<'} 2 个线性无关特征向量 ${nIndependent ? '✓' : '✗'}`
+        text: `${info.geoMult} ${nIndependent ? '=' : '<'} 2 个线性无关特征向量 ${nIndependent ? '对' : '错'}`
       },
       conclusion
     }
@@ -695,8 +695,8 @@ const sm = computed<{
   const amEqGm = info1.geoMult === info1.algMult && info2.geoMult === info2.algMult
   const nIndependent = (info1.geoMult + info2.geoMult) === 2
   const conclusion: StateNode = nIndependent
-    ? { status: 'pass', text: '✅ 可对角化（n=2 个线性无关特征向量）' }
-    : { status: 'fail', text: '❌ 不可对角化' }
+    ? { status: 'pass', text: '可对角化（n=2 个线性无关特征向量）' }
+    : { status: 'fail', text: '不可对角化' }
   return {
     step1: {
       status: amOk ? 'pass' : 'fail',
@@ -708,19 +708,19 @@ const sm = computed<{
     },
     step3: {
       status: amEqGm ? 'pass' : 'fail',
-      text: `GM=AM ${amEqGm ? '✓' : '✗'}`
+      text: `GM=AM ${amEqGm ? '对' : '错'}`
     },
     step4: {
       status: nIndependent ? 'pass' : 'fail',
-      text: `${info1.geoMult + info2.geoMult} 个线性无关特征向量 ${nIndependent ? '✓' : '✗'}`
+      text: `${info1.geoMult + info2.geoMult} 个线性无关特征向量 ${nIndependent ? '对' : '错'}`
     },
     conclusion
   }
 })
 
 function stateIcon(node: StateNode): string {
-  if (node.status === 'pass') return '✓'
-  if (node.status === 'fail') return '✗'
+  if (node.status === 'pass') return '对'
+  if (node.status === 'fail') return '错'
   return '○'
 }
 
@@ -920,10 +920,10 @@ function initScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
 
@@ -945,7 +945,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -1272,7 +1272,7 @@ onMounted(() => {
       animationId = requestAnimationFrame(animate)
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('DiagonalizationDemo init error:', e)
   }

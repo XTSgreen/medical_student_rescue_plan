@@ -54,7 +54,7 @@
           <span class="hint-row red">● 红色长轴：σ₁ = {{ sigma1.toFixed(4) }}</span>
           <span class="hint-row blue">● 蓝色短轴：σ₂ = {{ isSingular ? '≈ 0' : sigma2.toFixed(4) }}</span>
           <span class="hint-row gradient">● 渐变点云：按 ‖A·v‖ 编码（青→黄→红）</span>
-          <span v-if="isIllConditioned" class="hint-row warn">⚠ 病态震颤中</span>
+          <span v-if="isIllConditioned" class="hint-row warn">病态震颤中</span>
         </div>
       </div>
     </div>
@@ -62,7 +62,7 @@
     <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
 
     <div v-if="warningMsg" class="warning-banner" :class="warningType">
-      ⚠ {{ warningMsg }}
+      {{ warningMsg }}
     </div>
 
     <div class="matrix-editor">
@@ -165,7 +165,7 @@
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 条件数与数值稳定性</p>
+      <p class="formula-title">条件数与数值稳定性</p>
       <p class="formula-line">条件数定义：<span class="math">κ(A) = ‖A‖·‖A⁻¹‖ = σ<sub>max</sub>/σ<sub>min</sub></span></p>
       <p class="formula-line">误差放大：<span class="math">‖Δx‖/‖x‖ ≤ κ(A)·‖ΔA‖/‖A‖</span></p>
       <p class="formula-line">SVD 分解：<span class="math">A = U Σ V<sup>T</sup></span>，<span class="math">κ = σ₁/σ<sub>n</sub></span></p>
@@ -550,7 +550,7 @@ function initLeftScene() {
   try {
     leftRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ 左侧 WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = '左侧 WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -617,7 +617,7 @@ function initRightScene() {
   try {
     rightRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ 右侧 WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = '右侧 WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -957,14 +957,14 @@ watch([a, b, c, d], () => {
 
 onMounted(() => {
   if (!checkWebGL()) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染 3D 场景'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染 3D 场景'
     initStatusType.value = 'error'
     return
   }
   requestAnimationFrame(() => {
     initLeftScene()
     initRightScene()
-    if (leftScene && rightScene) {
+    if (leftScene && rightScene && leftRenderer && rightRenderer) {
       updateLeftScene()
       updateRightScene()
       updateRightCameraScale()
@@ -1243,8 +1243,8 @@ onBeforeUnmount(() => {
   animation: pulse-bg 1s ease-in-out infinite;
 }
 .kappa-mini.kappa-singular {
-  background: #1e293b;
-  color: #fca5a5;
+  background: #eff6ff;
+  color: #1e293b;
 }
 
 @keyframes pulse-bg {
@@ -1545,8 +1545,8 @@ onBeforeUnmount(() => {
 }
 
 .formula-block {
-  background: #1e293b;
-  color: #f1f5f9;
+  background: #eff6ff;
+  color: #1e293b;
   border-radius: 8px;
   padding: 14px 16px;
   margin-bottom: 12px;
@@ -1556,7 +1556,7 @@ onBeforeUnmount(() => {
   margin: 0 0 8px 0;
   font-size: 14px;
   font-weight: 700;
-  color: #fbbf24;
+  color: #1e40af;
 }
 
 .formula-line {
@@ -1567,10 +1567,10 @@ onBeforeUnmount(() => {
 }
 
 .formula-line .math {
-  background: #334155;
+  background: #dbeafe;
   padding: 2px 8px;
   border-radius: 3px;
-  color: #fbbf24;
+  color: #1e40af;
   font-style: italic;
 }
 

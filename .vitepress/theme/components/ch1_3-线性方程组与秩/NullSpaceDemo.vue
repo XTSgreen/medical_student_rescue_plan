@@ -59,7 +59,7 @@
       </div>
       <div class="output-row">
         <span class="label">验证 rank + nullity = n</span>
-        <span class="value">{{ rank }} + {{ nullity }} = {{ rank + nullity }} ✓</span>
+        <span class="value">{{ rank }} + {{ nullity }} = {{ rank + nullity }}</span>
       </div>
       <div class="output-row" v-if="basis.length > 0">
         <span class="label">基础解系</span>
@@ -71,7 +71,7 @@
       </div>
       <div class="output-row highlight" v-if="nullity > 0">
         <span class="label">验证 A·x =</span>
-        <span class="value">({{ axCheckDisplay }}) ✓ 在零空间内</span>
+        <span class="value">({{ axCheckDisplay }}) 在零空间内</span>
       </div>
       <div class="output-row" v-else>
         <span class="label">零空间</span>
@@ -282,10 +282,10 @@ function initScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
 
@@ -300,7 +300,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -532,7 +532,7 @@ onMounted(() => {
     initScene()
     if (renderer) animate()
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('NullSpaceDemo init error:', e)
   }

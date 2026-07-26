@@ -127,7 +127,7 @@
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 最小二乘法 · 列空间投影视角</p>
+      <p class="formula-title">最小二乘法 · 列空间投影视角</p>
       <p class="formula-line">设计矩阵 A ∈ ℝⁿˣ³（列：x_i, y_i, 1），观测向量 z ∈ ℝⁿ</p>
       <p class="formula-line">法方程：Aᵀ A β = Aᵀ z &nbsp; ⇒ &nbsp; β̂ = (AᵀA)⁻¹Aᵀz</p>
       <p class="formula-line">投影矩阵 P = A(AᵀA)⁻¹Aᵀ &nbsp; ⇒ &nbsp; ẑ = Pz 是 z 在 C(A) 上的投影</p>
@@ -367,10 +367,10 @@ function initScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
 
@@ -385,7 +385,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -633,7 +633,7 @@ onMounted(() => {
       animationId = requestAnimationFrame(animate)
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('LeastSquaresDemo init error:', e)
   }

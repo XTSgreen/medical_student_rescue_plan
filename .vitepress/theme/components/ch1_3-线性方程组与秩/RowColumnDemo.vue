@@ -66,7 +66,7 @@
       </div>
       <div class="output-row" v-if="viewMode === 'column' || viewMode === 'dual'" :class="{ highlight: matchesB }">
         <span class="label">匹配状态</span>
-        <span class="value">{{ matchesB ? '✓ 线性组合 = b（解正确）' : '✗ 不匹配（请调节 x, y）' }}</span>
+        <span class="value">{{ matchesB ? '线性组合 = b（解正确）' : '不匹配（请调节 x, y）' }}</span>
       </div>
     </div>
 
@@ -206,10 +206,10 @@ function createSceneCtx(container: HTMLElement, type: 'row' | 'column'): SceneCt
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return null
   }
 
@@ -230,7 +230,7 @@ function createSceneCtx(container: HTMLElement, type: 'row' | 'column'): SceneCt
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return null
   }
@@ -500,7 +500,7 @@ watch(viewMode, async () => {
     observeResize()
     animateLoop()
   } catch (e) {
-    initStatus.value = '✗ 切换模式失败：' + (e as Error).message
+    initStatus.value = '切换模式失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('RowColumnDemo viewMode switch error:', e)
   }
@@ -518,7 +518,7 @@ onMounted(() => {
       comboY.value = +y.value.toFixed(2)
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('RowColumnDemo init error:', e)
   }

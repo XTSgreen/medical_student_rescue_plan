@@ -164,7 +164,7 @@
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 矩阵分解复杂度公式</p>
+      <p class="formula-title">矩阵分解复杂度公式</p>
       <p class="formula-line">LU 分解：<span class="math">Flops<sub>LU</sub> = (2/3)·n³</span>（含列主元）</p>
       <p class="formula-line">Cholesky 分解：<span class="math">Flops<sub>Chol</sub> = (1/3)·n³</span>（仅正定对称）</p>
       <p class="formula-line">QR 分解（m=n）：<span class="math">Flops<sub>QR</sub> = (4/3)·n³</span></p>
@@ -528,10 +528,10 @@ function initScene() {
     const testCanvas = document.createElement('canvas')
     const gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl')
     if (!gl) {
-      initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染 3D 场景'
+      initStatus.value = '当前浏览器不支持 WebGL，无法渲染 3D 场景'
       initStatusType.value = 'error'
       container.innerHTML =
-        '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono,monospace);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+        '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono,monospace);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
       return
     }
   } catch (err) {
@@ -550,7 +550,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -800,7 +800,7 @@ onMounted(() => {
     try {
       initScene()
     } catch (e) {
-      initStatus.value = '✗ 初始化失败：' + (e as Error).message
+      initStatus.value = '初始化失败：' + (e as Error).message
       initStatusType.value = 'error'
       console.error('MatrixFactorizationCost init error:', e)
     }
@@ -1377,8 +1377,8 @@ onBeforeUnmount(() => {
 }
 
 .formula-block {
-  background: #1e293b;
-  color: #f1f5f9;
+  background: #eff6ff;
+  color: #1e293b;
   border-radius: 8px;
   padding: 14px 16px;
   margin-top: 12px;
@@ -1388,7 +1388,7 @@ onBeforeUnmount(() => {
   margin: 0 0 8px 0;
   font-size: 14px;
   font-weight: 700;
-  color: #fbbf24;
+  color: #1e40af;
 }
 
 .formula-line {
@@ -1399,10 +1399,10 @@ onBeforeUnmount(() => {
 }
 
 .formula-line .math {
-  background: #334155;
+  background: #dbeafe;
   padding: 2px 8px;
   border-radius: 3px;
-  color: #fbbf24;
+  color: #1e40af;
   font-style: italic;
 }
 

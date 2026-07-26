@@ -46,11 +46,11 @@
     </div>
 
     <div class="control-buttons">
-      <button class="play-btn" :disabled="playing || !rendererOk" @click="play">▶ 播放迭代</button>
-      <button class="pause-btn" :disabled="!playing" @click="pause">⏸ 暂停</button>
-      <button class="reset-btn" @click="reset">↻ 重置</button>
-      <button class="step-btn" :disabled="playing || currentK >= N" @click="stepForward">▶| 单步前进</button>
-      <button class="step-btn" :disabled="playing || currentK <= 0" @click="stepBackward">|◀ 单步后退</button>
+      <button class="play-btn" :disabled="playing || !rendererOk" @click="play">播放迭代</button>
+      <button class="pause-btn" :disabled="!playing" @click="pause">暂停</button>
+      <button class="reset-btn" @click="reset">重置</button>
+      <button class="step-btn" :disabled="playing || currentK >= N" @click="stepForward">单步前进</button>
+      <button class="step-btn" :disabled="playing || currentK <= 0" @click="stepBackward">单步后退</button>
       <span class="iter-info">k = {{ currentK }} / {{ N }}</span>
     </div>
 
@@ -172,7 +172,7 @@
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 幂法迭代公式</p>
+      <p class="formula-title">幂法迭代公式</p>
       <p class="formula-line">x<sub>k+1</sub> = A·x<sub>k</sub> / ‖A·x<sub>k</sub>‖</p>
       <p class="formula-line">收敛：x<sub>k</sub> → v<sub>max</sub>（主特征向量方向）</p>
       <p class="formula-line">收敛速率：‖x<sub>k</sub> − v<sub>max</sub>‖ = O(|λ₂/λ₁|<sup>k</sup>)</p>
@@ -459,10 +459,10 @@ function recomputeTrajectory() {
   trajectory.value = traj
 
   if (diverged) {
-    warningMsg.value = '⚠ 轨迹发散过快（‖A^k·v‖ > 1e6），已停止迭代'
+    warningMsg.value = '轨迹发散过快（‖A^k·v‖ > 1e6），已停止迭代'
     warningType.value = 'warning'
   } else if (isSingular.value) {
-    warningMsg.value = '⚠ det(A) = 0，矩阵奇异，至少一个特征值为 0'
+    warningMsg.value = 'det(A) = 0，矩阵奇异，至少一个特征值为 0'
     warningType.value = 'warning'
   } else if (spectralRadius.value >= 0.99 && spectralRadius.value <= 1.01 && !isRealRoots.value) {
     warningMsg.value = 'ℹ 旋转：复特征值位于单位圆上，A^k·v 在原点附近旋转'
@@ -502,7 +502,7 @@ function stepNext() {
   currentK.value++
   if (mag > 1e6) {
     playing.value = false
-    warningMsg.value = '⚠ 轨迹发散过快（‖A^k·v‖ > 1e6），已停止迭代'
+    warningMsg.value = '轨迹发散过快（‖A^k·v‖ > 1e6），已停止迭代'
     warningType.value = 'warning'
     updateSceneObjects()
     drawNormChart()
@@ -600,10 +600,10 @@ function initScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染 3D 演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染 3D 演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
 
@@ -618,7 +618,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -1298,7 +1298,7 @@ onMounted(() => {
       animationId = requestAnimationFrame(animate)
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('PowerMethodDemo init error:', e)
   }

@@ -94,11 +94,11 @@
       </div>
       <div class="output-row" :class="{ highlight: decompositionValid }">
         <span class="label">x = x<sub>r</sub> + x<sub>n</sub> ?</span>
-        <span class="value">{{ decompositionValid ? '✓ 验证成立' : '✗ 不成立' }}</span>
+        <span class="value">{{ decompositionValid ? '验证成立' : '不成立' }}</span>
       </div>
       <div class="output-row" :class="{ highlight: axnZero }">
         <span class="label">A x<sub>n</sub> = 0 ?</span>
-        <span class="value">{{ axnZero ? '✓ x_n ∈ N(A)' : '✗ 不在零空间' }}</span>
+        <span class="value">{{ axnZero ? 'x_n ∈ N(A)' : '不在零空间' }}</span>
       </div>
       <div class="output-row">
         <span class="label">Ax =</span>
@@ -106,7 +106,7 @@
       </div>
       <div class="output-row" :class="{ highlight: axInColSpace }">
         <span class="label">Ax ∈ C(A) ?</span>
-        <span class="value">{{ axInColSpace ? '✓ 是（始终成立）' : '✗ 否' }}</span>
+        <span class="value">{{ axInColSpace ? '是（始终成立）' : '否' }}</span>
       </div>
       <div class="output-row">
         <span class="label">‖Ax‖ vs ‖x<sub>r</sub>‖</span>
@@ -608,7 +608,7 @@ function initLeftScene() {
   try {
     leftRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ 左侧 WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = '左侧 WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -770,7 +770,7 @@ function initRightScene() {
   try {
     rightRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ 右侧 WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = '右侧 WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -1074,9 +1074,9 @@ function handleResize() {
 onMounted(() => {
   try {
     if (!checkWebGL()) {
-      initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+      initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
       initStatusType.value = 'warning'
-      const msg = '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      const msg = '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
       if (leftCanvasContainer.value) leftCanvasContainer.value.innerHTML = msg
       if (rightCanvasContainer.value) rightCanvasContainer.value.innerHTML = msg
       return
@@ -1091,7 +1091,7 @@ onMounted(() => {
       renderId = requestAnimationFrame(animate)
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('FourSubspacesTheoremDemo init error:', e)
   }

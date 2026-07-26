@@ -65,7 +65,7 @@
       </div>
       <div class="output-row" :class="{ highlight: bInColSpace, danger: !bInColSpace }">
         <span class="label">b ∈ C(A)</span>
-        <span class="value">{{ bInColSpace ? '是 → 有解 ✅' : '否 → 无解 ❌' }}</span>
+        <span class="value">{{ bInColSpace ? '是 → 有解' : '否 → 无解' }}</span>
       </div>
       <div class="output-row">
         <span class="label">rank([A|b])</span>
@@ -406,7 +406,7 @@ function initLeftScene() {
   try {
     leftRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ 左侧 WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = '左侧 WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -526,7 +526,7 @@ function initRightScene() {
   try {
     rightRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ 右侧 WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = '右侧 WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -806,9 +806,9 @@ function handleResize() {
 onMounted(() => {
   try {
     if (!checkWebGL()) {
-      initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+      initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
       initStatusType.value = 'warning'
-      const msg = '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      const msg = '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
       if (leftCanvasContainer.value) leftCanvasContainer.value.innerHTML = msg
       if (rightCanvasContainer.value) rightCanvasContainer.value.innerHTML = msg
       return
@@ -820,7 +820,7 @@ onMounted(() => {
       animationId = requestAnimationFrame(animate)
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('ColumnNullSpaceDemo init error:', e)
   }

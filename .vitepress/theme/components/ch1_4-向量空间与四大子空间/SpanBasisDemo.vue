@@ -22,7 +22,7 @@
     </div>
 
     <div v-if="autoWarning" class="auto-warning">
-      ⚠ {{ autoWarning }}
+      {{ autoWarning }}
     </div>
 
     <div class="vectors-editor" v-if="vectors.length > 0">
@@ -69,11 +69,11 @@
       </div>
       <div class="output-row" :class="{ highlight: linearIndependent, danger: !linearIndependent && activeCount > 0 }">
         <span class="label">是否线性无关</span>
-        <span class="value">{{ activeCount === 0 ? '—' : (linearIndependent ? '是 ✓' : '否 ✗') }}</span>
+        <span class="value">{{ activeCount === 0 ? '—' : (linearIndependent ? '是' : '否') }}</span>
       </div>
       <div class="output-row" :class="{ highlight: isBasis }">
         <span class="label">是否构成 R³ 的基</span>
-        <span class="value">{{ isBasis ? '是 ✓' : '否' }}</span>
+        <span class="value">{{ isBasis ? '是' : '否' }}</span>
       </div>
       <div class="output-row">
         <span class="label">维度关系</span>
@@ -261,16 +261,16 @@ const checkResultType = ref<'info' | 'success' | 'danger'>('info')
 function checkIndependence() {
   const n = activeCount.value
   if (n === 0) {
-    checkResult.value = '⚠ 当前没有向量，请先添加向量。'
+    checkResult.value = '当前没有向量，请先添加向量。'
     checkResultType.value = 'info'
     return
   }
   const r = rank.value
   if (r === n) {
-    checkResult.value = `✓ ${n} 个向量线性无关（rank = ${r} = 向量个数），每个向量都为张成空间贡献新方向。`
+    checkResult.value = `${n} 个向量线性无关（rank = ${r} = 向量个数），每个向量都为张成空间贡献新方向。`
     checkResultType.value = 'success'
   } else {
-    checkResult.value = `✗ ${n} 个向量线性相关（rank = ${r} < ${n}），有 ${n - r} 个向量"不增加维数"，可由其他向量线性表出。`
+    checkResult.value = `${n} 个向量线性相关（rank = ${r} < ${n}），有 ${n - r} 个向量"不增加维数"，可由其他向量线性表出。`
     checkResultType.value = 'danger'
   }
 }
@@ -304,10 +304,10 @@ function initScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
 
@@ -322,7 +322,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -563,7 +563,7 @@ onMounted(() => {
       animationId = requestAnimationFrame(animate)
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('SpanBasisDemo init error:', e)
   }

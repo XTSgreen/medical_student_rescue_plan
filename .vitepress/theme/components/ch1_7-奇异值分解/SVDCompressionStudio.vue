@@ -128,7 +128,7 @@
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 低秩逼近与 Eckart-Young 定理</p>
+      <p class="formula-title">低秩逼近与 Eckart-Young 定理</p>
       <p class="formula-line">
         低秩逼近：<span class="math">A<sub>k</sub> = Σ<sub>i=1</sub><sup>k</sup> σ<sub>i</sub>·u<sub>i</sub>·v<sub>i</sub><sup>T</sup> = U<sub>k</sub>·Σ<sub>k</sub>·V<sub>k</sub><sup>T</sup></span>
       </p>

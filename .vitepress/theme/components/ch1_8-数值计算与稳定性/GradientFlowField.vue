@@ -42,12 +42,12 @@
 
     <div class="control-buttons">
       <button class="play-btn" :disabled="isDescending || (isFinished && trajectory.length > 0)" @click="startDescent">
-        ▶ 开始下降
+        开始下降
       </button>
-      <button class="pause-btn" :disabled="!isDescending" @click="pauseDescent">⏸ 暂停</button>
-      <button class="reset-btn" @click="resetDescent">↺ 重置</button>
+      <button class="pause-btn" :disabled="!isDescending" @click="pauseDescent">暂停</button>
+      <button class="reset-btn" @click="resetDescent">重置</button>
       <button class="step-btn" :disabled="isDescending || isFinished" @click="stepDescent">
-        ▶| 单步执行
+        单步执行
       </button>
       <span class="iter-info">k = {{ descentStepIndex }} / {{ Math.max(0, trajectory.length - 1) }}</span>
     </div>
@@ -122,7 +122,7 @@
           <span class="label">数值梯度验证（中心差分 h=1e-5）</span>
           <span class="value">
             ({{ numericalGrad[0].toFixed(4) }}, {{ numericalGrad[1].toFixed(4) }})
-            {{ gradMatch ? '✓' : '✗' }}
+            {{ gradMatch ? '对' : '错' }}
           </span>
         </div>
       </div>
@@ -150,7 +150,7 @@
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 梯度、雅可比与链式法则</p>
+      <p class="formula-title">梯度、雅可比与链式法则</p>
       <p class="formula-line">梯度定义：<span class="math">∇f = (∂f/∂x₁, …, ∂f/∂xₙ)</span></p>
       <p class="formula-line">梯度下降：<span class="math">x<sub>k+1</sub> = x<sub>k</sub> − η ∇f(x<sub>k</sub>)</span></p>
       <p class="formula-line">雅可比矩阵：<span class="math">J<sub>ij</sub> = ∂f<sub>i</sub>/∂x<sub>j</sub></span>（标量函数的雅可比即梯度转置）</p>
@@ -351,9 +351,9 @@ const isFinished = computed(() => {
 })
 
 const convergenceLabel = computed(() => {
-  if (isDiverged.value) return '✗ 发散'
-  if (isConverged.value) return '✓ 收敛'
-  if (currentGradNorm.value < 0.01) return '✓ 收敛（‖∇f‖ < 0.01）'
+  if (isDiverged.value) return '发散'
+  if (isConverged.value) return '收敛'
+  if (currentGradNorm.value < 0.01) return '收敛（‖∇f‖ < 0.01）'
   if (trajectory.value.length === 0) return '— 未开始'
   return '迭代中…'
 })
@@ -404,7 +404,7 @@ const tipText = computed(() => {
   if (isConverged.value) {
     base += '当前已收敛（‖∇f‖ < 0.01）。'
   } else if (isDiverged.value) {
-    base += '⚠ 当前轨迹发散，请减小学习率 η。'
+    base += '当前轨迹发散，请减小学习率 η。'
   }
   return base
 })
@@ -471,11 +471,11 @@ function computeTrajectory() {
   isDiverged.value = diverged
 
   if (diverged) {
-    warningMsg.value = '⚠ 轨迹发散（‖x‖ > 10），请减小学习率 η'
+    warningMsg.value = '轨迹发散（‖x‖ > 10），请减小学习率 η'
     warningType.value = 'warning'
   } else if (converged) {
     const last = traj[traj.length - 1]
-    warningMsg.value = `✓ 收敛于 (${last.x.toFixed(4)}, ${last.y.toFixed(4)})，共 ${traj.length - 1} 步`
+    warningMsg.value = `收敛于 (${last.x.toFixed(4)}, ${last.y.toFixed(4)})，共 ${traj.length - 1} 步`
     warningType.value = 'success'
   } else {
     warningMsg.value = `ℹ 达到最大步数 200 未收敛，当前 ‖∇f‖ = ${currentGradNorm.value.toFixed(4)}`
@@ -592,10 +592,10 @@ function initScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染 3D 场景'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染 3D 场景'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看。</div>'
     return
   }
 
@@ -609,7 +609,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -1205,7 +1205,7 @@ onMounted(() => {
     try {
       initScene()
     } catch (e) {
-      initStatus.value = '✗ 初始化失败：' + (e as Error).message
+      initStatus.value = '初始化失败：' + (e as Error).message
       initStatusType.value = 'error'
       console.error('GradientFlowField init error:', e)
     }
@@ -1687,7 +1687,8 @@ onBeforeUnmount(() => {
   top: 2px;
   bottom: 2px;
   width: 3px;
-  background: #1e293b;
+  background: #eff6ff;
+  color: #1e293b;
   border-radius: 1px;
 }
 
@@ -1712,8 +1713,8 @@ onBeforeUnmount(() => {
 }
 
 .formula-block {
-  background: #1e293b;
-  color: #f1f5f9;
+  background: #eff6ff;
+  color: #1e293b;
   border-radius: 8px;
   padding: 16px 18px;
   margin-top: 12px;
@@ -1723,7 +1724,7 @@ onBeforeUnmount(() => {
   margin: 0 0 10px 0;
   font-size: 14px;
   font-weight: 700;
-  color: #fbbf24;
+  color: #1e40af;
 }
 
 .formula-line {
@@ -1734,10 +1735,10 @@ onBeforeUnmount(() => {
 }
 
 .formula-line .math {
-  background: #334155;
+  background: #dbeafe;
   padding: 2px 8px;
   border-radius: 3px;
-  color: #fbbf24;
+  color: #1e40af;
   font-style: italic;
 }
 

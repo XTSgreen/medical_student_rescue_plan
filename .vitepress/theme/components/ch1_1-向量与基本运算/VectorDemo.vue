@@ -151,10 +151,10 @@ function initScene() {
   const gl2 = testCanvas.getContext('webgl2')
   const gl1 = gl2 || testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl')
   if (!gl1) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染 3D 演示。请使用 Chrome/Edge/Firefox/Safari。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染 3D 演示。请使用 Chrome/Edge/Firefox/Safari。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，无法渲染 3D 演示。<br>请使用支持 WebGL 的现代浏览器（Chrome、Edge、Firefox、Safari）查看。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，无法渲染 3D 演示。<br>请使用支持 WebGL 的现代浏览器（Chrome、Edge、Firefox、Safari）查看。</div>'
     return
   }
 
@@ -174,10 +174,10 @@ function initScene() {
       powerPreference: 'default'
     })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#ef4444;font-family:var(--font-mono);font-size:0.9rem;">⚠ WebGL 初始化失败：' +
+      '<div style="padding:2rem;text-align:center;color:#ef4444;font-family:var(--font-mono);font-size:0.9rem;">WebGL 初始化失败：' +
       (e as Error).message +
       '</div>'
     return
@@ -396,7 +396,7 @@ onMounted(() => {
       animate()
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('VectorDemo init error:', e)
   }

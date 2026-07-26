@@ -211,8 +211,8 @@ const uniqueSolution = computed(() => consistent.value && rankA.value === n)
 const det = computed(() => a.value * d.value - b.value * c.value)
 
 const resultText = computed(() => {
-  if (!consistent.value) return '✗ 无解'
-  if (uniqueSolution.value) return '✓ 唯一解'
+  if (!consistent.value) return '无解'
+  if (uniqueSolution.value) return '唯一解'
   return '∞ 无穷多解'
 })
 
@@ -336,10 +336,10 @@ function createBaseScene(container: HTMLElement, viewSize = 8) {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:1rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.8rem;">⚠ 不支持 WebGL</div>'
+      '<div style="padding:1rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.8rem;">不支持 WebGL</div>'
     return null
   }
 
@@ -359,7 +359,7 @@ function createBaseScene(container: HTMLElement, viewSize = 8) {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return null
   }
@@ -753,7 +753,7 @@ onMounted(() => {
       animateLoop()
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('RankSummaryDemo init error:', e)
   }

@@ -152,15 +152,15 @@
       </div>
       <div class="output-row" v-if="currentStep >= 2" :class="{ highlight: orthoOk2 }">
         <span class="label">验证 q1 · v2 ≈ 0</span>
-        <span class="value">{{ q1DotV2.toFixed(6) }} {{ orthoOk2 ? '✓' : '✗' }}</span>
+        <span class="value">{{ q1DotV2.toFixed(6) }} {{ orthoOk2 ? '对' : '错' }}</span>
       </div>
       <div class="output-row" v-if="currentStep >= 4" :class="{ highlight: orthoOk31 }">
         <span class="label">验证 q1 · q3 ≈ 0</span>
-        <span class="value">{{ q1DotQ3.toFixed(6) }} {{ orthoOk31 ? '✓' : '✗' }}</span>
+        <span class="value">{{ q1DotQ3.toFixed(6) }} {{ orthoOk31 ? '对' : '错' }}</span>
       </div>
       <div class="output-row" v-if="currentStep >= 4" :class="{ highlight: orthoOk32 }">
         <span class="label">验证 q2 · q3 ≈ 0</span>
-        <span class="value">{{ q2DotQ3.toFixed(6) }} {{ orthoOk32 ? '✓' : '✗' }}</span>
+        <span class="value">{{ q2DotQ3.toFixed(6) }} {{ orthoOk32 ? '对' : '错' }}</span>
       </div>
     </div>
 
@@ -199,7 +199,7 @@
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 Gram-Schmidt 正交化公式</p>
+      <p class="formula-title">Gram-Schmidt 正交化公式</p>
       <p class="formula-line">v<sub>k</sub> = a<sub>k</sub> − Σ<sub>i=1..k−1</sub> (a<sub>k</sub>·q<sub>i</sub>) q<sub>i</sub> &nbsp; ⇒ &nbsp; q<sub>k</sub> = v<sub>k</sub> / ‖v<sub>k</sub>‖</p>
       <p class="formula-line">A = QR &nbsp; 其中 Q 列向量标准正交（Q<sup>T</sup>Q = I），R 上三角且 r<sub>kk</sub> = ‖v<sub>k</sub>‖</p>
     </div>
@@ -552,10 +552,10 @@ function initScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
 
@@ -569,7 +569,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -1170,7 +1170,7 @@ onMounted(() => {
       animationId = requestAnimationFrame(animate)
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('GramSchmidtDemo init error:', e)
   }

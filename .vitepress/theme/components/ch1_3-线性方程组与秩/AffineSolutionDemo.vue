@@ -54,7 +54,7 @@
       </div>
       <div class="output-row" :class="{ highlight: consistent, danger: !consistent }">
         <span class="label">相容性</span>
-        <span class="value">{{ consistent ? '✓ 相容（有解）' : '✗ 不相容（无解）' }}</span>
+        <span class="value">{{ consistent ? '相容（有解）' : '不相容（无解）' }}</span>
       </div>
       <div class="output-row" v-if="consistent">
         <span class="label">特解 x_p</span>
@@ -70,7 +70,7 @@
       </div>
       <div class="output-row" v-if="consistent && nullity > 0" :class="{ highlight: true }">
         <span class="label">验证 A·x = b</span>
-        <span class="value">({{ axCheck.map(v => v.toFixed(2)).join(', ') }}) = ({{ vectorB.map(v => v.toFixed(2)).join(', ') }}) ✓</span>
+        <span class="value">({{ axCheck.map(v => v.toFixed(2)).join(', ') }}) = ({{ vectorB.map(v => v.toFixed(2)).join(', ') }})</span>
       </div>
       <div class="output-row" v-if="consistent && nullity === 0">
         <span class="label">解</span>
@@ -423,10 +423,10 @@ function initScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
 
@@ -441,7 +441,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -749,7 +749,7 @@ onMounted(() => {
     initScene()
     if (renderer) animate()
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('AffineSolutionDemo init error:', e)
   }

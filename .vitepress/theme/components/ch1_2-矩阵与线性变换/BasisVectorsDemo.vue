@@ -84,7 +84,7 @@ let camera: THREE.PerspectiveCamera
 let renderer: THREE.WebGLRenderer
 let controls: OrbitControls
 let resizeObserver: ResizeObserver
-let animationId: number
+let animationId: number = 0
 
 // 箭头引用
 let arrowI: THREE.ArrowHelper   // 原始 i
@@ -140,12 +140,15 @@ function initScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染交互演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
+  // 释放检测用的 WebGL 上下文
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   scene.background = null
@@ -159,7 +162,7 @@ function initScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -288,7 +291,8 @@ function updateScene() {
   const iLen = Math.sqrt(av * av + cv * cv)
   if (iLen > 0.05) {
     arrowI2.setDirection(new THREE.Vector3(av, cv, 0).normalize())
-    arrowI2.setLength(iLen, 0.2, 0.12)
+    const iHeadLen = Math.min(0.2, iLen * 0.3)
+    arrowI2.setLength(iLen, iHeadLen, iHeadLen * 0.6)
     arrowI2.visible = true
   } else {
     arrowI2.visible = false
@@ -298,7 +302,8 @@ function updateScene() {
   const jLen = Math.sqrt(bv * bv + dv * dv)
   if (jLen > 0.05) {
     arrowJ2.setDirection(new THREE.Vector3(bv, dv, 0).normalize())
-    arrowJ2.setLength(jLen, 0.2, 0.12)
+    const jHeadLen = Math.min(0.2, jLen * 0.3)
+    arrowJ2.setLength(jLen, jHeadLen, jHeadLen * 0.6)
     arrowJ2.visible = true
   } else {
     arrowJ2.visible = false
@@ -333,7 +338,7 @@ onMounted(() => {
     initScene()
     if (renderer) animate()
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('BasisVectorsDemo init error:', e)
   }
@@ -345,6 +350,14 @@ onBeforeUnmount(() => {
   cancelAnimationFrame(animationId)
   resizeObserver?.disconnect()
   controls?.dispose()
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   renderer?.dispose()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)

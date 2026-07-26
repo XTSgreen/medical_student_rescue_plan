@@ -48,9 +48,9 @@
         </div>
 
         <div class="anim-buttons">
-          <button class="play-btn" @click="autoPlay" :disabled="isPlaying">▶ 自动演示</button>
-          <button @click="pause" :disabled="!isPlaying">⏸ 暂停</button>
-          <button @click="reset" :disabled="timelinePercent === 0 && !isPlaying">↺ 重置</button>
+          <button class="play-btn" @click="autoPlay" :disabled="isPlaying">自动演示</button>
+          <button @click="pause" :disabled="!isPlaying">暂停</button>
+          <button @click="reset" :disabled="timelinePercent === 0 && !isPlaying">重置</button>
         </div>
 
         <div class="color-legend">
@@ -180,25 +180,25 @@
         </div>
         <div class="output-row" :class="{ ok: usvOk === true, fail: usvOk === false }">
           <span class="label">验证 U·Σ·Vᵀ = A</span>
-          <span class="value">{{ usvOk === null ? '—' : (usvOk ? '✓ 成立' : '✗ 不成立') }}</span>
+          <span class="value">{{ usvOk === null ? '—' : (usvOk ? '成立' : '不成立') }}</span>
         </div>
         <div class="output-row" :class="{ ok: orthUOk === true, fail: orthUOk === false }">
           <span class="label">Uᵀ·U = I（正交）</span>
-          <span class="value">{{ orthUOk ? '✓' : '✗' }}</span>
+          <span class="value">{{ orthUOk ? '对' : '错' }}</span>
         </div>
         <div class="output-row" :class="{ ok: orthVOk === true, fail: orthVOk === false }">
           <span class="label">Vᵀ·V = I（正交）</span>
-          <span class="value">{{ orthVOk ? '✓' : '✗' }}</span>
+          <span class="value">{{ orthVOk ? '对' : '错' }}</span>
         </div>
         <div class="output-row">
           <span class="label">σ₁ ≥ σ₂ ≥ σ₃</span>
-          <span class="value">{{ sigmaOrderOk ? '✓ 降序' : '✗' }}</span>
+          <span class="value">{{ sigmaOrderOk ? '降序' : '错' }}</span>
         </div>
       </div>
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 SVD 三部曲</p>
+      <p class="formula-title">SVD 三部曲</p>
       <p class="formula-line">SVD 分解：<span class="math">A = U Σ Vᵀ</span></p>
       <p class="formula-line">三部曲：<span class="math">A·x = U(Σ(Vᵀ·x))</span></p>
       <p class="formula-line">几何效果：单位球 → 超椭球（沿主轴各向异性缩放）</p>
@@ -978,13 +978,13 @@ watch(
 const tipText = computed(() => {
   switch (currentPhase.value) {
     case 0:
-      return '原始状态：白色球面是单位球面 ‖x‖=1，红绿蓝分别是标准 XYZ 基。点击"▶ 自动演示"开始 SVD 三部曲，或拖动时间轴逐帧浏览。'
+      return '原始状态：白色球面是单位球面 ‖x‖=1，红绿蓝分别是标准 XYZ 基。点击"自动演示"开始 SVD 三部曲，或拖动时间轴逐帧浏览。'
     case 1:
       return 'Step 1 · Vᵀ 旋转：将单位球面的右奇异向量 v₁、v₂ 对齐到坐标轴方向。此阶段只是旋转，球面形状未变（V 是正交矩阵，保持长度）。'
     case 2:
       return 'Step 2 · Σ 缩放：沿主轴方向各向异性缩放——σ₁、σ₂、σ₃ 分别决定三个轴向的拉伸。球面变形为椭球，金色箭头长度即奇异值大小。'
     case 3:
-      return 'Step 3 · U 旋转：将椭球旋转到左奇异向量方向。最终椭球的三个主轴方向就是 u₁、u₂、u₃，主轴半长就是 σ₁、σ₂、σ₃。验证面板应显示 U·Σ·Vᵀ = A ✓。'
+      return 'Step 3 · U 旋转：将椭球旋转到左奇异向量方向。最终椭球的三个主轴方向就是 u₁、u₂、u₃，主轴半长就是 σ₁、σ₂、σ₃。验证面板应显示 U·Σ·Vᵀ = A。'
     default:
       return ''
   }
@@ -1590,8 +1590,8 @@ onBeforeUnmount(() => {
 }
 
 .formula-block {
-  background: #1e293b;
-  color: #f1f5f9;
+  background: #eff6ff;
+  color: #1e293b;
   border-radius: 8px;
   padding: 14px 16px;
   margin-top: 12px;
@@ -1601,7 +1601,7 @@ onBeforeUnmount(() => {
   margin: 0 0 8px 0;
   font-size: 14px;
   font-weight: 700;
-  color: #fbbf24;
+  color: #1e40af;
 }
 
 .formula-line {
@@ -1612,10 +1612,10 @@ onBeforeUnmount(() => {
 }
 
 .formula-line .math {
-  background: #334155;
+  background: #dbeafe;
   padding: 2px 8px;
   border-radius: 3px;
-  color: #fbbf24;
+  color: #1e40af;
   font-style: italic;
 }
 

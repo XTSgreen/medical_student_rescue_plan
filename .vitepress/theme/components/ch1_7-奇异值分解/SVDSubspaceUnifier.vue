@@ -96,7 +96,7 @@
           A·v = ({{ selectedVector.av.map(v => v.toFixed(3)).join(', ') }}) ≈ <b>0</b>
         </span>
       </div>
-      <button class="clear-btn" @click="clearSelection">✕ 清除选择</button>
+      <button class="clear-btn" @click="clearSelection">清除选择</button>
     </div>
 
     <table class="subspace-table">
@@ -162,7 +162,7 @@
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 四大基本子空间的彻底统一</p>
+      <p class="formula-title">四大基本子空间的彻底统一</p>
       <p class="formula-line">SVD 分解：<span class="math">A = U Σ V<sup>T</sup></span></p>
       <p class="formula-line">行空间映射：<span class="math">A v<sub>i</sub> = σ<sub>i</sub> u<sub>i</sub></span>（i ≤ r）</p>
       <p class="formula-line">零空间压缩：<span class="math">A v<sub>j</sub> = 0</span>（j &gt; r）</p>
@@ -708,7 +708,7 @@ function initLeftScene() {
   try {
     leftRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ 左侧 WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = '左侧 WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -780,7 +780,7 @@ function initRightScene() {
   try {
     rightRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ 右侧 WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = '右侧 WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -1126,7 +1126,7 @@ const tipText = computed(() => {
 
 onMounted(() => {
   if (!checkWebGL()) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染 3D 场景'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染 3D 场景'
     initStatusType.value = 'error'
     return
   }
@@ -1359,7 +1359,7 @@ onBeforeUnmount(() => {
   border: 1px solid #e2e8f0; font-size: 13px;
 }
 .subspace-table th {
-  background: #1e293b; color: #f1f5f9; padding: 8px 10px;
+  background: #eff6ff; color: #1e293b; padding: 8px 10px;
   text-align: left; font-weight: 600; font-size: 12px;
 }
 .subspace-table td { padding: 8px 10px; border-top: 1px solid #e2e8f0; color: #1f2937; }
@@ -1390,17 +1390,17 @@ onBeforeUnmount(() => {
 .rel-desc { font-size: 12px; color: #64748b; font-style: italic; }
 
 .formula-block {
-  background: #1e293b; color: #f1f5f9;
+  background: #eff6ff; color: #1e293b;
   border-radius: 8px; padding: 14px 16px; margin-bottom: 12px;
 }
-.formula-title { margin: 0 0 8px 0; font-size: 14px; font-weight: 700; color: #fbbf24; }
+.formula-title { margin: 0 0 8px 0; font-size: 14px; font-weight: 700; color: #1e40af; }
 .formula-line {
   margin: 4px 0; font-size: 13px;
   font-family: 'Cambria Math', 'Times New Roman', serif; line-height: 1.6;
 }
 .formula-line .math {
-  background: #334155; padding: 2px 8px;
-  border-radius: 3px; color: #fbbf24; font-style: italic;
+  background: #dbeafe; padding: 2px 8px;
+  border-radius: 3px; color: #1e40af; font-style: italic;
 }
 
 .demo-tip {

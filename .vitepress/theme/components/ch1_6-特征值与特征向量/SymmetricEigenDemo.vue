@@ -131,36 +131,36 @@
       </div>
       <div class="output-row highlight">
         <span class="label">验证 A·v₁ = λ₁·v₁</span>
-        <span class="value">({{ lam1.toFixed(2) }}, 0, 0) = {{ lam1.toFixed(2) }}·(1,0,0) ✓</span>
+        <span class="value">({{ lam1.toFixed(2) }}, 0, 0) = {{ lam1.toFixed(2) }}·(1,0,0)</span>
       </div>
       <div class="output-row highlight">
         <span class="label">验证 A·v₂ = λ₂·v₂</span>
-        <span class="value">(0, {{ lam2.toFixed(2) }}, 0) = {{ lam2.toFixed(2) }}·(0,1,0) ✓</span>
+        <span class="value">(0, {{ lam2.toFixed(2) }}, 0) = {{ lam2.toFixed(2) }}·(0,1,0)</span>
       </div>
       <div class="output-row highlight">
         <span class="label">验证 A·v₃ = λ₃·v₃</span>
-        <span class="value">(0, 0, {{ lam3.toFixed(2) }}) = {{ lam3.toFixed(2) }}·(0,0,1) ✓</span>
+        <span class="value">(0, 0, {{ lam3.toFixed(2) }}) = {{ lam3.toFixed(2) }}·(0,0,1)</span>
       </div>
       <div class="output-row highlight">
         <span class="label">验证 Q·Λ·Qᵀ = A</span>
-        <span class="value">{{ qlqtOk ? '✓ I·Λ·I = Λ = A' : '✗ 不一致' }}</span>
+        <span class="value">{{ qlqtOk ? 'I·Λ·I = Λ = A' : '不一致' }}</span>
       </div>
       <div class="output-row highlight">
         <span class="label">验证 v₁·v₂ = 0（正交）</span>
-        <span class="value">{{ v1DotV2.toFixed(6) }} ✓</span>
+        <span class="value">{{ v1DotV2.toFixed(6) }}</span>
       </div>
       <div class="output-row highlight">
         <span class="label">验证 v₁·v₃ = 0（正交）</span>
-        <span class="value">{{ v1DotV3.toFixed(6) }} ✓</span>
+        <span class="value">{{ v1DotV3.toFixed(6) }}</span>
       </div>
       <div class="output-row highlight">
         <span class="label">验证 v₂·v₃ = 0（正交）</span>
-        <span class="value">{{ v2DotV3.toFixed(6) }} ✓</span>
+        <span class="value">{{ v2DotV3.toFixed(6) }}</span>
       </div>
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 谱定理与主轴变换</p>
+      <p class="formula-title">谱定理与主轴变换</p>
       <p class="formula-line">谱定理：<span class="math">A = Q Λ Qᵀ</span>，Q 为正交矩阵（<span class="math">Qᵀ Q = I</span>）</p>
       <p class="formula-line">二次型：<span class="math">f(x) = xᵀ A x = Σ λᵢ xᵢ²</span></p>
       <p class="formula-line">主轴变换：在特征基下，二次型退化为 <span class="math">Σ λᵢ yᵢ²</span>（无交叉项）</p>
@@ -420,10 +420,10 @@ function init3DScene() {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
   if (!gl) {
-    initStatus.value = '⚠ 当前浏览器不支持 WebGL，无法渲染 3D 演示。'
+    initStatus.value = '当前浏览器不支持 WebGL，无法渲染 3D 演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">⚠ 当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
 
@@ -437,7 +437,7 @@ function init3DScene() {
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   } catch (e) {
-    initStatus.value = '⚠ WebGL 初始化失败：' + (e as Error).message
+    initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     return
   }
@@ -749,7 +749,7 @@ onMounted(() => {
       animationId = requestAnimationFrame(animate)
     }
   } catch (e) {
-    initStatus.value = '✗ 初始化失败：' + (e as Error).message
+    initStatus.value = '初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     console.error('SymmetricEigenDemo init error:', e)
   }

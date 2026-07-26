@@ -28,24 +28,25 @@
           </div>
           <div class="phase-labels">
             <span :class="{ active: mode === 'idle' }">待机</span>
-            <span :class="{ active: mode === 'forward' }">前向 ▶</span>
-            <span :class="{ active: mode === 'backward' }">◀ 反向</span>
+            <span :class="{ active: mode === 'forward' }">前向</span>
+            <span :class="{ active: mode === 'backward' }">反向</span>
+            <span :class="{ active: mode === 'forwardDone' }">前向完成</span>
             <span :class="{ active: mode === 'done' }">完成</span>
           </div>
         </div>
 
         <div class="anim-buttons">
           <button class="play-btn" @click="runForward" :disabled="mode === 'forward' || mode === 'backward'">
-            ▶ 开始前向
+            开始前向
           </button>
           <button class="backward-btn" @click="runBackward" :disabled="mode === 'idle' || mode === 'forward' || mode === 'backward'">
-            ◀ 计算梯度
+            计算梯度
           </button>
           <button @click="stepForward" :disabled="mode === 'forward' || mode === 'backward'">
-            ⏭ 单步执行
+            单步执行
           </button>
           <button @click="reset" :disabled="mode === 'idle' && phase === 0">
-            ↺ 重置
+            重置
           </button>
         </div>
 
@@ -175,8 +176,8 @@
             <span class="data-label">裁剪后 ‖∇L‖</span>
             <span class="data-val">{{ clippedNorm.toFixed(4) }}</span>
           </div>
-          <div v-if="isExploding" class="warn-banner">⚠ 梯度爆炸：‖∇L‖ &gt; 10，连线闪烁红色</div>
-          <div v-if="isVanishing" class="warn-banner vanish">⚠ 梯度消失：‖∇L‖ &lt; 1e-3，连线变细</div>
+          <div v-if="isExploding" class="warn-banner">梯度爆炸：‖∇L‖ &gt; 10，连线闪烁红色</div>
+          <div v-if="isVanishing" class="warn-banner vanish">梯度消失：‖∇L‖ &lt; 1e-3，连线变细</div>
         </div>
 
         <div class="chain-rule">
@@ -195,7 +196,7 @@
     </div>
 
     <div class="formula-block">
-      <p class="formula-title">📐 神经网络计算图与链式法则</p>
+      <p class="formula-title">神经网络计算图与链式法则</p>
       <p class="formula-line">前向：<span class="math">h = ReLU(W₁x + b₁)</span>，<span class="math">y = σ(W₂h + b₂)</span></p>
       <p class="formula-line">损失：<span class="math">L = (y - t)²</span></p>
       <p class="formula-line">链式法则：<span class="math">∂L/∂W₁ = ∂L/∂y · ∂y/∂h · ∂h/∂W₁</span></p>
@@ -484,7 +485,7 @@ const chainBreakdown = computed<string>(() => {
   }
 })
 
-type Mode = 'idle' | 'forward' | 'backward' | 'done'
+type Mode = 'idle' | 'forward' | 'backward' | 'done' | 'forwardDone'
 const mode = ref<Mode>('idle')
 const phase = ref(0)
 const timelinePercent = ref(0)
@@ -494,6 +495,7 @@ let lastFrameTime = 0
 const phaseName = computed(() => {
   if (mode.value === 'idle') return '待机'
   if (mode.value === 'done') return '完成'
+  if (mode.value === 'forwardDone') return '前向完成'
   if (mode.value === 'forward') {
     return `前向 Phase ${phase.value}/5`
   }
@@ -506,6 +508,7 @@ const phaseName = computed(() => {
 const phaseDescription = computed(() => {
   if (mode.value === 'idle') return '点击"开始前向"启动数据流；或调整输入/权重观察网络行为'
   if (mode.value === 'done') return '一次完整前向+反向已完成，可重置后再次运行'
+  if (mode.value === 'forwardDone') return '前向传播已完成，可点击「计算梯度」启动反向传播'
   if (mode.value === 'forward') {
     switch (phase.value) {
       case 1: return '数据光球从输入层流向隐藏层（速度 = |w|）'
@@ -533,6 +536,7 @@ const phaseDescription = computed(() => {
 const phaseColorClass = computed(() => {
   if (mode.value === 'idle') return 'phase-idle'
   if (mode.value === 'done') return 'phase-done'
+  if (mode.value === 'forwardDone') return 'phase-done'
   if (mode.value === 'forward') return 'phase-forward'
   if (mode.value === 'backward') return 'phase-backward'
   return ''
@@ -1049,7 +1053,7 @@ function animate() {
 }
 
 function tickPhaseAnimation(now: number) {
-  if (mode.value === 'idle' || mode.value === 'done') return
+  if (mode.value === 'idle' || mode.value === 'done' || mode.value === 'forwardDone') return
 
   const elapsed = now - phaseStartTime
   const phaseDuration = 1000
@@ -1082,7 +1086,7 @@ function spawnBallsWave(
     activeBalls.push(ball)
   }
 
-  if (arrived >= total) onComplete()
+  if (total === 0) onComplete()
 }
 
 function runForward() {
@@ -1144,7 +1148,7 @@ function startForwardPhase(p: number) {
 
       const onArrive = () => {
         refreshNodeVisuals()
-        mode.value = 'idle'
+        mode.value = 'forwardDone'
         phase.value = 0
         timelinePercent.value = 100
       }
@@ -1547,17 +1551,17 @@ onBeforeUnmount(() => {
 }
 
 .formula-block {
-  background: #1e293b; color: #f1f5f9; border-radius: 8px;
+  background: #eff6ff; color: #1e293b; border-radius: 8px;
   padding: 14px 16px; margin-top: 12px;
 }
-.formula-title { margin: 0 0 8px 0; font-size: 14px; font-weight: 700; color: #fbbf24; }
+.formula-title { margin: 0 0 8px 0; font-size: 14px; font-weight: 700; color: #1e40af; }
 .formula-line {
   margin: 4px 0; font-size: 13px;
   font-family: 'Cambria Math', 'Times New Roman', serif; line-height: 1.6;
 }
 .formula-line .math {
-  background: #334155; padding: 2px 8px; border-radius: 3px;
-  color: #fbbf24; font-style: italic;
+  background: #dbeafe; padding: 2px 8px; border-radius: 3px;
+  color: #1e40af; font-style: italic;
 }
 .demo-tip {
   margin: 12px 0 0 0; padding: 10px 12px; background: #dbeafe;
