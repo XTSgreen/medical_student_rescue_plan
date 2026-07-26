@@ -168,7 +168,12 @@ export default defineConfig({
               items: [
                 { text: '1.1 向量与基本运算', link: '/code/ai-math/ch1-linear-algebra/ch1_1-vectors' },
                 { text: '1.2 矩阵与线性变换', link: '/code/ai-math/ch1-linear-algebra/ch1_2-matrices' },
-                { text: '1.3 线性方程组与秩', link: '/code/ai-math/ch1-linear-algebra/ch1_3-linear-equations' }
+                { text: '1.3 线性方程组与秩', link: '/code/ai-math/ch1-linear-algebra/ch1_3-linear-equations' },
+                { text: '1.4 向量空间与四大子空间', link: '/code/ai-math/ch1-linear-algebra/ch1_4-vector-spaces' },
+                { text: '1.5 正交性与投影', link: '/code/ai-math/ch1-linear-algebra/ch1_5-orthogonality' },
+                { text: '1.6 特征值与特征向量', link: '/code/ai-math/ch1-linear-algebra/ch1_6-eigenvalues' },
+                { text: '1.7 奇异值分解', link: '/code/ai-math/ch1-linear-algebra/ch1_7-svd' },
+                { text: '1.8 数值计算与稳定性', link: '/code/ai-math/ch1-linear-algebra/ch1_8-matrix-calculus' }
               ]
             },
             {
