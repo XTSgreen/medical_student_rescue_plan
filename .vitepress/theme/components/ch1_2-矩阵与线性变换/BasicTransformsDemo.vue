@@ -1,15 +1,16 @@
 <template>
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
-    <div ref="canvasContainer" class="demo-canvas"></div>
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="基本线性变换三维演示画面，可用鼠标拖拽旋转视角，滚轮缩放"></div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <!-- 变换类型选择 -->
-    <div class="demo-mode-selector">
+    <div class="demo-mode-selector" role="group" aria-label="变换类型选择">
       <button
         v-for="m in modes"
         :key="m.key"
         :class="['mode-btn', { active: mode === m.key }]"
+        :aria-pressed="mode === m.key"
         @click="mode = m.key"
       >
         {{ m.label }}
@@ -201,7 +202,7 @@ let camera: THREE.OrthographicCamera
 let renderer: THREE.WebGLRenderer
 let controls: OrbitControls
 let resizeObserver: ResizeObserver
-let animationId: number
+let animationId: number = 0
 
 // 场景对象引用
 let originalSquare: THREE.LineLoop
@@ -254,9 +255,11 @@ function initScene() {
     initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:var(--color-warning);font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   scene.background = null
@@ -494,7 +497,8 @@ function updateScene() {
   const iLen = Math.sqrt(a * a + c * c)
   if (iLen > 1e-4) {
     arrowI2.setDirection(new THREE.Vector3(a, c, 0).normalize())
-    arrowI2.setLength(iLen, 0.2, 0.12)
+    const iHeadLen = Math.min(0.2, iLen * 0.3)
+    arrowI2.setLength(iLen, iHeadLen, iHeadLen * 0.6)
     arrowI2.visible = true
   } else {
     arrowI2.visible = false
@@ -504,7 +508,8 @@ function updateScene() {
   const jLen = Math.sqrt(b * b + d * d)
   if (jLen > 1e-4) {
     arrowJ2.setDirection(new THREE.Vector3(b, d, 0).normalize())
-    arrowJ2.setLength(jLen, 0.2, 0.12)
+    const jHeadLen = Math.min(0.2, jLen * 0.3)
+    arrowJ2.setLength(jLen, jHeadLen, jHeadLen * 0.6)
     arrowJ2.visible = true
   } else {
     arrowJ2.visible = false
@@ -556,7 +561,16 @@ onBeforeUnmount(() => {
   cancelAnimationFrame(animationId)
   resizeObserver?.disconnect()
   controls?.dispose()
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

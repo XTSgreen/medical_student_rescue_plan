@@ -2,18 +2,18 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'diag' }" @click="setPreset('diag')">方阵可对角化</button>
-      <button :class="{ active: preset === 'rect' }" @click="setPreset('rect')">非方阵 3×2（默认）</button>
-      <button :class="{ active: preset === 'shear' }" @click="setPreset('shear')">剪切矩阵</button>
-      <button :class="{ active: preset === 'rank' }" @click="setPreset('rank')">秩亏矩阵（σ₃=0）</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'diag' }" :aria-pressed="preset === 'diag'" @click="setPreset('diag')">方阵可对角化</button>
+      <button :class="{ active: preset === 'rect' }" :aria-pressed="preset === 'rect'" @click="setPreset('rect')">非方阵 3×2（默认）</button>
+      <button :class="{ active: preset === 'shear' }" :aria-pressed="preset === 'shear'" @click="setPreset('shear')">剪切矩阵</button>
+      <button :class="{ active: preset === 'rank' }" :aria-pressed="preset === 'rank'" @click="setPreset('rank')">秩亏矩阵（σ₃=0）</button>
     </div>
 
     <div class="dual-pane">
 
       <div class="left-pane">
-        <div ref="canvasContainer" class="demo-canvas"></div>
-        <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+        <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="SVD 几何分解演示画面，展示单位球面到椭球的变换过程，可用鼠标拖拽旋转视角"></div>
+        <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
         <div class="phase-label" :class="phaseColorClass">
           <span class="phase-name">Phase {{ currentPhase }}</span>
@@ -737,12 +737,14 @@ function initScene() {
 
   try {
     const testCanvas = document.createElement('canvas')
-    const gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl')
+    const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
     if (!gl) {
       initStatus.value = '当前浏览器不支持 WebGL，无法渲染 3D 场景'
       initStatusType.value = 'error'
       return
     }
+    const loseExt = gl.getExtension('WEBGL_lose_context')
+    loseExt?.loseContext()
   } catch (err) {
     initStatus.value = 'WebGL 初始化失败：' + (err as Error).message
     initStatusType.value = 'error'
@@ -1013,6 +1015,7 @@ onBeforeUnmount(() => {
   if (controls) controls.dispose()
   if (renderer) {
     renderer.dispose()
+    renderer.forceContextLoss()
     if (renderer.domElement.parentNode) {
       renderer.domElement.parentNode.removeChild(renderer.domElement)
     }

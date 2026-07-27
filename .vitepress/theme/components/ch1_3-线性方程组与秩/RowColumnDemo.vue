@@ -6,23 +6,23 @@
     <div v-if="viewMode === 'dual'" class="dual-canvas">
       <div class="canvas-pane">
         <p class="pane-label">行图像：两条直线相交</p>
-        <div ref="canvas1" class="demo-canvas"></div>
+        <div ref="canvas1" class="demo-canvas" role="img" aria-label="行图像画面，展示两条直线相交的解"></div>
       </div>
       <div class="canvas-pane">
         <p class="pane-label">列图像：列向量线性组合</p>
-        <div ref="canvas2" class="demo-canvas"></div>
+        <div ref="canvas2" class="demo-canvas" role="img" aria-label="列图像画面，展示列向量的线性组合"></div>
       </div>
     </div>
     <!-- 单画布模式 -->
-    <div v-else ref="canvas1" class="demo-canvas"></div>
+    <div v-else ref="canvas1" class="demo-canvas" role="img" aria-label="方程组行图像或列图像演示画面"></div>
 
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <!-- 视图模式 -->
-    <div class="demo-mode-selector">
-      <button :class="['mode-btn', { active: viewMode === 'row' }]" @click="viewMode = 'row'">行图像</button>
-      <button :class="['mode-btn', { active: viewMode === 'column' }]" @click="viewMode = 'column'">列图像</button>
-      <button :class="['mode-btn', { active: viewMode === 'dual' }]" @click="viewMode = 'dual'">双栏对比</button>
+    <div class="demo-mode-selector" role="group" aria-label="视图模式选择">
+      <button :class="['mode-btn', { active: viewMode === 'row' }]" :aria-pressed="viewMode === 'row'" @click="viewMode = 'row'">行图像</button>
+      <button :class="['mode-btn', { active: viewMode === 'column' }]" :aria-pressed="viewMode === 'column'" @click="viewMode = 'column'">列图像</button>
+      <button :class="['mode-btn', { active: viewMode === 'dual' }]" :aria-pressed="viewMode === 'dual'" @click="viewMode = 'dual'">双栏对比</button>
     </div>
 
     <!-- 系数滑块 -->
@@ -212,6 +212,8 @@ function createSceneCtx(container: HTMLElement, type: 'row' | 'column'): SceneCt
       '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return null
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   const scene = new THREE.Scene()
   scene.background = null
@@ -437,7 +439,16 @@ function disposeAll() {
   for (const ctx of [ctx1, ctx2]) {
     if (!ctx) continue
     ctx.controls.dispose()
+    ctx.scene.traverse(obj => {
+      const mesh = obj as THREE.Mesh
+      if (mesh.geometry) mesh.geometry.dispose()
+      if (mesh.material) {
+        if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+        else (mesh.material as THREE.Material).dispose()
+      }
+    })
     ctx.renderer.dispose()
+    ctx.renderer.forceContextLoss()
     if (ctx.renderer.domElement.parentNode) {
       ctx.renderer.domElement.parentNode.removeChild(ctx.renderer.domElement)
     }

@@ -2,11 +2,12 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div class="preset-buttons">
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
       <button
         v-for="opt in imageOptions"
         :key="opt.key"
         :class="{ active: imageType === opt.key }"
+        :aria-pressed="imageType === opt.key"
         @click="setImageType(opt.key)"
       >
         {{ opt.label }}
@@ -18,15 +19,15 @@
         <p class="canvas-label">
           低秩重建图像 · A<sub>k</sub> = Σ<sub>i=1</sub><sup>k</sup> σ<sub>i</sub>·u<sub>i</sub>·v<sub>i</sub><sup>T</sup>（k = {{ k }}）
         </p>
-        <canvas ref="leftCanvas" class="demo-canvas dual left-canvas"></canvas>
+        <canvas ref="leftCanvas" class="demo-canvas dual left-canvas" role="img" aria-label="低秩重建图像画面，展示保留前 k 个奇异值后的图像"></canvas>
       </div>
       <div class="canvas-wrap right-wrap">
         <p class="canvas-label">奇异值分析 · 条形图 + 累计能量曲线</p>
-        <canvas ref="rightCanvas" class="demo-canvas dual right-canvas"></canvas>
+        <canvas ref="rightCanvas" class="demo-canvas dual right-canvas" role="img" aria-label="奇异值分析画面，展示奇异值条形图和累计能量曲线"></canvas>
       </div>
     </div>
 
-    <div v-if="statusMsg" class="demo-status" :class="statusType">{{ statusMsg }}</div>
+    <div v-if="statusMsg" class="demo-status" :class="statusType" role="status" aria-live="polite">{{ statusMsg }}</div>
 
     <div class="color-legend">
       <span class="legend-item">

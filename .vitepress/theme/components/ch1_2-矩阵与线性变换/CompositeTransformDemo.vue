@@ -5,15 +5,15 @@
       <div class="canvas-pane">
         <p class="pane-label">顺序 1：先 A（旋转）后 B（缩放+剪切）</p>
         <p class="pane-matrix">复合矩阵 = B · A</p>
-        <div ref="canvas1" class="demo-canvas"></div>
+        <div ref="canvas1" class="demo-canvas" role="img" aria-label="顺序一演示画面：先旋转后缩放剪切（B·A），可用鼠标拖拽旋转视角"></div>
       </div>
       <div class="canvas-pane">
         <p class="pane-label">顺序 2：先 B（缩放+剪切）后 A（旋转）</p>
         <p class="pane-matrix">复合矩阵 = A · B</p>
-        <div ref="canvas2" class="demo-canvas"></div>
+        <div ref="canvas2" class="demo-canvas" role="img" aria-label="顺序二演示画面：先缩放剪切后旋转（A·B），可用鼠标拖拽旋转视角"></div>
       </div>
     </div>
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <!-- 参数 -->
     <div class="demo-controls">
@@ -252,6 +252,8 @@ function createSceneCtx(
       '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return null
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   const scene = new THREE.Scene()
   scene.background = null
@@ -549,7 +551,16 @@ onBeforeUnmount(() => {
   for (const ctx of [ctx1, ctx2]) {
     if (!ctx) continue
     ctx.controls.dispose()
+    ctx.scene.traverse(obj => {
+      const mesh = obj as THREE.Mesh
+      if (mesh.geometry) mesh.geometry.dispose()
+      if (mesh.material) {
+        if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+        else (mesh.material as THREE.Material).dispose()
+      }
+    })
     ctx.renderer.dispose()
+    ctx.renderer.forceContextLoss()
     if (ctx.renderer.domElement.parentNode) {
       ctx.renderer.domElement.parentNode.removeChild(ctx.renderer.domElement)
     }

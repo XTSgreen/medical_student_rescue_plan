@@ -1,12 +1,12 @@
 <template>
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
-    <div ref="canvasContainer" class="demo-canvas"></div>
+    <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="基向量变换三维演示画面，可用鼠标拖拽旋转视角，滚轮缩放"></div>
     <!-- WebGL 警告 -->
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <!-- 预设按钮 -->
-    <div class="preset-buttons">
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
       <button @click="setPreset('identity')">单位矩阵</button>
       <button @click="setPreset('rotate45')">旋转 45°</button>
       <button @click="setPreset('shear')">剪切</button>
@@ -143,7 +143,7 @@ function initScene() {
     initStatus.value = '当前浏览器不支持 WebGL，无法渲染交互演示。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
+      '<div style="padding:2rem;text-align:center;color:var(--color-warning);font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
   // 释放检测用的 WebGL 上下文
@@ -359,6 +359,7 @@ onBeforeUnmount(() => {
     }
   })
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

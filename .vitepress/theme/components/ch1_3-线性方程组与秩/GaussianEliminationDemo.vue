@@ -6,7 +6,7 @@
       <!-- 左侧：3D 几何场景 -->
       <div class="geometry-pane">
         <p class="pane-label">几何场景：三个平面相交</p>
-        <div ref="canvasContainer" class="demo-canvas"></div>
+        <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="高斯消元几何演示画面，展示三平面相交过程，可用鼠标拖拽旋转视角"></div>
       </div>
 
       <!-- 右侧：矩阵步骤显示 -->
@@ -27,13 +27,13 @@
       </div>
     </div>
 
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <!-- 预设 -->
-    <div class="preset-buttons">
-      <button :class="['preset-btn', { active: preset === 'unique' }]" @click="setPreset('unique')">唯一解</button>
-      <button :class="['preset-btn', { active: preset === 'infinite' }]" @click="setPreset('infinite')">无穷解</button>
-      <button :class="['preset-btn', { active: preset === 'none' }]" @click="setPreset('none')">无解</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="['preset-btn', { active: preset === 'unique' }]" :aria-pressed="preset === 'unique'" @click="setPreset('unique')">唯一解</button>
+      <button :class="['preset-btn', { active: preset === 'infinite' }]" :aria-pressed="preset === 'infinite'" @click="setPreset('infinite')">无穷解</button>
+      <button :class="['preset-btn', { active: preset === 'none' }]" :aria-pressed="preset === 'none'" @click="setPreset('none')">无解</button>
     </div>
 
     <!-- 步骤控制 -->
@@ -384,6 +384,8 @@ function initScene() {
       '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   scene.background = null
@@ -573,7 +575,16 @@ onBeforeUnmount(() => {
   if (playTimer !== null) clearInterval(playTimer)
   resizeObserver?.disconnect()
   controls?.dispose()
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

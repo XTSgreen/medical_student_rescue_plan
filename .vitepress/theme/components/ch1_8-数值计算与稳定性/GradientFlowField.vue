@@ -2,20 +2,21 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div class="function-selector">
+    <div class="function-selector" role="group" aria-label="损失函数选择">
       <button
         v-for="fn in lossFunctionList"
         :key="fn.key"
         :class="{ active: currentFnKey === fn.key }"
+        :aria-pressed="currentFnKey === fn.key"
         @click="selectFunction(fn.key)"
       >
         {{ fn.label }}
       </button>
     </div>
 
-    <div ref="canvasContainer" class="demo-canvas"></div>
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
-    <div v-if="warningMsg" class="demo-status" :class="warningType">{{ warningMsg }}</div>
+    <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="梯度流场三维演示画面，展示损失地形与梯度下降轨迹，可用鼠标拖拽旋转视角"></div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
+    <div v-if="warningMsg" class="demo-status" :class="warningType" role="status" aria-live="polite">{{ warningMsg }}</div>
 
     <div class="color-legend">
       <span class="legend-item">
@@ -598,6 +599,9 @@ function initScene() {
       '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看。</div>'
     return
   }
+
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   scene.background = new THREE.Color(0xf8fafc)
@@ -1224,6 +1228,7 @@ onBeforeUnmount(() => {
   controls?.dispose()
   if (renderer) {
     renderer.dispose()
+    renderer.forceContextLoss()
     if (renderer.domElement.parentNode) {
       renderer.domElement.parentNode.removeChild(renderer.domElement)
     }

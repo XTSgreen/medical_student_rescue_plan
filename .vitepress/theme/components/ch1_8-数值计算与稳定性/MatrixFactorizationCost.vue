@@ -2,17 +2,17 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'small' }" @click="setPreset('small')">
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'small' }" :aria-pressed="preset === 'small'" @click="setPreset('small')">
         n=10（小型）
       </button>
-      <button :class="{ active: preset === 'medium' }" @click="setPreset('medium')">
+      <button :class="{ active: preset === 'medium' }" :aria-pressed="preset === 'medium'" @click="setPreset('medium')">
         n=100（中型）
       </button>
-      <button :class="{ active: preset === 'large' }" @click="setPreset('large')">
+      <button :class="{ active: preset === 'large' }" :aria-pressed="preset === 'large'" @click="setPreset('large')">
         n=500（大型）
       </button>
-      <button :class="{ active: preset === 'industrial' }" @click="setPreset('industrial')">
+      <button :class="{ active: preset === 'industrial' }" :aria-pressed="preset === 'industrial'" @click="setPreset('industrial')">
         n=1000（工业级）
       </button>
     </div>
@@ -20,8 +20,8 @@
     <div class="dual-pane">
 
       <div class="left-pane">
-        <div ref="canvasContainer" class="demo-canvas"></div>
-        <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+        <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="矩阵分解计算成本演示画面，展示不同分解算法的耗时对比，可用鼠标拖拽旋转视角"></div>
+        <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
         <div class="n-slider-block">
           <div class="n-slider-header">
@@ -526,7 +526,7 @@ function initScene() {
 
   try {
     const testCanvas = document.createElement('canvas')
-    const gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl')
+    const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
     if (!gl) {
       initStatus.value = '当前浏览器不支持 WebGL，无法渲染 3D 场景'
       initStatusType.value = 'error'
@@ -534,6 +534,8 @@ function initScene() {
         '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono,monospace);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
       return
     }
+    const loseExt = gl.getExtension('WEBGL_lose_context')
+    loseExt?.loseContext()
   } catch (err) {
     initStatus.value = 'WebGL 初始化失败：' + (err as Error).message
     initStatusType.value = 'error'
@@ -813,6 +815,7 @@ onBeforeUnmount(() => {
   if (controls) controls.dispose()
   if (renderer) {
     renderer.dispose()
+    renderer.forceContextLoss()
     if (renderer.domElement.parentNode) {
       renderer.domElement.parentNode.removeChild(renderer.domElement)
     }

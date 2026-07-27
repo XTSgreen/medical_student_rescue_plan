@@ -2,9 +2,9 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div ref="canvas3DContainer" class="demo-canvas main-3d"></div>
+    <div ref="canvas3DContainer" class="demo-canvas main-3d" role="img" aria-label="对称矩阵特征值三维演示画面，展示椭球面与主轴方向，可用鼠标拖拽旋转视角"></div>
 
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <div class="classify-badge" :class="classifyClass">
       <span class="badge-label">曲面分类</span>
@@ -43,11 +43,11 @@
       </span>
     </div>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'pd' }" @click="setPreset('pd')">正定 (2, 1, 0.5)</button>
-      <button :class="{ active: preset === 'ind' }" @click="setPreset('ind')">不定 (1, -1, 0.5)</button>
-      <button :class="{ active: preset === 'psd' }" @click="setPreset('psd')">半正定 (2, 1, 0)</button>
-      <button :class="{ active: preset === 'sphere' }" @click="setPreset('sphere')">球面 (1, 1, 1)</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'pd' }" :aria-pressed="preset === 'pd'" @click="setPreset('pd')">正定 (2, 1, 0.5)</button>
+      <button :class="{ active: preset === 'ind' }" :aria-pressed="preset === 'ind'" @click="setPreset('ind')">不定 (1, -1, 0.5)</button>
+      <button :class="{ active: preset === 'psd' }" :aria-pressed="preset === 'psd'" @click="setPreset('psd')">半正定 (2, 1, 0)</button>
+      <button :class="{ active: preset === 'sphere' }" :aria-pressed="preset === 'sphere'" @click="setPreset('sphere')">球面 (1, 1, 1)</button>
       <button @click="reset">重置</button>
     </div>
 
@@ -427,6 +427,9 @@ function init3DScene() {
     return
   }
 
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
+
   scene = new THREE.Scene()
   scene.background = null
 
@@ -779,6 +782,7 @@ onBeforeUnmount(() => {
   squareXZ?.geometry?.dispose()
   ;(squareXZ?.material as THREE.Material | undefined)?.dispose()
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

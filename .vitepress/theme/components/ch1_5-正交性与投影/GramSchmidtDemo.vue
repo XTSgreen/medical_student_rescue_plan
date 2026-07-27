@@ -2,14 +2,14 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === '2d' }" @click="setPreset('2d')">二维示例</button>
-      <button :class="{ active: preset === '3d' }" @click="setPreset('3d')">三维示例</button>
-      <button :class="{ active: preset === 'random' }" @click="setPreset('random')">随机向量</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === '2d' }" :aria-pressed="preset === '2d'" @click="setPreset('2d')">二维示例</button>
+      <button :class="{ active: preset === '3d' }" :aria-pressed="preset === '3d'" @click="setPreset('3d')">三维示例</button>
+      <button :class="{ active: preset === 'random' }" :aria-pressed="preset === 'random'" @click="setPreset('random')">随机向量</button>
     </div>
 
-    <div ref="canvasContainer" class="demo-canvas"></div>
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="Gram-Schmidt 正交化三维演示画面，展示向量正交化过程，可用鼠标拖拽旋转视角"></div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <div class="step-info">
       <div class="step-progress">
@@ -558,6 +558,8 @@ function initScene() {
       '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   scene.background = null
@@ -1183,7 +1185,16 @@ onBeforeUnmount(() => {
   stepAnim.active = false
   resizeObserver?.disconnect()
   controls?.dispose()
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

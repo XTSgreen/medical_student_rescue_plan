@@ -2,16 +2,16 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'diagonal' }" @click="setPreset('diagonal')">对角矩阵</button>
-      <button :class="{ active: preset === 'upper' }" @click="setPreset('upper')">上三角矩阵</button>
-      <button :class="{ active: preset === 'general' }" @click="setPreset('general')">一般矩阵（默认）</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'diagonal' }" :aria-pressed="preset === 'diagonal'" @click="setPreset('diagonal')">对角矩阵</button>
+      <button :class="{ active: preset === 'upper' }" :aria-pressed="preset === 'upper'" @click="setPreset('upper')">上三角矩阵</button>
+      <button :class="{ active: preset === 'general' }" :aria-pressed="preset === 'general'" @click="setPreset('general')">一般矩阵（默认）</button>
     </div>
 
     <div class="dual-canvas">
       <div class="canvas-wrap">
         <p class="canvas-label">矩阵 A 的列向量（原始基）</p>
-        <div ref="leftCanvasContainer" class="demo-canvas dual"></div>
+        <div ref="leftCanvasContainer" class="demo-canvas dual" role="img" aria-label="矩阵 A 的列向量画面，展示原始基，可用鼠标拖拽旋转视角"></div>
       </div>
       <div class="equals-badge">
         <div class="equals-matrix">A</div>
@@ -20,11 +20,11 @@
       </div>
       <div class="canvas-wrap">
         <p class="canvas-label">矩阵 Q 的标准正交基</p>
-        <div ref="rightCanvasContainer" class="demo-canvas dual"></div>
+        <div ref="rightCanvasContainer" class="demo-canvas dual" role="img" aria-label="矩阵 Q 的标准正交基画面，展示正交化结果，可用鼠标拖拽旋转视角"></div>
       </div>
     </div>
 
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <div class="matrix-editor-3x3">
       <div class="matrix-display-block">
@@ -389,7 +389,10 @@ const initStatusType = ref<'info' | 'success' | 'warning' | 'error'>('info')
 function checkWebGL(): boolean {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
-  return !!gl
+  if (!gl) return false
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
+  return true
 }
 
 function createCommonSceneElements(scene: THREE.Scene): THREE.Mesh {
@@ -749,8 +752,26 @@ onBeforeUnmount(() => {
   resizeObserver?.disconnect()
   leftControls?.dispose()
   rightControls?.dispose()
+  leftScene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
+  rightScene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   leftRenderer?.dispose()
   rightRenderer?.dispose()
+  leftRenderer?.forceContextLoss()
+  rightRenderer?.forceContextLoss()
   if (leftRenderer?.domElement?.parentNode) {
     leftRenderer.domElement.parentNode.removeChild(leftRenderer.domElement)
   }

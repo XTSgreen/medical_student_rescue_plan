@@ -2,16 +2,16 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'rank2' }" @click="setPreset('rank2')">秩 r=2 投影演示</button>
-      <button :class="{ active: preset === 'rank1' }" @click="setPreset('rank1')">秩 r=1 投影演示</button>
-      <button :class="{ active: preset === 'full' }" @click="setPreset('full')">满秩 r=3</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'rank2' }" :aria-pressed="preset === 'rank2'" @click="setPreset('rank2')">秩 r=2 投影演示</button>
+      <button :class="{ active: preset === 'rank1' }" :aria-pressed="preset === 'rank1'" @click="setPreset('rank1')">秩 r=1 投影演示</button>
+      <button :class="{ active: preset === 'full' }" :aria-pressed="preset === 'full'" @click="setPreset('full')">满秩 r=3</button>
     </div>
 
     <div class="dual-canvas">
       <div class="canvas-wrap">
         <p class="canvas-label">定义域 ℝ³ = C(A<sup>T</sup>) ⊕ N(A)</p>
-        <div ref="leftCanvasContainer" class="demo-canvas dual"></div>
+        <div ref="leftCanvasContainer" class="demo-canvas dual" role="img" aria-label="定义域画面，展示行空间与零空间的直和分解，可用鼠标拖拽旋转视角"></div>
       </div>
       <div class="mapping-arrow">
         <div class="matrix-badge">A</div>
@@ -20,11 +20,11 @@
       </div>
       <div class="canvas-wrap">
         <p class="canvas-label">值域 ℝ³ = C(A) ⊕ N(A<sup>T</sup>)</p>
-        <div ref="rightCanvasContainer" class="demo-canvas dual"></div>
+        <div ref="rightCanvasContainer" class="demo-canvas dual" role="img" aria-label="值域画面，展示列空间与左零空间的直和分解，可用鼠标拖拽旋转视角"></div>
       </div>
     </div>
 
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <div class="matrix-editor-3x3">
       <div class="matrix-display-block">
@@ -590,7 +590,10 @@ const initStatusType = ref<'info' | 'success' | 'warning' | 'error'>('info')
 function checkWebGL(): boolean {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
-  return !!gl
+  if (!gl) return false
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
+  return true
 }
 
 function initLeftScene() {
@@ -1106,8 +1109,26 @@ onBeforeUnmount(() => {
   resizeObserver?.disconnect()
   leftControls?.dispose()
   rightControls?.dispose()
+  leftScene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
+  rightScene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   leftRenderer?.dispose()
   rightRenderer?.dispose()
+  leftRenderer?.forceContextLoss()
+  rightRenderer?.forceContextLoss()
   if (leftRenderer?.domElement?.parentNode) {
     leftRenderer.domElement.parentNode.removeChild(leftRenderer.domElement)
   }

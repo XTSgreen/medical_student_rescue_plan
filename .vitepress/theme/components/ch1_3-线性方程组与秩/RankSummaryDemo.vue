@@ -6,19 +6,19 @@
     <div class="triple-view">
       <div class="view-pane">
         <p class="pane-label">视角 1：行图像（有效方程数）</p>
-        <div ref="canvas1" class="demo-canvas small"></div>
+        <div ref="canvas1" class="demo-canvas small" role="img" aria-label="行图像视角画面，展示有效方程数与解的关系"></div>
       </div>
       <div class="view-pane">
         <p class="pane-label">视角 2：列图像（列张成空间）</p>
-        <div ref="canvas2" class="demo-canvas small"></div>
+        <div ref="canvas2" class="demo-canvas small" role="img" aria-label="列图像视角画面，展示列向量张成空间"></div>
       </div>
       <div class="view-pane">
         <p class="pane-label">视角 3：变换（像空间维度）</p>
-        <div ref="canvas3" class="demo-canvas small"></div>
+        <div ref="canvas3" class="demo-canvas small" role="img" aria-label="变换视角画面，展示像空间维度"></div>
       </div>
     </div>
 
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <!-- 判定流程图 -->
     <div class="flowchart">
@@ -48,10 +48,10 @@
     </div>
 
     <!-- 预设 -->
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'unique' }" @click="setPreset('unique')">唯一解</button>
-      <button :class="{ active: preset === 'infinite' }" @click="setPreset('infinite')">无穷多解</button>
-      <button :class="{ active: preset === 'none' }" @click="setPreset('none')">无解</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'unique' }" :aria-pressed="preset === 'unique'" @click="setPreset('unique')">唯一解</button>
+      <button :class="{ active: preset === 'infinite' }" :aria-pressed="preset === 'infinite'" @click="setPreset('infinite')">无穷多解</button>
+      <button :class="{ active: preset === 'none' }" :aria-pressed="preset === 'none'" @click="setPreset('none')">无解</button>
     </div>
 
     <!-- 矩阵编辑器（2x2 + b 向量） -->
@@ -342,6 +342,8 @@ function createBaseScene(container: HTMLElement, viewSize = 8) {
       '<div style="padding:1rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.8rem;">不支持 WebGL</div>'
     return null
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   const scene = new THREE.Scene()
   scene.background = null
@@ -782,6 +784,7 @@ onBeforeUnmount(() => {
       }
     })
     ctx.renderer.dispose()
+    ctx.renderer.forceContextLoss()
     if (ctx.renderer.domElement.parentNode) {
       ctx.renderer.domElement.parentNode.removeChild(ctx.renderer.domElement)
     }

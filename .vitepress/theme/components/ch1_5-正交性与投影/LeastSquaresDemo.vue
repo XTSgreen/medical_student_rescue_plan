@@ -1,13 +1,13 @@
 <template>
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
-    <div ref="canvasContainer" class="demo-canvas"></div>
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="最小二乘法三维拟合演示画面，展示数据点与拟合平面，可用鼠标拖拽旋转视角"></div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'good' }" @click="setPreset('good')">良好拟合</button>
-      <button :class="{ active: preset === 'noisy' }" @click="setPreset('noisy')">噪声较大</button>
-      <button :class="{ active: preset === 'horizontal' }" @click="setPreset('horizontal')">水平面</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'good' }" :aria-pressed="preset === 'good'" @click="setPreset('good')">良好拟合</button>
+      <button :class="{ active: preset === 'noisy' }" :aria-pressed="preset === 'noisy'" @click="setPreset('noisy')">噪声较大</button>
+      <button :class="{ active: preset === 'horizontal' }" :aria-pressed="preset === 'horizontal'" @click="setPreset('horizontal')">水平面</button>
     </div>
 
     <div class="data-editor">
@@ -373,6 +373,8 @@ function initScene() {
       '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   scene.background = null
@@ -645,7 +647,16 @@ onBeforeUnmount(() => {
   cancelAnimationFrame(animationId)
   resizeObserver?.disconnect()
   controls?.dispose()
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

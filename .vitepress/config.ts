@@ -180,20 +180,14 @@ export default defineConfig({
               text: '第二章 · 概率与统计',
               collapsed: false,
               items: [
-                { text: '2.1 概率论基础', link: '/code/ai-math/ch2-probability-statistics/' },
-                { text: '2.2 随机变量与分布', link: '/code/ai-math/ch2-probability-statistics/' },
-                { text: '2.3 参数估计', link: '/code/ai-math/ch2-probability-statistics/' },
-                { text: '2.4 假设检验', link: '/code/ai-math/ch2-probability-statistics/' }
+                { text: '2.1 概率论基础（建设中）', link: '/code/ai-math/ch2-probability-statistics/' }
               ]
             },
             {
               text: '第三章 · 最优化',
               collapsed: false,
               items: [
-                { text: '3.1 凸优化基础', link: '/code/ai-math/ch3-optimization/' },
-                { text: '3.2 梯度下降法', link: '/code/ai-math/ch3-optimization/' },
-                { text: '3.3 牛顿法与拟牛顿法', link: '/code/ai-math/ch3-optimization/' },
-                { text: '3.4 约束优化', link: '/code/ai-math/ch3-optimization/' }
+                { text: '3.1 凸优化基础（建设中）', link: '/code/ai-math/ch3-optimization/' }
               ]
             }
           ]
@@ -202,7 +196,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/' }
+      { icon: 'github', link: 'https://github.com/XTSgreen/medical_student_rescue_plan' }
     ],
     search: {
       provider: 'local',

@@ -1,14 +1,14 @@
 <template>
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
-    <div ref="canvasContainer" class="demo-canvas"></div>
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="零空间几何演示画面，展示基础解系与解向量，可用鼠标拖拽旋转视角"></div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'full' }" @click="setPreset('full')">满秩 rank=3</button>
-      <button :class="{ active: preset === 'rank2' }" @click="setPreset('rank2')">秩 2（零度=1）</button>
-      <button :class="{ active: preset === 'rank1' }" @click="setPreset('rank1')">秩 1（零度=2）</button>
-      <button :class="{ active: preset === 'rank0' }" @click="setPreset('rank0')">秩 0（零度=3）</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'full' }" :aria-pressed="preset === 'full'" @click="setPreset('full')">满秩 rank=3</button>
+      <button :class="{ active: preset === 'rank2' }" :aria-pressed="preset === 'rank2'" @click="setPreset('rank2')">秩 2（零度=1）</button>
+      <button :class="{ active: preset === 'rank1' }" :aria-pressed="preset === 'rank1'" @click="setPreset('rank1')">秩 1（零度=2）</button>
+      <button :class="{ active: preset === 'rank0' }" :aria-pressed="preset === 'rank0'" @click="setPreset('rank0')">秩 0（零度=3）</button>
     </div>
 
     <div class="matrix-editor-3x3">
@@ -288,6 +288,8 @@ function initScene() {
       '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   scene.background = null
@@ -544,7 +546,16 @@ onBeforeUnmount(() => {
   cancelAnimationFrame(animationId)
   resizeObserver?.disconnect()
   controls?.dispose()
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

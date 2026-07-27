@@ -2,11 +2,12 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div class="preset-buttons">
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
       <button
         v-for="p in presetList"
         :key="p.key"
         :class="{ active: preset === p.key }"
+        :aria-pressed="preset === p.key"
         @click="setPreset(p.key)"
       >{{ p.label }}</button>
     </div>
@@ -14,8 +15,8 @@
     <div class="dual-pane">
 
       <div class="left-pane">
-        <div ref="canvasContainer" class="demo-canvas"></div>
-        <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+        <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="计算图前向反向传播演示画面，可用鼠标拖拽查看节点"></div>
+        <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
         <div class="phase-label" :class="phaseColorClass">
           <span class="phase-name">{{ phaseName }}</span>
@@ -234,6 +235,16 @@ const COLOR_NEG_WEIGHT = 0xef4444
 const COLOR_EXPLODE = 0xdc2626
 const COLOR_BG = 0xf8fafc
 const COLOR_GRID = 0xe5e7eb
+
+const trackedTimers = new Set<number>()
+function trackedTimeout(fn: () => void, delay: number): number {
+  const id = window.setTimeout(() => {
+    trackedTimers.delete(id)
+    fn()
+  }, delay)
+  trackedTimers.add(id)
+  return id
+}
 
 interface NodeSpec {
   key: string
@@ -788,12 +799,14 @@ function initScene() {
 
   try {
     const testCanvas = document.createElement('canvas')
-    const gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl')
+    const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
     if (!gl) {
       initStatus.value = '当前浏览器不支持 WebGL，无法渲染 3D 场景'
       initStatusType.value = 'error'
       return
     }
+    const loseExt = gl.getExtension('WEBGL_lose_context')
+    loseExt?.loseContext()
   } catch (err) {
     initStatus.value = 'WebGL 初始化失败：' + (err as Error).message
     initStatusType.value = 'error'
@@ -1116,13 +1129,13 @@ function startForwardPhase(p: number) {
           })
         }
       }
-      spawnBallsWave(items, COLOR_FORWARD_BALL, () => setTimeout(() => startForwardPhase(2), 200))
+      spawnBallsWave(items, COLOR_FORWARD_BALL, () => trackedTimeout(() => startForwardPhase(2), 200))
       break
     }
     case 2:
 
       refreshNodeVisuals()
-      setTimeout(() => startForwardPhase(3), 600)
+      trackedTimeout(() => startForwardPhase(3), 600)
       break
     case 3: {
 
@@ -1136,13 +1149,13 @@ function startForwardPhase(p: number) {
           signal: hVals.value[i] < 1e-6 ? 0 : w
         })
       }
-      spawnBallsWave(items, COLOR_FORWARD_BALL, () => setTimeout(() => startForwardPhase(4), 200))
+      spawnBallsWave(items, COLOR_FORWARD_BALL, () => trackedTimeout(() => startForwardPhase(4), 200))
       break
     }
     case 4:
 
       refreshNodeVisuals()
-      setTimeout(() => startForwardPhase(5), 600)
+      trackedTimeout(() => startForwardPhase(5), 600)
       break
     case 5: {
 
@@ -1163,7 +1176,7 @@ function runBackward() {
   if (mode.value === 'idle' && phase.value === 0) {
     initStatus.value = '请先点击"开始前向"完成前向传播'
     initStatusType.value = 'warning'
-    setTimeout(() => {
+    trackedTimeout(() => {
       initStatus.value = '3D 场景已就绪 · 可拖拽旋转视角'
       initStatusType.value = 'success'
     }, 2000)
@@ -1182,13 +1195,13 @@ function startBackwardPhase(p: number) {
     case 1:
 
       activeBalls.push(spawnBall('L', 'y', COLOR_BACKWARD_BALL, 1.2,
-        () => setTimeout(() => startBackwardPhase(2), 200)))
+        () => trackedTimeout(() => startBackwardPhase(2), 200)))
       break
     case 2: {
 
       updateTextSprite(nodeValueLabels.get('y')!, `∂L/∂s=${dLds.value.toFixed(3)}`,
         '#dc2626', 'rgba(254,226,226,0.95)')
-      setTimeout(() => startBackwardPhase(3), 700)
+      trackedTimeout(() => startBackwardPhase(3), 700)
       break
     }
     case 3: {
@@ -1198,7 +1211,7 @@ function startBackwardPhase(p: number) {
         updateTextSprite(nodeValueLabels.get(`h${i + 1}`)!,
           `∂L/∂h=${dLdh.value[i].toFixed(3)}`, '#7f1d1d')
       }
-      setTimeout(() => startBackwardPhase(4), 800)
+      trackedTimeout(() => startBackwardPhase(4), 800)
       break
     }
     case 4: {
@@ -1220,7 +1233,7 @@ function startBackwardPhase(p: number) {
           signal: w2.value[i] * dLdh.value[i]
         })
       }
-      spawnBallsWave(items, COLOR_BACKWARD_BALL, () => setTimeout(() => startBackwardPhase(5), 300))
+      spawnBallsWave(items, COLOR_BACKWARD_BALL, () => trackedTimeout(() => startBackwardPhase(5), 300))
       break
     }
     case 5: {
@@ -1236,7 +1249,7 @@ function startBackwardPhase(p: number) {
           })
         }
       }
-      spawnBallsWave(items, COLOR_BACKWARD_BALL, () => setTimeout(() => startBackwardPhase(6), 300))
+      spawnBallsWave(items, COLOR_BACKWARD_BALL, () => trackedTimeout(() => startBackwardPhase(6), 300))
       break
     }
     case 6: {
@@ -1318,10 +1331,13 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (animationId) cancelAnimationFrame(animationId)
   if (resizeObserver) resizeObserver.disconnect()
+  trackedTimers.forEach(id => clearTimeout(id))
+  trackedTimers.clear()
   if (controls) controls.dispose()
   clearAllBalls()
   if (renderer) {
     renderer.dispose()
+    renderer.forceContextLoss()
     if (renderer.domElement.parentNode) {
       renderer.domElement.parentNode.removeChild(renderer.domElement)
     }

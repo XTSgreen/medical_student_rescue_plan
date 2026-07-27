@@ -2,20 +2,20 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'identity' }" @click="setPreset('identity')">
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'identity' }" :aria-pressed="preset === 'identity'" @click="setPreset('identity')">
         完美良态（圆 → 圆）
       </button>
-      <button :class="{ active: preset === 'diag' }" @click="setPreset('diag')">
+      <button :class="{ active: preset === 'diag' }" :aria-pressed="preset === 'diag'" @click="setPreset('diag')">
         良态各向异性（圆 → 椭圆）
       </button>
-      <button :class="{ active: preset === 'mid' }" @click="setPreset('mid')">
+      <button :class="{ active: preset === 'mid' }" :aria-pressed="preset === 'mid'" @click="setPreset('mid')">
         中等病态（圆 → 略扁椭圆）
       </button>
-      <button :class="{ active: preset === 'ill' }" @click="setPreset('ill')">
+      <button :class="{ active: preset === 'ill' }" :aria-pressed="preset === 'ill'" @click="setPreset('ill')">
         病态（圆 → 扁长椭圆）
       </button>
-      <button :class="{ active: preset === 'singular' }" @click="setPreset('singular')">
+      <button :class="{ active: preset === 'singular' }" :aria-pressed="preset === 'singular'" @click="setPreset('singular')">
         接近奇异（圆 → 极扁线段）
       </button>
     </div>
@@ -24,7 +24,7 @@
 
       <div class="canvas-wrap">
         <p class="canvas-label">输入空间 R² · 单位扰动圆斑</p>
-        <div ref="leftCanvasContainer" class="demo-canvas dual"></div>
+        <div ref="leftCanvasContainer" class="demo-canvas dual" role="img" aria-label="输入空间画面，展示单位扰动圆斑与奇异方向，可用鼠标拖拽旋转视角"></div>
         <div class="canvas-hint">
           <span class="hint-row white">● 白色：中心向量 x（长度 1）</span>
           <span class="hint-row cyan">● 青色：100 个扰动点 x+ε·v（ε=0.05）</span>
@@ -49,7 +49,7 @@
 
       <div class="canvas-wrap" :class="{ 'pulse-danger': isExtremeIllConditioned }">
         <p class="canvas-label">输出空间 R² · 椭圆畸变</p>
-        <div ref="rightCanvasContainer" class="demo-canvas dual"></div>
+        <div ref="rightCanvasContainer" class="demo-canvas dual" role="img" aria-label="输出空间画面，展示椭圆畸变与奇异值长短轴，可用鼠标拖拽旋转视角"></div>
         <div class="canvas-hint">
           <span class="hint-row red">● 红色长轴：σ₁ = {{ sigma1.toFixed(4) }}</span>
           <span class="hint-row blue">● 蓝色短轴：σ₂ = {{ isSingular ? '≈ 0' : sigma2.toFixed(4) }}</span>
@@ -59,9 +59,9 @@
       </div>
     </div>
 
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
-    <div v-if="warningMsg" class="warning-banner" :class="warningType">
+    <div v-if="warningMsg" class="warning-banner" :class="warningType" role="status" aria-live="polite">
       {{ warningMsg }}
     </div>
 
@@ -500,7 +500,10 @@ const initStatusType = ref<'info' | 'success' | 'warning' | 'error'>('info')
 function checkWebGL(): boolean {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
-  return !!gl
+  if (!gl) return false
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
+  return true
 }
 
 function gradientColor(t: number): THREE.Color {
@@ -986,6 +989,7 @@ onBeforeUnmount(() => {
   ;[leftRenderer, rightRenderer].forEach(r => {
     if (r) {
       r.dispose()
+      r.forceContextLoss()
       if (r.domElement.parentNode) {
         r.domElement.parentNode.removeChild(r.domElement)
       }

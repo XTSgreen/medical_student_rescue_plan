@@ -1,21 +1,23 @@
 <template>
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
-    <div ref="canvasContainer" class="demo-canvas"></div>
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">
+    <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="矩阵代数三维演示画面，可用鼠标拖拽旋转视角，滚轮缩放"></div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">
       {{ initStatus }}
     </div>
 
     <!-- 模式切换 -->
-    <div class="demo-mode-selector">
+    <div class="demo-mode-selector" role="group" aria-label="运算模式选择">
       <button
         :class="['mode-btn', { active: mode === 'add' }]"
+        :aria-pressed="mode === 'add'"
         @click="switchMode('add')"
       >
         矩阵加法 A + B
       </button>
       <button
         :class="['mode-btn', { active: mode === 'mul' }]"
+        :aria-pressed="mode === 'mul'"
         @click="switchMode('mul')"
       >
         矩阵乘法 A · B
@@ -408,6 +410,8 @@ function initScene() {
       '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   scene.background = null
@@ -712,7 +716,16 @@ onBeforeUnmount(() => {
   if (playTimer !== null) clearInterval(playTimer)
   resizeObserver?.disconnect()
   controls?.dispose()
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

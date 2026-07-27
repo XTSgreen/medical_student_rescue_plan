@@ -1,28 +1,28 @@
 <template>
   <div class="demo-container eigen-direction-finder">
     <p class="demo-title">{{ title }}</p>
-    <div ref="canvasContainer" class="demo-canvas"></div>
+    <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="特征方向探查三维演示画面，展示向量与变换像的关系，可用鼠标拖拽旋转视角"></div>
 
     <div v-if="isLocked" class="gold-pulse-overlay"></div>
 
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <div class="angle-display">
       <span>当前角度 θ = <strong>{{ thetaDeg.toFixed(1) }}°</strong></span>
       <span class="angle-rad">（{{ normTheta.toFixed(3) }} rad）</span>
     </div>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'anisotropic' }" @click="setPreset('anisotropic')">
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'anisotropic' }" :aria-pressed="preset === 'anisotropic'" @click="setPreset('anisotropic')">
         各向异性缩放
       </button>
-      <button :class="{ active: preset === 'shear' }" @click="setPreset('shear')">
+      <button :class="{ active: preset === 'shear' }" :aria-pressed="preset === 'shear'" @click="setPreset('shear')">
         剪切
       </button>
-      <button :class="{ active: preset === 'reflection' }" @click="setPreset('reflection')">
+      <button :class="{ active: preset === 'reflection' }" :aria-pressed="preset === 'reflection'" @click="setPreset('reflection')">
         反射
       </button>
-      <button :class="{ active: preset === 'rotation' }" @click="setPreset('rotation')">
+      <button :class="{ active: preset === 'rotation' }" :aria-pressed="preset === 'rotation'" @click="setPreset('rotation')">
         旋转 30°
       </button>
       <button @click="resetMatrix">重置</button>
@@ -489,6 +489,9 @@ function initScene() {
     return
   }
 
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
+
   scene = new THREE.Scene()
   scene.background = null
 
@@ -821,8 +824,17 @@ onBeforeUnmount(() => {
     renderer.domElement.removeEventListener('pointerup', onPointerUp)
     renderer.domElement.removeEventListener('pointerleave', onPointerUp)
   }
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   controls?.dispose()
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

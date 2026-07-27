@@ -1,8 +1,8 @@
 <template>
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
-    <div ref="canvasContainer" class="demo-canvas"></div>
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">
+    <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="三维交互演示画面，可用鼠标拖拽旋转视角，滚轮缩放"></div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">
       {{ initStatus }}
     </div>
     <div class="demo-controls">
@@ -124,7 +124,7 @@ let camera: THREE.PerspectiveCamera
 let renderer: THREE.WebGLRenderer
 let controls: OrbitControls
 let resizeObserver: ResizeObserver
-let animationId: number
+let animationId: number = 0
 
 // 向量箭头引用
 let arrowA: THREE.ArrowHelper
@@ -148,15 +148,16 @@ function initScene() {
 
   // 检测 WebGL 是否可用
   const testCanvas = document.createElement('canvas')
-  const gl2 = testCanvas.getContext('webgl2')
-  const gl1 = gl2 || testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl')
-  if (!gl1) {
+  const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
+  if (!gl) {
     initStatus.value = '当前浏览器不支持 WebGL，无法渲染 3D 演示。请使用 Chrome/Edge/Firefox/Safari。'
     initStatusType.value = 'warning'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，无法渲染 3D 演示。<br>请使用支持 WebGL 的现代浏览器（Chrome、Edge、Firefox、Safari）查看。</div>'
+      '<div style="padding:2rem;text-align:center;color:var(--color-warning);font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，无法渲染 3D 演示。<br>请使用支持 WebGL 的现代浏览器（Chrome、Edge、Firefox、Safari）查看。</div>'
     return
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   // 背景渐变效果用 fog + 透明清色，让 CSS 背景透出
@@ -177,7 +178,7 @@ function initScene() {
     initStatus.value = 'WebGL 初始化失败：' + (e as Error).message
     initStatusType.value = 'error'
     container.innerHTML =
-      '<div style="padding:2rem;text-align:center;color:#ef4444;font-family:var(--font-mono);font-size:0.9rem;">WebGL 初始化失败：' +
+      '<div style="padding:2rem;text-align:center;color:var(--color-danger);font-family:var(--font-mono);font-size:0.9rem;">WebGL 初始化失败：' +
       (e as Error).message +
       '</div>'
     return
@@ -408,7 +409,16 @@ onBeforeUnmount(() => {
   cancelAnimationFrame(animationId)
   resizeObserver?.disconnect()
   controls?.dispose()
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

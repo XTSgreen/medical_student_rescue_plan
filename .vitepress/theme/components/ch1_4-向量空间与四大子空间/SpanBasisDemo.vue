@@ -1,15 +1,15 @@
 <template>
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
-    <div ref="canvasContainer" class="demo-canvas"></div>
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="向量张成空间与基的三维演示画面，可用鼠标拖拽旋转视角，滚轮缩放"></div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'single' }" @click="setPreset('single')">单向量</button>
-      <button :class="{ active: preset === 'twoIndep' }" @click="setPreset('twoIndep')">两不共线向量</button>
-      <button :class="{ active: preset === 'basis' }" @click="setPreset('basis')">三不共面向量</button>
-      <button :class="{ active: preset === 'collinear' }" @click="setPreset('collinear')">共线向量</button>
-      <button :class="{ active: preset === 'empty' }" @click="setPreset('empty')">清空</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'single' }" :aria-pressed="preset === 'single'" @click="setPreset('single')">单向量</button>
+      <button :class="{ active: preset === 'twoIndep' }" :aria-pressed="preset === 'twoIndep'" @click="setPreset('twoIndep')">两不共线向量</button>
+      <button :class="{ active: preset === 'basis' }" :aria-pressed="preset === 'basis'" @click="setPreset('basis')">三不共面向量</button>
+      <button :class="{ active: preset === 'collinear' }" :aria-pressed="preset === 'collinear'" @click="setPreset('collinear')">共线向量</button>
+      <button :class="{ active: preset === 'empty' }" :aria-pressed="preset === 'empty'" @click="setPreset('empty')">清空</button>
     </div>
 
     <div class="action-buttons">
@@ -310,6 +310,8 @@ function initScene() {
       '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   scene.background = null
@@ -575,7 +577,16 @@ onBeforeUnmount(() => {
   cancelAnimationFrame(animationId)
   resizeObserver?.disconnect()
   controls?.dispose()
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

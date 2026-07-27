@@ -1,13 +1,13 @@
 <template>
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
-    <div ref="canvasContainer" class="demo-canvas"></div>
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="线性方程组解的几何演示画面，可用鼠标拖拽旋转视角，滚轮缩放"></div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'unique' }" @click="setPreset('unique')">唯一解</button>
-      <button :class="{ active: preset === 'infinite' }" @click="setPreset('infinite')">无穷多解</button>
-      <button :class="{ active: preset === 'none' }" @click="setPreset('none')">无解</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'unique' }" :aria-pressed="preset === 'unique'" @click="setPreset('unique')">唯一解</button>
+      <button :class="{ active: preset === 'infinite' }" :aria-pressed="preset === 'infinite'" @click="setPreset('infinite')">无穷多解</button>
+      <button :class="{ active: preset === 'none' }" :aria-pressed="preset === 'none'" @click="setPreset('none')">无解</button>
     </div>
 
     <div class="dual-matrix-editor">
@@ -429,6 +429,8 @@ function initScene() {
       '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   scene.background = null
@@ -777,6 +779,7 @@ onBeforeUnmount(() => {
   ;(gridHelper?.material as THREE.Material)?.dispose()
   axesHelper?.dispose()
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

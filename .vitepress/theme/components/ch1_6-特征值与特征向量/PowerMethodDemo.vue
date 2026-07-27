@@ -5,18 +5,18 @@
     <div class="dual-canvas">
       <div class="canvas-wrap">
         <p class="canvas-label">3D 视图 · 单位球面 + A<sup>k</sup>·v 迭代轨迹</p>
-        <div ref="threeContainer" class="demo-canvas dual three-canvas"></div>
+        <div ref="threeContainer" class="demo-canvas dual three-canvas" role="img" aria-label="幂法迭代三维演示画面，展示单位球面与迭代轨迹，可用鼠标拖拽旋转视角"></div>
       </div>
       <div class="canvas-wrap">
         <p class="canvas-label">
           范数曲线 · k vs ‖A<sup>k</sup>·v‖（对数）& log(‖A<sup>k</sup>·v‖)（k = 0 → {{ N }}，当前 k = {{ currentK }}）
         </p>
-        <canvas ref="normCanvas" class="demo-canvas dual"></canvas>
+        <canvas ref="normCanvas" class="demo-canvas dual" role="img" aria-label="范数曲线画面，展示迭代次数与向量范数的变化"></canvas>
       </div>
     </div>
 
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
-    <div v-if="warningMsg" class="demo-status" :class="warningType">{{ warningMsg }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
+    <div v-if="warningMsg" class="demo-status" :class="warningType" role="status" aria-live="polite">{{ warningMsg }}</div>
 
     <div class="color-legend">
       <span class="legend-item">
@@ -56,17 +56,17 @@
 
     <div class="preset-section">
       <p class="block-title">预设场景</p>
-      <div class="preset-buttons">
-        <button :class="{ active: preset === 'stable' }" @click="setPreset('stable')">
+      <div class="preset-buttons" role="group" aria-label="预设方案选择">
+        <button :class="{ active: preset === 'stable' }" :aria-pressed="preset === 'stable'" @click="setPreset('stable')">
           稳定压缩（ρ=0.8）
         </button>
-        <button :class="{ active: preset === 'unstable' }" @click="setPreset('unstable')">
+        <button :class="{ active: preset === 'unstable' }" :aria-pressed="preset === 'unstable'" @click="setPreset('unstable')">
           不稳定发散（ρ=1.5）
         </button>
-        <button :class="{ active: preset === 'rotation' }" @click="setPreset('rotation')">
+        <button :class="{ active: preset === 'rotation' }" :aria-pressed="preset === 'rotation'" @click="setPreset('rotation')">
           纯旋转（ρ=1，复特征值）
         </button>
-        <button :class="{ active: preset === 'power' }" @click="setPreset('power')">
+        <button :class="{ active: preset === 'power' }" :aria-pressed="preset === 'power'" @click="setPreset('power')">
           幂法收敛（ρ=1，实特征值）
         </button>
       </div>
@@ -606,6 +606,9 @@ function initScene() {
       '<div style="padding:2rem;text-align:center;color:#b8860b;font-family:var(--font-mono);font-size:0.9rem;">当前浏览器不支持 WebGL，请使用 Chrome/Edge/Firefox/Safari 查看交互演示。</div>'
     return
   }
+
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
 
   scene = new THREE.Scene()
   scene.background = null
@@ -1317,8 +1320,17 @@ onBeforeUnmount(() => {
     renderer.domElement.removeEventListener('pointerup', onPointerUp)
     renderer.domElement.removeEventListener('pointerleave', onPointerUp)
   }
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   controls?.dispose()
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

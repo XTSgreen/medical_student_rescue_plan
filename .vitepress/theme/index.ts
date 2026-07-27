@@ -9,7 +9,6 @@ import './styles/layout.css'
 import './styles/content.css'
 import './styles/components.css'
 import './styles/animations.css'
-import './styles/katex.css'
 
 
 import VectorDemo from './components/ch1_1-向量与基本运算/VectorDemo.vue'

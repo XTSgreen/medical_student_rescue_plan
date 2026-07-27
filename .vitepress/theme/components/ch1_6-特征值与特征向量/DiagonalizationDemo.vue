@@ -2,14 +2,14 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'diag_distinct' }" @click="setPreset('diag_distinct')">
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'diag_distinct' }" :aria-pressed="preset === 'diag_distinct'" @click="setPreset('diag_distinct')">
         可对角化（不同特征值）
       </button>
-      <button :class="{ active: preset === 'diag_repeat' }" @click="setPreset('diag_repeat')">
+      <button :class="{ active: preset === 'diag_repeat' }" :aria-pressed="preset === 'diag_repeat'" @click="setPreset('diag_repeat')">
         可对角化（重根 A=2I）
       </button>
-      <button :class="{ active: preset === 'defective' }" @click="setPreset('defective')">
+      <button :class="{ active: preset === 'defective' }" :aria-pressed="preset === 'defective'" @click="setPreset('defective')">
         不可对角化（缺陷矩阵）
       </button>
     </div>
@@ -17,8 +17,8 @@
     <div class="dual-pane">
 
       <div class="left-pane">
-        <div ref="canvasContainer" class="demo-canvas"></div>
-        <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+        <div ref="canvasContainer" class="demo-canvas" role="img" aria-label="矩阵对角化几何演示画面，展示特征向量方向与变形网格，可用鼠标拖拽旋转视角"></div>
+        <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
         <div v-if="!isDiagonalizable" class="warning-banner" :class="warningClass">
           <span v-if="hasComplexEigenvalues">复特征值（Δ&lt;0）：实数范围内不可对角化，A 含旋转分量</span>
@@ -927,6 +927,9 @@ function initScene() {
     return
   }
 
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
+
   scene = new THREE.Scene()
   scene.background = null
 
@@ -1285,8 +1288,17 @@ onBeforeUnmount(() => {
   morphAnim.active = false
   if (playTimer) clearTimeout(playTimer)
   resizeObserver?.disconnect()
+  scene?.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) {
+      if (Array.isArray(mesh.material)) mesh.material.forEach(mt => mt.dispose())
+      else (mesh.material as THREE.Material).dispose()
+    }
+  })
   controls?.dispose()
   renderer?.dispose()
+  renderer?.forceContextLoss()
   if (renderer?.domElement?.parentNode) {
     renderer.domElement.parentNode.removeChild(renderer.domElement)
   }

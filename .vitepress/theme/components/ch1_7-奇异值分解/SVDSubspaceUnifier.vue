@@ -2,11 +2,11 @@
   <div class="demo-container">
     <p class="demo-title">{{ title }}</p>
 
-    <div class="preset-buttons">
-      <button :class="{ active: preset === 'rect_full' }" @click="setPreset('rect_full')">满秩 3×2（默认）</button>
-      <button :class="{ active: preset === 'rect_rank' }" @click="setPreset('rect_rank')">秩亏 3×2</button>
-      <button :class="{ active: preset === 'square' }" @click="setPreset('square')">方阵 2×2</button>
-      <button :class="{ active: preset === 'cube_rank' }" @click="setPreset('cube_rank')">3×3 秩亏</button>
+    <div class="preset-buttons" role="group" aria-label="预设方案选择">
+      <button :class="{ active: preset === 'rect_full' }" :aria-pressed="preset === 'rect_full'" @click="setPreset('rect_full')">满秩 3×2（默认）</button>
+      <button :class="{ active: preset === 'rect_rank' }" :aria-pressed="preset === 'rect_rank'" @click="setPreset('rect_rank')">秩亏 3×2</button>
+      <button :class="{ active: preset === 'square' }" :aria-pressed="preset === 'square'" @click="setPreset('square')">方阵 2×2</button>
+      <button :class="{ active: preset === 'cube_rank' }" :aria-pressed="preset === 'cube_rank'" @click="setPreset('cube_rank')">3×3 秩亏</button>
     </div>
 
     <div class="dual-canvas" ref="dualCanvasRoot">
@@ -15,7 +15,7 @@
         <p class="canvas-label">
           输入空间 R<sup>{{ n }}</sup> = C(A<sup>T</sup>) ⊕ N(A)
         </p>
-        <div ref="leftCanvasContainer" class="demo-canvas dual"></div>
+        <div ref="leftCanvasContainer" class="demo-canvas dual" role="img" aria-label="输入空间画面，展示行空间与零空间的直和分解，可用鼠标拖拽旋转视角"></div>
         <div class="canvas-hint">
           <span class="hint-row green">● 绿色：行空间 C(A<sup>T</sup>) 基（V 前 r 列）</span>
           <span class="hint-row gray">● 灰色：零空间 N(A) 基（V 后 n−r 列）</span>
@@ -32,7 +32,7 @@
         <p class="canvas-label">
           输出空间 R<sup>{{ m }}</sup> = C(A) ⊕ N(A<sup>T</sup>)
         </p>
-        <div ref="rightCanvasContainer" class="demo-canvas dual"></div>
+        <div ref="rightCanvasContainer" class="demo-canvas dual" role="img" aria-label="输出空间画面，展示列空间与左零空间的直和分解，可用鼠标拖拽旋转视角"></div>
         <div class="canvas-hint">
           <span class="hint-row red">● 红色：列空间 C(A) 基（U 前 r 列）</span>
           <span class="hint-row purple">● 紫色：左零空间 N(A<sup>T</sup>) 基（U 后 m−r 列）</span>
@@ -51,7 +51,7 @@
       </svg>
     </div>
 
-    <div v-if="initStatus" class="demo-status" :class="initStatusType">{{ initStatus }}</div>
+    <div v-if="initStatus" class="demo-status" :class="initStatusType" role="status" aria-live="polite">{{ initStatus }}</div>
 
     <div class="matrix-editor">
       <p class="block-title">矩阵 A 编辑器（{{ m }}×{{ n }}）</p>
@@ -602,7 +602,10 @@ const initStatusType = ref<'info' | 'success' | 'warning' | 'error'>('info')
 function checkWebGL(): boolean {
   const testCanvas = document.createElement('canvas')
   const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl')
-  return !!gl
+  if (!gl) return false
+  const loseExt = gl.getExtension('WEBGL_lose_context')
+  loseExt?.loseContext()
+  return true
 }
 
 function vecTo3D(v: number[]): THREE.Vector3 {
@@ -1149,11 +1152,14 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (renderId) cancelAnimationFrame(renderId)
   if (resizeObserver) resizeObserver.disconnect()
+  leftRenderer?.domElement.removeEventListener('click', onLeftClick)
+  leftRenderer?.domElement.removeEventListener('mousemove', onLeftHover)
   if (leftControls) leftControls.dispose()
   if (rightControls) rightControls.dispose()
   ;[leftRenderer, rightRenderer].forEach(r => {
     if (r) {
       r.dispose()
+      r.forceContextLoss()
       if (r.domElement.parentNode) {
         r.domElement.parentNode.removeChild(r.domElement)
       }

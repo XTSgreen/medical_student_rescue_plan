@@ -21,7 +21,7 @@ aside: false
 
 ### 技术栈
 
-**教程站点**：[VitePress](https://vitepress.dev/) 构建的静态文档站点9
+**教程站点**：[VitePress](https://vitepress.dev/) 构建的静态文档站点
 
 **数学公式**：MathJax 3 
 
