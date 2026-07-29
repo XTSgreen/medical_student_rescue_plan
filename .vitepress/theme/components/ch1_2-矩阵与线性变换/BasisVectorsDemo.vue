@@ -53,7 +53,7 @@ import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     title?: string
   }>(),
@@ -274,6 +274,11 @@ function initScene() {
     0.2,
     0.12
   )
+  // k' = (0,0,1) 在 2D 变换下恒等于 k，设为半透明避免与 arrowK 完全重合造成视觉混乱
+  arrowK2.line.material.transparent = true
+  arrowK2.line.material.opacity = 0.5
+  arrowK2.cone.material.transparent = true
+  arrowK2.cone.material.opacity = 0.5
   scene.add(arrowK2)
 
   updateScene()
@@ -289,7 +294,7 @@ function updateScene() {
 
   // 变换后 i' = (a, c, 0)
   const iLen = Math.sqrt(av * av + cv * cv)
-  if (iLen > 0.05) {
+  if (iLen > 1e-4) {
     arrowI2.setDirection(new THREE.Vector3(av, cv, 0).normalize())
     const iHeadLen = Math.min(0.2, iLen * 0.3)
     arrowI2.setLength(iLen, iHeadLen, iHeadLen * 0.6)
@@ -300,7 +305,7 @@ function updateScene() {
 
   // 变换后 j' = (b, d, 0)
   const jLen = Math.sqrt(bv * bv + dv * dv)
-  if (jLen > 0.05) {
+  if (jLen > 1e-4) {
     arrowJ2.setDirection(new THREE.Vector3(bv, dv, 0).normalize())
     const jHeadLen = Math.min(0.2, jLen * 0.3)
     arrowJ2.setLength(jLen, jHeadLen, jHeadLen * 0.6)

@@ -37,7 +37,7 @@ function registerAdmonitionContainers(md: any) {
 export default defineConfig({
   lang: 'zh-CN',
   title: '医学生自救计划',
-  description: '医学生自救计划 · 互联网开发 / R语言与生信分析 / 人工智能的数学基础',
+  description: '医学生自救计划 · 互联网开发 / R语言与生信分析 / Python编程 / 人工智能的数学基础',
 
 
   base: '/medical_student_rescue_plan/',
@@ -154,6 +154,78 @@ export default defineConfig({
                 { text: '007 · 蛋白质组学与代谢组学', link: '/code/r-bioinformatics/bioinformatics/007-proteomics-metabolomics' },
                 { text: '008 · 系统生物学与网络分析', link: '/code/r-bioinformatics/bioinformatics/008-systems-biology' }
               ]
+            }
+          ]
+        },
+
+        {
+          text: 'Python 编程',
+          collapsed: false,
+          items: [
+            {
+              text: '第一层 · Python 核心语法基础',
+              collapsed: false,
+              items: [
+                {
+                  text: '开发环境与编程入门',
+                  collapsed: true,
+                  items: [
+                    { text: '1.1 Python概述与开发环境准备', link: '/code/python/01-python-core-syntax/01-dev-env-and-intro/001-python-overview-and-env-setup' },
+                    { text: '1.2 第一个Python程序与基本交互模式', link: '/code/python/01-python-core-syntax/01-dev-env-and-intro/002-first-program-and-interactive-mode' },
+                    { text: '1.3 编程基础概念与程序结构入门', link: '/code/python/01-python-core-syntax/01-dev-env-and-intro/003-programming-basics-and-structure' },
+                    { text: '1.4 程序组织与模块导入初步', link: '/code/python/01-python-core-syntax/01-dev-env-and-intro/004-modules-and-imports' },
+                    { text: '1.5 错误处理与调试入门', link: '/code/python/01-python-core-syntax/01-dev-env-and-intro/005-error-handling-and-debugging' },
+                    { text: '1.6 编程规范与风格初步', link: '/code/python/01-python-core-syntax/01-dev-env-and-intro/006-coding-standards-and-style' },
+                    { text: '1.7 开发工具与辅助功能入门', link: '/code/python/01-python-core-syntax/01-dev-env-and-intro/007-dev-tools-and-utilities' }
+                  ]
+                },
+                {
+                  text: '基本语法与数据类型',
+                  collapsed: true,
+                  items: [
+                    { text: '2.1 变量、常量与赋值机制', link: '/code/python/01-python-core-syntax/02-syntax-and-data-types/001-variables-constants-assignment' },
+                    { text: '2.2 运算符与表达式', link: '/code/python/01-python-core-syntax/02-syntax-and-data-types/002-operators-and-expressions' },
+                    { text: '2.3 数字类型', link: '/code/python/01-python-core-syntax/02-syntax-and-data-types/003-numeric-types' },
+                    { text: '2.4 字符串类型', link: '/code/python/01-python-core-syntax/02-syntax-and-data-types/004-string-type' },
+                    { text: '2.5 列表类型', link: '/code/python/01-python-core-syntax/02-syntax-and-data-types/005-list-type' },
+                    { text: '2.6 元组类型', link: '/code/python/01-python-core-syntax/02-syntax-and-data-types/006-tuple-type' },
+                    { text: '2.7 字典类型', link: '/code/python/01-python-core-syntax/02-syntax-and-data-types/007-dictionary-type' },
+                    { text: '2.8 集合类型', link: '/code/python/01-python-core-syntax/02-syntax-and-data-types/008-set-type' },
+                    { text: '2.9 类型转换与类型判断', link: '/code/python/01-python-core-syntax/02-syntax-and-data-types/009-type-conversion-and-checking' },
+                    { text: '2.10 输入输出与基本交互', link: '/code/python/01-python-core-syntax/02-syntax-and-data-types/010-input-output-for-data-types' }
+                  ]
+                },
+                {
+                  text: '程序控制结构（建设中）',
+                  collapsed: true,
+                  items: []
+                },
+                {
+                  text: '组合数据类型（建设中）',
+                  collapsed: true,
+                  items: []
+                },
+                {
+                  text: '函数与模块化编程（建设中）',
+                  collapsed: true,
+                  items: []
+                },
+                {
+                  text: '文件与异常处理（建设中）',
+                  collapsed: true,
+                  items: []
+                }
+              ]
+            },
+            {
+              text: '第二层 · 数据科学与AI工具箱（建设中）',
+              collapsed: true,
+              items: []
+            },
+            {
+              text: '第三层 · 医学数据处理专向技能（建设中）',
+              collapsed: true,
+              items: []
             }
           ]
         },

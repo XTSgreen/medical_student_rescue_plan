@@ -122,7 +122,7 @@ import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     title?: string
   }>(),
@@ -306,21 +306,27 @@ function initScene() {
   dir.position.set(5, 5, 10)
   scene.add(dir)
 
-  // 原始网格（细线，浅灰）
+  // 原始网格（细线，浅灰）—— 共享 material 减少资源占用
+  const gridMatAxis = new THREE.LineBasicMaterial({
+    color: COLOR_GRID_ORIG,
+    transparent: true,
+    opacity: 0.8
+  })
+  const gridMatNormal = new THREE.LineBasicMaterial({
+    color: COLOR_GRID_ORIG,
+    transparent: true,
+    opacity: 0.4
+  })
   gridLines = []
   for (let i = -5; i <= 5; i++) {
     const v = i
+    const mat = i === 0 ? gridMatAxis : gridMatNormal
     // 水平线
     const hGeom = new THREE.BufferGeometry().setFromPoints([
       new THREE.Vector3(-5, v, -0.01),
       new THREE.Vector3(5, v, -0.01)
     ])
-    const hMat = new THREE.LineBasicMaterial({
-      color: COLOR_GRID_ORIG,
-      transparent: true,
-      opacity: i === 0 ? 0.8 : 0.4
-    })
-    const hLine = new THREE.Line(hGeom, hMat)
+    const hLine = new THREE.Line(hGeom, mat)
     gridLines.push(hLine)
     scene.add(hLine)
     // 垂直线
@@ -328,12 +334,7 @@ function initScene() {
       new THREE.Vector3(v, -5, -0.01),
       new THREE.Vector3(v, 5, -0.01)
     ])
-    const vMat = new THREE.LineBasicMaterial({
-      color: COLOR_GRID_ORIG,
-      transparent: true,
-      opacity: i === 0 ? 0.8 : 0.4
-    })
-    const vLine = new THREE.Line(vGeom, vMat)
+    const vLine = new THREE.Line(vGeom, mat)
     gridLines.push(vLine)
     scene.add(vLine)
   }
@@ -477,7 +478,6 @@ function updateScene() {
   pos.setXYZ(2, v2.x, v2.y, v2.z)
   pos.setXYZ(3, v3.x, v3.y, v3.z)
   pos.needsUpdate = true
-  transformedSquare.geometry.computeVertexNormals()
 
   // 更新边框
   const epos = transformedSquareEdges.geometry.attributes.position as THREE.BufferAttribute
