@@ -13,7 +13,7 @@ sidebar:
 
 ### 什么是变量
 
-变量是一个名字，它指向内存中的某个值。可以把它想象成病历号：病历号本身不是患者信息，但它能找到对应的病历。类似地，变量名 `age` 不是数值 25 本身，但它指向存储 25 的那块内存。
+变量是一个名字，它指向内存中的某个值。可以把它想象成贴在箱子上的标签：标签本身不是箱子里的物品，但它能找到对应的物品。类似地，变量名 `age` 不是数值 25 本身，但它指向存储 25 的那块内存。
 
 ```python
 age = 25
@@ -29,14 +29,14 @@ Python 变量命名有硬性规则：只能使用字母、数字和下划线，�
 
 ```python
 # 合法
-patient_name = "张三"
+user_name = "张三"
 age2 = 25
 _private = "秘密"
-BMI = 22.5
+MAX_RETRIES = 3
 
 # 非法
-2nd_patient = "李四"   # 不能以数字开头
-patient-name = "王五"  # 不能用连字符
+2nd_user = "李四"   # 不能以数字开头
+user-name = "王五"  # 不能用连字符
 class = "一班"         # class 是关键字，不能用作变量名
 ```
 
@@ -46,13 +46,13 @@ PEP 8 建议变量名用**小写字母加下划线**分隔（称为 snake_case�
 
 ```python
 # 推荐
-patient_count = 30
-average_bmi = 22.5
-is_diabetic = True
+item_count = 30
+average_score = 85.5
+is_active = True
 
 # 不推荐
 pc = 30        # 含义不明
-averageBMI = 22.5  # 应该用下划线
+averageScore = 85.5  # 应该用下划线
 ```
 
 ### 关键字
@@ -83,7 +83,7 @@ print(len([1, 2, 3]))  # TypeError: 'int' object is not callable
 Python 没有真正的常量机制（不像 C 的 `const` 或 Java 的 `final`）。约定俗成的做法是用**全大写字母**命名表示常量，提醒程序员不要修改它：
 
 ```python
-MAX_PATIENTS = 100
+MAX_ITEMS = 100
 PI = 3.14159265
 DEFAULT_TIMEOUT = 30
 ```

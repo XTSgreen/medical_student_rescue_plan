@@ -7,15 +7,15 @@ sidebar:
 
 <span class="chapter-tag">Python核心语法基础</span>
 
-列表是 Python 中最常用的容器类型之一。它允许你把多个数据按顺序组织在一起，相当于临床中的一份病人名册：每个床位对应一个固定位置，可以随时增删、调换、查询。本节将从列表的字面量写法开始，逐步覆盖索引、切片、方法、推导式、嵌套与拷贝等内容，帮助你建立对列表的完整认识。
+列表是 Python 中最常用的容器类型之一。它允许你把多个数据按顺序组织在一起，相当于一份任务清单：每一项对应一个固定位置，可以随时增删、调换、查询。本节将从列表的字面量写法开始，逐步覆盖索引、切片、方法、推导式、嵌套与拷贝等内容，帮助你建立对列表的完整认识。
 
 ## 2.5.1 列表字面量
 
-列表的字面量写法是用一对方括号 `[]` 包起来，元素之间用逗号分隔。这种写法直接反映了列表的本质：一组按顺序排列的数据。下面是一份简化的收缩压记录列表：
+列表的字面量写法是用一对方括号 `[]` 包起来，元素之间用逗号分隔。这种写法直接反映了列表的本质：一组按顺序排列的数据。下面是一份简化的成绩记录列表：
 
 ```python
-systolic_bp = [120, 135, 128, 142, 119]
-print(systolic_bp)
+scores = [120, 135, 128, 142, 119]
+print(scores)
 # [120, 135, 128, 142, 119]
 ```
 
@@ -26,21 +26,21 @@ print(systolic_bp)
 列表具有两个核心特征：**有序**与**可变**。有序意味着元素有固定的位置编号，访问时按位置取值；可变意味着你可以在原列表上直接修改元素、增删条目，而无需新建列表。这一点与字符串不同，字符串虽然有序，但创建后无法修改其中某个字符。
 
 ```python
-vitals = ["心率", "血压", "体温"]
-vitals[0] = "脉搏"      # 直接修改第 0 个元素
-print(vitals)           # ['脉搏', '血压', '体温']
+fields = ["姓名", "年龄", "状态"]
+fields[0] = "用户名"      # 直接修改第 0 个元素
+print(fields)           # ['用户名', '年龄', '状态']
 ```
 
-可变性让列表在临床场景中特别实用。病人入出院时床位列表要频繁更新，异常指标要随时追加，检查项目要按优先级调整顺序，这些操作都能在原列表上原地完成，不必反复新建对象。
+可变性让列表在实际开发中特别实用。用户登录登出时在线列表要频繁更新，新日志要随时追加，任务项要按优先级调整顺序，这些操作都能在原列表上原地完成，不必反复新建对象。
 
 ## 2.5.3 列表元素可以是任意类型
 
 列表对元素类型没有任何限制，同一个列表里可以混合存放整数、字符串、浮点数，甚至其他列表或对象。Python 是动态类型语言，列表本身只关心元素的引用，不关心引用指向的具体类型。这种灵活性在处理异质数据时非常方便：
 
 ```python
-patient = ["P001", 45, 36.7, True, ["高血压", "糖尿病"]]
+user = ["U001", 45, 36.7, True, ["vip", "active"]]
 # 字符串、整数、浮点数、布尔、嵌套列表共存于一个列表
-print(patient[4])      # ['高血压', '糖尿病']
+print(user[4])      # ['vip', 'active']
 ```
 
 混合类型列表的代价是访问时需要清楚每个位置的类型，否则容易在后续操作中触发 `TypeError`。对于结构化数据，更推荐用字典或数据类表示；列表适合存放同质数据或临时组合。
@@ -55,49 +55,49 @@ empty2 = list()
 print(len(empty1))     # 0
 ```
 
-空列表常用于**先创建容器、稍后逐步填充**的场景，例如边读病历边收集异常指标，最终汇总。`list()` 也可以把其他可迭代对象转换为列表，例如 `list("ABC")` 得到 `['A', 'B', 'C']`，`list(range(5))` 得到 `[0, 1, 2, 3, 4]`。
+空列表常用于**先创建容器、稍后逐步填充**的场景，例如边读取数据边收集异常项，最终汇总。`list()` 也可以把其他可迭代对象转换为列表，例如 `list("ABC")` 得到 `['A', 'B', 'C']`，`list(range(5))` 得到 `[0, 1, 2, 3, 4]`。
 
 ## 2.5.5 列表索引
 
 列表通过索引访问元素，索引从 0 开始计数，这一点与 C、Java 一致。第一个元素索引为 0，第二个为 1，依此类推。Python 还支持**负向索引**，从 -1 开始倒数，-1 指向最后一个元素，-2 指向倒数第二个，非常适合取列表尾部而不必先算长度：
 
 ```python
-ward_beds = ["张三", "李四", "王五", "赵六"]
-print(ward_beds[0])    # 张三，第一个
-print(ward_beds[3])    # 赵六，第四个
-print(ward_beds[-1])   # 赵六，最后一个
-print(ward_beds[-2])   # 王五，倒数第二个
+members = ["张三", "李四", "王五", "赵六"]
+print(members[0])    # 张三，第一个
+print(members[3])    # 赵六，第四个
+print(members[-1])   # 赵六，最后一个
+print(members[-2])   # 王五，倒数第二个
 ```
 
-索引越界会抛出 `IndexError`，例如长度为 4 的列表访问索引 4 或 -5 都会报错。负向索引的本质是把负数加上列表长度，所以 `ward_beds[-1]` 等价于 `ward_beds[3]`，理解这一点有助于判断边界。
+索引越界会抛出 `IndexError`，例如长度为 4 的列表访问索引 4 或 -5 都会报错。负向索引的本质是把负数加上列表长度，所以 `members[-1]` 等价于 `members[3]`，理解这一点有助于判断边界。
 
 ## 2.5.6 列表切片
 
 切片用 `[start:stop:step]` 语法截取一段连续或步进的子列表，返回新列表，原列表不受影响。start 包含、stop 不包含，遵循左闭右开原则。三个参数都可以省略，省略时分别取 0、列表长度、1：
 
 ```python
-bps = [110, 125, 138, 142, 119, 130, 145]
-print(bps[1:4])        # [125, 138, 142]，索引 1 到 3
-print(bps[:3])         # [110, 125, 138]，从头到索引 2
-print(bps[4:])         # [119, 130, 145]，从索引 4 到末尾
-print(bps[::2])        # [110, 138, 119, 145]，每隔一个取一个
-print(bps[::-1])       # [145, 130, 119, 142, 138, 125, 110]，反转列表
+values = [110, 125, 138, 142, 119, 130, 145]
+print(values[1:4])        # [125, 138, 142]，索引 1 到 3
+print(values[:3])         # [110, 125, 138]，从头到索引 2
+print(values[4:])         # [119, 130, 145]，从索引 4 到末尾
+print(values[::2])        # [110, 138, 119, 145]，每隔一个取一个
+print(values[::-1])       # [145, 130, 119, 142, 138, 125, 110]，反转列表
 ```
 
-切片越界不会报错，解释器会自动截断到有效范围，这是切片与索引的重要差异。`bps[4:100]` 返回 `[119, 130, 145]`，不会抛 `IndexError`。利用 `[::-1]` 反转列表是 Python 中常见的技巧，比 `reverse()` 更轻量，因为它返回新列表而不修改原列表。
+切片越界不会报错，解释器会自动截断到有效范围，这是切片与索引的重要差异。`values[4:100]` 返回 `[119, 130, 145]`，不会抛 `IndexError`。利用 `[::-1]` 反转列表是 Python 中常见的技巧，比 `reverse()` 更轻量，因为它返回新列表而不修改原列表。
 
 ## 2.5.7 列表拼接和重复
 
 `+` 运算符把两个列表拼接成一个新列表，`*` 运算符把列表重复若干次。两者都返回新列表，原列表不变：
 
 ```python
-morning_meds = ["阿司匹林", "美托洛尔"]
-evening_meds = ["阿托伐他汀"]
-all_meds = morning_meds + evening_meds
-print(all_meds)        # ['阿司匹林', '美托洛尔', '阿托伐他汀']
+morning_tasks = ["登录", "签到"]
+evening_tasks = ["提交"]
+all_tasks = morning_tasks + evening_tasks
+print(all_tasks)        # ['登录', '签到', '提交']
 
-alert = ["异常"] * 3
-print(alert)           # ['异常', '异常', '异常']
+alert = ["error"] * 3
+print(alert)           # ['error', 'error', 'error']
 ```
 
 注意 `+` 两边必须是列表，列表加整数会报 `TypeError`。若想批量追加一个可迭代对象，应使用后续介绍的 `extend()` 方法，效率比 `+` 更高，因为 `+` 会创建新列表而 `extend()` 在原列表上扩展。
@@ -107,8 +107,8 @@ print(alert)           # ['异常', '异常', '异常']
 `len()` 返回列表中元素的个数，是 Python 内置函数之一：
 
 ```python
-patients = ["P001", "P002", "P003"]
-print(len(patients))   # 3
+users = ["U001", "U002", "U003"]
+print(len(users))   # 3
 ```
 
 `len()` 是 O(1) 操作，因为列表内部维护了长度信息，无需遍历统计。在循环或条件判断中需要列表长度时，直接调用 `len()` 即可，无需担心性能开销。
@@ -118,10 +118,10 @@ print(len(patients))   # 3
 `in` 和 `not in` 用于判断一个元素是否存在于列表中，返回布尔值。这种判断本质上是线性扫描，对于大列表性能较差，但写法直观：
 
 ```python
-allergies = ["青霉素", "磺胺", "阿司匹林"]
-if "青霉素" in allergies:
-    print("禁用青霉素类药物")
-# 输出：禁用青霉素类药物
+forbidden = ["spam", "ads", "bot"]
+if "spam" in forbidden:
+    print("命中禁止项")
+# 输出：命中禁止项
 ```
 
 如果需要频繁查找某个值是否在集合中，应该用集合 `set` 代替列表，集合的成员检查是 O(1)。列表适合按位置访问，集合适合按值查找，两者各有应用场景。
@@ -131,8 +131,8 @@ if "青霉素" in allergies:
 `for item in list:` 是遍历列表的标准写法，每次循环把列表中的下一个元素赋给 `item`：
 
 ```python
-vitals = [98, 120, 36.7]
-for v in vitals:
+values = [98, 120, 36.7]
+for v in values:
     print(v)
 # 98
 # 120
@@ -143,10 +143,10 @@ for v in vitals:
 
 ```python
 for i, name in enumerate(["张三", "李四", "王五"]):
-    print(f"床位 {i}: {name}")
-# 床位 0: 张三
-# 床位 1: 李四
-# 床位 2: 王五
+    print(f"序号 {i}: {name}")
+# 序号 0: 张三
+# 序号 1: 李四
+# 序号 2: 王五
 ```
 
 避免在遍历时用 `for i in range(len(list))` 这种写法，既冗长又易错，`enumerate()` 是更 Pythonic 的选择，可读性也更好。
@@ -160,15 +160,15 @@ for i, name in enumerate(["张三", "李四", "王五"]):
 `append(item)` 把单个元素追加到列表末尾，是最常用的添加方式。`extend(iterable)` 把一个可迭代对象的所有元素依次追加，相当于 `+=` 但更高效。`insert(index, item)` 在指定位置插入元素，原有元素后移：
 
 ```python
-queue = ["P001", "P002"]
-queue.append("P003")         # 末尾追加
-print(queue)                 # ['P001', 'P002', 'P003']
+queue = ["U001", "U002"]
+queue.append("U003")         # 末尾追加
+print(queue)                 # ['U001', 'U002', 'U003']
 
-queue.extend(["P004", "P005"])
-print(queue)                 # ['P001', 'P002', 'P003', 'P004', 'P005']
+queue.extend(["U004", "U005"])
+print(queue)                 # ['U001', 'U002', 'U003', 'U004', 'U005']
 
-queue.insert(0, "紧急")      # 在头部插入
-print(queue)                 # ['紧急', 'P001', 'P002', 'P003', 'P004', 'P005']
+queue.insert(0, "urgent")    # 在头部插入
+print(queue)                 # ['urgent', 'U001', 'U002', 'U003', 'U004', 'U005']
 ```
 
 `insert(0, item)` 在头部插入时，原有所有元素都要后移，时间复杂度是 O(n)，频繁头插时改用 `collections.deque` 更高效。`append()` 是 O(1)，是首选的追加方式。
@@ -178,39 +178,39 @@ print(queue)                 # ['紧急', 'P001', 'P002', 'P003', 'P004', 'P005'
 `remove(value)` 删除第一个等于 value 的元素，若不存在则抛 `ValueError`。`pop([index])` 删除并返回指定位置的元素，默认是末尾。`clear()` 清空整个列表：
 
 ```python
-tags = ["发热", "咳嗽", "发热", "乏力"]
-tags.remove("发热")          # 只删第一个匹配项
-print(tags)                  # ['咳嗽', '发热', '乏力']
+tags = ["error", "warn", "error", "info"]
+tags.remove("error")          # 只删第一个匹配项
+print(tags)                  # ['warn', 'error', 'info']
 
 last = tags.pop()            # 删除并返回末尾
-print(last, tags)            # 乏力 ['咳嗽', '发热']
+print(last, tags)            # info ['warn', 'error']
 
 first = tags.pop(0)          # 删除并返回头部
-print(first, tags)           # 咳嗽 ['发热']
+print(first, tags)           # warn ['error']
 
 tags.clear()
 print(tags)                  # []
 ```
 
-`pop()` 是少数返回值的方法，常用于**取出并处理**的场景，例如处理候诊队列中的下一个病人。`remove()` 只删第一个匹配项，要删除所有匹配项需配合循环或推导式。
+`pop()` 是少数返回值的方法，常用于**取出并处理**的场景，例如处理任务队列中的下一项。`remove()` 只删第一个匹配项，要删除所有匹配项需配合循环或推导式。
 
 ### 查找与排序：index()、count()、sort()、reverse()
 
 `index(value)` 返回第一个匹配元素的索引，找不到抛 `ValueError`。`count(value)` 返回某值出现的次数。`sort()` 原地排序，`reverse()` 原地反转：
 
 ```python
-ages = [45, 62, 38, 45, 70, 45]
-print(ages.index(45))        # 0，第一个 45 的位置
-print(ages.count(45))        # 3，45 出现的次数
+scores = [45, 62, 38, 45, 70, 45]
+print(scores.index(45))        # 0，第一个 45 的位置
+print(scores.count(45))        # 3，45 出现的次数
 
-ages.sort()                  # 原地升序
-print(ages)                  # [38, 45, 45, 45, 62, 70]
+scores.sort()                  # 原地升序
+print(scores)                  # [38, 45, 45, 45, 62, 70]
 
-ages.sort(reverse=True)      # 降序
-print(ages)                  # [70, 62, 45, 45, 45, 38]
+scores.sort(reverse=True)      # 降序
+print(scores)                  # [70, 62, 45, 45, 45, 38]
 
-ages.reverse()               # 原地反转
-print(ages)                  # [38, 45, 45, 45, 62, 70]
+scores.reverse()               # 原地反转
+print(scores)                  # [38, 45, 45, 45, 62, 70]
 ```
 
 `sort()` 接受 `key` 参数指定排序依据，例如 `key=len` 按长度排序，`key=abs` 按绝对值排序。`sorted()` 是内置函数，返回新列表而不修改原列表，与 `list.sort()` 形成对照：
@@ -251,15 +251,14 @@ print(undo_stack.pop())     # 操作2
 列表做**队列**（先进先出，FIFO）时，用 `append()` 入队、`pop(0)` 出队。但 `pop(0)` 是 O(n) 操作，每次出队都要把后面所有元素前移，大列表性能很差。标准库 `collections.deque` 是双端队列，两端操作都是 O(1)，是队列场景的正确选择：
 
 ```python
-from collections import deque
-queue = deque(["P001", "P002", "P003"])
-queue.append("P004")        # 入队
-print(queue.popleft())      # P001，O(1) 出队
-print(queue)                # deque(['P002', 'P003', 'P004'])
+queue = deque(["U001", "U002", "U003"])
+queue.append("U004")        # 入队
+print(queue.popleft())      # U001，O(1) 出队
+print(queue)                # deque(['U002', 'U003', 'U004'])
 ```
 
 ::: note 选择合适的数据结构
-栈用列表，队列用 deque，这是 Python 社区的共识。临床中处理叫号队列时，用 `deque.popleft()` 取下一个病人，比 `list.pop(0)` 高效得多，数据量大时差异显著。
+栈用列表，队列用 deque，这是 Python 社区的共识。实际开发中处理任务队列时，用 `deque.popleft()` 取下一项任务，比 `list.pop(0)` 高效得多，数据量大时差异显著。
 :::
 
 ## 2.5.13 列表推导式
@@ -267,9 +266,9 @@ print(queue)                # deque(['P002', 'P003', 'P004'])
 列表推导式是用一行表达式生成列表的语法糖，基本形式是 `[expr for item in iterable if cond]`。它把循环、条件、表达式压缩成一行，可读性远超等价的 for 循环：
 
 ```python
-# 从一组舒张压中筛出偏高的
-dbp = [78, 95, 82, 110, 88, 100]
-high = [x for x in dbp if x >= 90]
+# 从一组数值中筛出偏高的
+values = [78, 95, 82, 110, 88, 100]
+high = [x for x in values if x >= 90]
 print(high)                 # [95, 110, 100]
 
 # 把华氏温度转摄氏
@@ -285,14 +284,14 @@ print(celsius)              # [37.0, 38.0, 39.0]
 列表的元素可以是另一个列表，构成二维或多维结构。这在表示矩阵、表格、网格数据时常用。访问嵌套元素需要连续索引，`matrix[i][j]` 取第 i 行第 j 列：
 
 ```python
-# 三位病人的三项指标：[心率, 收缩压, 体温]
-vitals_matrix = [
+# 三位用户的三项指标：[分数, 时长, 评分]
+data_matrix = [
     [72, 120, 36.5],
     [88, 145, 38.2],
     [65, 110, 36.8]
 ]
-print(vitals_matrix[1])         # [88, 145, 38.2]，第二位病人
-print(vitals_matrix[1][2])      # 38.2，第二位病人的体温
+print(data_matrix[1])         # [88, 145, 38.2]，第二条记录
+print(data_matrix[1][2])      # 38.2，第二条记录的第三项
 ```
 
 构造嵌套列表时要警惕一个常见陷阱：`[[0] * 3] * 3` 看似生成了 3×3 的零矩阵，实际三行是同一个列表的引用，修改一行其他行也变。正确写法是用推导式 `[[0] * 3 for _ in range(3)]`，每行独立创建：
@@ -332,17 +331,17 @@ print(deep)                     # [[1, 2], [3, 4]]，独立不受影响
 `del` 是语句而非函数，可以删除指定位置的元素或一段切片。删除元素后，后面的元素自动前移填补空位：
 
 ```python
-patients = ["P001", "P002", "P003", "P004", "P005"]
-del patients[1]                 # 删除第二个
-print(patients)                 # ['P001', 'P003', 'P004', 'P005']
+users = ["U001", "U002", "U003", "U004", "U005"]
+del users[1]                 # 删除第二个
+print(users)                 # ['U001', 'U003', 'U004', 'U005']
 
-del patients[1:3]               # 删除一段切片
-print(patients)                 # ['P001', 'P005']
+del users[1:3]               # 删除一段切片
+print(users)                 # ['U001', 'U005']
 
-del patients[:]                 # 清空列表（保留对象本身）
-print(patients)                 # []
+del users[:]                 # 清空列表（保留对象本身）
+print(users)                 # []
 ```
 
-`del` 与 `remove()` 的区别在于：`del` 按位置删除，`remove()` 按值删除。`del patients[:]` 与 `patients.clear()` 效果相同，都是清空但保留列表对象本身。`del patients` 会删除整个变量绑定，此后 `patients` 这个名字不再可用。
+`del` 与 `remove()` 的区别在于：`del` 按位置删除，`remove()` 按值删除。`del users[:]` 与 `users.clear()` 效果相同，都是清空但保留列表对象本身。`del users` 会删除整个变量绑定，此后 `users` 这个名字不再可用。
 
 掌握列表后，下一节我们将认识它的近亲元组，理解可变与不可变之间的边界。

@@ -7,7 +7,7 @@ sidebar:
 
 <span class="chapter-tag">Python核心语法基础</span>
 
-字符串是 Python 中使用频率最高的数据类型之一。在医学场景中，病人姓名、诊断结果、病历文本、基因序列、药品名称、检查报告等内容都以字符串形式存在。Python 提供了丰富的字符串操作能力，从基础的拼接、切片到高级的格式化输出，覆盖了文本处理的绝大多数需求。本节将系统介绍字符串的字面量写法、转义机制、运算操作、索引切片规则、内置方法分类，以及三种格式化方式和格式说明符的完整语法。掌握这些内容后，你就能在代码中自如地处理各类文本数据。
+字符串是 Python 中使用频率最高的数据类型之一。在实际开发中，用户姓名、状态描述、日志文本、文件路径、商品名称、配置内容等都以字符串形式存在。Python 提供了丰富的字符串操作能力，从基础的拼接、切片到高级的格式化输出，覆盖了文本处理的绝大多数需求。本节将系统介绍字符串的字面量写法、转义机制、运算操作、索引切片规则、内置方法分类，以及三种格式化方式和格式说明符的完整语法。掌握这些内容后，你就能在代码中自如地处理各类文本数据。
 
 ## 字符串字面量与转义
 
@@ -24,7 +24,7 @@ s2 = 'He said "good morning"'  # 内部含双引号，外部用单引号
 
 # 双引号字符串
 s3 = "Hello, Python"
-s4 = "It's a patient"  # 内部含单引号，外部用双引号
+s4 = "It's a user"  # 内部含单引号，外部用双引号
 
 # 三引号字符串，可跨行
 s5 = '''第一行
@@ -44,7 +44,7 @@ print(s5)
 # 第三行
 ```
 
-医学场景中，包含撇号的诊断描述（如 `patient's history`）适合用双引号包裹；包含引号的医嘱引用（如 `医生说"立即停药"`）适合用单引号包裹。多行病历摘要、检查报告正文则适合用三引号。
+实际开发中，包含撇号的英文描述（如 `user's profile`）适合用双引号包裹；包含引号的提示文本（如 `提示"请重新输入"`）适合用单引号包裹。多行日志摘要、配置文本则适合用三引号。
 
 ### 转义字符
 
@@ -76,13 +76,13 @@ print("\N{HEAVY CHECK MARK}")  # ✓
 print("\u03b1")      # α，希腊字母 alpha
 print("\u20ac")      # €，欧元符号
 
-# 医学场景：特殊符号
-print("血型: A\u2003Rh\u2003+")  # 使用 em 空格分隔
-print("体温 \N{DEGREE SIGN}C")   # 体温 °C
+# 实际场景：特殊符号
+print("等级: A\u2003级\u2003+")  # 使用 em 空格分隔
+print("温度 \N{DEGREE SIGN}C")   # 温度 °C
 ```
 
-::: note 转义字符在医学文本的潜在坑
-从医院信息系统导出的文本数据可能包含各种不可见字符（如 `\r`、`\t`、不间断空格 `\u00a0`），这些字符会导致字符串比较失败但肉眼看不出来。处理这类数据时，建议先用 `repr()` 查看字符串的真实内容，再决定如何清洗。
+::: note 转义字符在文本数据的潜在坑
+从外部系统导入的文本数据可能包含各种不可见字符（如 `\r`、`\t`、不间断空格 `\u00a0`），这些字符会导致字符串比较失败但肉眼看不出来。处理这类数据时，建议先用 `repr()` 查看字符串的真实内容，再决定如何清洗。
 :::
 
 ### 原始字符串
@@ -133,11 +133,11 @@ age = 45
 # print("年龄: " + age)  # 报错：TypeError
 print("年龄: " + str(age))  # 正确：先把数字转为字符串
 
-# 医学场景
-patient_id = "P001"
-diagnosis = "高血压"
-record = "病人 " + patient_id + " 诊断为 " + diagnosis
-print(record)  # 病人 P001 诊断为 高血压
+# 实际场景
+user_id = "U001"
+status = "active"
+record = "用户 " + user_id + " 状态为 " + status
+print(record)  # 用户 U001 状态为 active
 ```
 
 需要拼接大量字符串时，`+` 会产生性能问题，因为每次拼接都创建新对象。推荐使用 `str.join()` 方法或 f-string，后续章节会介绍。
@@ -156,9 +156,9 @@ print("= " * 5)        # = = = = =
 print("x" * 0)         # 空字符串
 print("x" * -1)        # 空字符串
 
-# 医学场景：生成报告分隔线
+# 实际场景：生成报告分隔线
 print("=" * 40)
-print("病人检验报告")
+print("数据处理报告")
 print("=" * 40)
 ```
 
@@ -185,7 +185,7 @@ print(s[-6])   # P，第一个字符（负向）
 # print(s[-7])  # IndexError
 ```
 
-医学场景中，索引常用于提取编码的某一位。例如病历号 `P2024-001` 中，`code[0]` 是病人类型标识，`code[1:5]` 是年份。
+实际场景中，索引常用于提取编码的某一位。例如订单号 `O2024-001` 中，`code[0]` 是订单类型标识，`code[1:5]` 是年份。
 
 ### 字符串切片
 
@@ -217,10 +217,10 @@ print(s[::3])     # Hl,h，步长 3
 print(s[::-1])    # nohtyP ,olleH，字符串反转
 print(s[13:0:-1]) # nohtyP ,olle，反向切片
 
-# 医学场景：从基因序列中提取片段
-dna = "ATGCGATAGCAGTT"
-codon = dna[0:3]   # ATG，起始密码子
-print(codon)
+# 实际场景：从字节序列中提取片段
+data = "ATGCGATAGCAGTT"
+header = data[0:3]   # ATG，前 3 个字符作为标识
+print(header)
 ```
 
 ::: note 切片不会越界报错
@@ -244,12 +244,12 @@ print(len("你好，Python"))  # 9，中文和标点各算一个字符
 print(len(""))              # 0，空字符串
 print(len(" "))             # 1，空格也是一个字符
 
-# 医学场景：验证病历号长度
-patient_id = "P2024001"
-if len(patient_id) != 8:
-    print("病历号长度不正确")
+# 实际场景：验证订单号长度
+order_id = "O2024001"
+if len(order_id) != 8:
+    print("订单号长度不正确")
 else:
-    print("病历号格式正确")
+    print("订单号格式正确")
 ```
 
 ### 字符串迭代
@@ -270,10 +270,10 @@ for i, ch in enumerate("ATCG"):
 # 位置 2: C
 # 位置 3: G
 
-# 医学场景：统计 DNA 序列中各碱基数量
-dna = "ATGCGATAGCAGTT"
+# 实际场景：统计字符串中各字符出现次数
+data = "ATGCGATAGCAGTT"
 counts = {"A": 0, "T": 0, "C": 0, "G": 0}
-for base in dna:
+for base in data:
     if base in counts:
         counts[base] += 1
 print(counts)  # {'A': 4, 'T': 4, 'C': 3, 'G': 3}
@@ -284,22 +284,22 @@ print(counts)  # {'A': 4, 'T': 4, 'C': 3, 'G': 3}
 `in` 和 `not in` 运算符用于检查某个子串是否存在于字符串中，返回布尔值。这一操作是线性扫描，子串越长速度越慢，但对日常文本处理足够。
 
 ```python
-s = "病人诊断为高血压二期"
+s = "用户状态为已激活"
 
-print("高血压" in s)      # True
-print("糖尿病" in s)      # False
-print("糖尿病" not in s)  # True
+print("已激活" in s)      # True
+print("已禁用" in s)      # False
+print("已禁用" not in s)  # True
 
 # 检查单个字符
 print("A" in "ATCG")    # True
 print("N" in "ATCG")    # False
 
-# 医学场景：根据诊断文本判断
-diagnosis = "2型糖尿病，合并视网膜病变"
-if "糖尿病" in diagnosis:
-    print("该病人患有糖尿病")
-if "视网膜" in diagnosis:
-    print("存在视网膜并发症")
+# 实际场景：根据状态文本判断
+status = "VIP用户，合并高级权限"
+if "VIP" in status:
+    print("该用户是 VIP")
+if "高级权限" in status:
+    print("存在高级权限")
 ```
 
 ### 字符串不可变性
@@ -348,7 +348,7 @@ print(german.casefold())  # strasse，ß 被转为 ss
 print("strasse" == german.casefold())  # True
 ```
 
-医学场景中，统一药品名称大小写、规范化诊断文本时常用 `lower()` 或 `upper()`。`casefold()` 适合处理多语言数据。
+实际场景中，统一商品名称大小写、规范化状态文本时常用 `lower()` 或 `upper()`。`casefold()` 适合处理多语言数据。
 
 ### 对齐填充方法
 
@@ -363,14 +363,14 @@ print(s.ljust(10, "."))   # "42........"
 print(s.rjust(10, "."))   # "........42"
 print(s.zfill(8))         # "00000042"
 
-# 医学场景：病历号补齐
-patient_num = 42
-patient_id = f"P{str(patient_num).zfill(6)}"
-print(patient_id)  # P000042
+# 实际场景：订单号补齐
+order_num = 42
+order_id = f"O{str(order_num).zfill(6)}"
+print(order_id)  # O000042
 
 # 对齐表格输出
-print("姓名".ljust(8) + "年龄".rjust(4) + "诊断".ljust(10))
-print("张三".ljust(8) + "45".rjust(4) + "高血压".ljust(10))
+print("姓名".ljust(8) + "年龄".rjust(4) + "状态".ljust(10))
+print("张三".ljust(8) + "45".rjust(4) + "active".ljust(10))
 ```
 
 ### 查找替换方法
@@ -411,9 +411,9 @@ print(s.replace("o", "0"))               # Hell0, Pyth0n, Hell0 W0rld
 
 ```python
 # split 分割
-s = "张三,45,高血压,糖尿病"
+s = "张三,45,active,vip"
 parts = s.split(",")
-print(parts)  # ['张三', '45', '高血压', '糖尿病']
+print(parts)  # ['张三', '45', 'active', 'vip']
 
 # 按空白分割（默认行为）
 text = "Hello   Python  World"
@@ -421,7 +421,7 @@ print(text.split())     # ['Hello', 'Python', 'World']，自动处理多空格
 print(text.split(" "))  # ['Hello', '', '', 'Python', '', 'World']，按单空格分割
 
 # maxsplit 限制分割次数
-print(s.split(",", 2))  # ['张三', '45', '高血压,糖尿病']
+print(s.split(",", 2))  # ['张三', '45', 'active,vip']
 
 # rsplit 从右侧分割
 print("a.b.c.d".rsplit(".", 2))  # ['a.b', 'c', 'd']
@@ -431,8 +431,8 @@ multiline = "第一行\n第二行\n第三行"
 print(multiline.splitlines())  # ['第一行', '第二行', '第三行']
 
 # partition 分为三部分
-print("patient@hospital".partition("@"))
-# ('patient', '@', 'hospital')
+print("user@example".partition("@"))
+# ('user', '@', 'example')
 print("no_at_sign".partition("@"))
 # ('no_at_sign', '', '')，找不到时分隔符和后部分为空
 
@@ -442,10 +442,10 @@ print(" ".join(words))   # Hello Python World
 print("-".join(words))   # Hello-Python-World
 print(",".join(words))   # Hello,Python,World
 
-# 医学场景：拼接基因序列
-bases = ["ATG", "CGA", "TAG", "CAG", "TT"]
-dna = "".join(bases)
-print(dna)  # ATGCGATAGCAGTT
+# 实际场景：拼接数据片段
+chunks = ["ATG", "CGA", "TAG", "CAG", "TT"]
+data = "".join(chunks)
+print(data)  # ATGCGATAGCAGTT
 ```
 
 `join()` 是处理大量字符串拼接的推荐方式，效率远高于 `+` 反复拼接。其原理是预先计算结果长度，一次性分配内存，避免了中间字符串对象的反复创建。
@@ -466,13 +466,13 @@ print("###Hello###".strip("#"))   # Hello
 print("xyzHelloxyz".strip("xyz"))  # Hello，去除两端所有 x、y、z
 print("\t\nHello\n\t".strip())    # Hello
 
-# 医学场景：清洗用户输入
-user_input = "  高血压  \n"
+# 实际场景：清洗用户输入
+user_input = "  active  \n"
 clean = user_input.strip()
-print(f"[{clean}]")  # [高血压]
+print(f"[{clean}]")  # [active]
 ```
 
-从医院信息系统导出的文本数据经常带有前后空白，比较或存储前应先 `strip()` 清洗，避免因不可见空白导致逻辑错误。
+从外部系统导入的文本数据经常带有前后空白，比较或存储前应先 `strip()` 清洗，避免因不可见空白导致逻辑错误。
 
 ### 判断类型方法
 
@@ -497,7 +497,7 @@ print("hello".islower())     # True
 print("HELLO".isupper())     # True
 print("Hello World".istitle())  # True，每个单词首字母大写
 
-# 医学场景：验证输入
+# 实际场景：验证输入
 age_input = "45"
 if age_input.isdigit():
     age = int(age_input)
@@ -516,17 +516,17 @@ else:
 
 ```python
 # startswith 和 endswith
-filename = "patient_data.csv"
-print(filename.startswith("patient"))  # True
+filename = "user_data.csv"
+print(filename.startswith("user"))  # True
 print(filename.endswith(".csv"))       # True
 print(filename.endswith((".csv", ".txt", ".json")))  # True，匹配多种后缀
 
-# 医学场景：按文件类型处理
-filename = "ct_scan.dcm"
-if filename.endswith(".dcm"):
-    print("处理 DICOM 影像文件")
+# 实际场景：按文件类型处理
+filename = "image.png"
+if filename.endswith(".png"):
+    print("处理 PNG 图片文件")
 elif filename.endswith(".csv"):
-    print("处理临床数据表格")
+    print("处理数据表格文件")
 
 # encode 编码
 s = "你好，Python"
@@ -549,13 +549,13 @@ print(decoded == s)   # True
 # 旧式 % 格式化
 name = "张三"
 age = 45
-bp = 140.5
+price = 140.5
 
 print("姓名: %s, 年龄: %d" % (name, age))
 # 姓名: 张三, 年龄: 45
 
-print("血压: %.1f mmHg" % bp)
-# 血压: 140.5 mmHg
+print("价格: %.1f 元" % price)
+# 价格: 140.5 元
 
 # 常用占位符
 # %s 字符串, %d 整数, %f 浮点数, %x 十六进制, %% 百分号本身
@@ -571,18 +571,18 @@ print("姓名: {}, 年龄: {}".format("张三", 45))
 # 姓名: 张三, 年龄: 45
 
 # 通过索引复用参数
-print("{0}今年{1}岁，{0}是医生".format("李四", 38))
-# 李四今年38岁，李四是医生
+print("{0}今年{1}岁，{0}是会员".format("李四", 38))
+# 李四今年38岁，李四是会员
 
 # 关键字参数
 print("姓名: {name}, 年龄: {age}".format(name="王五", age=52))
 
 # 访问属性和索引
-patient = {"name": "赵六", "age": 60}
-print("病人: {p[name]}, {p[age]}岁".format(p=patient))
+user = {"name": "赵六", "age": 60}
+print("用户: {p[name]}, {p[age]}岁".format(p=user))
 
 # 格式说明符
-print("血压: {:.1f} mmHg".format(140.567))  # 血压: 140.6 mmHg
+print("价格: {:.1f} 元".format(140.567))  # 价格: 140.6 元
 print("编号: {:06d}".format(42))             # 编号: 000042
 ```
 
@@ -592,7 +592,7 @@ print("编号: {:06d}".format(42))             # 编号: 000042
 # f-string
 name = "张三"
 age = 45
-bp = 140.567
+price = 140.567
 
 print(f"姓名: {name}, 年龄: {age}")
 # 姓名: 张三, 年龄: 45
@@ -600,20 +600,20 @@ print(f"姓名: {name}, 年龄: {age}")
 # 花括号内可以是任意表达式
 print(f"明年 {age + 1} 岁")
 print(f"姓名长度: {len(name)}")
-print(f"血压均值: {(140 + 150 + 135) / 3:.1f}")
+print(f"价格均值: {(140 + 150 + 135) / 3:.1f}")
 
 # 调用函数
-def get_status(bp):
-    return "偏高" if bp > 130 else "正常"
+def get_status(price):
+    return "偏高" if price > 130 else "正常"
 
-print(f"血压状态: {get_status(bp)}")
+print(f"价格状态: {get_status(price)}")
 
-# 医学场景：生成报告
-patient_id = "P001"
-diagnosis = "高血压"
+# 实际场景：生成报告
+user_id = "U001"
+status = "active"
 risk = 0.85
-print(f"病人 {patient_id} 诊断为 {diagnosis}，10年心血管风险 {risk:.1%}")
-# 病人 P001 诊断为 高血压，10年心血管风险 85.0%
+print(f"用户 {user_id} 状态为 {status}，风险等级 {risk:.1%}")
+# 用户 U001 状态为 active，风险等级 85.0%
 ```
 
 ::: note f-string 的调试技巧
@@ -682,13 +682,13 @@ print(f"{ratio:.1%}") # 85.6%，百分比
 big_num = 1234567.891
 print(f"{big_num:,.2f}")  # 1,234,567.89
 
-# 医学场景
-dose = 0.025
-print(f"剂量: {dose:.3f} mg")  # 剂量: 0.025 mg
+# 实际场景
+amount = 0.025
+print(f"金额: {amount:.3f} 元")  # 金额: 0.025 元
 ```
 
 ::: note 类型码 g 的行为
-`g` 类型码会根据数值大小自动选择定点或科学计数法：当数值的指数小于 -4 或大于等于精度时用科学计数法，否则用定点表示。这在显示可能跨多个数量级的数据（如基因表达量、p 值）时很方便，能避免过多前导零或尾随零。
+`g` 类型码会根据数值大小自动选择定点或科学计数法：当数值的指数小于 -4 或大于等于精度时用科学计数法，否则用定点表示。这在显示可能跨多个数量级的数据（如统计量、p 值）时很方便，能避免过多前导零或尾随零。
 :::
 
 ### repr() 和 !r 转换
@@ -710,9 +710,9 @@ print(f"姓名: {name}")     # 姓名: 张三
 print(f"姓名: {name!r}")   # 姓名: '张三'，带引号
 
 # 调试场景：揭示隐藏的空白
-user_input = "  高血压  "
-print(f"输入: {user_input}")    # 输入:   高血压
-print(f"输入: {user_input!r}")  # 输入: '  高血压  '，看清空白
+user_input = "  active  "
+print(f"输入: {user_input}")    # 输入:   active
+print(f"输入: {user_input!r}")  # 输入: '  active  '，看清空白
 
 # !s 和 !a 也有
 # !s 调用 str()（默认行为），!a 调用 ascii()（非 ASCII 字符转义）

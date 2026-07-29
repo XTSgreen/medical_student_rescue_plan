@@ -13,7 +13,7 @@ sidebar:
 
 模块是 Python 代码组织的基本单位。**一个 `.py` 文件就是一个模块**，文件名就是模块名。例如 `utils.py` 这个文件对应的模块名是 `utils`。模块内部可以定义函数、类、变量，这些对象统称为模块的成员。
 
-模块存在的意义在于把相关功能聚集在一起。这类似于医院里的科室划分：心内科把心脏相关的诊疗资源集中在一起，放射科把影像设备集中在一起，各科室有自己的人员和设备，又能相互会诊。在程序中，你把字符串处理函数放进 `string_utils.py`，把日期计算函数放进 `date_utils.py`，需要哪部分功能就导入对应模块。
+模块存在的意义在于把相关功能聚集在一起。这类似于工具箱的分格收纳：把字符串处理工具放一格，把日期计算工具放另一格，每格工具有自己的用途，又能组合使用。在程序中，你把字符串处理函数放进 `string_utils.py`，把日期计算函数放进 `date_utils.py`，需要哪部分功能就导入对应模块。
 
 模块带来三个直接好处。代码被拆分到多个文件后，单个文件规模可控，阅读和定位问题都更方便。不同模块之间通过明确的导入关系协作，彼此的内部实现可以独立修改而不相互干扰。功能相同的模块可以在多个项目中复用，避免重复编写。
 
@@ -21,11 +21,11 @@ sidebar:
 
 当模块数量继续增加，扁平地堆在一个目录里又会变得混乱。包就是用来组织模块的上一级单位。**包是一个包含 `__init__.py` 文件的目录**，目录名就是包名。目录下的每个 `.py` 文件是这个包的子模块。
 
-包对应到医院就是楼栋概念。一栋住院楼里包含内科、外科、骨科等多个病区，每个病区是楼栋下的一个单元。同样地，一个 `medical` 包目录下可以有 `imaging.py`、`lab.py`、`prescription.py` 等子模块，它们共同构成医疗相关的功能集合。
+包对应到公司就是部门的概念。一个公司里包含研发部、市场部、财务部等多个部门，每个部门是公司下的一个单元。同样地，一个 `utils` 包目录下可以有 `files.py`、`stats.py`、`reports.py` 等子模块，它们共同构成工具相关的功能集合。
 
 `__init__.py` 文件可以是空的，它的存在向 Python 表明这个目录应被当作包处理。在较新的 Python 版本中，没有 `__init__.py` 的目录也能作为包使用，称为命名空间包，但初学阶段建议显式创建 `__init__.py`，避免引入额外复杂度。
 
-包可以嵌套，形成多层结构。`medical.imaging` 可以是一个子包，它本身又是一个目录，包含 `mri.py`、`ct.py` 等模块。这种层级组织让大型项目的代码结构清晰可循。
+包可以嵌套，形成多层结构。`utils.files` 可以是一个子包，它本身又是一个目录，包含 `csv_io.py`、`json_io.py` 等模块。这种层级组织让大型项目的代码结构清晰可循。
 
 ## 1.4.3 标准库模块概览
 
@@ -44,7 +44,7 @@ Python 自带一批功能丰富的模块，称为标准库。标准库无需安�
 | statistics  | 基本统计量，均值、中位数、标准差   |
 | pathlib     | 面向对象的路径操作                 |
 
-标准库覆盖了大部分日常编程需求。处理检验指标时用 `statistics` 算均值标准差，读取检验报告用 `json` 解析数据，批量处理病历文件用 `os` 和 `pathlib` 遍历目录。在引入第三方库之前，先查一查标准库是否已经提供对应功能，往往能省去不少依赖管理麻烦。
+标准库覆盖了大部分日常编程需求。处理数值指标时用 `statistics` 算均值标准差，读取配置文件用 `json` 解析数据，批量处理文件用 `os` 和 `pathlib` 遍历目录。在引入第三方库之前，先查一查标准库是否已经提供对应功能，往往能省去不少依赖管理麻烦。
 
 ## 1.4.4 导入模块的方式
 
@@ -120,20 +120,20 @@ Python 按这个顺序依次查找，找到第一个匹配的模块就停止。�
 # mymodule.py
 """一个简单的自定义模块，演示模块的基本结构。"""
 
-def bmi(weight, height):
-    """计算体质指数 BMI。weight 单位千克，height 单位米。"""
-    return weight / (height ** 2)
+def average_score(total, count):
+    """计算平均分。total 为总分，count 为人数。"""
+    return total / count
 
-def bmi_category(value):
-    """根据 BMI 值返回分类。"""
-    if value < 18.5:
-        return "偏瘦"
-    elif value < 24:
-        return "正常"
-    elif value < 28:
-        return "超重"
+def score_level(value):
+    """根据分数返回等级。"""
+    if value >= 90:
+        return "优秀"
+    elif value >= 80:
+        return "良好"
+    elif value >= 60:
+        return "及格"
     else:
-        return "肥胖"
+        return "不及格"
 
 version = "1.0"
 ```
@@ -144,9 +144,9 @@ version = "1.0"
 # main.py
 import mymodule
 
-value = mymodule.bmi(70, 1.75)
-print(f"BMI = {value:.2f}")              # 输出 BMI = 22.86
-print(f"分类：{mymodule.bmi_category(value)}")  # 输出 分类：正常
+value = mymodule.average_score(750, 9)
+print(f"平均分 = {value:.2f}")              # 输出 平均分 = 83.33
+print(f"等级：{mymodule.score_level(value)}")  # 输出 等级：良好
 print(f"模块版本：{mymodule.version}")    # 输出 模块版本：1.0
 ```
 
@@ -154,10 +154,10 @@ print(f"模块版本：{mymodule.version}")    # 输出 模块版本：1.0
 
 ```python
 # main.py
-from mymodule import bmi, bmi_category
+from mymodule import average_score, score_level
 
-value = bmi(70, 1.75)
-print(bmi_category(value))  # 输出 正常
+value = average_score(750, 9)
+print(score_level(value))  # 输出 良好
 ```
 
 自定义模块第一次被导入时，Python 会执行该模块的全部顶层代码，并把模块对象缓存到 `sys.modules`。之后再次导入同一模块时，直接使用缓存，不会重复执行。这也是为什么模块里的函数定义只生效一次。
@@ -170,29 +170,29 @@ print(bmi_category(value))  # 输出 正常
 
 ```python
 # mymodule.py
-def bmi(weight, height):
-    return weight / (height ** 2)
+def average_score(total, count):
+    return total / count
 
-def bmi_category(value):
-    if value < 18.5:
-        return "偏瘦"
-    elif value < 24:
-        return "正常"
-    elif value < 28:
-        return "超重"
+def score_level(value):
+    if value >= 90:
+        return "优秀"
+    elif value >= 80:
+        return "良好"
+    elif value >= 60:
+        return "及格"
     else:
-        return "肥胖"
+        return "不及格"
 
 # 直接运行时执行测试，被导入时跳过
 if __name__ == "__main__":
     print("自测结果：")
-    print(bmi(70, 1.75))           # 直接运行时输出 22.857...
-    print(bmi_category(30))        # 直接运行时输出 肥胖
+    print(average_score(750, 9))    # 直接运行时输出 83.333...
+    print(score_level(95))          # 直接运行时输出 优秀
 ```
 
 直接运行 `mymodule.py` 时，`__name__` 为 `"__main__"`，测试代码执行。在 `main.py` 里 `import mymodule` 时，`mymodule.__name__` 为 `"mymodule"`，测试代码被跳过，不会打印测试输出。
 
-这种模式类似于科室的自检流程。一个科室独立运转时会跑自检程序确认设备正常，但当其他科室来会诊调用它的资源时，就不需要再跑一遍自检。`if __name__ == "__main__":` 正是区分这两种情形的开关。
+这种模式类似于模块的自检流程。一个模块独立运行时会跑自测代码确认功能正常，但当被其他模块导入调用时，就不需要再跑一遍自测。`if __name__ == "__main__":` 正是区分这两种情形的开关。
 
 养成在模块中放测试代码的习惯，可以让你随时单独运行某个文件验证其功能，又不必担心被导入时产生副作用。
 
@@ -201,44 +201,44 @@ if __name__ == "__main__":
 包让模块形成层级结构。假设有如下目录结构。
 
 ```
-medical/
+utils/
     __init__.py
-    imaging.py
-    lab.py
-    prescription.py
+    files.py
+    stats.py
+    reports.py
 ```
 
-`medical` 是一个包，`imaging`、`lab`、`prescription` 是它的子模块。导入子模块有几种写法。
+`utils` 是一个包，`files`、`stats`、`reports` 是它的子模块。导入子模块有几种写法。
 
 ```python
 # 导入整个子模块，用完整路径访问
-import medical.imaging
+import utils.files
 
-medical.imaging.show_ct("brain.dcm")
+utils.files.read_text("data.txt")
 ```
 
 ```python
 # 导入子模块并起别名
-import medical.prescription as rx
+import utils.reports as rp
 
-rx.issue("阿司匹林", dose=100)
+rp.generate("月度报告", count=100)
 ```
 
 ```python
 # 从包中导入某个子模块
-from medical import lab
+from utils import stats
 
-lab.blood_test("血红蛋白")
+stats.compute_mean([85, 90, 78])
 ```
 
 ```python
 # 从子模块导入具体函数
-from medical.lab import blood_test
+from utils.stats import compute_mean
 
-blood_test("血红蛋白")
+compute_mean([85, 90, 78])
 ```
 
-`__init__.py` 文件除了标记目录为包，还可以用来控制包的导入行为。在 `__init__.py` 中可以写导入语句，让用户直接 `from medical import blood_test` 就能用，而不必写完整子模块路径。初学阶段保持 `__init__.py` 为空即可，等功能复杂后再考虑在其中做导入控制。
+`__init__.py` 文件除了标记目录为包，还可以用来控制包的导入行为。在 `__init__.py` 中可以写导入语句，让用户直接 `from utils import compute_mean` 就能用，而不必写完整子模块路径。初学阶段保持 `__init__.py` 为空即可，等功能复杂后再考虑在其中做导入控制。
 
 ## 1.4.9 相对导入与绝对导入的概念
 
@@ -247,18 +247,18 @@ blood_test("血红蛋白")
 **绝对导入**从顶层包名开始写完整路径。这种方式清晰明确，无论从哪里调用都能找到目标。
 
 ```python
-# 在 medical/imaging.py 中引用同包的 lab 模块
-from medical.lab import blood_test
+# 在 utils/files.py 中引用同包的 stats 模块
+from utils.stats import compute_mean
 ```
 
 **相对导入**用点号表示当前位置。一个点 `.` 表示当前包，两个点 `..` 表示上一级包。它只能用在包内部的模块中。
 
 ```python
-# 在 medical/imaging.py 中引用同包的 lab 模块
-from .lab import blood_test
-from . import prescription
+# 在 utils/files.py 中引用同包的 stats 模块
+from .stats import compute_mean
+from . import reports
 ```
 
-相对导入的好处是包整体改名或移动位置时，内部引用不用修改。它的缺点是可读性差，看到 `from . import lab` 时需要先弄清楚当前在哪个包里。绝对导入可读性更好，但在深层嵌套的包中路径会很长。
+相对导入的好处是包整体改名或移动位置时，内部引用不用修改。它的缺点是可读性差，看到 `from . import stats` 时需要先弄清楚当前在哪个包里。绝对导入可读性更好，但在深层嵌套的包中路径会很长。
 
-初学阶段建议统一使用绝对导入，等熟悉包结构后再按需采用相对导入。需要注意的是，相对导入在直接运行模块文件时会报错，因为它依赖包的上下文。这也就是为什么包内部的测试代码通常通过 `python -m medical.imaging` 这种以模块方式运行，而不是直接 `python medical/imaging.py`。
+初学阶段建议统一使用绝对导入，等熟悉包结构后再按需采用相对导入。需要注意的是，相对导入在直接运行模块文件时会报错，因为它依赖包的上下文。这也就是为什么包内部的测试代码通常通过 `python -m utils.files` 这种以模块方式运行，而不是直接 `python utils/files.py`。

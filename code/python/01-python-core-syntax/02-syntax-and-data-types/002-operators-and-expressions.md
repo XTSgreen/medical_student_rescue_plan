@@ -7,7 +7,7 @@ sidebar:
 
 <span class="chapter-tag">Python核心语法基础</span>
 
-运算符是连接数据的桥梁，表达式是运算符与操作数组合而成的可计算片段。如果说变量是存放数据的标本管，运算符就是检验科里的各类操作：有的做加法、有的做比较、有的做逻辑判断。掌握运算符的种类、行为和优先级，才能写出正确且可读的计算逻辑。本节将系统讲解 Python 的算术、比较、逻辑、位、成员、身份六类运算符，以及表达式的概念和优先级规则。医学数据处理中的剂量计算、指标判断、条件筛选，都建立在这些基础运算之上。
+运算符是连接数据的桥梁，表达式是运算符与操作数组合而成的可计算片段。如果说变量是存放数据的箱子，运算符就是对这些箱子里的数据进行的各类操作：有的做加法、有的做比较、有的做逻辑判断。掌握运算符的种类、行为和优先级，才能写出正确且可读的计算逻辑。本节将系统讲解 Python 的算术、比较、逻辑、位、成员、身份六类运算符，以及表达式的概念和优先级规则。实际开发中的数值计算、条件判断、数据筛选，都建立在这些基础运算之上。
 
 ## 2.2.1 算术运算符
 
@@ -42,17 +42,17 @@ print(-7 // 2)   # -4，向下取整（不是 -3）
 print(-7 % 2)    # 1，与 // 配合：(-4)*2 + 1 = -7
 ```
 
-::: note 医学场景中的取模运算
-取模运算在周期性计算中很有用。比如计算某项检查距离上次执行过了几天，或者把小时数转换为班次编号。`hour % 8` 能告诉你当前小时在 8 小时班次中的位置。整除运算常用于把秒数转换为分钟数或小时数，比如 `total_seconds // 60` 得到分钟数。
+::: note 实际开发中的取模运算
+取模运算在周期性计算中很有用。比如计算某个任务距离上次执行过了几天，或者把小时数转换为班次编号。`hour % 8` 能告诉你当前小时在 8 小时班次中的位置。整除运算常用于把秒数转换为分钟数或小时数，比如 `total_seconds // 60` 得到分钟数。
 :::
 
 `+` 和 `*` 还可以用于字符串和列表等序列类型，行为是拼接和重复：
 
 ```python
 # 字符串和列表的运算
-prefix = "患者"
+prefix = "用户"
 full_name = prefix + "张三"     # 字符串拼接
-print(full_name)                # 患者张三
+print(full_name)                # 用户张三
 
 separator = "-" * 20            # 字符串重复
 print(separator)                # --------------------
@@ -78,10 +78,10 @@ print(10 - 2 - 3)       # 5，从左到右：(10-2)-3
 print(10 / 2 / 5)       # 1.0，从左到右：(10/2)/5
 ```
 
-`-2 ** 2` 的结果是 `-4` 而非 `4`，这一点容易让人困惑。原因是 `**` 的优先级高于一元负号，所以先计算 `2 ** 2` 得到 `4`，再取负得到 `-4`。如果你想要的是 `(-2) ** 2`，必须显式加括号。这种细节在剂量计算等场景中可能影响结果，写代码时遇到负数与幂运算混合的情况要特别留意。
+`-2 ** 2` 的结果是 `-4` 而非 `4`，这一点容易让人困惑。原因是 `**` 的优先级高于一元负号，所以先计算 `2 ** 2` 得到 `4`，再取负得到 `-4`。如果你想要的是 `(-2) ** 2`，必须显式加括号。这种细节在数值计算等场景中可能影响结果，写代码时遇到负数与幂运算混合的情况要特别留意。
 
 ::: warning 优先级记不住怎么办
-不必死记所有优先级，遇到不确定的情况就加括号。括号能让计算顺序明确，也能提升代码可读性，让阅读者无需回忆优先级规则就能理解意图。`2 + (3 * 4)` 虽然比 `2 + 3 * 4` 多几个字符，但意图更清晰。在计算这类关键场景，加括号是良好的工程习惯。
+不必死记所有优先级，遇到不确定的情况就加括号。括号能让计算顺序明确，也能提升代码可读性，让阅读者无需回忆优先级规则就能理解意图。`2 + (3 * 4)` 虽然比 `2 + 3 * 4` 多几个字符，但意图更清晰。在关键计算场景，加括号是良好的工程习惯。
 :::
 
 ## 2.2.3 比较运算符
@@ -90,14 +90,14 @@ print(10 / 2 / 5)       # 1.0，从左到右：(10/2)/5
 
 ```python
 # 比较运算符
-heart_rate = 75
+score = 75
 
-print(heart_rate == 75)   # True，等于
-print(heart_rate != 80)   # True，不等于
-print(heart_rate > 100)   # False，大于
-print(heart_rate < 60)    # False，小于
-print(heart_rate >= 75)   # True，大于等于
-print(heart_rate <= 75)   # True，小于等于
+print(score == 75)   # True，等于
+print(score != 80)   # True，不等于
+print(score > 100)   # False，大于
+print(score < 60)    # False，小于
+print(score >= 75)   # True，大于等于
+print(score <= 75)   # True，小于等于
 ```
 
 `==` 和 `!=` 比较的是值的相等性，而非对象的身份。对于基本类型（整数、浮点数、字符串），`==` 直接比较值是否相等。对于列表、字典等容器类型，`==` 会递归比较每个元素是否相等。这一点在上一节讲 `is` 与 `==` 的区别时已经提到过。
@@ -122,18 +122,18 @@ print("张三" < "李四")    # True，按 Unicode 码点比较
 
 ## 2.2.4 比较运算符的链式使用
 
-Python 支持比较运算符的链式写法，可以连续使用多个比较运算符表达区间判断。比如 `a < b <= c` 等价于 `a < b and b <= c`，但 `b` 只会被求值一次。这种写法在表达医学参考范围时特别自然，比拆分成两个比较更简洁可读。
+Python 支持比较运算符的链式写法，可以连续使用多个比较运算符表达区间判断。比如 `a < b <= c` 等价于 `a < b and b <= c`，但 `b` 只会被求值一次。这种写法在表达数值范围时特别自然，比拆分成两个比较更简洁可读。
 
 ```python
 # 链式比较
-heart_rate = 75
+score = 75
 
-# 判断心率是否在正常范围 60-100
-is_normal = 60 <= heart_rate <= 100
+# 判断分数是否在及格范围 60-100
+is_normal = 60 <= score <= 100
 print(is_normal)   # True
 
 # 等价写法
-is_normal = 60 <= heart_rate and heart_rate <= 100
+is_normal = 60 <= score and score <= 100
 print(is_normal)   # True
 
 # 链式比较的多种形式
@@ -142,13 +142,13 @@ print(18 <= age < 60)    # True，成年且未到老年
 print(0 < age < 150)     # True，合理的年龄范围
 ```
 
-链式比较的求值规则是短路求值，与 `and` 一致。`60 <= heart_rate <= 100` 先判断 `60 <= heart_rate`，如果为 `False`，整个表达式就是 `False`，不会继续判断 `heart_rate <= 100`。这种短路行为在边界判断中避免了多余计算。
+链式比较的求值规则是短路求值，与 `and` 一致。`60 <= score <= 100` 先判断 `60 <= score`，如果为 `False`，整个表达式就是 `False`，不会继续判断 `score <= 100`。这种短路行为在边界判断中避免了多余计算。
 
 ```python
 # 链式比较的短路特性
-# 不会对 heart_rate 求值两次
-heart_rate = 50
-print(60 <= heart_rate <= 100)   # False，60 <= 50 为 False，直接返回
+# 不会对 score 求值两次
+score = 50
+print(60 <= score <= 100)   # False，60 <= 50 为 False，直接返回
 ```
 
 ## 2.2.5 逻辑运算符
@@ -158,15 +158,15 @@ print(60 <= heart_rate <= 100)   # False，60 <= 50 为 False，直接返回
 ```python
 # 逻辑运算符
 age = 45
-heart_rate = 75
-is_diabetic = False
+score = 75
+is_valid = False
 
 # and：所有条件都满足
-is_healthy = (age < 60) and (60 <= heart_rate <= 100) and (not is_diabetic)
+is_healthy = (age < 60) and (60 <= score <= 100) and (not is_valid)
 print(is_healthy)   # True
 
 # or：任一条件满足
-is_high_risk = (age >= 60) or (heart_rate > 100) or is_diabetic
+is_high_risk = (age >= 60) or (score > 100) or is_valid
 print(is_high_risk) # False
 ```
 
@@ -174,12 +174,12 @@ print(is_high_risk) # False
 
 ```python
 # not 运算符
-is_admitted = True
-print(not is_admitted)   # False
+is_active = True
+print(not is_active)   # False
 
 # 组合形式
-records = ["P001", "P002"]
-print("P003" not in records)   # True
+records = ["U001", "U002"]
+print("U003" not in records)   # True
 ```
 
 逻辑运算符的一个独特之处是它返回的不一定是布尔值。`and` 和 `or` 返回的是决定结果的那个操作数，而非布尔值。具体规则是：`a and b` 如果 `a` 为真返回 `b`，否则返回 `a`；`a or b` 如果 `a` 为真返回 `a`，否则返回 `b`。这种特性称为短路求值返回，在后续章节会详细说明。
@@ -206,15 +206,15 @@ False or check_something()    # 会打印
 
 ```python
 # 利用短路求值避免错误
-patient = None
+user = None
 name = "未知"
 
-# 如果 patient 为 None，不会访问 patient.name，避免 AttributeError
-display_name = patient and patient.name or name
+# 如果 user 为 None，不会访问 user.name，避免 AttributeError
+display_name = user and user.name or name
 print(display_name)   # 未知
 
 # 更清晰的等价写法用条件表达式
-display_name = patient.name if patient else name
+display_name = user.name if user else name
 ```
 
 ::: note 短路求值的返回值
@@ -250,15 +250,15 @@ print(not x and y or z)   # True
 ```python
 # 复杂条件判断：建议加括号
 age = 65
-is_diabetic = True
-has_hypertension = False
+is_vip = True
+has_coupon = False
 
 # 不加括号，依赖优先级，可读性差
-high_risk = age >= 60 or is_diabetic and has_hypertension
-# 实际计算：age >= 60 or (is_diabetic and has_hypertension)
+high_risk = age >= 60 or is_vip and has_coupon
+# 实际计算：age >= 60 or (is_vip and has_coupon)
 
 # 加括号，意图清晰
-high_risk = (age >= 60) or (is_diabetic and has_hypertension)
+high_risk = (age >= 60) or (is_vip and has_coupon)
 print(high_risk)   # True，因为 age >= 60
 ```
 
@@ -283,26 +283,26 @@ print(a >> 2)   # 3，右移 2 位：00000011，相当于除以 4
 
 左移 `<<` 把二进制位向左移动指定位数，右边补 0，相当于乘以 2 的 n 次方。右移 `>>` 把二进制位向右移动指定位数，左边补符号位，相当于除以 2 的 n 次方取整。
 
-::: note 位运算的医学应用
-医学影像处理中，DICOM 图像的像素值有时用位平面存储，位运算可以提取特定位平面。权限控制中，常用位运算组合多个标志位，比如用每一位表示一种权限，按位或组合权限，按位与检查权限。这些场景在后续章节涉及影像处理时会遇到。
+::: note 位运算的实际应用
+图像处理中，图像的像素值有时用位平面存储，位运算可以提取特定位平面。权限控制中，常用位运算组合多个标志位，比如用每一位表示一种权限，按位或组合权限，按位与检查权限。这些场景在底层编程中会经常遇到。
 :::
 
 ```python
 # 用位运算做标志位管理
-# 假设用 4 位表示检查项目权限
+# 假设用 4 位表示操作权限
 READ = 1      # 0001，读权限
 WRITE = 2     # 0010，写权限
 DELETE = 4    # 0100，删除权限
 ADMIN = 8     # 1000，管理员权限
 
 # 组合权限
-doctor_perm = READ | WRITE          # 0011，医生有读写权限
+user_perm = READ | WRITE          # 0011，普通用户有读写权限
 admin_perm = READ | WRITE | DELETE | ADMIN  # 1111
 
 # 检查权限
-print(doctor_perm & WRITE)    # 2，非零表示有写权限
-print(doctor_perm & DELETE)   # 0，零表示无删除权限
-print(bool(doctor_perm & DELETE))  # False
+print(user_perm & WRITE)    # 2，非零表示有写权限
+print(user_perm & DELETE)   # 0，零表示无删除权限
+print(bool(user_perm & DELETE))  # False
 ```
 
 ## 2.2.9 位运算符的优先级
@@ -341,24 +341,24 @@ print(a + (b & c))    # 14，先算 b&c=2，再 a+2=14
 
 ```python
 # 成员运算符用于列表
-diagnoses = ["高血压", "糖尿病", "冠心病"]
-print("糖尿病" in diagnoses)      # True
-print("肝病" not in diagnoses)    # True
+tags = ["urgent", "vip", "error"]
+print("vip" in tags)      # True
+print("warn" not in tags) # True
 
 # 用于字符串：判断子串
-note = "患者主诉头痛三天"
-print("头痛" in note)    # True
-print("腹痛" in note)    # False
+note = "用户提交了订单请求"
+print("订单" in note)    # True
+print("退款" in note)    # False
 
 # 用于集合：判断成员
-normal_range = {60, 70, 80, 90, 100}
-print(75 in normal_range)   # False
+valid_scores = {60, 70, 80, 90, 100}
+print(75 in valid_scores)   # False
 
 # 用于字典：判断键（不是值）
-patient = {"name": "张三", "age": 45}
-print("name" in patient)    # True，判断键
-print("张三" in patient)    # False，值不在判断范围
-print("张三" in patient.values())  # True，显式判断值
+user = {"name": "张三", "age": 45}
+print("name" in user)    # True，判断键
+print("张三" in user)    # False，值不在判断范围
+print("张三" in user.values())  # True，显式判断值
 ```
 
 成员运算符在不同容器上的性能差异很大。列表和字符串的成员判断是线性扫描，时间复杂度为 O(n)，元素越多越慢。集合和字典的键判断基于哈希表，时间复杂度为 O(1)，无论元素多少都很快。当需要频繁判断成员关系时，把列表转为集合能显著提升性能。
@@ -382,8 +382,8 @@ print(999999 in big_set)
 print("集合判断耗时：", time.time() - start)
 ```
 
-::: note 医学场景中的成员判断
-判断某个诊断是否在常见病列表、某个药物是否在禁忌药物名单、某个基因是否在目标基因集中，都是典型的成员判断场景。当名单较大且需要频繁查询时，优先用集合存储数据，能大幅提升查询速度。
+::: note 实际开发中的成员判断
+判断某个标签是否在标签列表、某个用户是否在白名单、某个键是否在配置集合中，都是典型的成员判断场景。当名单较大且需要频繁查询时，优先用集合存储数据，能大幅提升查询速度。
 :::
 
 ## 2.2.11 身份运算符
@@ -479,38 +479,39 @@ print(result)   # 7.0
 
 # 括号用于逻辑表达式
 age = 45
-is_diabetic = True
-has_hypertension = False
+is_vip = True
+has_coupon = False
 
 # 不加括号，依赖优先级
-risk1 = age >= 60 or is_diabetic and has_hypertension
-# 等价于：age >= 60 or (is_diabetic and has_hypertension)
+risk1 = age >= 60 or is_vip and has_coupon
+# 等价于：age >= 60 or (is_vip and has_coupon)
 
 # 加括号改变逻辑
-risk2 = (age >= 60 or is_diabetic) and has_hypertension
-# 先算括号内的 or，再与 has_hypertension 做 and
+risk2 = (age >= 60 or is_vip) and has_coupon
+# 先算括号内的 or，再与 has_coupon 做 and
 
 print(risk1)   # False，age < 60 且 (True and False) = False
 print(risk2)   # False，(False or True) = True，True and False = False
 ```
 
-在医学计算中，括号的使用尤为重要。剂量的复杂计算、多条件组合判断，都需要明确的计算顺序。养成**遇到复杂表达式就加括号**的习惯，能让代码更可靠、更易维护。
+在实际开发中，括号的使用尤为重要。复杂的数值计算、多条件组合判断，都需要明确的计算顺序。养成**遇到复杂表达式就加括号**的习惯，能让代码更可靠、更易维护。
 
 ```python
-# 医学计算中的括号使用
-weight = 70   # 体重 kg
-dose_per_kg = 5   # 每公斤剂量 mg
+# 实际计算中的括号使用
+weight = 70   # 重量 kg
+unit_price = 5   # 单价 元
 times_per_day = 3   # 每日次数
-days = 7   # 用药天数
+days = 7   # 天数
 
-# 总剂量计算
-total_dose = (weight * dose_per_kg) * (times_per_day * days)
-print(total_dose)   # 7350 mg
+# 总价计算
+total_cost = (weight * unit_price) * (times_per_day * days)
+print(total_cost)   # 7350 元
 
-# 体重指数 BMI 计算
-height = 1.75   # 身高 m
-bmi = weight / (height ** 2)
-print(bmi)   # 22.857...
+# 矩形对角线长度计算
+width = 3   # 宽 m
+height = 4   # 高 m
+diagonal = (width ** 2 + height ** 2) ** 0.5
+print(diagonal)   # 5.0
 ```
 
 ## 2.2.14 表达式的概念

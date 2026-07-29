@@ -7,7 +7,7 @@ sidebar:
 
 <span class="chapter-tag">Python核心语法基础</span>
 
-程序错误是编程的常态，就像临床工作中遇到并发症是常态一样。初学者常把报错当作失败，实际上报错是 Python 在告诉你哪里出了问题，是定位问题的关键线索。本节将区分两类错误，介绍常见异常类型，讲解 try-except 异常处理结构，最后介绍调试工具的使用。掌握错误处理与调试，你才能写出健壮的程序，也能在出问题时快速找到原因。
+程序错误是编程的常态，就像工程实践中遇到问题是常态一样。初学者常把报错当作失败，实际上报错是 Python 在告诉你哪里出了问题，是定位问题的关键线索。本节将区分两类错误，介绍常见异常类型，讲解 try-except 异常处理结构，最后介绍调试工具的使用。掌握错误处理与调试，你才能写出健壮的程序，也能在出问题时快速找到原因。
 
 ## 1.5.1 语法错误（SyntaxError）的识别与修正
 
@@ -17,23 +17,23 @@ sidebar:
 
 ```python
 # 括号不匹配，少了右括号
-print("检验结果"
+print("处理完成"
 ```
 
 缩进错误发生在缩进层级不符合语法要求时。Python 用缩进表示代码块，多缩进或少缩进都会报错。
 
 ```python
 # 缩进错误
-def compute_bmi(weight, height):
-return weight / (height ** 2)  # 这一行应该缩进
+def compute_area(length, width):
+return length * width  # 这一行应该缩进
 ```
 
 冒号遗漏发生在 `def`、`if`、`for`、`while` 等语句末尾忘了写冒号。
 
 ```python
 # 冒号遗漏
-if bmi > 24
-    print("超重")
+if score > 80
+    print("优秀")
 ```
 
 IDE 通常会标红提示语法错误，PyCharm 和 VS Code 都能在你输入时实时检查语法。遇到 `SyntaxError` 时，错误信息会指出出错的行号和位置，对照提示检查括号、缩进和冒号一般就能解决。语法错误是最低级的错误，也是最容易修正的，养成看错误提示的习惯能省下大量时间。
@@ -42,23 +42,23 @@ IDE 通常会标红提示语法错误，PyCharm 和 VS Code 都能在你输入�
 
 语法正确不代表运行时不出错。程序在执行过程中遇到的问题称为异常。下面介绍几种最常见的异常类型。
 
-`NameError` 发生在使用了未定义的变量时。就像在病历里引用了一个不存在的检验项目编号，系统找不到对应记录。
+`NameError` 发生在使用了未定义的变量时。就像在代码里引用了一个不存在的文件名，系统找不到对应文件。
 
 ```python
-print(patient_name)  # NameError: name 'patient_name' is not defined
+print(user_name)  # NameError: name 'user_name' is not defined
 ```
 
 `TypeError` 发生在对不兼容的类型执行操作时。例如把字符串和数字相加。
 
 ```python
 age = 30
-message = "患者年龄是" + age  # TypeError: can only concatenate str (not "int") to str
+message = "用户年龄是" + age  # TypeError: can only concatenate str (not "int") to str
 ```
 
 修正方法是显式转换类型。
 
 ```python
-message = "患者年龄是" + str(age)  # 正确
+message = "用户年龄是" + str(age)  # 正确
 ```
 
 `ValueError` 发生在值的类型正确但内容不合法时。例如把非数字字符串转成整数。
@@ -76,7 +76,7 @@ average = total / count  # 当 count 为 0 时触发 ZeroDivisionError
 `FileNotFoundError` 发生在尝试打开不存在的文件时。
 
 ```python
-with open("不存在的报告.txt") as f:  # FileNotFoundError
+with open("不存在的文件.txt") as f:  # FileNotFoundError
     content = f.read()
 ```
 
@@ -90,8 +90,8 @@ print(values[5])  # IndexError: list index out of range
 `KeyError` 发生在访问字典中不存在的键时。
 
 ```python
-patient = {"name": "张三", "age": 45}
-print(patient["diagnosis"])  # KeyError: 'diagnosis'
+user = {"name": "张三", "age": 45}
+print(user["status"])  # KeyError: 'status'
 ```
 
 这些异常都有明确的名字，错误信息会指出异常类型和具体原因。读懂异常类型是排查问题的第一步。
@@ -104,11 +104,11 @@ print(patient["diagnosis"])  # KeyError: 'diagnosis'
 
 ```python
 try:
-    count = int(input("请输入样本数量："))
+    count = int(input("请输入数量："))
     average = total / count
     print(f"平均值：{average}")
 except ZeroDivisionError:
-    print("样本数量不能为零，请重新输入。")
+    print("数量不能为零，请重新输入。")
 ```
 
 当 `count` 为零时，`total / count` 触发 `ZeroDivisionError`，程序跳转到 `except` 块执行提示，而不是崩溃退出。如果 `try` 块中没有异常，`except` 块会被跳过。
@@ -117,15 +117,15 @@ except ZeroDivisionError:
 
 ```python
 try:
-    count = int(input("请输入样本数量："))
+    count = int(input("请输入数量："))
     average = total / count
 except ValueError:
     print("输入的不是有效整数。")
 except ZeroDivisionError:
-    print("样本数量不能为零。")
+    print("数量不能为零。")
 ```
 
-这种结构类似于临床的分级处置：不同的异常对应不同的处理方案。注意异常处理应针对具体类型，避免一上来就写 `except:` 捕获所有异常，那样会掩盖真正的问题，让你无从排查。
+这种结构类似于分级处理：不同的异常对应不同的处理方案。注意异常处理应针对具体类型，避免一上来就写 `except:` 捕获所有异常，那样会掩盖真正的问题，让你无从排查。
 
 ## 1.5.4 try-except-else-finally 的完整结构
 
@@ -166,44 +166,44 @@ with open("data.txt") as f:
 # 离开 with 块后文件自动关闭
 ```
 
-`finally` 的可靠性体现在即使 `try` 块里出现了你没有预料到的异常，`finally` 也会执行，然后再把异常向上抛出。这保证了关键清理逻辑总能运行，类似于无论手术过程如何，结束后都要清点器械的流程要求。
+`finally` 的可靠性体现在即使 `try` 块里出现了你没有预料到的异常，`finally` 也会执行，然后再把异常向上抛出。这保证了关键清理逻辑总能运行，类似于无论任务执行如何，结束后都要释放资源的流程要求。
 
 ## 1.5.5 使用 raise 手动抛出异常
 
 除了捕获异常，你还可以主动抛出异常。`raise` 语句用于在检测到不合法状态时手动触发异常，常用于函数参数校验。
 
 ```python
-def set_heart_rate(value):
-    if value < 0 or value > 300:
-        raise ValueError(f"心率 {value} 不在合理范围（0-300）。")
-    print(f"心率已记录：{value}")
+def set_score(value):
+    if value < 0 or value > 100:
+        raise ValueError(f"分数 {value} 不在合理范围（0-100）。")
+    print(f"分数已记录：{value}")
 
-set_heart_rate(75)   # 正常记录
-set_heart_rate(-5)   # 抛出 ValueError
+set_score(75)   # 正常记录
+set_score(-5)   # 抛出 ValueError
 ```
 
 调用方可以用 `try-except` 捕获这个异常并处理。
 
 ```python
 try:
-    set_heart_rate(-5)
+    set_score(-5)
 except ValueError as e:
     print(f"输入无效：{e}")
 ```
 
-`as e` 把异常对象赋给变量 `e`，可以通过它获取错误信息。主动抛出异常的好处是把校验逻辑集中在函数内部，调用方只需要决定如何处理，不必重复写校验代码。这类似于检验科在收到不合格样本时直接拒收并报错，临床医生收到拒收通知后再决定如何处理，而不必每个医生都自己去判断样本是否合格。
+`as e` 把异常对象赋给变量 `e`，可以通过它获取错误信息。主动抛出异常的好处是把校验逻辑集中在函数内部，调用方只需要决定如何处理，不必重复写校验代码。这类似于仓库在收到不合格货物时直接拒收并报错，调用方收到拒收通知后再决定如何处理，而不必每个调用方都自己去判断货物是否合格。
 
 ## 1.5.6 断言 assert 的基本用法
 
 `assert` 语句用于断言某个条件必须为真。条件为假时抛出 `AssertionError`，并附带一条可选的错误消息。
 
 ```python
-def calculate_dose(weight, dose_per_kg):
-    assert weight > 0, "体重必须为正数"
-    return weight * dose_per_kg
+def calculate_amount(price, quantity):
+    assert quantity > 0, "数量必须为正数"
+    return price * quantity
 
-print(calculate_dose(70, 5))   # 输出 350
-print(calculate_dose(-70, 5))  # 抛出 AssertionError: 体重必须为正数
+print(calculate_amount(70, 5))   # 输出 350
+print(calculate_amount(70, -5))  # 抛出 AssertionError: 数量必须为正数
 ```
 
 `assert` 和 `raise` 都能用来检查条件，区别在于使用场景。`assert` 用于调试阶段确认程序内部状态符合预期，是开发者给自己留的检查点。`raise` 用于处理外部输入或运行时可能出现的错误，是程序正常逻辑的一部分。
@@ -214,7 +214,7 @@ print(calculate_dose(-70, 5))  # 抛出 AssertionError: 体重必须为正数
 
 调试是定位和修正程序错误的过程。现代 IDE 提供了调试器，让你能在程序运行时观察它的内部状态。理解三个核心概念能帮助你高效使用调试器。
 
-**断点**是程序暂停执行的位置。你在某一行代码上设置断点，程序运行到这一行时会停下来，把控制权交给你。这类似于在手术关键步骤暂停一下，确认解剖结构再继续。
+**断点**是程序暂停执行的位置。你在某一行代码上设置断点，程序运行到这一行时会停下来，把控制权交给你。这类似于在关键步骤暂停一下，确认状态再继续。
 
 **单步执行**是让程序逐行运行的方式。你可以一行一行地执行代码，观察每一行执行后的效果，找出问题出现在哪一步。
 

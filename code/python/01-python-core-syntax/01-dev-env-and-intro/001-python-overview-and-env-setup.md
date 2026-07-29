@@ -7,7 +7,7 @@ sidebar:
 
 <span class="chapter-tag">Python核心语法基础</span>
 
-Python 是当下最流行的通用编程语言之一，在数据科学、人工智能、Web 开发和自动化运维等领域都有广泛应用。对于医学生而言，掌握 Python 意味着能够直接处理医学影像、分析临床数据、构建生信流程。本节将从 Python 的历史与定位讲起，逐步覆盖语言特点、应用领域、安装配置、包管理、虚拟环境与开发工具选择等内容，目标是让你读完这一节后能拥有一台配置完整、可直接编写代码的 Python 工作环境。
+Python 是当下最流行的通用编程语言之一，在数据科学、人工智能、Web 开发和自动化运维等领域都有广泛应用。掌握 Python 意味着能够直接处理数据、构建自动化脚本、开发各类应用。本节将从 Python 的历史与定位讲起，逐步覆盖语言特点、应用领域、安装配置、包管理、虚拟环境与开发工具选择等内容，目标是让你读完这一节后能拥有一台配置完整、可直接编写代码的 Python 工作环境。
 
 ## Python 语言的发展历史与版本演进
 
@@ -23,7 +23,7 @@ Python 2 与 3 之间最大的隔阂在于不向后兼容，这意味着用 Pyth
 
 第一处差异是打印语句。Python 2 中 `print` 是语句，写法是 `print "hello"`；Python 3 中 `print` 是函数，写法是 `print("hello")`，必须加括号。这看似只是语法糖的变化，背后反映了 Python 3 对一致性的追求：所有可调用的东西都应该是函数。
 
-第二处差异是字符串编码。Python 2 默认使用 ASCII 字符串，处理中文等非 ASCII 字符时需要显式声明 `# -*- coding: utf-8 -*-`，并区分 `str` 和 `unicode` 两种类型；Python 3 默认使用 Unicode 字符串，所有文本都是 `str` 类型，字节流单独用 `bytes` 类型表示。这一改动让 Python 3 在处理多语言文本时更加自然，对处理中文病历、多语种医学文献尤为友好。
+第二处差异是字符串编码。Python 2 默认使用 ASCII 字符串，处理中文等非 ASCII 字符时需要显式声明 `# -*- coding: utf-8 -*-`，并区分 `str` 和 `unicode` 两种类型；Python 3 默认使用 Unicode 字符串，所有文本都是 `str` 类型，字节流单独用 `bytes` 类型表示。这一改动让 Python 3 在处理多语言文本时更加自然，对处理中文文本、多语种内容尤为友好。
 
 第三处差异是整数除法。Python 2 中 `/` 对两个整数做除法会截断小数部分，例如 `3 / 2` 结果是 `1`；Python 3 中 `/` 总是返回浮点数，`3 / 2` 结果是 `1.5`，需要整除时用 `//` 运算符。这一改动避免了大量隐式 bug。
 
@@ -55,7 +55,7 @@ Python 采用动态类型系统，变量的类型在运行时确定，无需在�
 ```python
 x = 42          # 此时 x 是整数
 print(type(x))  # <class 'int'>
-x = "patient"   # 此时 x 是字符串
+x = "hello"     # 此时 x 是字符串
 print(type(x))  # <class 'str'>
 ```
 
@@ -99,7 +99,7 @@ Python 支持类、继承、多态等完整的面向对象特性，但不强制�
 
 Python 可以嵌入到 C/C++ 程序中作为脚本扩展，也可以反过来用 C/C++ 为 Python 编写扩展模块。NumPy、Pandas 这些性能关键库的底层都是 C 实现的，通过扩展接口暴露给 Python 调用。这种机制让 Python 兼具易用性和性能：上层用 Python 写逻辑，性能瓶颈用 C 加速。
 
-医学影像处理库如 SimpleITK、pydicom 的底层就是 C++，Python 只是调用层。这种组合让你能用简洁的 Python 代码完成复杂的影像操作，而无需关心底层实现。
+图像处理库如 OpenCV、科学计算库如 NumPy 的底层就是 C/C++，Python 只是调用层。这种组合让你能用简洁的 Python 代码完成复杂的数值计算，而无需关心底层实现。
 
 ### 缩进语法
 
@@ -134,11 +134,11 @@ Python 在 Web 后端开发中占有一席之地。主流框架有三类。Djang
 
 数据分析是 Python 最强势的领域之一。NumPy 提供多维数组和向量化运算，是几乎所有数值库的底层依赖。Pandas 提供数据框结构和数据清洗、聚合、透视等操作，类似 R 的 data.frame 但生态更广。Matplotlib 是基础绘图库，Seaborn 在其上封装了统计图表，Plotly 则提供交互式图表。
 
-数据清洗、字段统计、检验指标分布可视化，这一类任务的标配是 Pandas 加 Matplotlib 或 Seaborn。
+数据清洗、字段统计、指标分布可视化，这一类任务的标配是 Pandas 加 Matplotlib 或 Seaborn。
 
 ### 人工智能
 
-深度学习领域 Python 几乎是事实标准。PyTorch 由 Meta 开源，动态图机制深受研究者欢迎，是影像分割、病理图像分类等学术研究的主流选择。TensorFlow 由 Google 开源，部署生态更成熟，工业界使用较多。Hugging Face Transformers 提供大量预训练模型，自然语言处理（如实体识别）常基于它做微调。
+深度学习领域 Python 几乎是事实标准。PyTorch 由 Meta 开源，动态图机制深受研究者欢迎，是图像分割、图像分类等学术研究的主流选择。TensorFlow 由 Google 开源，部署生态更成熟，工业界使用较多。Hugging Face Transformers 提供大量预训练模型，自然语言处理（如实体识别）常基于它做微调。
 
 ### 自动化脚本
 
@@ -154,14 +154,14 @@ Python 是跨平台语言，三大主流操作系统 Windows、macOS、Linux 都
 
 不同系统的安装方式和命令略有差异。Windows 系统上安装后命令通常是 `python`；macOS 和 Linux 系统上，由于历史上系统自带的 Python 2 占用了 `python` 命令，Python 3 通常以 `python3` 命令存在。这一差异在 macOS Ventura 之后有所缓解，新版系统默认没有预装 Python，安装后通过 `python3` 调用。
 
-路径分隔符是跨平台开发的一个常见坑。Windows 用反斜杠 `\` 分隔路径，例如 `C:\Users\patient\data.csv`；macOS 和 Linux 用正斜杠 `/`，例如 `/home/patient/data.csv`。Python 的 `pathlib` 模块封装了路径操作，能自动适配当前系统的分隔符，建议写跨平台脚本时优先使用：
+路径分隔符是跨平台开发的一个常见坑。Windows 用反斜杠 `\` 分隔路径，例如 `C:\Users\user\data.csv`；macOS 和 Linux 用正斜杠 `/`，例如 `/home/user/data.csv`。Python 的 `pathlib` 模块封装了路径操作，能自动适配当前系统的分隔符，建议写跨平台脚本时优先使用：
 
 ```python
 from pathlib import Path
 
 # pathlib 会自动处理路径分隔符
-data_dir = Path("data") / "patient" / "sample.csv"
-print(data_dir)  # Windows: data\patient\sample.csv; macOS/Linux: data/patient/sample.csv
+data_dir = Path("data") / "user" / "sample.csv"
+print(data_dir)  # Windows: data\user\sample.csv; macOS/Linux: data/user/sample.csv
 ```
 
 ## Python 解释器的安装
@@ -334,8 +334,8 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 虚拟环境的思路是给每个项目配一个独立的包目录。激活某个虚拟环境后，`pip install` 安装的包只进入该环境的目录，不影响其他环境。全局 Python 只保留标准库和 pip，具体项目的依赖各自隔离。
 
-::: note 与医学场景类比
-虚拟环境类似医院的隔离病房。每个病人（项目）有自己的病房（虚拟环境），用药（安装包）只影响该病房，不会污染其他病人。如果不隔离，一床用药全院共用，必然出问题。
+::: note 与工作间类比
+虚拟环境类似独立的工作间。每个项目（任务）有自己的工作间（虚拟环境），往里面放的工具（安装包）只影响该工作间，不会污染其他项目。如果不隔离，所有工具堆在一间屋子里共用，必然出问题。
 :::
 
 虚拟环境的另一个好处是可复现。把某个项目的依赖导出为 `requirements.txt`，到任何机器上用 `pip install -r` 都能复刻相同环境。这对论文复现、协作开发、部署上线都至关重要。
@@ -354,11 +354,11 @@ python -m venv .venv
 如果你使用 Anaconda 或 Miniconda，conda 也能创建虚拟环境，而且 conda 创建的环境可以指定不同版本的 Python：
 
 ```bash
-# 创建名为 medai 的环境，指定 Python 3.11
-conda create -n medai python=3.11
+# 创建名为 ml 的环境，指定 Python 3.11
+conda create -n ml python=3.11
 
-# 创建名为 medinfo 的环境，指定 Python 3.10 并预装 numpy
-conda create -n medinfo python=3.10 numpy
+# 创建名为 webdev 的环境，指定 Python 3.10 并预装 numpy
+conda create -n webdev python=3.10 numpy
 ```
 
 venv 和 conda 的主要区别：venv 只能用当前 Python 版本创建环境，包管理只能用 pip；conda 能为不同环境指定不同 Python 版本，包管理用 conda，也能在环境内用 pip。日常小型项目 venv 足够，需要管理多个 Python 版本或复杂非 Python 依赖时用 conda。
@@ -508,11 +508,11 @@ Jupyter Notebook 的界面主要有几部分。顶部是菜单栏，包含 File�
 # Code 单元格示例
 import pandas as pd
 
-# 模拟临床数据
+# 模拟用户数据
 data = pd.DataFrame({
-    "patient_id": ["P001", "P002", "P003"],
+    "user_id": ["U001", "U002", "U003"],
     "age": [45, 62, 38],
-    "diagnosis": ["高血压", "糖尿病", "健康"]
+    "city": ["北京", "上海", "广州"]
 })
 data
 ```
@@ -545,7 +545,7 @@ JupyterLab 兼容 Notebook 文件格式（`.ipynb`），原有 Notebook 文件�
 
 ## 远程开发环境配置
 
-实际工作中，你可能需要在远程服务器上跑 Python 代码。常见场景包括：医学影像数据存在医院服务器上、深度学习训练需要 GPU 服务器、生物信息学分析需要集群算力。这种情况下需要在本地编辑器连接远程环境开发。
+实际工作中，你可能需要在远程服务器上跑 Python 代码。常见场景包括：大规模数据存储在远程服务器上、深度学习训练需要 GPU 服务器、数据分析需要集群算力。这种情况下需要在本地编辑器连接远程环境开发。
 
 最基础的方式是 SSH 连接。SSH（Secure Shell）是远程登录协议，命令格式 `ssh username@server_ip`，输入密码后即可在远程服务器的终端中操作。在 SSH 终端中可以用 vim 或 nano 编辑代码，用 `python script.py` 运行。这种方式适合简单任务，但编辑体验不如本地 IDE。
 

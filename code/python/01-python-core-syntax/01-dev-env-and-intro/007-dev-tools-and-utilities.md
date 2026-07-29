@@ -7,7 +7,7 @@ sidebar:
 
 <span class="chapter-tag">Python核心语法基础</span>
 
-写代码只是工作的一部分，让代码正确运行、便于调试、可复现环境，才是完整的开发流程。Python 生态提供了丰富的辅助工具，从自动格式化到代码检查，从交互调试到环境管理，每一类工具都解决一个具体的工程痛点。本章将这些工具按用途分组介绍，重点是掌握每个工具的核心命令和适用场景。医学生初学编程时，常常因为环境问题而卡住，理解这些工具能帮你跳出困境。
+写代码只是工作的一部分，让代码正确运行、便于调试、可复现环境，才是完整的开发流程。Python 生态提供了丰富的辅助工具，从自动格式化到代码检查，从交互调试到环境管理，每一类工具都解决一个具体的工程痛点。本章将这些工具按用途分组介绍，重点是掌握每个工具的核心命令和适用场景。初学者常常因为环境问题而卡住，理解这些工具能帮你跳出困境。
 
 ## 1.7.1 代码格式化工具
 
@@ -28,12 +28,12 @@ black src/                  # 格式化整个目录
 
 ```python
 # 格式化前
-def calculate_bmi(weight,height):
-    return weight/(height**2)
+def calculate_area(length,width):
+    return length*width
 
 # black 格式化后
-def calculate_bmi(weight, height):
-    return weight / (height ** 2)
+def calculate_area(length, width):
+    return length * width
 ```
 
 ### autopep8 的使用
@@ -96,13 +96,13 @@ pylint src/                # 检查整个目录
 启动 pdb 的传统方式是在代码中插入 `import pdb; pdb.set_trace()`。程序运行到这一行时会暂停，进入 pdb 交互界面，光标处显示 `(Pdb)` 提示符。Python 3.7 之后，内置了 `breakpoint()` 函数，它会自动调用当前配置的调试器，默认就是 pdb。`breakpoint()` 是更推荐的写法，更短且更通用。
 
 ```python
-def calculate_dose(weight, concentration):
-    total = weight * concentration
+def calculate_amount(price, quantity):
+    total = price * quantity
     breakpoint()       # 程序在此暂停
     adjusted = total * 0.9
     return adjusted
 
-calculate_dose(70, 10)
+calculate_amount(70, 10)
 ```
 
 ### 常用 pdb 命令
@@ -113,7 +113,7 @@ calculate_dose(70, 10)
 (Pdb) n            # 执行下一行，不进入函数
 (Pdb) s            # 执行下一行，进入函数
 (Pdb) c            # 继续执行到下一个断点
-(Pdb) p weight     # 打印变量 weight 的值
+(Pdb) p price      # 打印变量 price 的值
 70
 (Pdb) p total      # 打印变量 total 的值
 700
@@ -126,7 +126,7 @@ print 调试适合简单问题，几行代码就能定位。复杂问题涉及�
 
 ## 1.7.4 计时工具 time 模块
 
-性能问题在医学数据分析中很常见。一个处理上万条病历的脚本，是 3 秒还是 30 秒，直接影响工作流。time 模块提供了基本的时间获取和计时功能，是性能分析的入门工具。
+性能问题在数据分析中很常见。一个处理上万条数据的脚本，是 3 秒还是 30 秒，直接影响工作流。time 模块提供了基本的时间获取和计时功能，是性能分析的入门工具。
 
 ### time.time() 与 time.sleep()
 
@@ -164,18 +164,18 @@ print(f"精确耗时: {end - start:.6f} 秒")
 
 ## 1.7.5 环境管理工具 conda
 
-conda 是 Anaconda 和 Miniconda 提供的包与环境管理器，在数据科学和生物信息学领域极为流行。它的核心能力是创建隔离的 Python 环境，让不同项目使用不同的 Python 版本和依赖包，互不干扰。这一点对医学生尤其重要，因为不同分析流程常常要求不同的库版本。
+conda 是 Anaconda 和 Miniconda 提供的包与环境管理器，在数据科学和科学计算领域极为流行。它的核心能力是创建隔离的 Python 环境，让不同项目使用不同的 Python 版本和依赖包，互不干扰。这一点对开发者尤其重要，因为不同项目常常要求不同的库版本。
 
 ### conda 的基本命令
 
 conda 的环境管理围绕几条命令展开。`conda create -n envname python=3.11` 创建一个名为 envname 的新环境，指定 Python 版本为 3.11。`conda activate envname` 激活该环境，激活后命令行提示符会显示当前环境名。`conda deactivate` 退出当前环境。`conda env list` 列出所有已创建的环境。`conda remove -n envname --all` 删除整个环境。
 
 ```bash
-conda create -n medai python=3.11
-conda activate medai
+conda create -n ml python=3.11
+conda activate ml
 conda deactivate
 conda env list
-conda remove -n medai --all
+conda remove -n ml --all
 ```
 
 环境内安装包用 `conda install package`，查看已安装的包用 `conda list`。conda 安装包时会自动处理依赖，包括非 Python 的 C 库，这是 conda 相对 pip 的一大优势。
@@ -186,7 +186,7 @@ conda list
 ```
 
 ::: note 环境隔离的价值
-设想你同时在做两个项目，一个用旧版 TensorFlow 训练医学影像模型，另一个用新版 PyTorch 做基因组分析。两个项目对 NumPy 版本的要求冲突，共用一个环境会导致其中一个跑不起来。conda 环境把每个项目的依赖隔离开，互不影响，这是工程实践的基本要求。
+设想你同时在做两个项目，一个用旧版 TensorFlow 训练图像分类模型，另一个用新版 PyTorch 做数据分析。两个项目对 NumPy 版本的要求冲突，共用一个环境会导致其中一个跑不起来。conda 环境把每个项目的依赖隔离开，互不影响，这是工程实践的基本要求。
 :::
 
 ## 1.7.6 pip 与 conda 的区别与协同
@@ -209,7 +209,7 @@ pip install some-pypi-only-package
 
 ## 1.7.7 requirements.txt 文件的生成与安装
 
-当项目需要在另一台机器上运行时，最关键的是复现依赖环境。requirements.txt 是 pip 的依赖清单文件，列出了项目所需的所有 Python 包及版本。这个文件是 Python 项目协作的标准产物，类似于临床实验的试剂清单。
+当项目需要在另一台机器上运行时，最关键的是复现依赖环境。requirements.txt 是 pip 的依赖清单文件，列出了项目所需的所有 Python 包及版本。这个文件是 Python 项目协作的标准产物，类似于实验的器材清单。
 
 生成 requirements.txt 最简单的方式是 `pip freeze > requirements.txt`，它把当前环境所有已安装的包及其精确版本写入文件。在另一台机器上，运行 `pip install -r requirements.txt` 即可按清单安装。
 
@@ -242,7 +242,7 @@ conda env create -f environment.yml
 environment.yml 文件的结构如下，channels 指定包来源，dependencies 列出 conda 包，pip 子项列出 PyPI 上的包。
 
 ```yaml
-name: medai
+name: ml
 channels:
   - conda-forge
   - defaults
@@ -251,8 +251,8 @@ dependencies:
   - numpy=1.24.3
   - pandas=2.0.3
   - pip:
-    - medpy==0.4.0
-    - dicom2nifti==2.3.0
+    - scikit-learn==1.3.0
+    - matplotlib==3.7.2
 ```
 
 ::: note 跨平台复现的注意
@@ -261,7 +261,7 @@ conda env export 会包含平台特定的包版本，从 Windows 导出的 yml �
 
 ## 1.7.9 使用 jupyter notebook 生成配置文件
 
-Jupyter Notebook 是数据科学领域最常用的交互式环境，医学生用它分析病历数据、可视化指标趋势非常方便。默认配置在大多数场景下够用，但有时需要修改默认目录、监听端口、密码等。Jupyter 提供了 `jupyter notebook --generate-config` 命令生成配置文件。
+Jupyter Notebook 是数据科学领域最常用的交互式环境，开发者用它分析数据、可视化指标趋势非常方便。默认配置在大多数场景下够用，但有时需要修改默认目录、监听端口、密码等。Jupyter 提供了 `jupyter notebook --generate-config` 命令生成配置文件。
 
 ```bash
 jupyter notebook --generate-config
@@ -273,7 +273,7 @@ jupyter notebook --generate-config
 # jupyter_notebook_config.py 节选
 
 # 修改默认启动目录
-c.NotebookApp.notebook_dir = 'D:/medical_analysis'
+c.NotebookApp.notebook_dir = 'D:/data_analysis'
 
 # 禁用启动时自动打开浏览器
 c.NotebookApp.open_browser = False
@@ -336,8 +336,8 @@ clean_data = clean_raw_data(raw_data)
 %%time
 import pandas as pd
 
-df = pd.read_csv("large_clinical_dataset.csv")
-df.groupby("diagnosis").mean()
+df = pd.read_csv("large_dataset.csv")
+df.groupby("category").mean()
 ```
 
 ## 1.7.11 使用 help() 函数获取在线文档
@@ -357,20 +357,20 @@ help(list.sort)
 help() 的输出基于对象的 `__doc__` 属性，因此自定义函数只要写了 docstring，help() 也能显示。这进一步说明 docstring 的重要性。
 
 ```python
-def calculate_bmi(weight, height):
+def calculate_area(length, width):
     """
-    计算 BMI 指数。
+    计算矩形面积。
 
     Args:
-        weight (float): 体重，单位 kg。
-        height (float): 身高，单位 m。
+        length (float): 长度，单位 m。
+        width (float): 宽度，单位 m。
 
     Returns:
-        float: BMI 值。
+        float: 面积，单位 m²。
     """
-    return weight / height ** 2
+    return length * width
 
-help(calculate_bmi)
+help(calculate_area)
 ```
 
 ## 1.7.12 使用 dir() 函数查看对象属性与方法

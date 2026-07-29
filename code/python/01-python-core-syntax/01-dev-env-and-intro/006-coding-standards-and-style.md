@@ -7,7 +7,7 @@ sidebar:
 
 <span class="chapter-tag">Python核心语法基础</span>
 
-编程规范是协作的基础。医学生写病历有固定格式，主诉、现病史、既往史按顺序书写，目的在于让任何接诊医生都能快速读懂。Python 社区同样有一套通用规范，称为 PEP 8，它规定了缩进、命名、空格、换行等细节。初学阶段就遵守这些规则，能让你的代码从一开始就具备专业气质，也为后续参与开源项目、团队协作打下基础。本章将从 PEP 8 出发，覆盖命名、文档、注释、空格、换行等核心内容，帮助你建立正确的代码风格意识。
+编程规范是协作的基础。程序员写代码有固定格式，命名、缩进、空格按规范书写，目的在于让任何接手的人都能快速读懂。Python 社区同样有一套通用规范，称为 PEP 8，它规定了缩进、命名、空格、换行等细节。初学阶段就遵守这些规则，能让你的代码从一开始就具备专业气质，也为后续参与开源项目、团队协作打下基础。本章将从 PEP 8 出发，覆盖命名、文档、注释、空格、换行等核心内容，帮助你建立正确的代码风格意识。
 
 ## 1.6.1 PEP 8 编码规范概览
 
@@ -21,31 +21,31 @@ Python 用缩进表示代码块的层次关系，因此缩进在 Python 中具�
 
 ```python
 # 推荐写法
-def calculate_bmi(weight, height):
+def calculate_area(length, width):
     # 4 个空格缩进
-    return weight / (height ** 2)
+    return length * width
 
 # 错误写法：混用 Tab 和空格会报错
-# def calculate_bmi(weight, height):
-# \treturn weight / (height ** 2)   # 这里是 Tab
+# def calculate_area(length, width):
+# \treturn length * width   # 这里是 Tab
 ```
 
 ### 空行规则
 
-空行用于在视觉上分隔代码块。PEP 8 规定顶层函数与类之间空两行，类内的方法之间空一行。这里的顶层指的是模块级别定义的函数和类，而不是嵌套在函数内部的小函数。空行的目的是让阅读者一眼看出代码的逻辑边界，类似于病历中不同段落之间的空行。
+空行用于在视觉上分隔代码块。PEP 8 规定顶层函数与类之间空两行，类内的方法之间空一行。这里的顶层指的是模块级别定义的函数和类，而不是嵌套在函数内部的小函数。空行的目的是让阅读者一眼看出代码的逻辑边界，类似于文章中不同段落之间的空行。
 
 ```python
-def parse_lab_report(text):
-    """解析化验单文本"""
+def parse_csv_file(text):
+    """解析 CSV 文本"""
     pass
 
 
-def parse_imaging_report(text):
-    """解析影像报告文本"""
+def parse_json_file(text):
+    """解析 JSON 文本"""
     pass
 
 
-class Patient:
+class User:
     def __init__(self, name):
         self.name = name
 
@@ -68,8 +68,8 @@ import numpy as np
 import pandas as pd
 
 # 本地模块
-from utils.file_io import read_dicom
-from models.patient import Patient
+from utils.file_io import read_csv
+from models.user import User
 ```
 
 ## 1.6.2 命名约定
@@ -82,17 +82,17 @@ from models.patient import Patient
 
 ```python
 # 推荐
-patient_name = "张三"
-heart_rate = 72
+user_name = "张三"
+score = 72
 
-def calculate_bmi(weight, height):
-    return weight / (height ** 2)
+def calculate_area(length, width):
+    return length * width
 
 # 不推荐：使用了驼峰命名
-patientName = "张三"
+userName = "张三"
 
-def calculateBMI(weight, height):
-    return weight / (height ** 2)
+def calculateArea(length, width):
+    return length * width
 ```
 
 ### 类名：PascalCase
@@ -101,16 +101,16 @@ def calculateBMI(weight, height):
 
 ```python
 # 推荐
-class PatientRecord:
+class UserRecord:
     pass
 
 
-class ClinicalTrialAnalyzer:
+class DataAnalyzer:
     pass
 
 
 # 不推荐
-class patient_record:
+class user_record:
     pass
 ```
 
@@ -120,13 +120,13 @@ class patient_record:
 
 ```python
 # 推荐
-MAX_HEART_RATE = 220
-NORMAL_BODY_TEMP = 37.0
+MAX_RETRIES = 3
+DEFAULT_TIMEOUT = 30
 DAYS_PER_WEEK = 7
 
 # 不推荐
-maxHeartRate = 220
-normal_body_temp = 37.0
+maxRetries = 3
+default_timeout = 30
 ```
 
 ### 私有成员：前缀下划线
@@ -134,7 +134,7 @@ normal_body_temp = 37.0
 以单下划线开头的名字表示私有，例如 `_name`、`_internal_method`。这种约定告诉其他开发者这个属性或方法仅供模块或类内部使用，不应在外部直接访问。Python 不会强制阻止访问，单下划线仅是一种约定。双下划线开头则会触发名称改写（name mangling），更强地隔离类内私有属性。
 
 ```python
-class Patient:
+class User:
     def __init__(self, name, id_number):
         self.name = name          # 公开属性
         self._id = id_number      # 私有属性，外部不应直接访问
@@ -157,18 +157,18 @@ def square(x):
     return x * x
 
 
-def calculate_dose(weight, concentration):
+def calculate_amount(price, quantity):
     """
-    根据体重和药物浓度计算给药剂量。
+    根据单价和数量计算总金额。
 
     参数:
-        weight (float): 患者体重，单位千克。
-        concentration (float): 药物浓度，单位 mg/mL。
+        price (float): 单价，单位元。
+        quantity (float): 数量。
 
     返回:
-        float: 推荐剂量，单位 mg。
+        float: 总金额，单位元。
     """
-    return weight * concentration
+    return price * quantity
 ```
 
 ### Google 风格 docstring
@@ -176,24 +176,24 @@ def calculate_dose(weight, concentration):
 社区有多种 docstring 规范，Google 风格最为流行，因为它结构清晰、可读性强，且能被 sphinx 等文档工具自动解析。Google 风格把参数、返回值、异常分块列出，每块以关键字开头，例如 `Args`、`Returns`、`Raises`。下面是一个完整示例：
 
 ```python
-def diagnose(symptoms, lab_results):
+def classify_category(items, scores):
     """
-    根据症状和化验结果给出初步诊断。
+    根据项目和评分给出分类结果。
 
     Args:
-        symptoms (list[str]): 患者主诉症状列表。
-        lab_results (dict): 化验指标字典，键为指标名，值为数值。
+        items (list[str]): 项目名称列表。
+        scores (dict): 评分字典，键为项目名，值为数值。
 
     Returns:
-        dict: 诊断结果，包含 disease 和 confidence 两个字段。
+        dict: 分类结果，包含 category 和 confidence 两个字段。
 
     Raises:
-        ValueError: 当症状列表为空时抛出。
+        ValueError: 当项目列表为空时抛出。
     """
-    if not symptoms:
-        raise ValueError("症状列表不能为空")
-    # 诊断逻辑略
-    return {"disease": "流感", "confidence": 0.85}
+    if not items:
+        raise ValueError("项目列表不能为空")
+    # 分类逻辑略
+    return {"category": "A类", "confidence": 0.85}
 ```
 
 ::: note docstring 与注释的区别
@@ -208,14 +208,14 @@ docstring 描述的是函数或类的对外契约，包括输入、输出、行�
 
 ```python
 # 坏注释：复述代码，没有增加信息
-heart_rate = 72  # 把心率设为 72
+score = 72  # 把分数设为 72
 
 # 好注释：解释背景或意图
-# 该患者为运动员，静息心率偏低属正常
-resting_hr = 52
+# 该测试用例覆盖边界条件，分数偏低属预期
+edge_score = 52
 ```
 
-第一段注释完全是在翻译代码，任何人看到 `heart_rate = 72` 都知道是把心率设为 72，注释没有提供任何额外信息。第二段注释解释了为什么 52 这个看起来异常的值是正常的，这种背景信息在病历式编程中尤为珍贵。
+第一段注释完全是在翻译代码，任何人看到 `score = 72` 都知道是把分数设为 72，注释没有提供任何额外信息。第二段注释解释了为什么 52 这个看起来异常的值是正常的，这种背景信息在团队协作中尤为珍贵。
 
 ### 代码自解释时不需要注释
 
@@ -223,13 +223,12 @@ resting_hr = 52
 
 ```python
 # 需要注释才能理解
-def f(x, y):
-    return x / (y / 100) ** 2
+def f(x):
+    return x / 1048576
 
 # 自解释，无需注释
-def calculate_bmi(weight_kg, height_cm):
-    height_m = height_cm / 100
-    return weight_kg / (height_m ** 2)
+def convert_bytes_to_mb(bytes):
+    return bytes / (1024 * 1024)
 ```
 
 ### 过时注释比没有注释更危险
@@ -237,8 +236,8 @@ def calculate_bmi(weight_kg, height_cm):
 代码会随需求变化，但注释常常被遗忘。当注释与代码矛盾时，维护者会陷入困惑，不知道该相信哪一方。这种过时注释的危害远大于没有注释。修改代码时务必同步修改相关注释，养成这个习惯能避免很多沟通成本。
 
 ```python
-# 注释说取心率，代码实际取的是血压，明显过时
-heart_rate = blood_pressure  # 获取患者心率
+# 注释说取数量，代码实际取的是价格，明显过时
+item_count = unit_price  # 获取数量
 ```
 
 ## 1.6.5 行末注释与独立注释
@@ -250,9 +249,9 @@ heart_rate = blood_pressure  # 获取患者心率
 行末注释与代码之间至少空两格，使用 `#` 加一个空格开头。注释内容应简短，超过一行的应改用独立注释。行末注释过多会让代码显得杂乱，应控制使用频率。
 
 ```python
-heart_rate = 72  # 静息心率，单位 bpm
-systolic = 120   # 收缩压
-diastolic = 80   # 舒张压
+score = 72       # 考试分数，单位分
+length = 120     # 长度，单位 mm
+width = 80       # 宽度，单位 mm
 ```
 
 ### 独立注释的格式
@@ -260,11 +259,11 @@ diastolic = 80   # 舒张压
 独立注释独占一行，`#` 后加一个空格，再写注释内容。独立注释放在它所说明的代码块之前，让阅读者先看到说明再看实现。多行独立注释每行都以 `#` 开头，保持对齐。
 
 ```python
-# 以下代码计算 BMI 并判断体重分级
-# 分级标准采用 WHO 成人标准
-weight = 65
-height = 1.70
-bmi = weight / height ** 2
+# 以下代码计算总价并判断折扣
+# 折扣标准采用默认规则
+unit_price = 50
+quantity = 3
+total = unit_price * quantity
 ```
 
 ## 1.6.6 空格使用规范
@@ -286,8 +285,8 @@ x = 1+2
 y = x*3-1
 
 # 函数默认值中的等号两侧不加空格
-def calculate_dose(weight=70, concentration=10):
-    return weight * concentration
+def calculate_amount(price=70, quantity=10):
+    return price * quantity
 ```
 
 ### 逗号与冒号
@@ -297,14 +296,14 @@ def calculate_dose(weight=70, concentration=10):
 ```python
 # 推荐
 numbers = [1, 2, 3, 4, 5]
-patient = {"name": "张三", "age": 45}
+user = {"name": "张三", "age": 45}
 
 def greet(name, greeting="你好"):
     print(greeting, name)
 
 # 不推荐
 numbers = [1,2,3,4,5]
-patient = {"name":"张三","age":45}
+user = {"name":"张三","age":45}
 ```
 
 ### 函数调用括号内不留空格
@@ -313,12 +312,12 @@ patient = {"name":"张三","age":45}
 
 ```python
 # 推荐
-result = calculate_bmi(65, 1.70)
+result = calculate_area(65, 1.70)
 first = numbers[0]
 subset = numbers[1:5]
 
 # 不推荐
-result = calculate_bmi( 65, 1.70 )
+result = calculate_area( 65, 1.70 )
 first = numbers[ 0 ]
 subset = numbers[1 : 5]
 ```
@@ -333,15 +332,15 @@ subset = numbers[1 : 5]
 
 ```python
 # 函数调用换行
-result = calculate_bmi(
-    weight=65,
-    height=1.70,
+result = create_user(
+    name="张三",
     age=30,
+    city="北京",
     gender="male",
 )
 
 # 列表换行
-patients = [
+users = [
     "张三", "李四", "王五",
     "赵六", "钱七", "孙八",
 ]
@@ -353,16 +352,16 @@ patients = [
 
 ```python
 # 长条件表达式
-if patient_age > 60 and \
-   patient_has_diabetes and \
-   patient_smoker:
-    print("高风险患者")
+if user_age > 60 and \
+   user_is_admin and \
+   user_is_active:
+    print("高权限用户")
 
 # 实际更推荐用括号
-if (patient_age > 60 and
-    patient_has_diabetes and
-    patient_smoker):
-    print("高风险患者")
+if (user_age > 60 and
+    user_is_admin and
+    user_is_active):
+    print("高权限用户")
 ```
 
 ### 二元运算符前换行
@@ -425,16 +424,16 @@ data = pd.read_csv("data.csv")
 
 ## 1.6.9 模块级 __all__ 变量的作用
 
-`__all__` 是模块级的一个特殊变量，它是一个字符串列表，用于定义模块的公开接口。当其他模块使用 `from module import *` 导入时，只会导入 `__all__` 中列出的名字。这是一种主动控制模块对外暴露范围的方式，类似于医院科室的公开门诊清单，列在清单上的服务对外提供，未列出的视为内部事务。
+`__all__` 是模块级的一个特殊变量，它是一个字符串列表，用于定义模块的公开接口。当其他模块使用 `from module import *` 导入时，只会导入 `__all__` 中列出的名字。这是一种主动控制模块对外暴露范围的方式，类似于商店的公开服务清单，列在清单上的服务对外提供，未列出的视为内部事务。
 
 `__all__` 仅对通配导入生效，对显式导入无效。即使一个名字不在 `__all__` 中，外部仍然可以用 `from module import name` 显式导入它。因此 `__all__` 更多是一种约定，告诉使用者哪些是稳定公开的 API，哪些是可能变动的内部实现。
 
 ```python
 # my_module.py
-__all__ = ["parse_patient", "format_report"]
+__all__ = ["parse_user", "format_report"]
 
 
-def parse_patient(text):
+def parse_user(text):
     """公开 API"""
     pass
 
@@ -453,9 +452,9 @@ def _internal_helper():
 # 使用方
 from my_module import *
 
-# 只能用 parse_patient 和 format_report
+# 只能用 parse_user 和 format_report
 # _internal_helper 没有被导入
-parse_patient("...")    # 正常
+parse_user("...")    # 正常
 format_report({...})    # 正常
 _internal_helper()      # NameError
 ```
