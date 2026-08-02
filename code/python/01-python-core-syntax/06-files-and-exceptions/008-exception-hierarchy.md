@@ -368,7 +368,7 @@ print(FileNotFoundError.__mro__)
 1. 解释为什么应当用 `except Exception:` 而不是裸 `except:` 作为兜底捕获。如果用裸 `except:` 捕获，会出现什么问题？
 
 ::: details 参考答案
-裸 `except:` 会捕获所有继承自 `BaseException` 的异常，包括 `KeyboardInterrupt` 和 `SystemExit`。这两个异常分别表示用户按 Ctrl+C 中断程序和 `sys.exit()` 请求退出，它们不是程序错误，而是控制信号。
+裸 `except:` 会捕获所有继承自 `BaseException` 的异常，包括 `KeyboardInterrupt` 和 `SystemExit`。这两个异常分别表示用户按 Ctrl+C 中断程序和 `sys.exit()` 请求退出，它们属于控制信号，不代表程序错误。
 
 如果用裸 `except:` 捕获，按 Ctrl+C 无法中断程序，`sys.exit()` 无法正常退出，程序会继续运行，这对用户和运维都是灾难性的。
 
