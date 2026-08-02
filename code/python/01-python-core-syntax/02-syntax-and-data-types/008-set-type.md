@@ -5,8 +5,6 @@ sidebar:
 ---
 # 2.8 集合类型
 
-<span class="chapter-tag">Python核心语法基础</span>
-
 数据处理中经常遇到去重和判断属于两类问题：从一份日志里挑出所有异常项目、判断某位用户的操作是否属于预设的权限清单、找出两组用户中共同所属的分组。这些场景的核心都是元素的唯一性与成员关系，Python 的集合（set）类型正是为此设计。集合是无序、可变、不可重复的容器，本节将从字面量、特性、方法、运算符到推导式逐一讲解，并介绍不可变版本 frozenset。
 
 ## 2.8.1 集合字面量与空集
@@ -247,3 +245,155 @@ print(common)
 ::: note 集合与列表的选择
 当任务只关心是否存在或重叠部分，集合几乎是唯一选择；当任务关心顺序、允许重复或需要按下标访问时，列表更合适。购物清单如果只用来查是否在购物车，用集合；如果按加入顺序展示，用列表。两类容器常配合使用，列表保序、集合快速查询。
 :::
+
+## 练习题
+
+### 第1题 概念理解
+
+阅读下面的代码，写出输出结果，并解释为什么空集合不能用 `{}` 表示。
+
+```python
+a = {}
+b = set()
+print(type(a))
+print(type(b))
+
+codes = ["A001", "A001", "A002", "A003", "A002"]
+unique = set(codes)
+print(unique)
+print("A001" in unique)
+```
+
+::: details 参考答案
+```python
+print(type(a))  # <class 'dict'>
+print(type(b))  # <class 'set'>
+print(unique)   # {'A001', 'A002', 'A003'}，顺序可能不同
+print("A001" in unique)  # True
+```
+
+`{}` 在 Python 中被解释为空字典，不是空集合。创建空集合必须用 `set()` 内置函数。非空集合可以用 `{...}` 写法，元素之间用逗号分隔。`set()` 还可以把任何可迭代对象转成集合，自动去重，所以 `set(codes)` 把含重复项的列表变成了唯一编码集合。集合的成员检查是 O(1) 操作，比列表快得多。
+:::
+
+### 第2题 代码编写
+有两组用户的权限标签，A 组为 `{"read", "write", "delete"}`，B 组为 `{"read", "share", "comment"}`。用集合运算求出两组共有的权限、A 组独有的权限、两组所有的权限，以及只在一组中出现的权限。
+
+::: details 参考答案
+```python
+group_a = {"read", "write", "delete"}
+group_b = {"read", "share", "comment"}
+
+# 交集：两组共有的权限
+common = group_a & group_b
+print(f"共有权限: {common}")  # {'read'}
+
+# 差集：A 组独有的权限
+only_a = group_a - group_b
+print(f"A 组独有: {only_a}")  # {'write', 'delete'}
+
+# 并集：所有权限
+all_perms = group_a | group_b
+print(f"所有权限: {all_perms}")  # {'read', 'write', 'delete', 'share', 'comment'}
+
+# 对称差集：只在一组中出现的权限
+exclusive = group_a ^ group_b
+print(f"独占权限: {exclusive}")  # {'write', 'delete', 'share', 'comment'}
+```
+
+集合运算符 `&` 交集、`-` 差集、`|` 并集、`^` 对称差集，比调用方法形式更简洁。运算符要求两边都是集合，方法形式可以接受任意可迭代对象。这些运算在标签分析、权限对比、用户群体重叠统计等场景中非常常用。
+:::
+
+### 第3题 进阶
+从一份日志文本中提取所有不重复的项目编码。日志内容为 `["A001 A002", "A002 A003", "A001 A003 A004"]`，用集合推导式提取所有编码并去重，再判断编码 `A005` 是否在结果中。
+
+::: details 参考答案
+```python
+logs = ["A001 A002", "A002 A003", "A001 A003 A004"]
+
+# 集合推导式提取并去重
+all_codes = {code for log in logs for code in log.split()}
+print(all_codes)  # {'A001', 'A002', 'A003', 'A004'}
+
+# 判断编码是否存在
+print("A003" in all_codes)  # True
+print("A005" in all_codes)  # False
+
+# 统计不重复编码数量
+print(f"不重复编码数: {len(all_codes)}")  # 4
+```
+
+集合推导式 `{code for log in logs for code in log.split()}` 用了两层循环，外层遍历每条日志，内层用 `split()` 把日志拆成单词。花括号语法自动去重，无需额外处理。注意区分集合推导式和字典推导式：有冒号是字典，无冒号是集合。
+:::
+
+### 第4题 项目实践
+在一个任务管理程序中，用 `frozenset` 表示固定的任务权限组合，并作为字典的键来查找对应的角色模板。定义两个权限组合 `{"create", "edit"}` 和 `{"create", "edit", "delete", "assign"}`，分别对应 `编辑者` 和 `管理员`。编写代码通过构造 `frozenset` 查询角色。
+
+::: details 参考答案
+```python
+# 用 frozenset 作为字典键
+role_templates = {
+    frozenset({"create", "edit"}): "编辑者",
+    frozenset({"create", "edit", "delete", "assign"}): "管理员",
+}
+
+# 查询角色
+query1 = frozenset({"edit", "create"})  # 顺序无关
+print(role_templates.get(query1, "未知角色"))  # 编辑者
+
+query2 = frozenset({"create", "edit", "delete", "assign"})
+print(role_templates.get(query2, "未知角色"))  # 管理员
+
+query3 = frozenset({"read"})
+print(role_templates.get(query3, "未知角色"))  # 未知角色
+```
+
+普通 `set` 是可变类型，不可哈希，不能作为字典的键。`frozenset` 是集合的不可变版本，一旦创建不能增删元素，因此可哈希，可以作为字典键或集合元素。用 `frozenset` 作键的好处是查询时与元素顺序无关，只要权限组合相同就能匹配。这适合配置比对、标签组合识别等场景。
+:::
+
+## 常见错误
+
+**错误 1 · `{}` 创建的是空字典，不是空集合**
+
+```python
+empty = {}
+print(type(empty))  # <class 'dict'>
+```
+
+原因:`{}` 在 Python 中被解释为空字典，因为字典比集合更早出现且使用更频繁。用 `{}` 期望得到空集合是初学者常踩的坑，代码不会报错但行为完全错误，后续调用集合方法时会抛 `AttributeError`。
+
+解决:创建空集合用 `set()` 内置函数。非空集合可以用 `{1, 2, 3}` 字面量写法。判断变量是否为空集合用 `if not s:`，与空字典、空列表的判断方式一致。
+
+**错误 2 · `TypeError: unhashable type: 'list'`**
+
+```python
+s = {[1, 2], [3, 4]}  # TypeError
+d = {frozenset({1, 2}): "a"}  # 正确
+```
+
+原因:集合的元素必须可哈希，列表、字典、集合本身都是可变类型，不可哈希，强行加入会抛 `TypeError`。集合内部用哈希表存储元素，要求元素哈希值在生命周期内不变。
+
+解决:存入集合前把可变对象转成不可变类型，例如用元组替代列表 `{(1, 2), (3, 4)}`，用 `frozenset` 替代 `set`。元组可哈希的前提是其所有元素都可哈希，含可变元素的元组同样不可哈希。
+
+**错误 3 · `KeyError` from `set.remove()`**
+
+```python
+s = {"a", "b", "c"}
+s.remove("d")  # KeyError: 'd'
+```
+
+原因:`remove(elem)` 删除不存在的元素会抛 `KeyError`，与字典访问不存在的键行为类似。这与 `discard()` 不同，`discard()` 删除不存在元素时静默返回。
+
+解决:元素可能不存在时用 `discard(elem)`，它不会报错。明确知道元素存在时才用 `remove()`，让异常暴露逻辑错误。或先 `if elem in s:` 判断再 `remove()`，但 `discard()` 更简洁。
+
+**错误 4 · `TypeError: unsupported operand type(s) for &: 'set' and 'list'`**
+
+```python
+a = {1, 2, 3}
+b = [2, 3, 4]
+print(a & b)  # TypeError
+print(a.intersection(b))  # 正确，返回 {2, 3}
+```
+
+原因:集合运算符 `&`、`|`、`-`、`^` 要求两边都是集合，传列表、元组等可迭代对象会抛 `TypeError`。方法形式 `intersection()`、`union()` 等可以接受任意可迭代对象，内部会自动转换。
+
+解决:用运算符时确保两边都是集合，先把可迭代对象 `set(b)` 转成集合。需要与列表、元组等做集合运算时用方法形式 `a.intersection(b)`、`a.union(b)`，更灵活。

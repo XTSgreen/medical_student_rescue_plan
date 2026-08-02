@@ -6,8 +6,6 @@ sidebar:
 
 # 1.7 奇异值分解
 
-<span class="chapter-tag">第一章 · 线性代数</span>
-
 上一节我们建立了特征分解 $A = PDP^{-1}$，把**变换的固有方向**转化为可计算的代数工具——找到矩阵自身的**固有坐标系**，让变换在该坐标系下退化为纯缩放。但特征分解有两大无法回避的局限：**仅适用于方阵**（非方阵无特征值定义）和**仅适用于可对角化矩阵**（缺陷矩阵特征向量不足）。这两条限制让特征分解在工程实际中常常受限——数据矩阵几乎都是非方阵，且数值扰动下**可对角化**也是脆弱假设。
 
 本节将引入**奇异值分解**（Singular Value Decomposition, SVD）——把特征分解从方阵推广到任意 $m \times n$ 矩阵，给出 $A = U\Sigma V^T$ 这一**线性代数的最终答案**。SVD 的核心哲学是**旋转 → 缩放 → 旋转**三步：任意线性变换都可分解为右乘一个正交矩阵（输入空间的旋转/反射）、再乘一个对角矩阵（沿主轴各向异性缩放）、最后左乘一个正交矩阵（输出空间的旋转/反射）。这一步骤既保留了特征分解的几何直觉，又摆脱了**方阵与可对角化**的双重束缚。
@@ -1535,3 +1533,81 @@ SVD 是连接线性代数与机器学习的核心桥梁。PCA 把数据降维到
 8. **全局统一是顶峰**：SVD 整合了 1.2（变换）、1.3（秩与方程组）、1.4（四大子空间）、1.5（正交性与投影）、1.6（特征值）的所有概念，是线性代数的**最终答案**。在 AI 中，PCA、协同过滤、LSA、神经网络压缩都根植于 SVD——它是连接线性代数与机器学习的核心桥梁。
 
 至此，第一章线性代数的内容告一段落。从 1.1 节的向量与矩阵基础，到 1.7 节的 SVD 全景图景，我们建立了完整的线性代数工具链：**向量空间 → 线性变换 → 秩与方程组 → 四大子空间 → 正交性与投影 → 特征值与特征向量 → 奇异值分解**。这套工具链将在后续章节中持续发挥作用——概率论的协方差矩阵、优化的 Hessian 矩阵、深度学习的权重初始化与压缩，都将依赖本章建立的线性代数基础。
+
+## 练习题
+
+### 第 1 题 概念推导
+
+设 $A \in \mathbb{R}^{m \times n}$，其 SVD 为 $A = U\Sigma V^T$，$\text{rank}(A) = r$。证明：$V$ 的前 $r$ 列构成行空间 $C(A^T)$ 的标准正交基，$V$ 的后 $n-r$ 列构成零空间 $N(A)$ 的标准正交基；并由此说明 SVD 为何能同时给出四大子空间的标准正交基。
+
+::: details 参考答案
+$A = U\Sigma V^T$，把 $\Sigma$ 分块为 $\Sigma = \begin{bmatrix} \Sigma_r & 0 \\ 0 & 0 \end{bmatrix}$，其中 $\Sigma_r = \text{diag}(\sigma_1, \ldots, \sigma_r)$，$\sigma_i > 0$。相应地把 $V$ 分块为 $V = [V_r \mid V_n]$，$V_r \in \mathbb{R}^{n \times r}$（前 $r$ 列），$V_n \in \mathbb{R}^{n \times (n-r)}$（后 $n-r$ 列）。
+
+**行空间**：$A = U\Sigma V^T = U \begin{bmatrix} \Sigma_r & 0 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} V_r^T \\ V_n^T \end{bmatrix} = U \begin{bmatrix} \Sigma_r V_r^T \\ 0 \end{bmatrix} = [U_r \mid U_n]\begin{bmatrix} \Sigma_r V_r^T \\ 0 \end{bmatrix} = U_r \Sigma_r V_r^T$。故 $A$ 的列空间由 $U_r$ 张成（$U_r$ 列正交，构成 $C(A)$ 的标准正交基）。同理 $A^T = V_r \Sigma_r U_r^T$，$A^T$ 的列空间（即 $A$ 的行空间）由 $V_r$ 张成。$V_r$ 列正交，故 $V_r$ 构成 $C(A^T)$ 的标准正交基。
+
+**零空间**：对 $V_n$ 的任意列 $\mathbf{v}$（$\mathbf{v} \in \mathbb{R}^n$），$A\mathbf{v} = U\Sigma V^T \mathbf{v}$。由于 $\mathbf{v}$ 是 $V$ 的列，$V^T \mathbf{v}$ 是标准基向量 $\mathbf{e}_j$（$j > r$），$\Sigma \mathbf{e}_j = \mathbf{0}$（因 $\Sigma$ 的第 $j$ 列全零），故 $A\mathbf{v} = \mathbf{0}$，$\mathbf{v} \in N(A)$。反之，$N(A)$ 的维数为 $n - r$，$V_n$ 恰有 $n - r$ 个正交列，故 $V_n$ 构成 $N(A)$ 的标准正交基。
+
+SVD 之所以能同时给出四大子空间的标准正交基，根源在于 $V$ 和 $U$ 都是正交矩阵（列正交且完备），而 $\Sigma$ 的非零奇异值个数恰为秩 $r$。这一结构让输入侧（$V$）与输出侧（$U$）各自被正交分割为行空间/零空间与列空间/左零空间，是 SVD 作为**线性代数统一框架**的核心体现。
+:::
+
+### 第 2 题 代码验证
+
+利用本节的 `<SVDCompressionStudio>` 交互组件（或对一张 $32 \times 32$ 的矩阵做截断 SVD），取 $k = 1, 5, 15, 32$ 四个秩参数。记录每个 $k$ 对应的 Frobenius 误差 $\|A - A_k\|_F$ 与理论值 $\sqrt{\sigma_{k+1}^2 + \cdots + \sigma_r^2}$，验证 Eckart-Young 定理给出的误差公式。
+
+::: details 参考答案
+Eckart-Young 定理指出，截断 SVD 给出的 $A_k = U_k \Sigma_k V_k^T$ 是所有秩 $\leq k$ 矩阵中最接近 $A$ 的，且逼近误差满足：
+
+$$
+\|A - A_k\|_2 = \sigma_{k+1}, \quad \|A - A_k\|_F = \sqrt{\sum_{i=k+1}^{r} \sigma_i^2}.
+$$
+
+四组数据记录如下（以 $32 \times 32$ 矩阵为例）：$k=1$ 时，$\|A - A_1\|_F = \sqrt{\sigma_2^2 + \cdots + \sigma_r^2}$，误差最大，仅保留最大奇异值方向；$k=5$ 时，误差 $= \sqrt{\sigma_6^2 + \cdots + \sigma_r^2}$，前 5 个主方向已捕获大部分能量；$k=15$ 时，误差进一步减小，能量集中在 $\sigma_1$ 到 $\sigma_{15}$；$k=32$（若 $r = 32$）时，$A_{32} = A$，误差为零。每个 $k$ 的实际误差与理论公式 $\sqrt{\sum_{i>k} \sigma_i^2}$ 完全一致，印证 Eckart-Young 定理。这表明 SVD 截断给出的低秩逼近是**最优的**，任何其他秩 $k$ 矩阵的逼近误差都不会更小。
+:::
+
+### 第 3 题 概念推导
+
+设 $A = \begin{bmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}$。写出 $A$ 的 SVD 分解 $A = U\Sigma V^T$（给出 $U, \Sigma, V$ 的具体形式），并计算伪逆 $A^+ = V\Sigma^+ U^T$，验证 $A^+ \mathbf{b}$ 给出 $A\mathbf{x} = \mathbf{b}$ 的最小范数最小二乘解（取 $\mathbf{b} = (2, 3, 0)^T$）。
+
+::: details 参考答案
+$A$ 已经是对角形式，$\text{rank}(A) = 1$，唯一非零奇异值 $\sigma_1 = 1$。SVD 分解可直接读出：
+
+$$
+U = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}, \quad \Sigma = \begin{bmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}, \quad V = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}.
+$$
+
+（$U$ 是 $3 \times 3$ 单位阵，$V$ 是 $2 \times 2$ 单位阵，$\Sigma$ 仅 $(1,1)$ 位置为 $1$，其余为零。）
+
+伪逆 $\Sigma^+$ 把非零奇异值取倒数，零奇异值保持为零：$\Sigma^+ = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}$（$2 \times 3$ 矩阵）。
+
+$A^+ = V \Sigma^+ U^T = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix} \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}$。
+
+对 $\mathbf{b} = (2, 3, 0)^T$：$\mathbf{x}^+ = A^+ \mathbf{b} = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix} \begin{bmatrix} 2 \\ 3 \\ 0 \end{bmatrix} = \begin{bmatrix} 2 \\ 0 \end{bmatrix}$。
+
+验证：$A\mathbf{x}^+ = \begin{bmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} 2 \\ 0 \end{bmatrix} = \begin{bmatrix} 2 \\ 0 \\ 0 \end{bmatrix}$，残差 $\mathbf{b} - A\mathbf{x}^+ = (0, 3, 0)^T$，$\|\text{残差}\| = 3$。这一残差恰为 $\mathbf{b}$ 在左零空间 $N(A^T)$ 中的分量（左零空间由 $\mathbf{e}_2, \mathbf{e}_3$ 张成），是最小二乘意义下的最优。$\mathbf{x}^+ = (2, 0)^T$ 在行空间 $C(A^T)$ 中（行空间由 $(1, 0)^T$ 张成），范数为 $2$，是所有最小二乘解中范数最小的。
+:::
+
+## 常见错误
+
+**错误 1 · 用 $A^T A$ 的特征分解代替直接 SVD**
+
+原因：SVD 的代数构造表明 $V$ 是 $A^T A$ 的特征向量，$\sigma_i = \sqrt{\lambda_i}$。初学时容易直接对 $A^T A$ 做特征分解来获取 SVD，忽视条件数平方放大问题：$\kappa(A^T A) = \kappa(A)^2$。若 $A$ 的条件数为 $10^4$，$A^T A$ 的条件数高达 $10^8$，小奇异值的计算误差被严重放大。
+
+解决：工程实现 SVD 时直接调用 `numpy.linalg.svd` 等专用函数（内部用分治或迭代算法，避免显式构造 $A^T A$）。仅在理论推导或小矩阵教学时使用 $A^T A$ 特征分解。涉及条件数判定的场合，牢记 SVD 的条件数是 $\kappa(A) = \sigma_{\max}/\sigma_{\min}$，而非 $\kappa(A^T A)$。
+
+**错误 2 · 把截断 SVD 与完整 SVD 混淆**
+
+原因：完整 SVD 给出 $U \in \mathbb{R}^{m \times m}$、$V \in \mathbb{R}^{n \times n}$ 方阵正交矩阵，包含零空间与左零空间方向；截断 SVD $A_k = U_k \Sigma_k V_k^T$ 仅保留前 $k$ 个最大奇异值，$U_k, V_k$ 是瘦长矩阵。初学时容易把截断 SVD 当作完整 SVD 使用，或反之。
+
+解决：明确**完整 SVD 用于理论分析**（需要四大子空间完整结构），**截断 SVD 用于低秩逼近与数据压缩**（只需前 $k$ 个主方向）。NumPy 的 `np.linalg.svd(A, full_matrices=False)` 默认给出瘦 SVD（前 $\min(m,n)$ 列），进一步取前 $k$ 列即得截断 SVD。重构时 $A_k = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]$，维度匹配是关键。
+
+**错误 3 · 把伪逆当作普通逆矩阵使用**
+
+原因：伪逆 $A^+$ 满足 $AA^+ A = A$ 等四条摩尔-彭罗斯条件，形式上类似逆矩阵。初学时容易套用逆矩阵的性质，如 $(AB)^+ = B^+ A^+$（这一般不成立），或认为 $A^+ A = I$（仅当 $A$ 列满秩时 $A^+ A = I_n$，一般情形 $A^+ A$ 是投影到行空间的矩阵，不是单位阵）。
+
+解决：明确伪逆是**广义逆**，仅在方阵可逆时退化为普通逆。使用前检查矩阵形状与秩：列满秩时 $A^+ = (A^T A)^{-1} A^T$，行满秩时 $A^+ = A^T (AA^T)^{-1}$，一般情形用 SVD 构造 $A^+ = V\Sigma^+ U^T$。避免套用 $(AB)^+ = B^+ A^+$ 这类对一般矩阵不成立的性质。
+
+**错误 4 · 把奇异值非负误认为矩阵半正定**
+
+原因：奇异值 $\sigma_i \geq 0$ 恒成立，初学时容易由此推断矩阵本身半正定。半正定性的判据是**所有特征值非负**（仅对对称矩阵定义），而奇异值非负是对任意矩阵成立的性质，两者无直接关联。例如 $\begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}$ 的奇异值为 $\{1, 0\}$，但它不是对称矩阵，半正定概念根本不适用。
+
+解决：区分**奇异值非负**（任意矩阵的普适性质）与**特征值非负**（半正定矩阵的判据，仅对对称矩阵定义）。判定半正定时先检查矩阵对称性，再用特征值符号判定；讨论矩阵的缩放强度或条件数时用奇异值。两者仅在实对称矩阵上有简单关系 $\sigma_i = |\lambda_i|$。

@@ -5,7 +5,6 @@ sidebar:
 ---
 # 2.4 字符串类型
 
-<span class="chapter-tag">Python核心语法基础</span>
 
 字符串是 Python 中使用频率最高的数据类型之一。在实际开发中，用户姓名、状态描述、日志文本、文件路径、商品名称、配置内容等都以字符串形式存在。Python 提供了丰富的字符串操作能力，从基础的拼接、切片到高级的格式化输出，覆盖了文本处理的绝大多数需求。本节将系统介绍字符串的字面量写法、转义机制、运算操作、索引切片规则、内置方法分类，以及三种格式化方式和格式说明符的完整语法。掌握这些内容后，你就能在代码中自如地处理各类文本数据。
 
@@ -727,3 +726,149 @@ print("值: {!r}".format("test"))  # 值: 'test'
 :::
 
 至此，本节完整介绍了字符串类型的字面量、运算、索引切片、方法分类和格式化方式。字符串是 Python 中最灵活的内置类型之一，方法众多但各有侧重。日常编程中，f-string 配合格式说明符能解决绝大多数格式化需求，`split` 和 `join` 处理文本切分与拼接，`strip` 和判断方法用于数据清洗。下一节将进入控制流，学习如何让程序根据条件执行不同的代码路径。
+
+## 练习题
+
+### 第1题 概念理解
+
+字符串是不可变对象。阅读下面的代码，写出输出结果，并解释为什么修改字符串不能直接用索引赋值。
+
+```python
+s = "Hello, Python"
+print(s[7:13])
+print(s[::-1])
+print(s.replace("Python", "World"))
+print(s)
+```
+
+::: details 参考答案
+```python
+print(s[7:13])              # Python
+print(s[::-1])              # nohtyP ,olleH
+print(s.replace("Python", "World"))  # Hello, World
+print(s)                    # Hello, Python
+```
+
+切片 `s[7:13]` 取索引 7 到 12 的子串，遵循含左不含右规则。`s[::-1]` 用负步长反转整个字符串。`replace()` 返回一个新字符串，把 `Python` 替换为 `World`。最后一行打印 `s` 仍然是原值，因为字符串不可变，`replace()` 不会修改原字符串，要保留结果必须赋值给变量。
+:::
+
+### 第2题 代码编写
+有一行 CSV 格式的数据 `"U001,张三,45,active,vip"`，编写代码用 `split()` 拆分后，分别取出用户 ID、姓名、年龄，再用 f-string 格式化输出为 `用户 U001（张三，45岁）` 的形式。同时把剩余的角色标签用 `join()` 重新拼成 `active|vip` 的格式。
+
+::: details 参考答案
+```python
+line = "U001,张三,45,active,vip"
+parts = line.split(",")
+
+uid = parts[0]
+name = parts[1]
+age = int(parts[2])
+roles = parts[3:]
+
+print(f"用户 {uid}（{name}，{age}岁）")
+# 用户 U001（张三，45岁）
+
+roles_str = "|".join(roles)
+print(roles_str)
+# active|vip
+```
+
+`split(",")` 按逗号切分字符串得到列表。切片 `parts[3:]` 取出从索引 3 到末尾的所有角色标签。`"|".join(roles)` 用竖线把列表中的字符串连接起来，`join()` 是处理大量拼接的高效方式。
+:::
+
+### 第3题 进阶
+从外部导入的用户输入经常带有前后空白和不可见字符。编写一个清洗函数 `clean_input(text)`，去除两端空白，把首字母大写其余小写，并判断清洗后的字符串是否只包含字母。用 `"  hELLO world  "` 和 `"  user123  "` 测试该函数。
+
+::: details 参考答案
+```python
+def clean_input(text):
+    cleaned = text.strip()
+    normalized = cleaned.capitalize()
+    is_alpha = normalized.isalpha()
+    return normalized, is_alpha
+
+result1 = clean_input("  hELLO world  ")
+print(result1)  # ('Hello world', True)
+
+result2 = clean_input("  user123  ")
+print(result2)  # ('User123', False)
+```
+
+`strip()` 去除两端空白字符，`capitalize()` 把首字符大写、其余小写，`isalpha()` 判断字符串是否全为字母。注意 `capitalize()` 只让第一个字符大写，其余全部小写，所以 `Hello world` 中的 `world` 仍是小写。`"User123"` 含数字，`isalpha()` 返回 `False`。
+:::
+
+### 第4题 项目实践
+在一个任务管理程序中，任务编号格式为 `T` 加 6 位数字，例如 `T000042`。编写代码，接收用户输入的整数编号 `42`，用 `zfill()` 补齐到 6 位再拼上前缀 `T`。再编写一个函数 `parse_task_id(task_id)`，从 `T000042` 中提取出数字部分并转为整数。
+
+::: details 参考答案
+```python
+# 编号补齐
+num = 42
+task_id = "T" + str(num).zfill(6)
+print(task_id)  # T000042
+
+# 从编号中提取数字
+def parse_task_id(task_id):
+    if not task_id.startswith("T"):
+        return None
+    num_str = task_id[1:]
+    if not num_str.isdigit():
+        return None
+    return int(num_str)
+
+print(parse_task_id("T000042"))  # 42
+print(parse_task_id("T001234"))  # 1234
+print(parse_task_id("X000042"))  # None
+```
+
+`str(num).zfill(6)` 把数字转成字符串后用零在左侧填充到 6 位宽度。`startswith("T")` 判断前缀，`task_id[1:]` 切片去掉首字符。`isdigit()` 确保剩余部分全是数字后再用 `int()` 转换，避免非法编号导致程序崩溃。
+:::
+
+## 常见错误
+
+**错误 1 · `TypeError: can only concatenate str (not "int") to str`**
+
+```python
+age = 45
+print("年龄: " + age)  # TypeError
+```
+
+原因:用 `+` 拼接字符串和数字。`+` 运算符要求两边类型一致，字符串与整数、浮点数不能直接相加。这是初学者最常踩的坑，尤其在打印含数值的提示语时。
+
+解决:用 `str()` 把数字转成字符串再拼接，例如 `"年龄: " + str(age)`，或直接用 f-string `f"年龄: {age}"`。f-string 自动调用 `str()` 转换，写法更简洁，也是当前推荐方式。
+
+**错误 2 · `IndexError: string index out of range`**
+
+```python
+s = "Python"
+print(s[6])   # IndexError，长度 6 的字符串索引范围是 0 到 5
+print(s[-7])  # IndexError，负向索引范围是 -1 到 -6
+```
+
+原因:访问了超出字符串长度的索引。正向索引从 0 开始到 `len(s) - 1`，负向索引从 -1 开始到 `-len(s)`，超出即报错。常见于循环中边界计算错误，或假设字符串长度固定。
+
+解决:访问前用 `if 0 <= i < len(s):` 守卫，或用切片替代索引（切片越界不报错，自动截断）。遍历字符用 `for ch in s:`，需要索引用 `for i, ch in enumerate(s):`，避免手写 `range(len(s))`。
+
+**错误 3 · `TypeError: 'str' object does not support item assignment`**
+
+```python
+s = "Python"
+s[0] = "J"  # TypeError，字符串不可变
+```
+
+原因:试图通过索引赋值修改字符串的某个字符。Python 字符串是不可变对象，创建后内容不能修改。这与列表不同，列表可以通过 `lst[i] = x` 修改元素。
+
+解决:用切片拼接构造新字符串，例如 `"J" + s[1:]` 得到 `"Jython"`。批量替换用 `s.replace(old, new)` 返回新字符串。需要频繁修改的文本考虑用列表收集字符片段，最后 `"".join()` 合并。
+
+**错误 4 · f-string 中混用引号导致 `SyntaxError`**
+
+```python
+name = "张三"
+print(f"姓名: {name}")        # 正确
+print(f'姓名: {name}')        # 正确
+print(f"姓名: {name.replace("三", "四")}")  # SyntaxError（Python 3.11 之前）
+```
+
+原因:f-string 花括号内的表达式使用了与外层字符串相同的引号，导致字符串提前结束。Python 3.12 之前 f-string 内部不能复用外层引号。括号、反斜杠转义在 f-string 内也有特殊限制。
+
+解决:f-string 内部表达式用与外层不同的引号，例如外层双引号、内层单引号 `f"...{name.replace('三', '四')}"`。复杂表达式先赋值给变量再嵌入 f-string，例如 `short = name.replace("三", "四"); print(f"姓名: {short}")`。Python 3.12+ 放宽了这一限制，可复用引号。

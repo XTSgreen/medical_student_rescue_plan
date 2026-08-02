@@ -576,3 +576,55 @@ rule deseq2:
 ::: note 本节来源
 本节内容由原 reStructuredText 文件迁移而来。如需查看原始 Sphinx 版本，请参考项目源码中的 .rst 文件。
 :::
+
+## 练习题
+
+### 第1题 概念理解
+
+某研究者使用 FPKM 进行跨样本比较，发现基因 A 在处理组中表达量低于对照组，但用 TPM 和 DESeq2 size factor 归一化后基因 A 实际上调表达。解释 FPKM 不适合跨样本比较的原因，并说明组成型偏倚如何导致这种方向性反转。
+
+::: details 参考答案
+FPKM 的分母是所有 reads 数（或片段数），受少数极高表达基因影响。若处理组中某些基因（如管家基因或污染转录本）表达极度升高，占用大量测序资源，其他基因（包括基因 A）的 FPKM 被系统性压低，即使其实际计数没有下降。TPM 先按基因长度归一化得到 RPK，再用 RPK 总和归一化，所有样本 TPM 之和恒定为 10^6，避免了组成型偏倚。DESeq2 的 size factor 基于每个基因与所有样本中位数的比值取中位数，对少数极高表达基因不敏感。当组成型偏倚存在时，FPKM 可能给出与真实方向相反的结果，TPM 和 DESeq2 归一化更稳健。跨样本比较应使用 TPM 或 DESeq2 size factor，FPKM 仅适合同一样本内不同基因的比较。
+:::
+
+### 第2题 参数分析
+
+某研究者有 6 个样本（3 对照 3 处理），分两批测序：批次 1 包含 Control1、Control2、Treatment1，批次 2 包含 Control3、Treatment2、Treatment3。研究者使用 DESeq2 的 `design = ~ condition` 分析，PCA 显示样本按批次而非处理组聚集。研究者随后用 limma 的 `removeBatchEffect` 对 DESeq2 归一化后的计数矩阵校正，再做差异分析。说明该做法的错误，并给出正确方案。
+
+::: details 参考答案
+该做法有两处错误。第一，批次效应应在统计模型中估计，而非事后数学校正。`removeBatchEffect` 修改计数矩阵后破坏了负二项分布假设，DESeq2 的离散度估计和统计检验不再有效。第二，`removeBatchEffect` 用于 limma-voom 的 log-CPM 矩阵，不适用于原始计数。正确方案是将批次纳入 DESeq2 设计公式：`design = ~ batch + condition`。DESeq2 在拟合 GLM 时同时估计批次和处理效应，条件效应在控制批次效应后估计，统计检验的正确性得到保证。需要注意的是，批次与处理之间存在部分混淆（批次 1 多为对照，批次 2 多为处理），这会降低统计功效但不会使结果无效。实验设计阶段应随机化分配样本到各批次，避免完全混淆。
+:::
+
+### 第3题 概念理解
+
+单细胞 RNA-seq 质控中，研究者将线粒体基因比例阈值设为 5%，过滤后丢失了 40% 的细胞，聚类后发现剩余细胞几乎全为一种类型。解释线粒体比例升高的生物学原因，并说明为何严格阈值会导致细胞类型丢失。
+
+::: details 参考答案
+线粒体比例升高有多种原因。细胞损伤导致细胞质 RNA 释放降解，线粒体 RNA 因有膜保护相对保留，比例被动升高。某些细胞类型生理上具有高线粒体含量，如心肌细胞、肝细胞、棕色脂肪细胞，其线粒体基因比例天然较高。代谢活跃的细胞（如激活的 T 细胞）线粒体转录增加以满足能量需求。不同细胞类型的基线线粒体比例差异很大，统一 5% 阈值会系统性过滤特定细胞类型。正确做法是先观察线粒体比例分布，按细胞类型或聚类后分别评估。阈值通常设 10-20%，特定组织可能需要更高。过滤应基于多维 QC 指标（nFeature、nCount、percent.mt）联合判断，而非单一指标。
+:::
+
+## 常见错误
+
+**错误 1 · DESeq2 差异分析结果全部不显著，或 log2FoldChange 方向与预期相反**
+
+原因：`results()` 函数的 `contrast` 或 `name` 参数使用错误。DESeq2 默认将因子按字母顺序排列，对照（Control）在处理（Treatment）之前时，`name = "condition_Control_vs_Treatment"` 表示对照相对处理的变化，与预期方向相反。`contrast` 参数中水平顺序为（分子，分母），写反会导致 LFC 符号反转。因子水平未在创建 DESeqDataSet 时显式指定，导致参考水平不是预期的对照组。
+
+解决：创建 DESeqDataSet 前显式设定因子水平：`condition <- factor(condition, levels = c("Control", "Treatment"))`，使 Control 为参考水平。运行 `resultsNames(dds)` 查看可用系数名称，确认 `condition_Treatment_vs_Control` 存在。提取结果时用 `name = "condition_Treatment_vs_Control"` 或 `contrast = c("condition", "Treatment", "Control")`，后者格式为（变量名，分子水平，分母水平）。多组比较时用 `contrast = list(c("condition_B_vs_A", "condition_C_vs_A"))` 进行线性组合。
+
+**错误 2 · 反义转录本检测到表达，重叠基因无法区分，lncRNA 分析结果异常**
+
+原因：建库使用了链特异性文库（如 dUTP 法），但比对和定量阶段未设置链特异性参数。STAR 默认非链特异性模式，featureCounts 默认 `-s 0`（非链特异性），导致正反义 reads 混合计数。链特异性信息丢失后，反义转录本和正义转录本无法区分，重叠基因的 reads 随机分配。
+
+解决：确认建库类型（dUTP/TruSeq Stranded 等），在 STAR 比对时使用 `--outSAMstrandField intronMotif` 配合 `--sjdbGTFfile` 提供剪接位点。featureCounts 根据建库方法设置 `-s` 参数：dUTP 法第二链测序用 `-s 1`（正向链特异性），第一链测序用 `-s 2`（反向链特异性）。HTSeq-count 用 `-s reverse` 或 `-s yes`。Salmon 在 `quant` 命令中用 `-l ISR` 或 `-l A`（自动检测）。建库类型不明时，用 RSeQC 的 `infer_experiment.py` 从 BAM 文件推断链特异性模式。
+
+**错误 3 · PCA 显示样本按批次聚集，差异基因列表中大量批次相关基因**
+
+原因：批次效应未在统计模型中处理。研究者使用 `design = ~ condition` 忽略批次变量，或先分析再用 `removeBatchEffect` 事后校正。事后校正修改了计数矩阵，破坏负二项分布假设，统计检验无效。批次与处理混淆时（如所有对照在批次 1，所有处理在批次 2），批次效应完全混淆处理效应，差异基因无法区分是批次还是处理引起。
+
+解决：实验设计阶段随机化分配样本到批次，避免批次与处理混淆。分析时将批次纳入设计公式：DESeq2 用 `design = ~ batch + condition`，edgeR 设计矩阵加入 batch 列，limma-voom 在设计矩阵中加入 batch。批次变量在前、处理变量在后的顺序使统计检验估计的是控制批次后的处理效应。批次与处理完全混淆时无法通过统计方法解决，需要重新实验。`removeBatchEffect` 仅用于可视化（如热图、PCA），不用于差异分析前的计数校正。
+
+**错误 4 · ORA 富集分析结果中显著条目极少或完全无富集，与 GSEA 结果矛盾**
+
+原因：ORA 背景基因集选择错误。研究者使用全基因组所有基因作为背景，但 RNA-seq 只能检测表达基因，大量未表达基因被纳入背景后稀释了富集信号。另一种情况是使用差异基因列表本身作为背景，导致超几何检验失去意义。基因 ID 类型不匹配（SYMBOL 与 ENTREZID 混用）也会导致匹配失败。
+
+解决：背景基因集使用所有表达基因（如 `rowSums(counts) > 10` 的基因），反映实验实际能检测的范围。差异基因列表和背景基因集使用相同的 ID 类型，clusterProfiler 的 `bitr` 函数完成 ID 转换。GO 富集分析设置 `universe` 参数指定背景集：`enrichGO(gene = sig_genes, universe = expressed_genes, OrgDb = org.Hs.eg.db, ...)`。ORA 和 GSEA 结果矛盾时，优先参考 GSEA，因为它使用所有基因的排序信息，不受任意阈值切割的影响。

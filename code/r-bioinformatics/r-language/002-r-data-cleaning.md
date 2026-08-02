@@ -750,3 +750,108 @@ patients_summary
 ## 本节小结
 
 数据清洗的本质是把杂乱的原始数据整理成**每一行一个观测、每一列一个变量**的整洁形态。dplyr 的五个核心动词 filter、select、mutate、summarise、arrange 加上 group_by 分组机制，覆盖了绝大多数单表操作；tidyr 的 pivot_longer/pivot_wider 处理长宽格式互转，separate/unite 处理列的拆分合并。缺失值处理要先判断机制再选策略，删除与填充各有适用场景，对医疗数据尤其要警惕非随机缺失。管道操作符让数据流向一目了然，多表连接则把分散的数据源整合成一张可分析的主表。这些工具组合起来，就是从原始 CSV 到分析就绪数据的完整桥梁。
+
+## 练习题
+
+### 第1题 管道与分组汇总
+
+给定数据框 `sales <- data.frame(region = c("东", "南", "东", "北", "南"), product = c("A", "A", "B", "B", "A"), amount = c(100, 200, 150, 80, 120))`,用一条管道写出按 region 分组计算总销售额与平均销售额,并按总销售额降序排列的代码。
+
+::: details 参考答案
+
+```r
+sales <- data.frame(
+  region  = c("东", "南", "东", "北", "南"),
+  product = c("A", "A", "B", "B", "A"),
+  amount  = c(100, 200, 150, 80, 120)
+)
+
+sales %>%
+  group_by(region) %>%
+  summarise(
+    total = sum(amount),
+    mean  = mean(amount)
+  ) %>%
+  arrange(desc(total))
+```
+
+`group_by()` 打上分组标签后,`summarise()` 会按组聚合,每组返回一行。`arrange(desc(total))` 在汇总后的表上排序,不需要再分组。
+:::
+
+### 第2题 长宽格式转换
+
+给定宽格式数据框 `grades <- data.frame(student = c("甲", "乙"), math = c(85, 78), english = c(80, 88), physics = c(90, 85))`,将其转为长格式,列名拆分为 `subject` 与 `score` 两列,再转回宽格式。
+
+::: details 参考答案
+
+```r
+grades <- data.frame(
+  student = c("甲", "乙"),
+  math    = c(85, 78),
+  english = c(80, 88),
+  physics = c(90, 85)
+)
+
+# 宽转长
+grades_long <- grades %>%
+  pivot_longer(
+    cols      = -student,
+    names_to  = "subject",
+    values_to = "score"
+  )
+
+# 长转宽
+grades_wide <- grades_long %>%
+  pivot_wider(
+    names_from  = subject,
+    values_from = score
+  )
+```
+
+`pivot_longer()` 的 `cols = -student` 表示除 student 列外都参与堆叠。`pivot_wider()` 是逆操作,`names_from` 指定来源列名,`values_from` 指定取值列。
+:::
+
+### 第3题 缺失值识别与填充
+
+给定向量 `bp <- c(120, NA, 135, 140, NA, 128)`,写代码统计缺失数量,并用中位数填充缺失值。
+
+::: details 参考答案
+
+```r
+bp <- c(120, NA, 135, 140, NA, 128)
+
+# 统计缺失数量
+sum(is.na(bp))
+
+# 用中位数填充
+bp_filled <- ifelse(is.na(bp), median(bp, na.rm = TRUE), bp)
+```
+
+`is.na()` 返回逻辑向量,`sum()` 把 TRUE 当作 1 求和得到缺失数。`median(bp, na.rm = TRUE)` 必须加 `na.rm = TRUE`,否则遇到 NA 会返回 NA。`ifelse()` 逐元素判断,缺失位置填中位数,其余位置保留原值。
+:::
+
+## 常见错误
+
+**错误 1 · `Error: object '.' not found`**
+
+原因:在原生管道 `|>` 后接的函数里使用了点号占位 `.`。点号占位是 magrittr 管道 `%>%` 的特性,`|>` 不支持。
+
+解决:改用 `%>%` 替代 `|>`,或在 R 4.2 以上版本用下划线 `_` 占位。例如 `mtcars |> lm(mpg ~ disp, data = _)`。
+
+**错误 2 · `filter()` 静默丢弃 NA 行**
+
+原因:`filter(sys_bp > 130)` 中,`NA > 130` 的结果是 `NA` 而非 `TRUE`,`filter()` 只保留 `TRUE` 的行,NA 行被无声删除。
+
+解决:若需保留 NA 行,显式写出 `is.na(sys_bp) | sys_bp > 130`。养成在 filter 后用 `nrow()` 检查行数的习惯,避免数据量意外减少。
+
+**错误 3 · `as.numeric()` 把字符转为 NA**
+
+原因:`age` 列存为字符型,其中混有 `"不详"` 等无法解析的字符串,`as.numeric()` 会静默把这些值转为 NA,并给出警告 `NAs introduced by coercion`。
+
+解决:转换后用 `sum(is.na(age))` 检查是否产生了预期外的缺失。若需保留原值,先用 `readr::parse_number()` 或正则提取数字部分。
+
+**错误 4 · `left_join` 后行数膨胀**
+
+原因:右表的连接键有重复值,一对多关系导致左表的某些行被复制多份,行数无声增加。
+
+解决:连接前用 `count(id) %>% filter(n > 1)` 检查右表键的唯一性。若右表确实有多行,先用 `group_by() %>% summarise()` 聚合到键唯一,或明确接受一对多关系并在后续步骤处理。

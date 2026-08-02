@@ -5,8 +5,6 @@ sidebar:
 ---
 # 2.7 字典类型
 
-<span class="chapter-tag">Python核心语法基础</span>
-
 实际开发中经常需要把信息以键值对的形式成对存放，比如用户 ID 对应姓名、商品编号对应价格、订单号对应状态。这种一一对应的关系在 Python 中由字典（dict）类型来表达。字典是 Python 中最重要的内置数据结构之一，几乎所有稍微复杂的数据组织都会用到它。本节将从字面量写法讲起，逐步介绍字典的创建、访问、修改、迭代、推导式与嵌套结构，帮助你在处理实际数据时能够熟练运用这一利器。
 
 ## 2.7.1 字典字面量
@@ -328,3 +326,161 @@ print(by_value)
 `sorted()` 的 `key` 参数接收一个函数，决定排序依据。`lambda kv: kv[1]` 表示用每个键值对的第二个元素（值）作为排序键。需要降序时加 `reverse=True`。
 
 排序结果赋值回原变量后，由于 Python 3.7+ 字典保持插入顺序，新字典就会按排序后的顺序遍历。处理配置项、编码列表时常需要按键字典序展示，这时 `sorted(d.items())` 就够了。
+
+## 练习题
+
+### 第1题 概念理解
+
+阅读下面的代码，写出输出结果，并解释 `get()` 方法相比直接用方括号访问的优势。
+
+```python
+metrics = {"score": 78, "count": 98}
+print(metrics.get("score"))
+print(metrics.get("ratio"))
+print(metrics.get("ratio", "未设置"))
+print(metrics["ratio"])
+```
+
+::: details 参考答案
+```python
+print(metrics.get("score"))          # 78
+print(metrics.get("ratio"))          # None
+print(metrics.get("ratio", "未设置"))  # 未设置
+print(metrics["ratio"])              # KeyError: 'ratio'
+```
+
+`get()` 在键存在时返回对应值，键不存在时返回 `None` 而不报错，还可以传入第二个参数指定默认值。直接用方括号 `metrics["ratio"]` 在键不存在时会抛出 `KeyError`，导致程序中断。处理来源不可控的数据时，`get()` 更安全，能让程序在缺数据时优雅降级。
+:::
+
+### 第2题 代码编写
+有一组用户访问日志 `["U001", "U002", "U001", "U003", "U001", "U002"]`，用 `setdefault()` 方法统计每位用户的访问次数，再用 `sorted()` 按访问次数降序排列输出。
+
+::: details 参考答案
+```python
+logs = ["U001", "U002", "U001", "U003", "U001", "U002"]
+
+# 用 setdefault 统计访问次数
+counts = {}
+for user in logs:
+    counts.setdefault(user, 0)
+    counts[user] += 1
+print(counts)  # {'U001': 3, 'U002': 2, 'U003': 1}
+
+# 按访问次数降序
+sorted_counts = sorted(counts.items(), key=lambda kv: kv[1], reverse=True)
+for user, count in sorted_counts:
+    print(f"{user}: {count} 次")
+# U001: 3 次
+# U002: 2 次
+# U003: 1 次
+```
+
+`setdefault(user, 0)` 在键不存在时插入默认值 0，键存在时直接返回原值。这样每次循环都可以安全地执行 `+= 1`，无需先判断键是否存在。`sorted()` 的 `key` 参数指定排序依据，`lambda kv: kv[1]` 表示用键值对的值排序，`reverse=True` 降序。
+:::
+
+### 第3题 进阶
+有一个嵌套字典表示用户档案，部分字段可能缺失。编写函数 `get_user_name(user)`，安全地从三层嵌套中提取用户姓名，缺失时返回 `未知`。用 `{"basic": {"info": {"name": "张三"}}}` 和 `{"basic": {}}` 两个数据测试。
+
+::: details 参考答案
+```python
+def get_user_name(user):
+    return user.get("basic", {}).get("info", {}).get("name", "未知")
+
+user1 = {"basic": {"info": {"name": "张三"}}}
+user2 = {"basic": {}}
+user3 = {}
+
+print(get_user_name(user1))  # 张三
+print(get_user_name(user2))  # 未知
+print(get_user_name(user3))  # 未知
+```
+
+链式 `get()` 配合空字典兜底是处理嵌套结构的安全技巧。每一层 `get()` 都用空字典 `{}` 作为默认值，即使中间某层缺失，后续的 `get()` 仍在空字典上调用而不会抛 `KeyError`。最后一层用字符串 `"未知"` 作为默认值，确保缺失时返回有意义的提示。这种写法在处理结构不稳定的接口数据时非常实用。
+:::
+
+### 第4题 项目实践
+在一个任务管理程序中，用字典存储任务状态，键为任务 ID，值为状态字符串。编写代码实现添加任务、更新状态、删除已完成任务、列出所有待处理任务四个操作。
+
+::: details 参考答案
+```python
+tasks = {
+    "T001": "已完成",
+    "T002": "处理中",
+    "T003": "待处理",
+    "T004": "待处理",
+}
+
+# 添加新任务
+tasks["T005"] = "待处理"
+print(tasks)
+# {'T001': '已完成', 'T002': '处理中', 'T003': '待处理', 'T004': '待处理', 'T005': '待处理'}
+
+# 更新状态
+tasks["T002"] = "已完成"
+print(tasks["T002"])  # 已完成
+
+# 删除已完成任务（用列表收集键避免遍历时修改）
+done_keys = [tid for tid, status in tasks.items() if status == "已完成"]
+for key in done_keys:
+    tasks.pop(key)
+print(tasks)
+# {'T003': '待处理', 'T004': '待处理', 'T005': '待处理'}
+
+# 列出所有待处理任务
+pending = {tid: status for tid, status in tasks.items() if status == "待处理"}
+print(pending)
+# {'T003': '待处理', 'T004': '待处理', 'T005': '待处理'}
+```
+
+添加和更新都用方括号赋值，键存在则覆盖、不存在则新增。删除时先收集要删的键再遍历删除，避免在遍历字典时修改字典导致 `RuntimeError`。字典推导式 `{tid: status for ... if ...}` 可以同时过滤键值对并构造新字典，适合按条件筛选任务。
+:::
+
+## 常见错误
+
+**错误 1 · `KeyError: 'price'`**
+
+```python
+metrics = {"score": 78, "count": 98}
+print(metrics["price"])  # KeyError: 'price'
+```
+
+原因:用方括号 `d[key]` 访问不存在的键，解释器抛出 `KeyError` 中断程序。这与列表索引越界抛 `IndexError` 类似。常见于解析接口返回的 JSON 数据时，某些字段可能缺失。
+
+解决:键可能不存在时用 `d.get(key)` 返回 `None`，或用 `d.get(key, default)` 指定默认值。明确知道键应存在时才用方括号访问，让异常尽早暴露问题。批量处理时用 `if key in d:` 先判断，或用 `try/except KeyError` 捕获。
+
+**错误 2 · `TypeError: unhashable type: 'list'`**
+
+```python
+d = {[1, 2]: "value"}  # TypeError
+s = {{"a": 1}}         # TypeError
+```
+
+原因:字典的键必须可哈希，可变类型（列表、字典、集合）不可哈希，强行用作键会抛 `TypeError`。字典内部用哈希表组织键，可变对象的哈希值会随内容改变而失效。
+
+解决:用元组代替列表作为复合键，例如 `{(1, 2): "value"}`。需要用集合作为键时改用 `frozenset`。元组可哈希的前提是其所有元素都可哈希，含可变元素的元组同样不可哈希。
+
+**错误 3 · `RuntimeError: dictionary changed size during iteration`**
+
+```python
+d = {"a": 1, "b": 2, "c": 3}
+for key in d:
+    if d[key] < 2:
+        del d[key]  # RuntimeError
+```
+
+原因:遍历字典时修改字典（增删键值对）会改变内部哈希表结构，导致视图对象失效，抛出 `RuntimeError`。这是 Python 的保护机制，避免遍历过程中产生未定义行为。
+
+解决:遍历时先收集要操作的键，遍历结束后再修改。例如 `to_delete = [k for k, v in d.items() if v < 2]; for k in to_delete: del d[k]`。或用字典推导式构造新字典 `{k: v for k, v in d.items() if v >= 2}`，原字典保持不变。
+
+**错误 4 · 浅拷贝导致嵌套字典被意外修改**
+
+```python
+original = {"info": {"name": "张三", "age": 30}}
+shallow = original.copy()
+shallow["info"]["age"] = 31
+print(original["info"]["age"])  # 31，原字典也被改了
+```
+
+原因:`dict.copy()` 只做浅拷贝，外层字典独立，但内层可变对象仍是共享引用。修改 `shallow["info"]` 指向的字典，`original["info"]` 看到的是同一个字典，因此也变了。
+
+解决:需要完全独立的副本用 `copy.deepcopy(original)` 递归复制所有层级。浅拷贝适合只含不可变值的字典；含嵌套字典、列表等可变对象时必须用深拷贝。处理嵌套用户数据时尤其要注意这一陷阱。

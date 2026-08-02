@@ -5,8 +5,6 @@ sidebar:
 ---
 # 1.1 向量与基本运算
 
-<span class="chapter-tag">第一章 · 线性代数</span>
-
 线性代数的整体框架，建立在一个最朴素的对象之上——**向量**。本节将围绕向量的几何本质、代数运算、度量方式、乘法规则与组合方式五个层面，循序渐进地建立起代数—几何—工程的三层意义。理解向量需要在代数、几何、工程三种视角之间自由切换，而不仅是记住定义与公式。
 
 ## 1.1.1 向量的几何本质与坐标表达
@@ -503,3 +501,61 @@ print(f"秩 = {rank}")  # 输出 3，三个向量线性无关
 ::: success 本节小结
 本节从向量的几何本质（有向线段）与代数本质（有序数对）出发，建立了**代数—几何**双向直觉。加法、数乘是后续一切线性结构的源头；模长、距离、夹角提供了向量的**度量**；点积把**方向相似度**压缩成一个数，叉积则从两个向量生成垂直方向；线性组合、张成、线性相关则是从**个体向量**过渡到**向量空间**的桥梁。掌握这些概念，就为后续学习矩阵、线性变换、特征值打下了坚实基础。
 :::
+
+## 练习题
+
+### 第 1 题 概念推导
+
+设 $\mathbf{a}, \mathbf{b} \in \mathbb{R}^n$ 且 $\mathbf{b} \neq \mathbf{0}$。从点积的几何定义 $\mathbf{a} \cdot \mathbf{b} = \|\mathbf{a}\|\|\mathbf{b}\|\cos\theta$ 出发，推导 $\mathbf{a}$ 在 $\mathbf{b}$ 方向上的向量投影公式 $\text{proj}_{\mathbf{b}} \mathbf{a} = \dfrac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}$，并解释分母为何是 $\|\mathbf{b}\|^2$ 而非 $\|\mathbf{b}\|$。
+
+::: details 参考答案
+标量投影为 $\text{comp}_{\mathbf{b}} \mathbf{a} = \|\mathbf{a}\|\cos\theta = \dfrac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|}$，表示 $\mathbf{a}$ 在 $\mathbf{b}$ 方向上的有效长度。向量投影需要把标量投影乘以 $\mathbf{b}$ 方向的单位向量 $\hat{\mathbf{b}} = \dfrac{\mathbf{b}}{\|\mathbf{b}\|}$，得到
+
+$$
+\text{proj}_{\mathbf{b}} \mathbf{a} = \text{comp}_{\mathbf{b}} \mathbf{a} \cdot \hat{\mathbf{b}} = \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|} \cdot \frac{\mathbf{b}}{\|\mathbf{b}\|} = \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}.
+$$
+
+分母出现 $\|\mathbf{b}\|^2$ 是因为既要除以 $\|\mathbf{b}\|$ 求标量投影，又要再除以 $\|\mathbf{b}\|$ 把 $\mathbf{b}$ 归一化为单位向量，两次归一合并即得平方。这一形式也保证当 $\mathbf{b}$ 缩放 $k$ 倍时投影向量不变，符合**投影只依赖方向而非长度**的几何直觉。
+:::
+
+### 第 2 题 代码验证
+
+利用本节的 `<VectorDemo>` 交互组件，取 $\mathbf{a} = (3, 4, 0)$，依次将 $\mathbf{b}$ 设为 $(1, 0, 0)$、$(0, 5, 0)$、$(-3, -4, 0)$、$(2, 1, 1)$。记录每组的点积 $\mathbf{a} \cdot \mathbf{b}$ 与模长乘积 $\|\mathbf{a}\|\|\mathbf{b}\|$，验证 $|\mathbf{a} \cdot \mathbf{b}| \leq \|\mathbf{a}\|\|\mathbf{b}\|$ 是否恒成立，并指出等号成立的几何条件。
+
+::: details 参考答案
+$\|\mathbf{a}\| = 5$。四组数据依次为：$\mathbf{b}_1=(1,0,0)$，点积 $3$，模长乘积 $5$；$\mathbf{b}_2=(0,5,0)$，点积 $20$，模长乘积 $25$；$\mathbf{b}_3=(-3,-4,0)$，点积 $-25$，模长乘积 $25$；$\mathbf{b}_4=(2,1,1)$，点积 $10$，模长乘积 $5\sqrt{6}\approx 12.25$。四组均满足 $|\mathbf{a}\cdot\mathbf{b}| \leq \|\mathbf{a}\|\|\mathbf{b}\|$。等号仅在 $\mathbf{b}_3$ 这一组成立，此时 $\mathbf{b}$ 与 $\mathbf{a}$ 共线（反向），夹角 $\theta = \pi$，$|\cos\theta| = 1$。这印证柯西-施瓦茨不等式等号条件为两向量共线。
+:::
+
+### 第 3 题 概念推导
+
+设 $\mathbf{v}_1 = (1, 2, 3)$，$\mathbf{v}_2 = (2, 4, 6)$，$\mathbf{v}_3 = (1, 0, 1)$。判断这三个向量是否线性相关；若相关，给出一组非零标量 $c_1, c_2, c_3$ 使 $c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + c_3 \mathbf{v}_3 = \mathbf{0}$，并说明 $\mathbf{v}_3$ 能否由 $\mathbf{v}_1, \mathbf{v}_2$ 线性表出。
+
+::: details 参考答案
+$\mathbf{v}_2 = 2\mathbf{v}_1$，故 $\mathbf{v}_1, \mathbf{v}_2$ 已经线性相关，三向量整体必然线性相关。取 $c_1 = 2$，$c_2 = -1$，$c_3 = 0$，则 $2\mathbf{v}_1 - \mathbf{v}_2 + 0\mathbf{v}_3 = \mathbf{0}$ 成立。但 $\mathbf{v}_3 = (1,0,1)$ 不在 $\mathbf{v}_1$ 所张成的直线上（$\mathbf{v}_1 = (1,2,3)$ 的三个分量不成 $1:0:1$ 的比例），因此 $\mathbf{v}_3$ 不能由 $\mathbf{v}_1, \mathbf{v}_2$ 线性表出。该例说明**线性相关**只要求存在冗余向量，不要求每个向量都能被其他向量表出；判定某个具体向量是否可表出，需要单独求解线性方程组。
+:::
+
+## 常见错误
+
+**错误 1 · 把零向量的方向说成任意方向**
+
+原因：零向量 $\mathbf{0}$ 的所有分量为零，模长为零，几何上退化为一个点，没有可定义的朝向。教材中**方向任意**的表述常被误解为零向量可以指向任何方向，进而在涉及单位向量 $\hat{\mathbf{v}} = \mathbf{v}/\|\mathbf{v}\|$ 时忽视分母为零的隐患。
+
+解决：明确零向量**没有方向**这一结论，凡涉及归一化、方向角、单位向量的运算都先排除 $\mathbf{v} = \mathbf{0}$ 的情形，再做后续推导。
+
+**错误 2 · 行向量与列向量混用导致矩阵乘法维度不匹配**
+
+原因：默认列向量 $\mathbf{v} \in \mathbb{R}^{n \times 1}$，矩阵右乘列向量 $A\mathbf{v}$ 要求 $A$ 的列数等于 $n$。若在同一推导中把 $\mathbf{v}$ 当作行向量 $1 \times n$ 直接代入 $A\mathbf{v}$，会出现内维不一致的乘法错误，或在 NumPy 中因广播机制得到错误结果而不报错。
+
+解决：在每段推导开头明确约定向量取向（本教程默认列向量），涉及转置时显式写出 $\mathbf{v}^T$；在代码中用 `v.reshape(-1, 1)` 或 `v[:, None]` 强制列向量形状，避免一维数组的歧义。
+
+**错误 3 · 把点积结果当作向量，或把叉积结果当作标量**
+
+原因：点积 $\mathbf{u} \cdot \mathbf{v} = \sum u_i v_i$ 是标量，叉积 $\mathbf{u} \times \mathbf{v}$ 是向量（三维情形）。两者公式都含乘法与减法，初学时容易把 $\mathbf{u} \cdot \mathbf{v}$ 写成向量形式，或把 $\mathbf{u} \times \mathbf{v}$ 当成面积数值直接使用。
+
+解决：记忆**点积出标量、叉积出向量**这条结果类型规则；在运算前先核对结果维度，若题目要求**面积**则对叉积再取模长 $\|\mathbf{u} \times \mathbf{v}\|$，而非直接使用叉积本身。
+
+**错误 4 · 用叉积为零判定任意维向量的共线**
+
+原因：叉积仅在二维（退化形式）与三维中有定义。面对 $\mathbb{R}^4$ 或更高维的两个向量，套用 $\mathbf{u} \times \mathbf{v} = \mathbf{0}$ 判定共线会直接失效，因为高维叉积本身没有标准定义。
+
+解决：高维情形改用**对应分量比例相等**或**秩判据**：构造矩阵 $[\mathbf{u}\ \mathbf{v}]$，若 $\text{rank} \leq 1$ 则两向量共线；也可检查是否存在标量 $k$ 使 $\mathbf{u} = k\mathbf{v}$。

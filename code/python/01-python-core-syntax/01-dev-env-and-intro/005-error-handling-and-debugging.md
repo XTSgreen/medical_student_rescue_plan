@@ -5,8 +5,6 @@ sidebar:
 ---
 # 1.5 错误处理与调试入门
 
-<span class="chapter-tag">Python核心语法基础</span>
-
 程序错误是编程的常态，就像工程实践中遇到问题是常态一样。初学者常把报错当作失败，实际上报错是 Python 在告诉你哪里出了问题，是定位问题的关键线索。本节将区分两类错误，介绍常见异常类型，讲解 try-except 异常处理结构，最后介绍调试工具的使用。掌握错误处理与调试，你才能写出健壮的程序，也能在出问题时快速找到原因。
 
 ## 1.5.1 语法错误（SyntaxError）的识别与修正
@@ -322,3 +320,137 @@ analyze([85, 90, 78, 92])
 输出变量的类型尤其重要。很多运行时错误源于类型不符合预期，比如你以为拿到的是列表，实际拿到的是字符串。`print(type(变量))` 能立刻暴露这类问题。
 
 调试完成后记得删除多余的 `print` 语句，避免污染正式输出。如果需要更结构化的日志，可以使用 `logging` 模块，它支持分级输出和写入文件，适合稍大一点的项目。但在学习阶段，`print` 调试完全够用。
+
+## 练习题
+
+### 第1题 概念理解
+
+判断下面四段代码各自会抛出什么异常，写出异常类型名称并简要说明原因。
+
+```python
+# 代码一
+print(undefined_var)
+
+# 代码二
+result = 10 / 0
+
+# 代码三
+numbers = [1, 2, 3]
+print(numbers[5])
+
+# 代码四
+value = int("abc")
+```
+
+::: details 参考答案
+代码一抛出 `NameError`，使用了未定义的变量 `undefined_var`。代码二抛出 `ZeroDivisionError`，除数为零。代码三抛出 `IndexError`，列表索引 5 超出了长度为 3 的列表范围。代码四抛出 `ValueError`，字符串 `"abc"` 不是合法的整数字面量，无法被 `int()` 解析。
+
+读懂异常类型是排查问题的第一步。异常名称通常能直接提示出错原因，遇到报错时应先看异常类型和错误信息，再定位到出错行。
+:::
+
+### 第2题 代码编写
+
+编写一个函数 `safe_int_convert`，接收一个字符串参数，尝试将其转换为整数。转换成功返回整数，转换失败返回 `None` 并打印一条提示信息。要求用 `try-except` 结构处理 `ValueError`。
+
+::: details 参考答案
+```python
+def safe_int_convert(text):
+    """把字符串安全转换为整数，失败时返回 None。"""
+    try:
+        return int(text)
+    except ValueError:
+        print(f"无法将 '{text}' 转换为整数")
+        return None
+
+print(safe_int_convert("42"))    # 42
+print(safe_int_convert("3.14"))  # 提示并返回 None
+print(safe_int_convert("abc"))   # 提示并返回 None
+```
+
+`try` 块中放可能出错的转换操作，`except ValueError` 捕获转换失败的情况。返回 `None` 让调用方可以通过判断返回值决定后续处理。这种模式在处理用户输入或外部数据时很常用，避免一条坏数据导致整个程序崩溃。
+:::
+
+### 第3题 进阶练习
+
+编写一个函数 `safe_divide` 接收两个参数 `a` 和 `b`，返回 `a / b` 的结果。要求处理两种异常：当 `b` 为零时捕获 `ZeroDivisionError` 并返回 `None`，当 `a` 或 `b` 不是数字时捕获 `TypeError` 并返回 `None`。使用 `try-except-else-finally` 完整结构，在 `finally` 块中打印本次计算结束的提示。
+
+::: details 参考答案
+```python
+def safe_divide(a, b):
+    """安全除法，处理除零和类型错误。"""
+    try:
+        result = a / b
+    except ZeroDivisionError:
+        print("错误：除数不能为零")
+        return None
+    except TypeError:
+        print("错误：参数必须是数字")
+        return None
+    else:
+        print(f"计算成功：{a} / {b} = {result}")
+        return result
+    finally:
+        print("本次计算结束")
+
+print(safe_divide(10, 4))    # 计算成功，返回 2.5
+print(safe_divide(10, 0))    # 除零错误，返回 None
+print(safe_divide("10", 4))  # 类型错误，返回 None
+```
+
+`try` 块执行可能出错的操作，两个 `except` 分别处理不同异常类型。`else` 块在没有异常时执行，打印成功结果。`finally` 块无论是否异常都会执行，用于打印结束提示。实际开发中 `finally` 更常用于关闭文件、释放资源等必须执行的清理操作。
+:::
+
+### 第4题 项目实践
+
+命令行任务管理器需要从文件读取任务数据，文件可能不存在、内容格式可能错误。请思考读取任务文件时可能遇到哪些异常，应该如何用 `try-except` 结构处理，让程序在文件缺失或格式错误时仍能正常运行而不崩溃。
+
+::: details 参考答案
+读取任务文件可能遇到三类异常。文件不存在时抛出 `FileNotFoundError`，此时可以提示用户并返回空任务列表，让程序以全新状态启动。文件内容格式错误（如解析失败）抛出 `ValueError` 或其他解析异常，此时可以提示数据损坏并返回空列表。权限不足时抛出 `PermissionError`，提示用户检查文件权限。
+
+```python
+def load_tasks(filename):
+    """从文件加载任务列表，出错时返回空列表。"""
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            content = f.read()
+        # 这里简化处理，实际解析逻辑后续章节展开
+        return content
+    except FileNotFoundError:
+        print(f"任务文件 {filename} 不存在，将以空列表启动")
+        return []
+    except PermissionError:
+        print(f"无权限读取 {filename}，请检查文件权限")
+        return []
+    except Exception as e:
+        print(f"读取任务文件出错：{e}")
+        return []
+```
+
+针对具体异常类型分别处理，比用一个空的 `except:` 捕获所有异常更安全。空的 `except:` 会掩盖真正的问题，让你无从排查。`with` 语句保证文件在任何情况下都会被正确关闭。
+:::
+
+## 常见错误
+
+**错误 1 · `空 except 子句捕获所有异常导致问题被掩盖`**
+
+原因:使用空的 `except:` 子句捕获所有异常，包括 `KeyboardInterrupt`、`SystemExit` 等不应被拦截的异常，导致程序出错时无任何提示或被静默吞掉。
+
+解决:始终指定具体的异常类型，如 `except ValueError:`、`except (FileNotFoundError, PermissionError):`。需要捕获多种异常时用元组列出，需要打印异常信息时用 `except Exception as e:` 并在块内记录 `e`。
+
+**错误 2 · `except 子句顺序写反导致特定异常永远捕获不到`**
+
+原因:多个 `except` 子句时，父类异常（如 `Exception`）写在子类异常（如 `ValueError`）之前，Python 按顺序匹配，子类异常永远被父类捕获，后面的具体处理代码不会执行。
+
+解决:把更具体的异常类型写在前面，更通用的异常写在后面。例如先写 `except ValueError:`，再写 `except Exception:`。
+
+**错误 3 · `assert 在生产环境被跳过导致校验失效`**
+
+原因:用 `assert` 做数据校验或权限检查，但生产环境用 `python -O` 启用优化模式后，`assert` 语句被跳过，校验逻辑失效。
+
+解决:数据校验、权限检查等必须执行的逻辑用 `raise` 主动抛出异常。`assert` 仅用于调试阶段的内部状态确认，不要承担业务校验职责。
+
+**错误 4 · `finally 块中的 return 吞掉了异常`**
+
+原因:在 `finally` 块中使用 `return`，会覆盖 `try` 块中的返回值，并且吞掉 `try` 块中尚未处理的异常，导致问题难以排查。
+
+解决:`finally` 块只放清理代码（如关闭文件、释放锁），不要在其中使用 `return`。需要返回值时让 `try` 或 `else` 块负责返回。

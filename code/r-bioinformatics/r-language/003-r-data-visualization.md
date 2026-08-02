@@ -896,3 +896,88 @@ ggplot2 的真正贡献在于把图形本身定义为可组合、可扩展、可
 学习 ggplot2 的过程大致分三个阶段。第一阶段是记住常用 geom 与参数，能把基本图画出来。第二阶段是理解标度与映射的差别，能精确控制每一条线、每一个点的颜色与位置。第三阶段是理解分层与组合，能把复杂的数据故事拆解为一组相互配合的图层。本节的目标是把读者从第一阶段带到第二阶段，并给第三阶段一个入口。剩下的熟练度来自反复地把真实数据画成图，再回头检查代码能否表达清楚自己当初想说什么。
 
 把这套语法内化之后，读者应当能够在面对任何新数据时无需逐个查阅 geom 的参数文档，直接从数据故事出发：选择哪些变量映射到哪些美学、需要哪几种图层叠加、是否需要分面或统计变换、最终如何定制主题与输出。这种从意图到代码的直觉，是 ggplot2 长期训练的最终回报。
+
+## 练习题
+
+### 第1题 aes 映射与常量设置
+
+给定 `df <- data.frame(x = 1:10, y = rnorm(10))`,写出两种代码把散点染成红色:一种会把红色误当作变量生成图例,另一种不会。说明两者的区别。
+
+::: details 参考答案
+
+```r
+df <- data.frame(x = 1:10, y = rnorm(10))
+
+# 错误写法:color 进了 aes,生成图例
+ggplot(df, aes(x = x, y = y, color = "red")) +
+  geom_point()
+
+# 正确写法:color 放在 aes 外,直接设置颜色
+ggplot(df, aes(x = x, y = y)) +
+  geom_point(color = "red")
+```
+
+`aes()` 内的 `color = "red"` 把字符串 `"red"` 当作一个单水平变量映射到颜色,因此会生成一个名为 `red` 的图例,且实际颜色是 ggplot2 默认的第一种离散色(通常为粉红),而非红色。把 `color = "red"` 写在 `geom_point()` 参数里,则是直接设置视觉属性,不产生图例。原则是变量进 aes,常量出 aes。
+:::
+
+### 第2题 分面与统计变换
+
+用 ggplot2 内置的 `mpg` 数据集,画一张按驱动方式 `drv` 分面的散点图,x 轴为 `displ`,y 轴为 `hwy`,并在每个分面内叠加一条线性回归趋势线(不带置信区间)。
+
+::: details 参考答案
+
+```r
+library(ggplot2)
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "tomato") +
+  facet_wrap(~ drv) +
+  labs(x = "排量", y = "高速油耗") +
+  theme_minimal()
+```
+
+`facet_wrap(~ drv)` 按驱动方式切分为子图,所有子图共享坐标轴。`geom_smooth(method = "lm", se = FALSE)` 在每个分面内独立拟合线性回归,`se = FALSE` 关闭置信区间带。分面会让 `geom_smooth` 自动按组分别拟合,无需额外声明。
+:::
+
+### 第3题 标度替换
+
+给定散点图 `ggplot(mpg, aes(x = displ, y = hwy, color = cty)) + geom_point()`,默认颜色标度是蓝色渐变。改用 viridis 的 `plasma` 色板,并把图例标题改为城市油耗。
+
+::: details 参考答案
+
+```r
+ggplot(mpg, aes(x = displ, y = hwy, color = cty)) +
+  geom_point() +
+  scale_color_viridis_c(option = "plasma", name = "城市油耗") +
+  labs(x = "排量", y = "高速油耗")
+```
+
+`scale_color_viridis_c()` 用于连续型颜色映射,`option = "plasma"` 选择 plasma 色板,`name` 参数设置图例标题。也可以用 `labs(color = "城市油耗")` 统一管理图例标题,效果等价。
+:::
+
+## 常见错误
+
+**错误 1 · `aes()` 内写常量生成意外图例**
+
+原因:`ggplot(df, aes(x, y, color = "blue"))` 中,`"blue"` 被当作单水平因子映射到颜色,生成名为 `blue` 的图例,且实际颜色是默认离散调色板的第一色而非蓝色。
+
+解决:常量颜色写在 `aes()` 外,即 `geom_point(color = "blue")`。判断依据是该值是否来自数据框的某一列:是则进 `aes()`,否则出 `aes()`。
+
+**错误 2 · `geom_bar` 与 `geom_col` 混用报错**
+
+原因:`geom_bar()` 默认调用 `stat_count` 对 x 变量计数,不需要 y 美学;`geom_col()` 默认使用恒等统计变换,需要显式给出 y 值。把已有高度的数值向量交给 `geom_bar()` 会报 `stat_count() must not be used with a y aesthetic`。
+
+解决:已有高度值时用 `geom_col()`;需要对分类变量计数时用 `geom_bar()`。两者也可以通过 `stat` 参数互换,但遵循默认语义更清晰。
+
+**错误 3 · `xlim()` 截断导致拟合曲线变形**
+
+原因:`xlim(0, 10)` 会把超出范围的点从数据中删除,`geom_smooth()` 在剩余数据上重新拟合,曲线形状会改变。这是标度层面的截断。
+
+解决:只想缩放视野而不影响数据,用 `coord_cartesian(xlim = c(0, 10))`。它在视觉层面限制坐标轴范围,数据仍参与统计计算。两者的区别在含平滑层或汇总层的图中尤为关键。
+
+**错误 4 · `ggsave` 保存 PDF 中文显示为方框**
+
+原因:默认 PDF 设备依赖的字体表不含中文字符,渲染时找不到字形就显示为方框。
+
+解决:指定 `device = cairo_pdf`,它使用系统字体渲染,能正确显示 CJK 字符。PNG 输出推荐用 `device = ragg::agg_png` 替代默认 `png()`,字体处理更可靠。

@@ -196,24 +196,73 @@ export default defineConfig({
                   ]
                 },
                 {
-                  text: '程序控制结构（建设中）',
+                  text: '程序控制结构',
                   collapsed: true,
-                  items: []
+                  items: [
+                    { text: '3.1 顺序结构', link: '/code/python/01-python-core-syntax/03-control-structures/001-sequential-structure' },
+                    { text: '3.2 分支结构', link: '/code/python/01-python-core-syntax/03-control-structures/002-branch-structure' },
+                    { text: '3.3 for 循环', link: '/code/python/01-python-core-syntax/03-control-structures/003-for-loop' },
+                    { text: '3.4 while 循环', link: '/code/python/01-python-core-syntax/03-control-structures/004-while-loop' },
+                    { text: '3.5 循环控制与中断', link: '/code/python/01-python-core-syntax/03-control-structures/005-loop-control-and-break' },
+                    { text: '3.6 条件表达式（三元运算符）', link: '/code/python/01-python-core-syntax/03-control-structures/006-conditional-expression' },
+                    { text: '3.7 异常处理控制结构', link: '/code/python/01-python-core-syntax/03-control-structures/007-exception-handling-control' },
+                    { text: '3.8 上下文管理控制结构', link: '/code/python/01-python-core-syntax/03-control-structures/008-context-manager-control' },
+                    { text: '3.9 嵌套与复合控制结构', link: '/code/python/01-python-core-syntax/03-control-structures/009-nested-composite-control' }
+                  ]
                 },
                 {
-                  text: '组合数据类型（建设中）',
+                  text: '组合数据类型',
                   collapsed: true,
-                  items: []
+                  items: [
+                    { text: '4.1 分类与通用特性', link: '/code/python/01-python-core-syntax/04-composite-data-types/001-composite-types-overview' },
+                    { text: '4.2 序列类型通用操作', link: '/code/python/01-python-core-syntax/04-composite-data-types/002-sequence-common-operations' },
+                    { text: '4.3 列表类型专题', link: '/code/python/01-python-core-syntax/04-composite-data-types/003-list-type-detail' },
+                    { text: '4.4 元组类型专题', link: '/code/python/01-python-core-syntax/04-composite-data-types/004-tuple-type-detail' },
+                    { text: '4.5 字典类型专题', link: '/code/python/01-python-core-syntax/04-composite-data-types/005-dictionary-type-detail' },
+                    { text: '4.6 集合类型专题', link: '/code/python/01-python-core-syntax/04-composite-data-types/006-set-type-detail' },
+                    { text: '4.7 对象引用、拷贝与内存管理', link: '/code/python/01-python-core-syntax/04-composite-data-types/007-references-copy-memory' },
+                    { text: '4.8 构造与类型转换', link: '/code/python/01-python-core-syntax/04-composite-data-types/008-construction-and-type-conversion' }
+                  ]
                 },
                 {
-                  text: '函数与模块化编程（建设中）',
+                  text: '函数与模块化编程',
                   collapsed: true,
-                  items: []
+                  items: [
+                    { text: '5.1 函数定义与调用基础', link: '/code/python/01-python-core-syntax/05-functions-and-modules/001-function-basics' },
+                    { text: '5.2 参数传递机制', link: '/code/python/01-python-core-syntax/05-functions-and-modules/002-parameters-and-arguments' },
+                    { text: '5.3 作用域与命名空间', link: '/code/python/01-python-core-syntax/05-functions-and-modules/003-scope-and-namespace' },
+                    { text: '5.4 递归函数', link: '/code/python/01-python-core-syntax/05-functions-and-modules/004-recursion' },
+                    { text: '5.5 匿名函数与高阶函数基础', link: '/code/python/01-python-core-syntax/05-functions-and-modules/005-lambda-and-higher-order' },
+                    { text: '5.6 模块基础', link: '/code/python/01-python-core-syntax/05-functions-and-modules/006-module-basics' },
+                    { text: '5.7 包与项目组织', link: '/code/python/01-python-core-syntax/05-functions-and-modules/007-packages' },
+                    { text: '5.8 模块级特殊属性', link: '/code/python/01-python-core-syntax/05-functions-and-modules/008-module-special-attributes' },
+                    { text: '5.9 代码组织与最佳实践', link: '/code/python/01-python-core-syntax/05-functions-and-modules/009-code-organization' }
+                  ]
                 },
                 {
-                  text: '文件与异常处理（建设中）',
+                  text: '文件与异常处理',
                   collapsed: true,
-                  items: []
+                  items: [
+                    { text: '6.1 文件对象基础与打开模式', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/001-file-object-basics' },
+                    { text: '6.2 文本文件读取', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/002-text-file-reading' },
+                    { text: '6.3 文本文件写入与追加', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/003-text-file-writing' },
+                    { text: '6.4 二进制文件操作', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/004-binary-file' },
+                    { text: '6.5 文件指针移动与文件信息', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/005-file-pointer' },
+                    { text: '6.6 上下文管理语句', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/006-with-statement' },
+                    { text: '6.7 文件系统路径操作', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/007-path-operations' },
+                    { text: '6.8 异常体系与内置异常类型', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/008-exception-hierarchy' },
+                    { text: '6.9 异常捕获结构', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/009-try-except' },
+                    { text: '6.10 异常抛出与自定义异常', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/010-raise-and-custom' },
+                    { text: '6.11 断言与调试辅助', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/011-assert-and-debug' },
+                    { text: '6.12 文件操作典型异常场景', link: '/code/python/01-python-core-syntax/06-files-and-exceptions/012-file-exception-scenarios' }
+                  ]
+                },
+                {
+                  text: '实战项目',
+                  collapsed: true,
+                  items: [
+                    { text: '命令行任务管理器', link: '/code/python/project/' }
+                  ]
                 }
               ]
             },

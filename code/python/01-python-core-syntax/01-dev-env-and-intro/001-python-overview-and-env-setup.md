@@ -5,7 +5,7 @@ sidebar:
 ---
 # 1.1 Python概述与开发环境准备
 
-<span class="chapter-tag">Python核心语法基础</span>
+
 
 Python 是当下最流行的通用编程语言之一，在数据科学、人工智能、Web 开发和自动化运维等领域都有广泛应用。掌握 Python 意味着能够直接处理数据、构建自动化脚本、开发各类应用。本节将从 Python 的历史与定位讲起，逐步覆盖语言特点、应用领域、安装配置、包管理、虚拟环境与开发工具选择等内容，目标是让你读完这一节后能拥有一台配置完整、可直接编写代码的 Python 工作环境。
 
@@ -60,7 +60,6 @@ print(type(x))  # <class 'str'>
 ```
 
 动态类型的好处是写起来灵活，少写很多样板代码；代价是类型错误要到运行时才暴露，IDE 也难以做严格的静态检查。对于大型项目，可以用 `typing` 模块加类型注解缓解这一问题，但注解本身不强制执行，需要配合 mypy 等静态检查工具。
-
 
 ### 面向对象与一切皆对象
 
@@ -560,3 +559,115 @@ PyCharm 的远程开发通过配置远程解释器实现。Professional 版支�
 远程开发还需要注意几个细节。一是网络稳定性，断线会导致编辑器与远程连接中断，VS Code 通常能自动重连，PyCharm 需要手动重新同步。二是文件同步策略，VS Code Remote SSH 是直接在远程文件上操作，不存在同步问题；PyCharm 需要手动或自动同步本地与远程文件，注意避免覆盖。三是远程环境配置，远程服务器上也需要安装 Python 解释器、虚拟环境、所需依赖包，与本地配置流程一致。
 
 到本节结束，你应该已经拥有一台配置完整的 Python 工作环境：解释器安装好、pip 可用、虚拟环境会建会激活、IDE 顺手。下一节我们将正式开始 Python 语法的学习，从变量、数据类型与运算符讲起。
+
+## 练习题
+
+### 第1题 概念理解
+
+阅读下面这段代码，写出它的输出结果，并说明 Python 3 中三种除法运算符 `/`、`//`、`%` 各自的含义。
+
+```python
+print(7 / 2)
+print(7 // 2)
+print(7 % 2)
+```
+
+::: details 参考答案
+
+```python
+print(7 / 2)   # 3.5
+print(7 // 2)  # 3
+print(7 % 2)   # 1
+```
+
+`/` 是真除法，无论操作数是否为整数，结果总是浮点数。`//` 是整除，返回商的整数部分，向下取整。`%` 是取模，返回除法的余数。Python 2 中两个整数相除的 `/` 会截断小数部分，这一行为在 Python 3 中改为始终返回浮点数，避免了大量隐式 bug。
+:::
+
+### 第2题 代码编写
+
+使用 `pathlib` 模块编写一段代码，构建一个跨平台的文件路径。路径由目录 `data`、子目录 `reports` 和文件名 `summary.csv` 组成，打印出该路径对象。再说明为什么跨平台脚本应优先使用 `pathlib` 而非字符串拼接。
+
+::: details 参考答案
+
+```python
+from pathlib import Path
+
+path = Path("data") / "reports" / "summary.csv"
+print(path)
+```
+
+`pathlib` 会自动适配当前操作系统的路径分隔符。Windows 上输出 `data\reports\summary.csv`，macOS 和 Linux 上输出 `data/reports/summary.csv`。用字符串拼接需要手动判断系统并选择 `\` 或 `/`，容易出错。`pathlib` 把这部分细节封装了起来，代码只需写一次就能在三个系统上运行。
+:::
+
+### 第3题 进阶练习
+
+假设你在开发两个项目，项目 A 依赖 `requests` 2.25 版本，项目 B 依赖 `requests` 2.31 版本。请写出完整的命令流程，包括为每个项目创建虚拟环境、激活环境、安装指定版本依赖、导出依赖清单。要求两个项目的依赖互不影响。
+
+::: details 参考答案
+
+```bash
+# 项目 A
+python -m venv .venv_a
+# Windows
+.venv_a\Scripts\activate
+# macOS/Linux
+source .venv_a/bin/activate
+pip install requests==2.25
+pip freeze > requirements.txt
+deactivate
+
+# 项目 B
+python -m venv .venv_b
+# Windows
+.venv_b\Scripts\activate
+# macOS/Linux
+source .venv_b/bin/activate
+pip install requests==2.31
+pip freeze > requirements.txt
+deactivate
+```
+
+虚拟环境为每个项目维护独立的包目录，激活后 `pip install` 只影响当前环境。两个项目分别用各自的 `.venv`，`requests` 版本互不干扰。导出 `requirements.txt` 后，到新机器上用 `pip install -r requirements.txt` 即可复现环境。
+:::
+
+### 第4题 项目实践
+
+命令行任务管理器项目需要管理多个依赖。请思考这个项目应该如何组织虚拟环境，`requirements.txt` 应该包含哪些内容，以及为什么不应该把 `.venv` 目录提交到版本库。
+
+::: details 参考答案
+在项目根目录创建一个 `.venv` 虚拟环境，在 `.gitignore` 中添加 `.venv/` 一行避免提交。`requirements.txt` 列出项目直接依赖及版本，例如命令行解析库、数据存储库等，具体依赖在学习后续章节后确定。
+
+```text
+# requirements.txt 示例
+# 命令行解析相关库
+# 数据存储相关库
+```
+
+不提交 `.venv` 是因为该目录包含大量二进制文件，体积大且与具体机器相关。其他开发者拿到代码后，自己创建虚拟环境并执行 `pip install -r requirements.txt` 即可复现依赖，比直接拷贝二进制目录更可靠。
+:::
+
+## 常见错误
+
+**错误 1 · `'python' 不是内部或外部命令`**
+
+原因:Windows 安装 Python 时未勾选 **Add Python to PATH** 选项，系统在环境变量中找不到 `python.exe`。
+
+解决:打开"环境变量"设置，在用户变量或系统变量的 `Path` 中添加 Python 安装目录（如 `D:\Python312`）和 Scripts 子目录（如 `D:\Python312\Scripts`），保存后重新打开命令行窗口。更省事的做法是重新运行安装包选择 **Modify**，勾选 **Add Python to PATH**。
+
+**错误 2 · `pip install` 长时间无响应后超时**
+
+原因:默认从 PyPI 官方源下载，国内网络访问速度慢或连接被中断。
+
+解决:临时使用国内镜像源安装，命令是 `pip install 包名 -i https://pypi.tuna.tsinghua.edu.cn/simple`。永久配置镜像源用 `pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple`，配置后所有 `pip install` 都走镜像。
+
+**错误 3 · `cannot be loaded because running scripts is disabled on this system`**
+
+原因:Windows PowerShell 默认禁止执行脚本，导致 `.venv\Scripts\activate` 激活虚拟环境时被拦截。
+
+解决:以管理员身份打开 PowerShell，执行 `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`，确认后即可激活虚拟环境。改用 cmd 执行 `activate.bat` 也能避开此限制。
+
+**错误 4 · `安装路径含中文或空格导致后续报错`**
+
+原因:Python 安装目录或项目路径包含中文字符、空格，部分第三方库在编译或读取路径时无法正确处理。
+
+解决:卸载后重新安装到纯英文无空格的目录，例如 `D:\Python312`，避免 `C:\Program Files\` 或含中文的路径。项目目录同样使用英文命名。

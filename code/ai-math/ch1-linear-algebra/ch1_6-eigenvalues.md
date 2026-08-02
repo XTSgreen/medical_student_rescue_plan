@@ -6,8 +6,6 @@ sidebar:
 
 # 1.6 特征值与特征向量
 
-<span class="chapter-tag">第一章 · 线性代数</span>
-
 上一节我们建立了**正交性—投影—最小二乘—QR 分解**的完整工具链，把**哪些方向相互垂直**这一几何问题转化为可计算的代数算法。但线性代数中还有另一类深刻的几何问题：**当矩阵 $A$ 作用于空间时，是否存在某些特殊方向，在变换前后方向保持不变？** 这一问题引出**特征值与特征向量**——线性代数中几何意义与工程价值并重的概念。
 
 正交投影回答了**如何把向量最近地表示为已知子空间的元素**这一问题，特征分解则回答了**如何找到矩阵自身的固有坐标系——在这个坐标系下，变换退化为最简的纯缩放**。当 $A$ 作用于其特征向量 $\mathbf{v}$ 时，结果是 $A\mathbf{v} = \lambda \mathbf{v}$：方向不变，只被缩放 $\lambda$ 倍。**这一缩放因子 $\lambda$ 就是特征值**，它揭示了矩阵在该方向上的**内在强度**。
@@ -1345,3 +1343,73 @@ for k in range(1, 11):
 7. **谱图景连接动力系统**：谱半径 $\rho(A)$ 决定 $A^k$ 的渐近行为（$\rho < 1$ 稳定、$\rho > 1$ 发散、$\rho = 1$ 临界），次主特征值决定收敛速率。PageRank、马尔可夫链、动力系统稳定性皆由特征值刻画。
 
 下一节将进入 **SVD（奇异值分解）**——把特征分解从方阵推广到任意矩阵，从对称矩阵推广到一般矩阵。SVD 将综合 1.5 节的正交性与 1.6 节的特征结构，给出 $A = U\Sigma V^T$ 这一**线性代数的顶峰**——任意矩阵都能分解为**正交旋转 + 对角缩放 + 正交旋转**三步组合，成为数据科学（PCA、推荐系统、图像压缩）的重要工具。
+
+## 练习题
+
+### 第 1 题 概念推导
+
+设 $A$ 是实对称矩阵，$\lambda_1, \lambda_2$ 是 $A$ 的两个不同特征值（$\lambda_1 \neq \lambda_2$），$\mathbf{v}_1, \mathbf{v}_2$ 是对应的特征向量。证明 $\mathbf{v}_1 \perp \mathbf{v}_2$，并说明这一结论为何是谱定理（实对称矩阵可正交对角化）的关键前提。
+
+::: details 参考答案
+由特征向量定义 $A\mathbf{v}_1 = \lambda_1 \mathbf{v}_1$，$A\mathbf{v}_2 = \lambda_2 \mathbf{v}_2$。考虑 $\mathbf{v}_1^T A \mathbf{v}_2$ 这一标量，用两种方式计算：
+
+**方式一**：先用 $A$ 作用于 $\mathbf{v}_2$：$\mathbf{v}_1^T (A \mathbf{v}_2) = \mathbf{v}_1^T (\lambda_2 \mathbf{v}_2) = \lambda_2 (\mathbf{v}_1^T \mathbf{v}_2)$。
+
+**方式二**：利用 $A$ 对称（$A^T = A$），改写为 $(A \mathbf{v}_1)^T \mathbf{v}_2 = (\lambda_1 \mathbf{v}_1)^T \mathbf{v}_2 = \lambda_1 (\mathbf{v}_1^T \mathbf{v}_2)$。
+
+两种方式计算同一标量，故 $\lambda_2 (\mathbf{v}_1^T \mathbf{v}_2) = \lambda_1 (\mathbf{v}_1^T \mathbf{v}_2)$，即 $(\lambda_2 - \lambda_1)(\mathbf{v}_1^T \mathbf{v}_2) = 0$。由 $\lambda_1 \neq \lambda_2$ 推出 $\mathbf{v}_1^T \mathbf{v}_2 = 0$，即 $\mathbf{v}_1 \perp \mathbf{v}_2$。
+
+这一结论是谱定理的关键前提：不同特征值对应的特征向量天然正交，同一特征空间内可用 Gram-Schmidt 正交化，合并后即得 $n$ 个标准正交特征向量，构成 $Q$ 的列，使 $A = Q\Lambda Q^T$ 成立。没有这条正交性，对角化只能用一般可逆矩阵 $P$（$A = P\Lambda P^{-1}$），无法保证 $P$ 正交，数值稳定性与几何意义都大打折扣。
+:::
+
+### 第 2 题 代码验证
+
+利用本节的 `<SymmetricEigenDemo>` 交互组件，输入实对称矩阵 $A = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}$。记录特征值 $\lambda_1, \lambda_2$ 与特征向量 $\mathbf{q}_1, \mathbf{q}_2$，验证三条性质：特征值为实数；$\mathbf{q}_1 \perp \mathbf{q}_2$；$A = Q\Lambda Q^T$ 重构无误。
+
+::: details 参考答案
+特征方程 $\det(A - \lambda I) = (2-\lambda)^2 - 1 = \lambda^2 - 4\lambda + 3 = (\lambda-1)(\lambda-3) = 0$，特征值 $\lambda_1 = 1$，$\lambda_2 = 3$，均为实数。
+
+求特征向量：$\lambda_1 = 1$ 时 $(A - I)\mathbf{v} = \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix}\mathbf{v} = \mathbf{0}$，得 $\mathbf{v}_1 = \frac{1}{\sqrt{2}}(1, -1)^T$。$\lambda_2 = 3$ 时 $(A - 3I)\mathbf{v} = \begin{bmatrix} -1 & 1 \\ 1 & -1 \end{bmatrix}\mathbf{v} = \mathbf{0}$，得 $\mathbf{v}_2 = \frac{1}{\sqrt{2}}(1, 1)^T$。
+
+验证三条性质：特征值 $1, 3$ 均为实数；$\mathbf{q}_1 \cdot \mathbf{q}_2 = \frac{1}{2}(1 \cdot 1 + (-1) \cdot 1) = 0$，正交；$Q = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}$，$\Lambda = \begin{bmatrix} 1 & 0 \\ 0 & 3 \end{bmatrix}$，$Q\Lambda Q^T = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 \\ 0 & 3 \end{bmatrix}\begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix} = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix} = A$，重构无误。几何上，$A$ 沿 $\mathbf{q}_1$ 方向缩放 $1$ 倍（不变），沿 $\mathbf{q}_2$ 方向缩放 $3$ 倍。
+:::
+
+### 第 3 题 概念推导
+
+设 $A = \begin{bmatrix} 2 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{bmatrix}$。求 $A$ 的特征值与对应的特征空间，判断 $A$ 是否可对角化，并说明几何重数与代数重数的关系。
+
+::: details 参考答案
+$A$ 是上三角矩阵，特征值即对角元 $\lambda_1 = 2$（代数重数 AM = 2），$\lambda_2 = 3$（AM = 1）。
+
+**$\lambda_1 = 2$ 的特征空间**：解 $(A - 2I)\mathbf{v} = \mathbf{0}$，即 $\begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix} = \mathbf{0}$。得 $v_2 = 0$，$v_3 = 0$，$v_1$ 自由。特征空间 $E_2 = \text{span}\{(1, 0, 0)^T\}$，几何重数 GM = 1。
+
+**$\lambda_2 = 3$ 的特征空间**：解 $(A - 3I)\mathbf{v} = \mathbf{0}$，即 $\begin{bmatrix} -1 & 1 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 0 \end{bmatrix}\mathbf{v} = \mathbf{0}$。得 $v_1 = 0$，$v_2 = 0$，$v_3$ 自由。特征空间 $E_3 = \text{span}\{(0, 0, 1)^T\}$，GM = 1。
+
+**可对角化判定**：可对角化要求所有特征值满足 GM = AM。这里 $\lambda_1 = 2$ 的 GM = 1 < AM = 2，故 $A$ **不可对角化**，是缺陷矩阵。三个特征向量无法拼出 $\mathbb{R}^3$ 的一组基（只有两个独立方向），对角化所需的 $P$ 不存在。这类矩阵需用 Jordan 标准形 $A = PJP^{-1}$ 描述，其中 $J$ 含有 $2 \times 2$ Jordan 块 $\begin{bmatrix} 2 & 1 \\ 0 & 2 \end{bmatrix}$。这一例子说明**并非所有方阵都可对角化**，GM < AM 是判断缺陷的直接判据。
+:::
+
+## 常见错误
+
+**错误 1 · 把特征值与奇异值混为一谈**
+
+原因：特征值 $\lambda$ 满足 $A\mathbf{v} = \lambda\mathbf{v}$，奇异值 $\sigma$ 满足 $A = U\Sigma V^T$ 中 $\Sigma$ 的对角元。两者都反映矩阵的缩放强度，初学时容易混用。关键区别：特征值仅对方阵定义，可为负、可为复数；奇异值对任意 $m \times n$ 矩阵定义，恒为非负实数。实对称矩阵的奇异值等于特征值的绝对值 $|\lambda_i|$，一般矩阵则无此简单关系。
+
+解决：明确**特征值刻画方阵的固有方向缩放**，**奇异值刻画任意矩阵的主方向放大倍数**。记忆规则：特征值可负可复（保留方向与旋转信息），奇异值非负（只关心放大倍数）。涉及方阵对角化用特征值，涉及一般矩阵的范数、条件数、低秩逼近用奇异值。
+
+**错误 2 · 把特征向量的方向不变理解为向量本身不变**
+
+原因：$A\mathbf{v} = \lambda \mathbf{v}$ 中 $\lambda$ 可以不等于 $1$，特征向量的长度（甚至指向，当 $\lambda < 0$）都会变化。初学时容易把**方向不变**误读为**向量不变**，忽视 $\lambda$ 的缩放作用。更精确的表述是：特征向量张成的一维子空间 $\text{span}\{\mathbf{v}\}$ 在 $A$ 作用下保持稳定，$A$ 把这条直线映射到自身。
+
+解决：区分**向量不变**（$\lambda = 1$，恒等变换的特例）与**方向不变**（一维不变子空间，$\lambda$ 任意）。判定特征向量时检查 $A\mathbf{v}$ 与 $\mathbf{v}$ 是否共线（在同一直线上），而非是否相等。$\lambda < 0$ 时 $A\mathbf{v}$ 与 $\mathbf{v}$ 反向但仍共线，仍是特征向量。
+
+**错误 3 · 误认为所有方阵都可对角化**
+
+原因：教材常以实对称矩阵、可对角化矩阵为例，给人**方阵都能对角化**的错觉。实际上存在缺陷矩阵（GM < AM），如 $\begin{bmatrix} 2 & 1 \\ 0 & 2 \end{bmatrix}$，特征向量不足，无法拼出完整基，对角化 $A = PDP^{-1}$ 不存在。
+
+解决：对角化前先检查每个特征值的 GM 与 AM。GM = AM 对所有特征值成立才可对角化；任一特征值 GM < AM 则为缺陷矩阵，需用 Jordan 标准形替代。实对称矩阵天然满足 GM = AM（谱定理保证），故总可对角化，这是实对称矩阵**完美性**的体现。
+
+**错误 4 · 认为实矩阵的特征值必为实数**
+
+原因：实矩阵的元素都是实数，初学时容易推断特征值也为实数。实际上特征方程 $\det(A - \lambda I) = 0$ 是实系数多项式，实系数多项式可能有复根。旋转矩阵 $\begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$（$\theta \neq 0, \pi$）的特征值为 $e^{\pm i\theta}$，是纯虚数方向的复数。
+
+解决：明确**实矩阵的特征值可能为复数**，复特征值成共轭对出现。仅当矩阵是实对称矩阵（更一般地，正规矩阵）时，特征值才保证为实数。遇到实矩阵的复特征值时，对应二维不变子空间上的变换是**旋转 + 缩放**，几何意义清晰，无需强行在实数域内讨论。

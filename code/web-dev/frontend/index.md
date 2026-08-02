@@ -6,8 +6,6 @@ aside: false
 
 # 前端开发
 
-<span class="chapter-tag">互联网开发 · 前端</span>
-
 前端开发是构建用户界面的技术方向，核心是三大语言：HTML 负责结构，CSS 负责样式，JavaScript 负责交互。本部分共 11 节，从零开始带你理解网页的构成与运行机制。
 
 ## 目录

@@ -5,7 +5,6 @@ sidebar:
 ---
 # 1.6 编程规范与风格初步
 
-<span class="chapter-tag">Python核心语法基础</span>
 
 编程规范是协作的基础。程序员写代码有固定格式，命名、缩进、空格按规范书写，目的在于让任何接手的人都能快速读懂。Python 社区同样有一套通用规范，称为 PEP 8，它规定了缩进、命名、空格、换行等细节。初学阶段就遵守这些规则，能让你的代码从一开始就具备专业气质，也为后续参与开源项目、团队协作打下基础。本章将从 PEP 8 出发，覆盖命名、文档、注释、空格、换行等核心内容，帮助你建立正确的代码风格意识。
 
@@ -464,3 +463,127 @@ _internal_helper()      # NameError
 :::
 
 掌握 PEP 8 的目的在于让代码可读、可维护。编程规范的本质是降低沟通成本，让不同人写的代码风格一致，让阅读者把注意力放在逻辑而非格式上。下一章将介绍开发工具链，包括自动格式化工具和代码检查工具，它们能帮你自动遵守 PEP 8，省去手动调整格式的繁琐工作。
+
+## 练习题
+
+### 第1题 概念理解
+
+阅读下面这段代码，指出其中不符合 PEP 8 规范的地方，涉及命名、空格、空行、导入顺序等方面。
+
+```python
+import pandas as pd
+import os
+def calculateArea(length,width):
+    return length*width
+userName="张三"
+```
+
+::: details 参考答案
+这段代码有几处不符合 PEP 8 规范。导入顺序不对，标准库 `os` 应排在第三方库 `pandas` 之前，且两组之间应空一行。函数名 `calculateArea` 使用了驼峰命名，应改为 snake_case 风格的 `calculate_area`。函数参数逗号后缺少空格，`length,width` 应写成 `length, width`。运算符两侧缺少空格，`length*width` 应写成 `length * width`。变量名 `userName` 用了驼峰命名，应改为 `user_name`。赋值号两侧缺少空格，`userName="张三"` 应写成 `user_name = "张三"`。顶层函数定义前后应各有两个空行。
+
+修改后的代码：
+```python
+import os
+
+import pandas as pd
+
+
+def calculate_area(length, width):
+    return length * width
+
+
+user_name = "张三"
+```
+:::
+
+### 第2题 代码编写
+
+编写一个函数 `format_price`，接收单价和数量两个参数，返回总金额。要求遵循 PEP 8 规范：函数名用 snake_case，参数默认值的等号两侧不加空格，运算符两侧加空格，并添加符合 Google 风格的 docstring 说明参数和返回值。
+
+::: details 参考答案
+```python
+def format_price(unit_price, quantity=1):
+    """
+    根据单价和数量计算总金额。
+
+    Args:
+        unit_price (float): 单价，单位元。
+        quantity (int): 数量，默认为 1。
+
+    Returns:
+        float: 总金额，单位元。
+    """
+    return unit_price * quantity
+
+
+print(format_price(7.5, 3))  # 22.5
+```
+
+函数名 `format_price` 使用小写字母加下划线的 snake_case 风格。参数默认值 `quantity=1` 的等号两侧不加空格，这是 PEP 8 的特殊规则，为了与关键字参数语法区分。运算符 `*` 两侧各加一个空格。docstring 采用 Google 风格，分 `Args` 和 `Returns` 两块说明参数和返回值。
+:::
+
+### 第3题 进阶练习
+
+下面这段代码的注释属于坏注释，只复述了代码内容而没有提供额外信息。请重写注释，让它解释为什么这样做而非做了什么，并把变量名改得更见名知意。
+
+```python
+# 把 data 排序后取中间值
+center = sorted(data)[len(data) // 2]
+```
+
+::: details 参考答案
+```python
+# 使用中位数而非均值，因为数据存在极端异常值，均值会被拉偏
+median_value = sorted(data)[len(data) // 2]
+```
+
+原注释 `把 data 排序后取中间值` 只是在翻译代码，任何人看到 `sorted(data)[len(data) // 2]` 都能看出这是排序取中间值，注释没有提供任何额外信息。修改后的注释解释了为什么用中位数：因为数据存在极端异常值，均值会被拉偏。这种背景信息是代码本身无法表达的。变量名 `center` 改为 `median_value`，更清楚地表明这是中位数。
+:::
+
+### 第4题 项目实践
+
+命令行任务管理器项目需要定义一些常量和函数。请为以下数据设计符合 PEP 8 的命名：存储任务数据的文件名常量、添加任务的函数、任务类、任务的最大标题长度常量。说明每种命名采用的风格及其原因。
+
+::: details 参考答案
+```python
+# 常量用全大写字母加下划线，表示程序运行期间不应改变的值
+TASK_DATA_FILE = "tasks.json"
+MAX_TITLE_LENGTH = 50
+
+# 函数用小写字母加下划线的 snake_case 风格
+def add_task(title, priority=1):
+    pass
+
+# 类名用大驼峰的 PascalCase 风格，每个单词首字母大写
+class TaskRecord:
+    pass
+```
+
+常量 `TASK_DATA_FILE` 和 `MAX_TITLE_LENGTH` 用全大写字母加下划线，这是 PEP 8 对常量的约定，提醒阅读者这些值不应被修改。函数 `add_task` 用 snake_case，与 Python 关键字的小写风格保持一致。类 `TaskRecord` 用 PascalCase，每个单词首字母大写，与变量函数的小写风格形成对比，让阅读者一眼区分标识符是类还是实例或函数。
+:::
+
+## 常见错误
+
+**错误 1 · `TabError: inconsistent use of tabs and spaces in indentation`**
+
+原因:同一文件或同一代码块中混用了 Tab 字符和空格作为缩进，Python 3 不允许混用，直接报语法错误。
+
+解决:在编辑器中把 Tab 键设置为自动插入 4 个空格。VS Code 在 `File → Preferences → Settings` 中搜索"tab size"设为 4，并勾选"Detect Indentation"。PyCharm 在 `Settings → Editor → Code Style → Python` 中勾选"Use tab character"为关闭状态。已有混用文件可用编辑器的"将 Tab 转为空格"功能批量转换。
+
+**错误 2 · `E501 line too long 行宽超限`**
+
+原因:单行代码超过 PEP 8 建议的 79 字符（注释和 docstring 建议 72 字符），flake8 等检查工具会报告 E501 警告。
+
+解决:把长行拆分为多行。函数调用和定义用括号内隐式换行，长字符串用括号拼接或三引号字符串，长条件表达式用括号包裹后换行。也可以在项目配置文件（如 `setup.cfg` 的 `[flake8]` 段）中调高 `max-line-length`，但通常不建议超过 100。
+
+**错误 3 · `通配导入 from module import * 导致命名空间污染`**
+
+原因:通配导入把模块的所有公开名字倒入当前作用域，多个模块的同名函数会相互覆盖，且代码中调用的函数来源不可追溯。
+
+解决:显式导入需要的名字，例如 `from math import sqrt, pi`；或保留模块名前缀，例如 `import math` 后用 `math.sqrt(4)`。在项目配置中可以用 flake8 的 `F403` 规则禁用通配导入，从工具层面避免此类问题。
+
+**错误 4 · `命名风格混乱导致可读性下降`**
+
+原因:同一个项目中混用了 snake_case、camelCase、PascalCase 等多种命名风格，或变量名缩写严重、含义模糊，阅读者无法从名字判断其类型和用途。
+
+解决:统一遵循 PEP 8 命名约定，变量和函数用 snake_case，类用 PascalCase，常量用 UPPER_CASE。命名做到见名知意，避免 `a`、`b`、`tmp`、`data2` 这类无意义名字。使用 black 或 autopep8 自动格式化，配合 flake8 检查命名规则。

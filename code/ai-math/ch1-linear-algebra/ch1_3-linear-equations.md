@@ -6,8 +6,6 @@ sidebar:
 
 # 1.3 线性方程组与秩
 
-<span class="chapter-tag">第一章 · 线性代数</span>
-
 前两节我们建立了**向量—变换**的语言体系：向量描述空间中的对象，矩阵描述空间之间的映射。本节把这套语言应用到线性代数最古老也最实用的问题上——**解方程组**。线性方程组是数学本身的核心对象，也是几乎所有工程问题的最终落脚点：最小二乘拟合、有限元分析、PageRank 排名、神经网络反向传播，归根结底都在求解某个形式的 $A\mathbf{x} = \mathbf{b}$。本节的中心目标，是把**解方程**这一算术操作提升为对变换结构的几何理解——而连接这两者的关键概念，就是**秩**（Rank）。
 
 ## 1.3.1 从方程到矩阵：建模与几何直觉
@@ -682,3 +680,71 @@ analyze_system([[1, 1], [2, 2]], [3, 6])
 :::
 
 接下来 1.4 节将把视角从**解方程**提升到**空间结构**——系统讨论向量空间、四大基本子空间（列空间、零空间、行空间、左零空间），把本节的**秩**、**零空间**等概念纳入一个统一的几何框架。这一框架是线性代数的重要成果之一，也是理解 SVD、PCA 等高级方法的基础。
+
+## 练习题
+
+### 第 1 题 概念推导
+
+设 $A \in \mathbb{R}^{m \times n}$。证明秩-零度定理 $\text{rank}(A) + \text{nullity}(A) = n$，其中 $\text{nullity}(A) = \dim(\text{Null}(A))$。提示：从 $A$ 的列向量中选出一组极大线性无关列，构造从 $\mathbb{R}^n$ 到列空间的同构。
+
+::: details 参考答案
+设 $\text{rank}(A) = r$，$A$ 的列空间有一组基 $\{\mathbf{a}_{i_1}, \ldots, \mathbf{a}_{i_r}\}$（$r$ 个线性无关列）。把 $A$ 按列分块为 $A = [A_1 \mid A_2]$，其中 $A_1 \in \mathbb{R}^{m \times r}$ 由这 $r$ 个基列构成，$A_2 \in \mathbb{R}^{m \times (n-r)}$ 由其余列构成。由于 $A_2$ 的每一列都能被 $A_1$ 的列线性表出，存在矩阵 $C \in \mathbb{R}^{r \times (n-r)}$ 使 $A_2 = A_1 C$。
+
+定义线性映射 $T: \mathbb{R}^n \to \mathbb{R}^m$，$T(\mathbf{x}) = A\mathbf{x}$。$\text{Null}(A) = \ker T$。把 $\mathbf{x} \in \mathbb{R}^n$ 分块为 $\begin{bmatrix} \mathbf{x}_1 \\ \mathbf{x}_2 \end{bmatrix}$（$\mathbf{x}_1 \in \mathbb{R}^r$，$\mathbf{x}_2 \in \mathbb{R}^{n-r}$），则
+
+$$
+A\mathbf{x} = A_1 \mathbf{x}_1 + A_2 \mathbf{x}_2 = A_1(\mathbf{x}_1 + C\mathbf{x}_2).
+$$
+
+由于 $A_1$ 列满秩，$A_1 \mathbf{z} = \mathbf{0}$ 当且仅当 $\mathbf{z} = \mathbf{0}$。故 $A\mathbf{x} = \mathbf{0}$ 当且仅当 $\mathbf{x}_1 + C\mathbf{x}_2 = \mathbf{0}$，即 $\mathbf{x}_1 = -C\mathbf{x}_2$。$\mathbf{x}_2 \in \mathbb{R}^{n-r}$ 可任取，每组 $\mathbf{x}_2$ 唯一确定一组 $\mathbf{x}_1$，故 $\text{Null}(A)$ 与 $\mathbb{R}^{n-r}$ 同构，$\text{nullity}(A) = n - r$。代入即得 $\text{rank}(A) + \text{nullity}(A) = r + (n - r) = n$。
+:::
+
+### 第 2 题 代码验证
+
+利用本节的 `<RankSummaryDemo>` 交互组件，依次加载三个预设：**唯一解**（$A = \begin{bmatrix} 2 & 1 \\ 1 & -1 \end{bmatrix}$，$\mathbf{b} = (3, 0)$）、**无穷多解**（$A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}$，$\mathbf{b} = (3, 6)$）、**无解**（$A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}$，$\mathbf{b} = (3, 7)$）。记录每组的 $\text{rank}(A)$、$\text{rank}([A \mid \mathbf{b}])$、$n$，对照判定流程图验证三类情形的判据。
+
+::: details 参考答案
+三组数据如下：**唯一解**情形 $\text{rank}(A) = 2$，$\text{rank}([A \mid \mathbf{b}]) = 2$，$n = 2$，满足 $\text{rank}(A) = \text{rank}([A \mid \mathbf{b}]) = n$，判定为唯一解，行图像中两直线交于一点，列图像中 $\mathbf{b}$ 落在列空间内。**无穷多解**情形 $\text{rank}(A) = 1$，$\text{rank}([A \mid \mathbf{b}]) = 1$，$n = 2$，满足 $\text{rank}(A) = \text{rank}([A \mid \mathbf{b}]) < n$，判定为无穷多解，行图像中两直线重合，自由变量个数为 $n - \text{rank}(A) = 1$。**无解**情形 $\text{rank}(A) = 1$，$\text{rank}([A \mid \mathbf{b}]) = 2$，满足 $\text{rank}(A) < \text{rank}([A \mid \mathbf{b}])$，判定为无解，行图像中两直线平行不相交，$\mathbf{b}$ 脱离列空间。三组数据完整覆盖判定流程的三条路径。
+:::
+
+### 第 3 题 概念推导
+
+求解方程组 $\begin{cases} x_1 + 2x_2 + 3x_3 = 6 \\ 2x_1 + 4x_2 + 6x_3 = 12 \end{cases}$，写出通解形式 $\mathbf{x} = \mathbf{x}_p + c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2$，并从**仿射子空间**角度说明解集的几何形状与维度。
+
+::: details 参考答案
+系数矩阵 $A = \begin{bmatrix} 1 & 2 & 3 \\ 2 & 4 & 6 \end{bmatrix}$，第二行是第一行的 $2$ 倍，$\text{rank}(A) = 1$，$\text{nullity}(A) = 3 - 1 = 2$。$\text{rank}([A \mid \mathbf{b}]) = 1$（$\mathbf{b} = (6, 12)^T$ 也满足同样的比例关系），方程组相容且有无穷多解。
+
+**特解**：令自由变量 $x_2 = x_3 = 0$，由 $x_1 + 2 \cdot 0 + 3 \cdot 0 = 6$ 得 $x_1 = 6$，故 $\mathbf{x}_p = (6, 0, 0)^T$。
+
+**齐次基础解系**：解 $x_1 + 2x_2 + 3x_3 = 0$。令 $(x_2, x_3) = (1, 0)$ 得 $\mathbf{v}_1 = (-2, 1, 0)^T$；令 $(x_2, x_3) = (0, 1)$ 得 $\mathbf{v}_2 = (-3, 0, 1)^T$。
+
+通解为 $\mathbf{x} = (6, 0, 0)^T + c_1 (-2, 1, 0)^T + c_2 (-3, 0, 1)^T$，$c_1, c_2 \in \mathbb{R}$。
+
+几何上，解集是 $\mathbb{R}^3$ 中一个**二维仿射子空间**（平面），由零空间（过原点、由 $\mathbf{v}_1, \mathbf{v}_2$ 张成的平面）沿 $\mathbf{x}_p$ 平移得到，**不过原点**。该平面与零空间平面平行，维度等于 $\text{nullity}(A) = 2$。
+:::
+
+## 常见错误
+
+**错误 1 · 用行列式判定非方阵方程组的解**
+
+原因：方阵情形下 $\det(A) \neq 0$ 是唯一解的判据，初学时容易把这条规则套用到 $m \times n$（$m \neq n$）矩阵上。非方阵没有行列式定义，套用会直接失效；即便对方阵，$\det(A) \neq 0$ 也只能判定唯一解，无法区分无解与无穷多解。
+
+解决：统一使用**秩判据**：先比较 $\text{rank}(A)$ 与 $\text{rank}([A \mid \mathbf{b}])$ 判定相容性，再比较 $\text{rank}(A)$ 与 $n$ 判定唯一性。秩判据适用于任意 $m \times n$ 矩阵，覆盖全部三种情形。
+
+**错误 2 · 混淆 $\text{rank}(A)$ 与 $\text{rank}([A \mid \mathbf{b}])$ 的判定角色**
+
+原因：把相容性判据记反，写成 $\text{rank}(A) > \text{rank}([A \mid \mathbf{b}])$ 时无解。实际上增广矩阵的秩只会大于或等于系数矩阵的秩（增广矩阵包含 $A$ 的所有列，秩不会减少），不可能出现 $\text{rank}(A) > \text{rank}([A \mid \mathbf{b}])$。
+
+解决：明确**增广矩阵秩只增不减**这一性质：$\text{rank}([A \mid \mathbf{b}]) \geq \text{rank}(A)$ 恒成立。相容要求两者相等，无解对应增广矩阵秩更高（$\mathbf{b}$ 引入了新的独立方向，脱离列空间）。
+
+**错误 3 · 把非齐次解集当作线性子空间**
+
+原因：非齐次方程组 $A\mathbf{x} = \mathbf{b}$（$\mathbf{b} \neq \mathbf{0}$）的解集是仿射子空间，不过原点，对加法与数乘不封闭。初学时容易把它当作线性子空间处理，例如试图求解集的**基**或验证零向量是否在解集中。
+
+解决：明确**非齐次解集 = 特解 + 齐次解集**这一结构。齐次解集 $\text{Null}(A)$ 才是线性子空间，有基（零空间基础解系）；非齐次解集是零空间沿特解方向平移得到的仿射子空间，不过原点（除非 $\mathbf{b} = \mathbf{0}$），讨论**基**时务必回到齐次情形。
+
+**错误 4 · 自由变量个数按行数 $m$ 计算**
+
+原因：把自由变量个数误记为 $m - \text{rank}(A)$（方程数减秩），实际应为 $n - \text{rank}(A)$（未知数减秩）。这一错误源于混淆**冗余方程数**与**自由变量数**。
+
+解决：区分两个量：$m - \text{rank}(A)$ 是**冗余方程数**（行视角，被其他方程线性表示的方程数），$n - \text{rank}(A)$ 是**自由变量数**（列视角，等于零度）。自由变量数由未知数 $n$ 与秩共同决定，与方程数 $m$ 无直接关系。

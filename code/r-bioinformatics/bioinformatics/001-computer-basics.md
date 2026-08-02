@@ -2089,3 +2089,55 @@ snakemake --use-singularity \
 - 在论文方法部分记录镜像名称和版本，使其他研究者可以精确复现
 - 敏感数据不应打入镜像，通过挂载方式访问
 :::
+
+## 练习题
+
+### 第1题 概念理解
+
+某脚本中执行 `export PATH=/opt/conda/envs/rna_seq/bin:$PATH` 后，在当前终端运行 `samtools` 调用的是该环境内的版本。但将这条命令写入脚本 `setup.sh` 并用 `bash setup.sh` 执行后，后续在终端直接输入 `samtools` 调用的仍是系统旧版本。分析原因，并给出让脚本中的 PATH 修改对当前终端生效的方法。
+
+::: details 参考答案
+`bash setup.sh` 启动一个子 shell 执行脚本，其中的 `export` 仅影响子进程及其后代，父进程（当前终端）的 PATH 不受影响。要让修改对当前终端生效，需用 `source setup.sh` 或 `. setup.sh` 方式执行，使脚本在当前 shell 中运行而非启动子进程。
+:::
+
+### 第2题 参数分析
+
+某项目需要同时使用 samtools 1.9（配合旧版 GATK 流程）和 samtools 1.17（配合新流程），两个流程要在同一台服务器上交替运行。直接在系统全局安装会产生版本冲突。给出一种环境隔离方案，说明应创建几个环境、如何切换、如何保证流程脚本调用到正确版本。
+
+::: details 参考答案
+用 Conda 创建两个独立环境，例如 `conda create -n gatk3 samtools=1.9` 与 `conda create -n gatk4 samtools=1.17`。运行对应流程前先 `conda activate` 切换到目标环境，或在流程脚本首行加入 `conda activate gatk3`。更稳妥的做法是为每个流程构建独立的 Docker 或 Singularity 镜像，将工具版本固化在镜像中，避免依赖宿主机的 Conda 激活状态。
+:::
+
+### 第3题 概念理解
+
+`rm -rf "${VAR:?error}/"` 与 `rm -rf "$VAR/"` 两种写法在 `$VAR` 为空字符串时行为有何不同？解释 `${VAR:?error}` 的作用，并说明在涉及删除操作的脚本中推荐这种写法的理由。
+
+::: details 参考答案
+`$VAR` 为空时，`rm -rf "$VAR/"` 展开为 `rm -rf /`，递归删除根目录造成灾难性后果。`${VAR:?error}` 在变量为空或未定义时打印 error 信息并使脚本立即退出，不会执行 rm 命令。涉及删除、覆盖等不可逆操作的脚本中，这种写法能防止变量为空导致的误删，应作为标准写法。
+:::
+
+## 常见错误
+
+**错误 1 · Conda 安装软件后命令仍提示 command not found**
+
+原因：未激活对应环境，或安装到了 base 环境但当前处于其他环境。也可能是 shell 初始化未完成，PATH 未正确指向环境 bin 目录。
+
+解决：先 `conda env list` 确认当前所在环境，再 `conda activate 目标环境`，执行 `which samtools` 确认路径指向环境的 bin 目录。若 `conda activate` 报错，运行 `conda init bash` 并重开终端。
+
+**错误 2 · 批量清理脚本误删工作目录**
+
+原因：脚本中 `rm -rf $DIR/` 当 `$DIR` 因参数解析失败而为空时，展开为 `rm -rf /`，递归删除根目录。
+
+解决：使用 `rm -rf "${DIR:?变量未设置}/"` 形式，变量为空时脚本中断退出；或在删除前加 `[[ -z "$DIR" ]] && exit 1` 检查。涉及不可逆操作的变量引用一律加双引号和空值保护。
+
+**错误 3 · Docker 容器运行后结果文件丢失**
+
+原因：容器的可写层在容器删除后随之销毁，未通过 `-v` 挂载的目录中的写入全部丢失。
+
+解决：运行容器时用 `-v /host/path:/container/path` 挂载输出目录，结果直接写入主机持久化路径。Singularity 默认挂载 `$HOME`，但仍需用 `-B` 显式挂载工作目录。
+
+**错误 4 · SSH 远程执行命令时环境变量丢失**
+
+原因：非交互非登录 shell 默认不读取 `~/.bashrc`，Conda 初始化代码未执行，PATH 中缺少环境 bin 目录。
+
+解决：在命令前显式初始化，写作 `ssh server "source ~/.bashrc && bwa mem ..."`；或在 `~/.ssh/environment` 中设置必要的环境变量（需服务端启用 PermitUserEnvironment）。

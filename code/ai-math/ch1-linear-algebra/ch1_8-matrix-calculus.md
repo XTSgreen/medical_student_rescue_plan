@@ -5,8 +5,6 @@ sidebar:
 ---
 # 1.8 数值计算与稳定性
 
-<span class="chapter-tag">第一章 · 线性代数</span>
-
 上一节我们建立了**奇异值分解** $A = U\Sigma V^T$，把**任意矩阵的分解**转化为可计算的代数工具——任何线性变换都可拆解为**旋转 → 缩放 → 旋转**的三步，四大子空间、低秩逼近、伪逆都在 SVD 的统一图景下找到位置。但 SVD 给出的是**静态**视角：它描述**矩阵本身的结构**，却未回答**矩阵如何随参数变化**——而当 AI 把矩阵视为可学习的**参数** $W$，需要最小化损失函数 $L(W)$ 时，我们必须追问一个全新的问题：**当 $W$ 发生微小变化时，$L$ 如何变化？** 这一问题把线性代数从**静态结构**推向**动态变化**，自然引出**矩阵微积分**。
 
 更深层的挑战来自**计算机本身**。数学上**无穷小**的微分与**任意精度**的实数，在计算机中只能是**有限步迭代**和**有限位浮点数**。理论上正确的算法可能因浮点误差累积而失效；数学上简单的矩阵求逆可能因条件数过大而给出错误结果；理论上收敛的梯度下降可能因梯度消失或爆炸而无法训练。**数值稳定性**——算法在有限精度下仍能给出可靠结果的能力——是工程实现中不可回避的**误差哲学**。
@@ -2149,3 +2147,104 @@ print(f"→ 这就是 ResNet 能训练 1000+ 层的数学根源")
 - **1.8 数值计算与稳定性**：矩阵微积分把线性代数从**静态**推向**动态**，数值稳定性把**理论**转化为**工程**，自动微分是连接线性代数与 AI 框架的数学基石。
 
 这套工具链将在后续章节中持续发挥作用——**概率论的协方差矩阵**（特征值 = 主成分方差）、**优化的 Hessian 矩阵**（特征值 = 曲率）、**深度学习的权重初始化与压缩**（SVD 低秩逼近）、**反向传播的自动微分**（链式法则 + 计算图）——所有这些 AI 核心技术都根植于本章建立的线性代数基础。掌握这八章内容，就是掌握了**用线性代数理解 AI**的核心工具。
+
+## 练习题
+
+### 第 1 题 概念推导
+
+设 $A \in \mathbb{R}^{n \times n}$，$\mathbf{x} \in \mathbb{R}^n$。采用分母布局，从分量展开出发证明二次型求导公式 $\nabla_\mathbf{x}(\mathbf{x}^T A \mathbf{x}) = (A + A^T)\mathbf{x}$；并说明当 $A$ 对称时为何简化为 $2A\mathbf{x}$。
+
+::: details 参考答案
+把二次型展开为分量形式：
+
+$$
+\mathbf{x}^T A \mathbf{x} = \sum_{i=1}^n \sum_{j=1}^n x_i A_{ij} x_j.
+$$
+
+对 $x_k$ 求偏导时，需同时处理 $x_i = x_k$（$i$ 求和项）与 $x_j = x_k$（$j$ 求和项）两类贡献：
+
+$$
+\frac{\partial}{\partial x_k}(\mathbf{x}^T A \mathbf{x}) = \sum_{j=1}^n A_{kj} x_j + \sum_{i=1}^n x_i A_{ik} = (A\mathbf{x})_k + (A^T \mathbf{x})_k.
+$$
+
+把所有分量按列排开，得到 $\nabla_\mathbf{x}(\mathbf{x}^T A \mathbf{x}) = A\mathbf{x} + A^T \mathbf{x} = (A + A^T)\mathbf{x}$。
+
+当 $A$ 对称时 $A = A^T$，故 $(A + A^T)\mathbf{x} = 2A\mathbf{x}$。对称矩阵的二次型中交叉项 $A_{ij} x_i x_j$ 与 $A_{ji} x_j x_i$ 系数相等，求导时各贡献一份，总和恰为 $2A_{ij}$，与直接对 $2\sum_{i \leq j} A_{ij} x_i x_j$ 求导的结果一致。MSE 损失 $L = \mathbf{x}^T A \mathbf{x}$（$A$ 对称正定）的梯度为 $2A\mathbf{x}$ 即源于此。
+:::
+
+### 第 2 题 代码验证
+
+利用本节的 `<ConditionNumberIllusion>` 交互组件（或用 Python 构造 Hilbert 矩阵 $H_n$，$n = 5, 10, 15$），计算 $\kappa_2(H_n) = \sigma_{\max}/\sigma_{\min}$，并求解 $H_n \mathbf{x} = \mathbf{b}$（取 $\mathbf{b} = H_n \mathbf{1}$，真解为全 1 向量）。记录相对误差 $\|\hat{\mathbf{x}} - \mathbf{x}\|/\|\mathbf{x}\|$，验证其量级与 $\kappa(H_n) \cdot \epsilon_{\text{mach}}$ 一致。
+
+::: details 参考答案
+Hilbert 矩阵 $H_{ij} = 1/(i+j-1)$ 是经典的病态矩阵，条件数随 $n$ 指数增长。Python 验证代码如下：
+
+```python
+import numpy as np
+
+def hilbert(n):
+    i = np.arange(1, n + 1).reshape(-1, 1)
+    j = np.arange(1, n + 1).reshape(1, -1)
+    return 1.0 / (i + j - 1)
+
+eps_mach = np.finfo(float).eps  # ≈ 2.22e-16
+for n in [5, 10, 15]:
+    H = hilbert(n)
+    x_true = np.ones(n)
+    b = H @ x_true
+    x_hat = np.linalg.solve(H, b)
+    rel_err = np.linalg.norm(x_hat - x_true) / np.linalg.norm(x_true)
+    kappa = np.linalg.cond(H)  # 默认 2-范数条件数
+    print(f"n={n:2d}: κ(H)={kappa:.2e}, 相对误差={rel_err:.2e}, κ·ε={kappa*eps_mach:.2e}")
+```
+
+典型结果：$n=5$ 时 $\kappa \approx 4.8 \times 10^5$，相对误差 $\approx 10^{-11}$，与 $\kappa \cdot \epsilon_{\text{mach}} \approx 10^{-10}$ 同量级；$n=10$ 时 $\kappa \approx 1.6 \times 10^{13}$，相对误差 $\approx 10^{-4}$；$n=15$ 时 $\kappa \approx 6.9 \times 10^{17}$，相对误差 $\approx 10^{-2}$，解已严重失真。
+
+这一实验印证了 1.8.4 节的结论：输出的相对误差上界为 $\kappa(A) \cdot \epsilon_{\text{mach}}$，条件数越大，数值解越不可靠。当 $\kappa > 10^{16}$ 时（$n=15$ 的 Hilbert 矩阵），误差已与 1 同量级，解毫无意义。
+:::
+
+### 第 3 题 概念推导
+
+证明 Log-Sum-Exp 技巧给出的 $\text{softmax}(\mathbf{z})_i = \dfrac{e^{z_i - c}}{\sum_j e^{z_j - c}}$（$c = \max_k z_k$）与原始定义 $\text{softmax}(\mathbf{z})_i = \dfrac{e^{z_i}}{\sum_j e^{z_j}}$ 数学上完全等价，并说明为何这一变形能同时避免上溢与下溢。
+
+::: details 参考答案
+**等价性证明**：取 $c = \max_k z_k$，分子分母同乘 $e^{-c}$：
+
+$$
+\frac{e^{z_i - c}}{\sum_j e^{z_j - c}} = \frac{e^{z_i} \cdot e^{-c}}{\sum_j e^{z_j} \cdot e^{-c}} = \frac{e^{z_i} \cdot e^{-c}}{e^{-c} \cdot \sum_j e^{z_j}} = \frac{e^{z_i}}{\sum_j e^{z_j}}.
+$$
+
+$e^{-c}$ 是非零常数，分子分母约去后恒等于原始定义，故数学上完全等价。
+
+**避免上溢**：$c = \max_k z_k$ 保证所有指数输入 $z_j - c \leq 0$，故 $e^{z_j - c} \leq 1$，不会出现 $e^{1000} = \infty$ 的上溢。
+
+**避免下溢**：分母 $\sum_j e^{z_j - c} \geq e^{z_k - c} = e^0 = 1$（$k$ 是最大值下标），故分母恒不小于 1，不会因分母下溢为零而导致除零。分子 $e^{z_i - c}$ 在 $z_i \ll c$ 时可能下溢为零，但这对应概率确实接近零的情形，是正确的数值行为，不会引发 NaN。
+
+对数形式 $\log \sum_j e^{z_j} = c + \log \sum_j e^{z_j - c}$ 同样稳定：内部 $\sum_j e^{z_j - c} \in [1, n]$，$\log$ 取值有界。PyTorch 的 `F.log_softmax` 与 `F.cross_entropy` 内部正是用这一变形实现数值稳定。
+:::
+
+## 常见错误
+
+**错误 1 · 混用分子布局与分母布局导致梯度形状错误**
+
+原因：矩阵微积分存在分子布局与分母布局两种约定，前者把标量对向量的梯度排成行向量，后者排成列向量。若在同一项目中混用两种约定，公式形式会相互矛盾——例如 $\nabla_\mathbf{x}(\mathbf{x}^T A \mathbf{x})$ 在分母布局下为 $(A + A^T)\mathbf{x}$（列向量），在分子布局下为 $\mathbf{x}^T(A + A^T)$（行向量），代入代码时形状不匹配，梯度下降更新 $\theta \leftarrow \theta - \eta \nabla_\theta L$ 无法执行。
+
+解决：在项目 README 或代码注释中明确声明采用的布局约定（AI 领域通用分母布局，即梯度形状与自变量一致）。阅读他人论文或代码时，先查看公式表或由梯度形状推断布局。PyTorch、TensorFlow 等框架内部统一采用分母布局，自定义层求导时务必与框架保持一致。
+
+**错误 2 · 直接计算 Softmax 导致数值溢出**
+
+原因：Softmax 的原始定义 $\text{softmax}(\mathbf{z})_i = e^{z_i}/\sum_j e^{z_j}$ 中，当某个 $z_i$ 较大（如 $z_i = 1000$）时，$e^{z_i}$ 上溢为 $\infty$，分子分母同为 $\infty$ 得到 NaN。深度学习中 logits 经过若干层线性变换后量级可能很大，直接计算 Softmax 在训练初期或学习率过大时频繁失效。
+
+解决：始终使用 Log-Sum-Exp 技巧，取 $c = \max_k z_k$，计算 $\text{softmax}(\mathbf{z})_i = e^{z_i - c}/\sum_j e^{z_j - c}$。所有指数输入 $\leq 0$，避免上溢；分母 $\geq 1$，避免除零。涉及交叉熵损失时，直接用 logits 计算 $\log \text{softmax}$（如 PyTorch 的 `F.cross_entropy`），避免先算概率再取对数的精度损失。
+
+**错误 3 · 用数值差分替代自动微分进行梯度计算**
+
+原因：数值差分 $(f(x+h) - f(x))/h$ 实现简单，但存在截断误差与舍入误差的跷跷板——$h$ 太大则截断误差主导，$h$ 太小则舍入误差主导，最佳精度约 $10^{-8}$，远低于机器精度。更严重的是，对 $n$ 维参数的梯度需要 $n$ 次前向求值，深度学习参数量动辄百万，数值差分的计算量不可接受。
+
+解决：训练神经网络时使用自动微分（反向模式 AD），它具有机器精度、计算量与前向传播同阶的优势。PyTorch 的 `loss.backward()`、TensorFlow 的 `GradientTape` 内部即反向模式 AD。数值差分仅用于验证自动微分的正确性（梯度检查），且应选用中心差分 $(f(x+h) - f(x-h))/(2h)$ 与合适步长 $h \approx 10^{-6}$。
+
+**错误 4 · 用行列式接近零判断矩阵病态**
+
+原因：行列式 $\det(A)$ 衡量矩阵对体积的绝对缩放率，受矩阵规模与元素量级影响很大。$0.01 I_{100}$ 的行列式为 $0.01^{100} \approx 10^{-200}$（极小），但条件数为 1（完全良态）；反之 $10^{10} I_{2}$ 的行列式为 $10^{20}$（极大），条件数也为 1。把行列式接近零等同于矩阵病态，会导致大量误判。
+
+解决：判定矩阵病态的唯一可靠指标是条件数 $\kappa(A) = \sigma_{\max}/\sigma_{\min}$（或 $\|A\| \cdot \|A^{-1}\|$），它与矩阵规模和元素量级无关，直接刻画问题的数值敏感度。工程上 $\kappa > 10^6$ 视为病态，$\kappa > 10^{16}$ 在双精度下不可解。NumPy 的 `np.linalg.cond(A)` 直接给出 2-范数条件数，判定时使用这一函数而非 `np.linalg.det`。

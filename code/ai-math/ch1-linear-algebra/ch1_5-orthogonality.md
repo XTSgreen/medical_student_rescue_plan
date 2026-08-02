@@ -6,8 +6,6 @@ sidebar:
 
 # 1.5 正交性与投影
 
-<span class="chapter-tag">第一章 · 线性代数</span>
-
 上一节我们建立了**四大子空间**的结构图景：行空间与零空间在 $\mathbb{R}^n$ 中互补，列空间与左零空间在 $\mathbb{R}^m$ 中互补。但**互补**只是维度上的加法关系——两个子空间的维数之和等于全空间维数。本节将进一步引入**正交**这一几何关系：互补的子空间**填满**整个空间，且**相互垂直**。这一性质让我们能把任意向量**唯一分解**为两个正交分量之和，从而引出**投影**这一核心算法。
 
 投影是线性代数中最具工程价值的工具：当方程 $A\mathbf{x} = \mathbf{b}$ 无解时，我们寻找**最接近** $\mathbf{b}$ 的 $A\mathbf{x}$——这等价于把 $\mathbf{b}$ 投影到 $A$ 的列空间。**最小二乘法**正是这一思想的直接应用。而要让投影算法**数值稳定**，我们需要**标准正交基**与 **Gram-Schmidt 正交化**，最终凝聚为矩阵形式的 **QR 分解**。本节将沿着**正交 → 投影 → 最小二乘 → 标准正交基 → Gram-Schmidt → QR** 这条主线，把正交性的几何直觉转化为可计算的代数工具。
@@ -1015,3 +1013,73 @@ print(f"主成分总能量: {projected_energy:.4f}")  # 应相等
 7. **正交性是 AI 的隐形骨架**：PCA、神经网络正则化、Transformer 注意力等核心算法都根植于正交性。
 
 下一节将进入**特征值与特征向量**：把**正交**从基的层面扩展到变换的层面，研究哪些方向在变换下**不变方向只伸缩**。最终，对称矩阵的**特征向量正交**将把本节的标准正交基与变换的特征结构统一起来，通向 **SVD（奇异值分解）**——线性代数的顶峰。
+
+## 练习题
+
+### 第 1 题 概念推导
+
+设 $A \in \mathbb{R}^{m \times n}$ 列满秩，投影矩阵 $P = A(A^T A)^{-1} A^T$。证明 $P$ 满足**对称性** $P^T = P$ 与**幂等性** $P^2 = P$，并从几何角度解释这两条性质对应投影的什么行为。
+
+::: details 参考答案
+**对称性**：$P^T = \big(A(A^T A)^{-1} A^T\big)^T = (A^T)^T \big((A^T A)^{-1}\big)^T A^T = A (A^T A)^{-1} A^T = P$。其中用到 $(XY)^T = Y^T X^T$、$(A^T A)^T = A^T A$（对称）、$(A^T A)^{-1}$ 仍对称。几何含义：$\mathbf{u}$ 在 $V$ 上的投影与 $\mathbf{v}$ 在 $V$ 上的投影的内积，等于 $\mathbf{v}$ 在 $V$ 上的投影与 $\mathbf{u}$ 在 $V$ 上的投影的内积，即投影算子自伴。
+
+**幂等性**：$P^2 = A(A^T A)^{-1} A^T \cdot A(A^T A)^{-1} A^T = A(A^T A)^{-1} (A^T A) (A^T A)^{-1} A^T = A(A^T A)^{-1} A^T = P$。中间步骤用到 $A^T A$ 与其逆相消。几何含义：把向量投影到 $V$ 一次后，结果已落在 $V$ 中；再投影一次，结果不变——**投影的投影仍是自身**。这两条性质合起来是投影矩阵的充要条件：对称且幂等的矩阵必定是到其列空间的正交投影。
+:::
+
+### 第 2 题 代码验证
+
+利用本节的 `<GramSchmidtDemo>` 交互组件，输入向量组 $\mathbf{a}_1 = (1, 1, 0)^T$，$\mathbf{a}_2 = (1, 0, 1)^T$，$\mathbf{a}_3 = (0, 1, 1)^T$。观察分步正交化过程，记录每一步得到的 $\mathbf{v}_k$ 与 $\mathbf{q}_k$，并验证最终 $\{\mathbf{q}_1, \mathbf{q}_2, \mathbf{q}_3\}$ 满足 $Q^T Q = I$。
+
+::: details 参考答案
+**第 1 步**：$\mathbf{v}_1 = \mathbf{a}_1 = (1, 1, 0)^T$，$\|\mathbf{v}_1\| = \sqrt{2}$，$\mathbf{q}_1 = \frac{1}{\sqrt{2}}(1, 1, 0)^T$。
+
+**第 2 步**：$\mathbf{v}_2 = \mathbf{a}_2 - (\mathbf{a}_2 \cdot \mathbf{q}_1)\mathbf{q}_1$。$\mathbf{a}_2 \cdot \mathbf{q}_1 = \frac{1}{\sqrt{2}}$，故 $\mathbf{v}_2 = (1, 0, 1)^T - \frac{1}{2}(1, 1, 0)^T = (\frac{1}{2}, -\frac{1}{2}, 1)^T$。$\|\mathbf{v}_2\| = \sqrt{\frac{1}{4} + \frac{1}{4} + 1} = \sqrt{\frac{3}{2}}$，$\mathbf{q}_2 = \frac{1}{\sqrt{6}}(1, -1, 2)^T$。
+
+**第 3 步**：$\mathbf{v}_3 = \mathbf{a}_3 - (\mathbf{a}_3 \cdot \mathbf{q}_1)\mathbf{q}_1 - (\mathbf{a}_3 \cdot \mathbf{q}_2)\mathbf{q}_2$。$\mathbf{a}_3 \cdot \mathbf{q}_1 = \frac{1}{\sqrt{2}}$，$\mathbf{a}_3 \cdot \mathbf{q}_2 = \frac{1}{\sqrt{6}}$。代入计算得 $\mathbf{v}_3 = (-\frac{2}{3}, \frac{2}{3}, \frac{2}{3})^T$，归一化得 $\mathbf{q}_3 = \frac{1}{\sqrt{3}}(-1, 1, 1)^T$。
+
+验证正交性：$\mathbf{q}_i \cdot \mathbf{q}_j = 0$（$i \neq j$），$\|\mathbf{q}_i\| = 1$，故 $Q^T Q = I$。整个过程体现了 Gram-Schmidt 的**逐列减去已有正交方向的投影**这一核心思想。
+:::
+
+### 第 3 题 概念推导
+
+设 $A = \begin{bmatrix} 1 & 1 \\ 0 & 1 \\ 1 & 0 \end{bmatrix}$，$\mathbf{b} = \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}$。用最小二乘法求 $\hat{\mathbf{x}} = (A^T A)^{-1} A^T \mathbf{b}$，并验证残差 $\mathbf{e} = \mathbf{b} - A\hat{\mathbf{x}}$ 与 $A$ 的列空间正交（即 $A^T \mathbf{e} = \mathbf{0}$）。
+
+::: details 参考答案
+计算 $A^T A = \begin{bmatrix} 1 & 0 & 1 \\ 1 & 1 & 0 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 0 & 1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}$，$\det(A^T A) = 3$，$(A^T A)^{-1} = \frac{1}{3}\begin{bmatrix} 2 & -1 \\ -1 & 2 \end{bmatrix}$。
+
+$A^T \mathbf{b} = \begin{bmatrix} 1 & 0 & 1 \\ 1 & 1 & 0 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} = \begin{bmatrix} 2 \\ 2 \end{bmatrix}$。
+
+$\hat{\mathbf{x}} = \frac{1}{3}\begin{bmatrix} 2 & -1 \\ -1 & 2 \end{bmatrix} \begin{bmatrix} 2 \\ 2 \end{bmatrix} = \frac{1}{3}\begin{bmatrix} 2 \\ 2 \end{bmatrix} = \begin{bmatrix} 2/3 \\ 2/3 \end{bmatrix}$。
+
+投影向量 $\mathbf{p} = A\hat{\mathbf{x}} = \begin{bmatrix} 1 & 1 \\ 0 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 2/3 \\ 2/3 \end{bmatrix} = \begin{bmatrix} 4/3 \\ 2/3 \\ 2/3 \end{bmatrix}$。
+
+残差 $\mathbf{e} = \mathbf{b} - \mathbf{p} = \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} - \begin{bmatrix} 4/3 \\ 2/3 \\ 2/3 \end{bmatrix} = \begin{bmatrix} -1/3 \\ 1/3 \\ 1/3 \end{bmatrix}$。
+
+验证正交性：$A^T \mathbf{e} = \begin{bmatrix} 1 & 0 & 1 \\ 1 & 1 & 0 \end{bmatrix} \begin{bmatrix} -1/3 \\ 1/3 \\ 1/3 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}$。残差确实与 $A$ 的列空间正交，落在左零空间 $N(A^T)$ 中，印证最小二乘解的几何性质。
+:::
+
+## 常见错误
+
+**错误 1 · 把正交矩阵与可逆矩阵混为一谈**
+
+原因：正交矩阵 $Q$ 满足 $Q^T Q = I$，必然可逆且 $Q^{-1} = Q^T$。初学时容易反向推断**可逆矩阵都正交**，或在使用时忽视 $Q^{-1} = Q^T$ 这一额外性质，对正交矩阵仍显式求逆。实际上一般可逆矩阵的逆不等于其转置，正交性是远强于可逆性的条件。
+
+解决：明确**正交矩阵 = 可逆 + 逆等于转置**这一双重条件。判定时检查 $Q^T Q = I$ 是否成立；使用时优先用 $Q^T$ 代替 $Q^{-1}$，既节省计算又保证数值稳定。
+
+**错误 2 · 投影矩阵误用为非对称或非幂等**
+
+原因：投影矩阵 $P = A(A^T A)^{-1} A^T$ 满足对称性与幂等性，是投影算子的充要条件。初学时容易把任意形如 $A A^T$ 或 $A(A^T A)^{-1}$ 的矩阵当作投影矩阵，忽视完整形式。$A A^T$ 一般不是投影矩阵（除非 $A$ 行正交），$A(A^T A)^{-1}$ 形状不符且不幂等。
+
+解决：牢记投影矩阵的完整形式 $P = A(A^T A)^{-1} A^T$，并验证对称性与幂等性两条性质。若某矩阵 $M$ 不满足 $M^T = M$ 或 $M^2 = M$，则不是正交投影矩阵，不能套用投影的几何结论。
+
+**错误 3 · Gram-Schmidt 正交化时减去投影的顺序错误**
+
+原因：第 $k$ 步正交化应减去 $\mathbf{a}_k$ 在**所有已正交化方向** $\mathbf{q}_1, \ldots, \mathbf{q}_{k-1}$ 上的投影之和。初学时容易只减去最后一个方向，或减去原始向量 $\mathbf{a}_i$ 而非正交化后的 $\mathbf{q}_i$，导致结果不正交。
+
+解决：严格按公式 $\mathbf{v}_k = \mathbf{a}_k - \sum_{i=1}^{k-1} (\mathbf{a}_k \cdot \mathbf{q}_i) \mathbf{q}_i$ 执行，每一步都减去在**所有已有 $\mathbf{q}_i$** 上的投影，且使用的是已正交归一化的 $\mathbf{q}_i$ 而非原始 $\mathbf{a}_i$。计算后验证 $\mathbf{v}_k$ 与所有 $\mathbf{q}_i$（$i < k$）的点积为零。
+
+**错误 4 · 最小二乘法方程忽视条件数平方放大**
+
+原因：法方程 $A^T A \hat{\mathbf{x}} = A^T \mathbf{b}$ 中 $A^T A$ 的条件数 $\kappa(A^T A) = \kappa(A)^2$。当 $A$ 本身条件数较大（如 $10^4$）时，$A^T A$ 的条件数高达 $10^8$，数值误差被严重放大，解的精度急剧下降。直接调用 `np.linalg.solve(A.T @ A, A.T @ b)` 在病态情形下可能给出错误结果。
+
+解决：工程实现最小二乘时优先使用 QR 分解（解 $R\hat{\mathbf{x}} = Q^T \mathbf{b}$，条件数保持 $\kappa(A)$）或 SVD，避免显式构造 $A^T A$。NumPy 的 `np.linalg.lstsq` 内部默认使用 SVD 或 QR，比手动实现法方程稳定得多。仅在 $A$ 条件数较小且教学演示时使用法方程。

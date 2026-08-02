@@ -5,8 +5,6 @@ sidebar:
 ---
 # 2.10 输入输出与基本交互
 
-<span class="chapter-tag">Python核心语法基础</span>
-
 程序的价值在于与外部世界交互。输入从用户或文件流入程序，输出从程序流向屏幕或文件。Python 提供了简洁的 `print()` 和 `input()` 两个函数完成基本的控制台交互，足以支撑大多数数据处理脚本的原型开发。本节从这两个函数出发，覆盖多对象输出、格式化、字符串读取、类型转换、自定义对象打印、文件输出等场景，最后用一个完整的用户信息录入程序把所有知识点串起来。
 
 ## 2.10.1 print() 输出多个对象
@@ -407,3 +405,147 @@ if __name__ == "__main__":
 这个示例综合运用了 `input()` 读取、`int()` 和 `float()` 类型转换、`try/except` 异常处理、f-string 格式化输出、`print()` 的 `sep` 和 `file` 参数、文件追加写入等内容。它是一个完整的小型数据处理脚本骨架，后续学习函数、列表、字典、异常等章节后，可以在此基础上扩展更复杂的功能，比如批量录入、数据查询、统计汇总。
 
 把这几个知识点想清楚，你就掌握了 Python 与人交互、与文件交互的基本能力。后续章节会展开更高级的话题，底层的输入输出逻辑始终是这一节奠定的。
+
+## 练习题
+
+### 第1题 概念理解
+
+阅读下面的代码，写出输出结果，并解释 `input()` 返回值的类型以及为什么需要类型转换。
+
+```python
+line = "U001,张三,45"
+parts = line.split(",")
+name = parts[1]
+age = parts[2]
+print(type(name))
+print(type(age))
+print(name + str(age))
+```
+
+::: details 参考答案
+```python
+print(type(name))   # <class 'str'>
+print(type(age))    # <class 'str'>
+print(name + str(age))  # 张三45
+```
+
+`split()` 把字符串切分后得到的是字符串列表，每个元素都是字符串类型，即使 `parts[2]` 的内容是 `"45"`，它的类型仍是 `str` 而非 `int`。这与 `input()` 的行为一致，`input()` 总是返回字符串。要做数值运算必须先 `int()` 或 `float()` 转换。`name + str(age)` 中 `age` 本身已经是字符串，`str()` 是多余的但不会出错，结果是把两个字符串拼接。
+:::
+
+### 第2题 代码编写
+编写代码用 `print()` 的 `sep` 参数输出一行 CSV 格式的数据，包含用户 ID、姓名、年龄、角色四个字段。再用 `end` 参数实现一个简单的下载进度条，从 0% 到 100% 每次增加 20%。
+
+::: details 参考答案
+```python
+# 用 sep 输出 CSV 行
+print("U001", "张三", "45", "admin", sep=",")
+# 输出：U001,张三,45,admin
+
+# 用 end 实现进度条
+import time
+for i in range(6):
+    percent = i * 20
+    bar = "#" * i + "." * (5 - i)
+    print(f"\r下载进度 [{bar}] {percent}%", end="")
+    time.sleep(0.3)
+print(" 完成")
+```
+
+`sep=","` 让 `print()` 用逗号分隔多个参数，适合生成 CSV 格式文本。`\r` 是回车符让光标回到行首，配合 `end=""` 不换行，下次 `print()` 覆盖当前行内容，实现原地刷新的进度条效果。处理大批量数据时这种技巧能让用户感知程序仍在运行。
+:::
+
+### 第3题 进阶
+编写一个程序，用 `input()` 读取用户的姓名和年龄，用 `try/except` 处理年龄输入非数字的情况，用 f-string 格式化输出，最后把记录追加写入文件 `users.txt`。要求文件使用 UTF-8 编码。
+
+::: details 参考答案
+```python
+name = input("请输入姓名：").strip()
+age_str = input("请输入年龄：").strip()
+
+try:
+    age = int(age_str)
+except ValueError:
+    print("年龄必须是数字")
+    age = 0
+
+# 格式化输出
+print(f"姓名: {name}, 年龄: {age} 岁, 出生年份: {2026 - age}")
+
+# 追加写入文件
+with open("users.txt", "a", encoding="utf-8") as f:
+    print(f"{name},{age},{2026 - age}", file=f)
+print("已保存到 users.txt")
+```
+
+`input()` 返回字符串，用 `strip()` 去除前后空白。`int()` 转换可能失败，用 `try/except ValueError` 捕获异常，失败时给年龄赋默认值 0。`with open(...) as f:` 是文件操作的标准写法，代码块结束自动关闭文件。`encoding="utf-8"` 显式指定编码，避免 Windows 下默认用 GBK 导致中文乱码。`print(..., file=f)` 把内容写入文件而非屏幕。
+:::
+
+### 第4题 项目实践
+在一个任务管理程序中，需要把多条任务记录保存到 CSV 文件。编写代码，用 `print()` 的 `file` 参数把以下三条任务写入 `tasks.csv`，第一行是表头，后续每行是一条记录。再用 `sep` 参数确保字段用逗号分隔。
+
+::: details 参考答案
+```python
+tasks = [
+    ("T001", "设计登录页面", "3", "处理中"),
+    ("T002", "修复支付Bug", "5", "已完成"),
+    ("T003", "编写文档", "2", "待处理"),
+]
+
+with open("tasks.csv", "w", encoding="utf-8") as f:
+    # 写入表头
+    print("task_id", "title", "priority", "status", sep=",", file=f)
+    # 写入数据行
+    for task in tasks:
+        print(*task, sep=",", file=f)
+
+print("已保存 3 条任务到 tasks.csv")
+```
+
+`print("task_id", "title", "priority", "status", sep=",", file=f)` 用 `sep=","` 让多个参数以逗号分隔写入文件。`print(*task, sep=",", file=f)` 用星号展开元组，把元组中的每个元素作为独立参数传给 `print()`，再以逗号分隔写入。这种写法比手动拼接字符串更简洁，也避免了逗号数量错误。文件用 `"w"` 模式打开会覆盖原内容，追加数据时改用 `"a"` 模式。
+:::
+
+## 常见错误
+
+**错误 1 · `input()` 返回字符串，直接做数值运算报错**
+
+```python
+age = input("请输入年龄：")  # 用户输入 45
+print(age + 1)  # TypeError: can only concatenate str (not "int") to str
+```
+
+原因:`input()` 总是返回字符串，无论用户输入的是数字还是文本。用户输入 `45`，程序得到的是字符串 `"45"`，不是整数 45。直接参与算术运算会抛 `TypeError`。
+
+解决:数值输入后显式转换类型，整数用 `int(input(...))`，浮点用 `float(input(...))`。转换前用 `try/except ValueError` 包裹，处理非数字输入。批量读入多个数值时先 `split()` 切分再逐个 `int()` 或 `float()` 转换。
+
+**错误 2 · `ValueError: invalid literal for int() with base 10: 'abc'`**
+
+```python
+age = int(input("请输入年龄："))  # 用户输入 abc
+# ValueError
+```
+
+原因:用户输入了非数字字符，`int()` 无法解析。处理用户输入或外部数据时，输入内容不可控，直接转换容易导致程序崩溃。空字符串、含字母、含小数点的字符串都会触发。
+
+解决:用 `try/except ValueError` 捕获转换异常，提示用户重新输入或使用默认值。更严格的做法是先 `str.isdigit()` 判断（注意空字符串需单独排除）。生产环境应对用户输入做完整校验后再转换。
+
+**错误 3 · `FileNotFoundError: [Errno 2] No such file or directory: 'data.csv'`**
+
+```python
+with open("data.csv", "r") as f:  # FileNotFoundError
+    content = f.read()
+```
+
+原因:用 `"r"` 模式打开不存在的文件会抛 `FileNotFoundError`。常见于路径写错、文件未创建、工作目录不正确。Windows 下反斜杠路径 `"C:\Users\data"` 中的 `\U`、`\d` 可能被当作转义字符。
+
+解决:读取前用 `os.path.exists(path)` 检查文件是否存在。Windows 路径用原始字符串 `r"C:\Users\data"` 或正斜杠 `"C:/Users/data"`。不确定文件是否存在时用 `try/except FileNotFoundError` 捕获，或用 `"a"` 模式（文件不存在会自动创建）。
+
+**错误 4 · `UnicodeDecodeError: 'gbk' codec can't decode byte ...`**
+
+```python
+with open("data.txt", "r") as f:  # Windows 下默认 GBK 编码
+    content = f.read()  # UnicodeDecodeError
+```
+
+原因:Windows 默认系统编码是 GBK，Python 3 在 Windows 下 `open()` 不指定 `encoding` 时用系统编码。读取 UTF-8 编码的中文文件时，GBK 解码失败抛 `UnicodeDecodeError`。Excel 打开 UTF-8 编码的 CSV 也可能显示乱码。
+
+解决:`open()` 始终显式指定 `encoding="utf-8"`，处理中文时这一参数几乎必加。需要让 Excel 正确识别的 CSV 文件用 `encoding="utf-8-sig"`，它会在文件开头写入 BOM 标记。写入文件时也用相同编码，避免读写编码不一致。

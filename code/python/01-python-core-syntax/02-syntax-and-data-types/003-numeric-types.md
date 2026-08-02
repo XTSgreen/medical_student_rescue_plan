@@ -5,7 +5,6 @@ sidebar:
 ---
 # 2.3 数字类型
 
-<span class="chapter-tag">Python核心语法基础</span>
 
 数字是编程中最基础的数据形式。在实际开发中，年龄、价格、温度、分数、像素值、统计数据等都需要用数字表示。Python 提供了四种内置数字类型，分别是整数（int）、浮点数（float）、复数（complex）和布尔类型（bool）。本节将依次介绍每种类型的字面量写法、取值范围、内部表示，以及类型转换、格式化输出和常用数值函数。掌握这些内容后，你就能在代码中准确表达各种数值，并避免因类型不当引发的精度误差或逻辑错误。
 
@@ -478,3 +477,154 @@ print(round(2.675, 2))  # 2.67，不是 2.68
 值得注意的是，由于浮点数本身的精度问题，`round(2.675, 2)` 得到 `2.67` 而非 `2.68`。这是因为 `2.675` 在二进制浮点数中实际存储为略小于 2.675 的值，舍入时被当作 2.6749... 处理。对精度敏感的场景务必使用 `decimal` 模块。
 
 至此，本节覆盖了 Python 四种数字类型的核心知识。整数无上限的特性让大数运算不再困扰，浮点数的精度问题提醒我们在比较和计算时要格外小心，复数为科学计算提供了完整支持，布尔类型作为整数的子类简化了计数逻辑。下一节将介绍 Python 中使用频率最高的字符串类型。
+
+## 练习题
+
+### 第1题 概念理解
+
+阅读下面的代码，先写出你预期的输出结果，再运行验证。解释 `round()` 函数为什么对 `2.5` 和 `3.5` 给出了看似不一致的结果。
+
+```python
+print(0.1 + 0.2)
+print(0.1 + 0.2 == 0.3)
+print(round(2.5))
+print(round(3.5))
+print(round(2.675, 2))
+```
+
+::: details 参考答案
+```python
+print(0.1 + 0.2)          # 0.30000000000000004
+print(0.1 + 0.2 == 0.3)   # False
+print(round(2.5))          # 2
+print(round(3.5))          # 4
+print(round(2.675, 2))     # 2.67
+```
+
+`0.1` 和 `0.2` 在二进制浮点数中都无法精确表示，相加后得到一个略大于 `0.3` 的值，所以直接用 `==` 比较会返回 `False`。比较浮点数应该检查差的绝对值是否小于一个很小的容差。
+
+`round()` 采用**银行家舍入**规则，当待舍入部分恰好等于 5 时，舍入到最近的偶数。`2.5` 舍入到 `2`，`3.5` 舍入到 `4`，两者都是偶数。`round(2.675, 2)` 得到 `2.67` 是因为 `2.675` 在浮点数中实际存储为略小于 2.675 的值，被当作 2.6749... 处理。
+:::
+
+### 第2题 代码编写
+编写一段代码，定义一组统计数据，包含用户总数 `12567`、转化率 `0.9234`、人均费用 `15800.5`、p 值 `0.00034`。用 f-string 格式化输出一份报告，要求用户总数加千位分隔符，转化率显示为百分比保留一位小数，人均费用保留两位小数并加千位分隔符，p 值用科学计数法保留三位小数。
+
+::: details 参考答案
+```python
+user_count = 12567
+conversion_rate = 0.9234
+avg_cost = 15800.5
+p_value = 0.00034
+
+report = f"""
+统计报告
+用户总数: {user_count:,} 人
+转化率: {conversion_rate:.1%}
+人均费用: {avg_cost:,.2f} 元
+p 值: {p_value:.3e}
+"""
+print(report)
+```
+
+`:,` 添加千位分隔符，`.1%` 把小数转成百分比并保留一位小数，`:,.2f` 同时使用千位分隔符和两位小数，`.3e` 用科学计数法保留三位小数。这些格式说明符可以组合使用，写在冒号后的格式说明符中。
+:::
+
+### 第3题 进阶
+布尔类型是整数类型的子类，`True` 等于 `1`，`False` 等于 `0`。利用这一特性，编写代码统计一组任务状态中已完成任务的数量，再用 `divmod()` 计算已完成任务按每页 10 条分页后的页数和余数。
+
+::: details 参考答案
+```python
+tasks_done = [True, False, True, True, False, True, False, True, True, False, True, True, False]
+
+# 利用 bool 是 int 子类，sum 直接累加 True 的个数
+done_count = sum(tasks_done)
+print(f"已完成任务数: {done_count}")  # 8
+
+# divmod 同时得到商和余数
+pages, remainder = divmod(done_count, 10)
+print(f"页数: {pages}, 余数: {remainder}")  # 页数: 0, 余数: 8
+
+# 更大的数据量
+big_tasks = [True] * 137 + [False] * 63
+big_done = sum(big_tasks)
+pages, remainder = divmod(big_done, 10)
+print(f"已完成: {big_done}, 页数: {pages}, 余数: {remainder}")
+# 已完成: 137, 页数: 13, 余数: 7
+```
+
+`sum()` 遍历列表时把 `True` 当作 `1`、`False` 当作 `0` 累加，直接得到已完成数量。`divmod(a, b)` 返回元组 `(a // b, a % b)`，一步得到商和余数，比分两次调用更简洁。
+:::
+
+### 第4题 项目实践
+在一个任务管理程序中，任务的优先级用整数 1 到 5 表示，5 为最高。假设有如下任务列表 `tasks = [3, 1, 5, 2, 4, 5, 1, 3]`，编写代码统计各优先级的任务数量，找出最高优先级和最低优先级，计算平均优先级并保留一位小数。
+
+::: details 参考答案
+```python
+tasks = [3, 1, 5, 2, 4, 5, 1, 3]
+
+# 统计各优先级数量
+priority_counts = {}
+for p in tasks:
+    priority_counts[p] = priority_counts.get(p, 0) + 1
+print("各优先级数量:", priority_counts)
+# 各优先级数量: {3: 2, 1: 2, 5: 2, 2: 1, 4: 1}
+
+# 最高和最低优先级
+print(f"最高优先级: {max(tasks)}")  # 5
+print(f"最低优先级: {min(tasks)}")  # 1
+
+# 平均优先级
+avg_priority = sum(tasks) / len(tasks)
+print(f"平均优先级: {avg_priority:.1f}")  # 3.0
+```
+
+这个练习综合运用了 `max()`、`min()`、`sum()`、`len()` 等内置数值函数，以及字典的 `get()` 方法做分组统计。`max()` 和 `min()` 既能接受多个参数，也能接受可迭代对象。平均值的计算用 `sum() / len()`，配合 f-string 的 `.1f` 保留一位小数。
+:::
+
+## 常见错误
+
+**错误 1 · `ValueError: invalid literal for int() with base 10: '3.14'`**
+
+```python
+print(int("3.14"))   # ValueError
+print(int("0x1A"))   # ValueError，默认只接受十进制
+```
+
+原因:`int()` 解析字符串时要求内容是合法的整数字面量，含小数点、前缀（如 `0x`）、字母的字符串都会失败。`int()` 对浮点数是向零截断，但解析字符串时不会先做浮点转换。
+
+解决:含小数的字符串先 `float()` 再 `int()`，例如 `int(float("3.14"))` 得到 `3`。十六进制字符串传第二个参数 `int("0x1A", 16)` 或 `int("1A", 16)`。处理来源不可控的输入时用 `try/except ValueError` 包裹。
+
+**错误 2 · `ZeroDivisionError: division by zero`**
+
+```python
+print(1 / 0)     # ZeroDivisionError
+print(1 // 0)    # ZeroDivisionError
+print(1 % 0)     # ZeroDivisionError
+```
+
+原因:除数、取模的右操作数为 0 时触发。常见于统计数据中某分母为 0，例如计算平均值时 `sum(scores) / len(scores)`，而 `scores` 是空列表。
+
+解决:除法前检查除数是否为 0，或用 `try/except ZeroDivisionError` 捕获。计算平均值时先判断 `if scores:` 再除。注意 `1.0 / 0.0` 同样抛异常，不会产生无穷大；要得到 `inf` 需用 `float("inf")` 或 `math.inf`。
+
+**错误 3 · `round(2.5)` 得到 `2`（期望 `3`）**
+
+```python
+print(round(2.5))   # 2
+print(round(3.5))   # 4
+print(round(2.675, 2))  # 2.67，不是 2.68
+```
+
+原因:Python 3 的 `round()` 采用银行家舍入（四舍六入五成双），当待舍入部分恰好等于 5 时舍入到最近的偶数。`2.5` 舍入到 `2`，`3.5` 舍入到 `4`。`round(2.675, 2)` 得到 `2.67` 是因为 `2.675` 在浮点数中实际存储为略小于 2.675 的值。
+
+解决:需要传统四舍五入（.5 总是向上）时用 `decimal.Decimal` 配合 `ROUND_HALF_UP` 模式。涉及金额、统计等精度敏感场景一律用 `decimal` 模块，避免浮点精度叠加舍入规则带来的偏差。
+
+**错误 4 · `TypeError: unsupported operand type(s) for ** or pow(): 'complex' and 'float'`**
+
+```python
+print((-1) ** 0.5)  # 返回复数 (6.123e-17+1j)
+print(pow(-1, 0.5)) # 同上
+```
+
+原因:对负数取非整数次幂，结果在实数域无定义，Python 自动返回复数类型。这不会报错，但返回的 `complex` 类型参与后续运算可能导致意外结果，例如作为 `math.sqrt` 的参数会抛 `TypeError`。
+
+解决:需要实数结果时先判断被开方数是否为负，或直接用 `cmath` 模块处理复数。涉及混合数值类型的运算要留意结果类型可能从 `int`/`float` 变成 `complex`，影响后续逻辑分支。

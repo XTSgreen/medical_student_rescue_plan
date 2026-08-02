@@ -5,8 +5,6 @@ sidebar:
 ---
 # 1.7 开发工具与辅助功能入门
 
-<span class="chapter-tag">Python核心语法基础</span>
-
 写代码只是工作的一部分，让代码正确运行、便于调试、可复现环境，才是完整的开发流程。Python 生态提供了丰富的辅助工具，从自动格式化到代码检查，从交互调试到环境管理，每一类工具都解决一个具体的工程痛点。本章将这些工具按用途分组介绍，重点是掌握每个工具的核心命令和适用场景。初学者常常因为环境问题而卡住，理解这些工具能帮你跳出困境。
 
 ## 1.7.1 代码格式化工具
@@ -401,3 +399,132 @@ print(dir([]))
 ```
 
 `dir()` 与 `help()` 配合使用是探索式编程的利器。先用 `dir()` 看到对象有哪些方法，再用 `help()` 查具体方法的用法，可以脱离网络文档独立学习。这种自给自足的查询能力，是 Python 学习中需要尽早建立的习惯。
+
+## 练习题
+
+### 第1题 概念理解
+
+解释 `pip freeze > requirements.txt` 和 `pip install -r requirements.txt` 这两条命令各自的作用，以及它们如何配合实现环境复现。再说明 `pip freeze` 的一个主要缺点。
+
+::: details 参考答案
+`pip freeze > requirements.txt` 把当前环境所有已安装的包及其精确版本写入 `requirements.txt` 文件。`pip install -r requirements.txt` 读取该文件，按清单安装指定版本的包。两者配合实现环境复现：在一台机器上导出依赖清单，到另一台机器上按清单安装，得到相同版本的依赖。
+
+`pip freeze` 的主要缺点是会把当前环境的所有包都写进去，包括与项目无关的包。如果虚拟环境里装了很多临时试验用的库，它们也会被记录到 `requirements.txt` 中，导致清单臃肿。更精细的做法是用 `pip-tools` 或手动维护只列出直接依赖的精简清单。
+:::
+
+### 第2题 代码编写
+
+使用 `time` 模块编写一段代码，对比用 `for` 循环累加和用 `sum()` 函数累加 1 到 1000000 的耗时差异。用 `time.perf_counter()` 计时，结果保留 6 位小数。
+
+::: details 参考答案
+```python
+import time
+
+# 用 for 循环累加
+start1 = time.perf_counter()
+total1 = 0
+for i in range(1, 1000001):
+    total1 += i
+end1 = time.perf_counter()
+print(f"for 循环结果：{total1}，耗时 {end1 - start1:.6f} 秒")
+
+# 用 sum 函数累加
+start2 = time.perf_counter()
+total2 = sum(range(1, 1000001))
+end2 = time.perf_counter()
+print(f"sum 函数结果：{total2}，耗时 {end2 - start2:.6f} 秒")
+```
+
+`time.perf_counter()` 返回高精度时间戳，两次调用的差值就是中间代码的耗时，比 `time.time()` 精度更高，不受系统时间调整影响。通常 `sum()` 配合 `range()` 比 `for` 循环快，因为 `sum()` 是内置函数，底层用 C 实现，省去了循环解释执行的开销。
+:::
+
+### 第3题 进阶练习
+
+下面这段代码的输出不符合预期，请说明如何用 `breakpoint()` 进入 pdb 调试器定位问题，并列出调试时常用的 pdb 命令。
+
+```python
+def calculate_average(values):
+    total = sum(values)
+    average = total / len(values)
+    return average
+
+data = [10, 20, 30]
+result = calculate_average(data)
+print(f"平均值：{result}")
+```
+
+假设运行时发现 `result` 是错误的值，想检查 `total` 和 `average` 的中间结果。
+
+::: details 参考答案
+在怀疑有问题的位置插入 `breakpoint()`，程序运行到这一行会暂停并进入 pdb：
+
+```python
+def calculate_average(values):
+    total = sum(values)
+    breakpoint()  # 程序在此暂停
+    average = total / len(values)
+    return average
+```
+
+进入 pdb 后常用的命令有：`n` 执行下一行，不进入函数内部。`s` 执行下一行，遇到函数调用会进入函数内部。`c` 继续执行到下一个断点。`p 变量名` 打印变量的值，例如 `p total` 查看 total 的值。`l` 查看当前代码周围的几行。`q` 退出调试器。
+
+调试时先 `p total` 检查总和是否正确，再 `n` 执行到下一行，`p average` 检查平均值计算。通过逐行执行和查看变量，能精确定位逻辑错误出在哪一步。
+:::
+
+### 第4题 项目实践
+
+命令行任务管理器项目完成后，需要让别人也能运行。请思考这个项目应该如何管理依赖：用 pip 还是 conda，requirements.txt 应包含什么，新用户拿到代码后的安装步骤是什么。
+
+::: details 参考答案
+对于命令行任务管理器这类纯 Python 项目，用 pip 加 venv 管理依赖即可，无需引入 conda 增加复杂度。在项目根目录维护一个 `requirements.txt`，列出直接依赖及版本号。
+
+新用户的安装步骤：
+```bash
+# 1. 克隆或下载项目代码
+# 2. 进入项目目录
+cd task_manager
+
+# 3. 创建虚拟环境
+python -m venv .venv
+
+# 4. 激活虚拟环境
+# Windows
+.venv\Scripts\activate
+# macOS/Linux
+source .venv/bin/activate
+
+# 5. 安装依赖
+pip install -r requirements.txt
+
+# 6. 运行程序
+python main.py
+```
+
+锁定版本号（如 `requests==2.31.0`）能避免因依赖更新导致的兼容性问题。项目开发完成后，用 `pip freeze > requirements.txt` 导出精确版本，确保其他用户复现的环境与自己一致。
+:::
+
+## 常见错误
+
+**错误 1 · `conda 与 pip 混用顺序错误导致环境损坏`**
+
+原因:在 conda 环境中先用 pip 安装包，再用 conda 安装包，conda 可能会卸载或覆盖 pip 装的包，导致依赖关系混乱，环境不可用。
+
+解决:遵循"先 conda 再 pip"的原则，conda 安装底层依赖和非 Python 包，再用 pip 安装 PyPI 上的 Python 包。若环境已经混乱，最稳妥的做法是 `conda env remove -n 环境名` 删除重建，而非逐个卸载。
+
+**错误 2 · `breakpoint() 进入调试器后无反应或报错`**
+
+原因:Python 版本低于 3.7 不支持内置 `breakpoint()` 函数，或环境变量 `PYTHONBREAKPOINT` 被设置为空字符串导致调试器不启动。
+
+解决:确认 Python 版本为 3.7 及以上，命令行执行 `python --version` 查看。旧版本用 `import pdb; pdb.set_trace()` 替代。检查 `PYTHONBREAKPOINT` 环境变量是否被设置，用 `echo $PYTHONBREAKPOINT`（macOS/Linux）或 `echo %PYTHONBREAKPOINT%`（Windows）查看，设为空字符串会禁用调试器。
+
+**错误 3 · `jupyter 命令找不到或 notebook 启动失败`**
+
+原因:Jupyter Notebook 未安装，或安装在了未激活的虚拟环境中，当前命令行找不到 `jupyter` 命令。
+
+解决:先激活目标虚拟环境，再执行 `pip install notebook` 或 `pip install jupyterlab` 安装。安装后用 `pip show notebook` 确认安装位置，确保它与当前 `python` 命令对应同一环境。如果仍找不到命令，用 `python -m notebook` 启动替代 `jupyter notebook`。
+
+**错误 4 · `flake8 或 black 安装后命令找不到`**
+
+原因:工具安装在虚拟环境中，但当前命令行未激活该环境，或 Scripts 目录（Windows）/ bin 目录（macOS/Linux）不在 PATH 中。
+
+解决:先激活虚拟环境再执行命令。也可以用 `python -m black 文件名`、`python -m flake8 文件名` 的方式调用，显式指定使用当前 Python 对应的工具，避免 PATH 顺序问题。全局安装工具时用 `pip install --user black flake8`，安装到用户目录便于多项目共用。

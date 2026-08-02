@@ -750,3 +750,97 @@ PCA、t-SNE、UMAP 三者各有定位：PCA 用于线性降维和特征工程，
 掌握这套流程的关键在于理解每一步背后的统计原理。预处理为什么要训练-应用分离、交叉验证为什么不能在测试集上调参、随机森林为什么对量纲不敏感、t-SNE 为什么不能用作特征工程，这些问题的答案决定了你能否在数据出问题时知道从哪里排查。本节给出了主干框架，具体算法的细节、医学场景的实战案例、深度学习的扩展等内容，建议在做实际项目时按需查阅专题文档。
 
 医学研究中机器学习的最终价值不在于模型本身，而在于能否回答科学问题。一个 AUC 0.85 的诊断模型如果用错了人群、漏掉了关键协变量、或评估流程存在信息泄漏，结论依然不可信。把工程纪律做扎实，把每个步骤的假设和限制想清楚，机器学习才能从漂亮的演示变成可靠的研究工具。
+
+## 练习题
+
+### 第1题 训练集与测试集划分
+
+用 `iris` 数据集,按 7:3 比例划分训练集与测试集,要求分层抽样保持各类别比例。写出用 `caret` 与 `rsample` 两种包的实现代码。
+
+::: details 参考答案
+
+```r
+library(caret)
+set.seed(42)
+train_idx <- createDataPartition(iris$Species, p = 0.7, list = FALSE)
+train_set <- iris[train_idx, ]
+test_set  <- iris[-train_idx, ]
+
+# rsample 写法
+library(rsample)
+set.seed(42)
+split <- initial_split(iris, prop = 0.7, strata = Species)
+train_set <- training(split)
+test_set  <- testing(split)
+```
+
+`createDataPartition()` 默认做分层抽样,保持原始数据中各类别比例。`rsample::initial_split()` 的 `strata` 参数指定分层变量。随机切分时小类样本可能全部进入某一侧,分层抽样能避免这种风险。
+:::
+
+### 第2题 随机森林训练与评估
+
+用 `caret` 训练随机森林模型预测 `iris` 的 `Species`,使用 10 折交叉验证,并在测试集上计算准确率与混淆矩阵。
+
+::: details 参考答案
+
+```r
+library(caret)
+set.seed(42)
+
+ctrl <- trainControl(method = "cv", number = 10)
+rf_fit <- train(Species ~ ., data = train_set, method = "rf",
+                trControl = ctrl, tuneLength = 3)
+
+# 测试集预测
+pred <- predict(rf_fit, newdata = test_set)
+confusionMatrix(pred, test_set$Species)
+```
+
+`trainControl(method = "cv", number = 10)` 设置 10 折交叉验证。`method = "rf"` 指定随机森林,`tuneLength = 3` 让 caret 自动尝试 3 个 `mtry` 值。`confusionMatrix()` 输出准确率、敏感度、特异度等指标,并给出按类别拆分的统计量。
+:::
+
+### 第3题 PCA 降维与可视化
+
+对 `iris` 的四个数值列做 PCA,绘制前两个主成分的散点图,按 `Species` 着色,并解释前两个主成分解释的方差比例。
+
+::: details 参考答案
+
+```r
+iris_scaled <- scale(iris[, 1:4])
+pca_fit <- prcomp(iris_scaled, center = TRUE, scale. = TRUE)
+summary(pca_fit)
+
+# 散点图
+plot(pca_fit$x[, 1], pca_fit$x[, 2], col = iris$Species, pch = 19,
+     xlab = "PC1", ylab = "PC2")
+legend("topright", legend = levels(iris$Species), col = 1:3, pch = 19)
+```
+
+`prcomp()` 执行 PCA,`summary()` 输出每个主成分的解释方差比例。前两个主成分通常能解释 iris 数据 95% 以上的变异。PCA 对量纲敏感,必须先做标准化(`scale. = TRUE`),否则方差大的变量会主导主成分方向。散点图中 setosa 通常与其他两类清晰分离,versicolor 与 virginica 有一定重叠。
+:::
+
+## 常见错误
+
+**错误 1 · 未设随机种子导致结果不可复现**
+
+原因:随机森林、K-means、交叉验证划分等都涉及随机过程,不设 `set.seed()` 每次运行结果不同,无法复现也无法调试。
+
+解决:在数据划分、模型训练、随机搜索等关键步骤前调用 `set.seed(42)`。团队协作时把种子写入项目配置,确保所有人得到一致结果。注意种子只在当前 R 会话有效,重启后需重新设置。
+
+**错误 2 · 预处理在全量数据上拟合导致数据泄露**
+
+原因:标准化、缺失值填充等预处理在全量数据(含测试集)上估计参数,再用到训练集与测试集。测试集的分布信息泄漏到训练过程,交叉验证误差过于乐观。
+
+解决:预处理参数只能在训练折上估计。用 `caret` 的 `preProcess` 参数或 `tidymodels` 的 `recipe` 机制,它们会自动在交叉验证循环内部执行预处理,避免泄露。手动实现时,把训练集的均值与标准差保存下来,再应用到测试集。
+
+**错误 3 · 用 t-SNE 或 UMAP 输出做聚类**
+
+原因:t-SNE 与 UMAP 是非线性降维方法,输出坐标的距离关系已被扭曲,簇的大小与间距不反映真实相似度。在这些坐标上做 K-means 或层次聚类会得到误导性结果。
+
+解决:t-SNE 与 UMAP 仅用于可视化探索。聚类应在 PCA 降维后的数据上进行,因为 PCA 保留线性距离关系。单细胞数据分析的标准流程是 PCA 降到 30-50 维,再在该空间上聚类,最后用 UMAP 可视化聚类结果。
+
+**错误 4 · 在测试集上反复调参**
+
+原因:用测试集评估不同超参数组合,根据测试集表现选择最优参数,相当于把测试集当作验证集。测试集信息泄漏到模型选择过程,最终性能估计被严重乐观化。
+
+解决:严格区分验证集与测试集。超参数调优只在训练集的交叉验证折上进行,测试集只在最后一次评估时使用。`tidymodels` 的 `last_fit()` 把这一流程固化,确保测试集不被反复触碰。

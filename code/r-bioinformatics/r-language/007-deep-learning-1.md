@@ -908,3 +908,109 @@ cell_embedding <- encoder %>% predict(expr)
 ## 本节小结
 
 本节从神经元的数学定义出发，依次介绍了张量、层、激活函数、损失函数、优化器与评估指标等核心组件，然后用 Keras 演示了顺序模型与函数式 API 的搭建流程，并通过 Dropout、BatchNormalization、早停、迁移学习等技巧应对过拟合问题。卷积神经网络部分聚焦于医学影像的迁移学习与微调，循环神经网络部分覆盖了 LSTM、GRU、双向结构与时间序列预测，自编码器部分则延伸到去噪、变分自编码器与单细胞降噪应用。下一节将进入深度学习（下），讨论注意力机制、Transformer 以及更面向生物医学的实战项目。
+
+## 练习题
+
+### 第1题 顺序模型搭建
+
+用 keras 构建一个用于二分类的全连接网络:输入 20 维特征,两层隐层分别为 64 与 32 个神经元,ReLU 激活,每层后接 30% Dropout,输出层为单神经元 Sigmoid。写出 `compile` 与 `fit` 的完整代码。
+
+::: details 参考答案
+
+```r
+library(keras)
+
+model <- keras_model_sequential() %>%
+  layer_dense(units = 64, activation = "relu", input_shape = c(20)) %>%
+  layer_dropout(rate = 0.3) %>%
+  layer_dense(units = 32, activation = "relu") %>%
+  layer_dropout(rate = 0.3) %>%
+  layer_dense(units = 1, activation = "sigmoid")
+
+model %>% compile(
+  optimizer = optimizer_adam(lr = 1e-3),
+  loss = "binary_crossentropy",
+  metrics = c("accuracy", metric_auc())
+)
+
+history <- model %>% fit(
+  x_train, y_train,
+  epochs = 50, batch_size = 32,
+  validation_split = 0.2,
+  callbacks = callback_early_stopping(patience = 5, restore_best_weights = TRUE)
+)
+```
+
+`input_shape = c(20)` 指定输入维度,不需要写 batch 维度。`binary_crossentropy` 是二分类的标准损失。`metric_auc()` 在不平衡数据上比 accuracy 更有参考价值。`callback_early_stopping` 防止过拟合,`restore_best_weights = TRUE` 确保返回最佳权重而非最后一轮权重。
+:::
+
+### 第2题 迁移学习概念
+
+说明迁移学习中冻结预训练模型权重与微调的区别,以及微调时学习率应如何设置。
+
+::: details 参考答案
+
+冻结权重时,预训练模型的卷积基作为固定特征提取器,只训练顶部新加的分类层。这种方式适用于小数据集,训练快,不易破坏预训练特征。
+
+微调是解冻预训练模型的部分顶层卷积块,与新分类层联合训练。这种方式适用于数据量较大或与原任务分布差异较大的场景,能进一步优化高层特征。
+
+微调时学习率必须远小于训练新分类头时的值,通常从 1e-5 起步。原因是预训练权重已经处于较好的位置,大学习率会快速破坏这些权重。微调要在新分类头训练收敛后进行,否则随机初始化的梯度会破坏预训练特征。
+:::
+
+### 第3题 LSTM 时间序列预测
+
+给定一段长度 1000 的时间序列 `series <- sin(seq(0, 10, length.out = 1000)) + rnorm(1000, sd = 0.1)`,用滑动窗口(窗口大小 50)构造样本,搭建 LSTM 模型预测下一个时间点的值。
+
+::: details 参考答案
+
+```r
+library(keras)
+
+series <- sin(seq(0, 10, length.out = 1000)) + rnorm(1000, sd = 0.1)
+window <- 50
+
+# 构造滑动窗口样本
+x <- t(sapply(1:(length(series) - window), function(i) series[i:(i + window - 1)]))
+y <- series[(window + 1):length(series)]
+x <- array(x, dim = c(dim(x), 1))
+
+# 搭建 LSTM
+model <- keras_model_sequential() %>%
+  layer_lstm(units = 32, input_shape = c(window, 1)) %>%
+  layer_dense(units = 1)
+
+model %>% compile(optimizer = "adam", loss = "mse")
+history <- model %>% fit(
+  x, y, epochs = 20, batch_size = 32,
+  validation_split = 0.2, shuffle = FALSE
+)
+```
+
+`input_shape = c(50, 1)` 表示 50 个时间步、每步 1 维特征。`shuffle = FALSE` 很关键,时间序列不能随机打乱,否则验证集会包含训练集的未来信息,导致指标虚高。回归任务用 `loss = "mse"`,输出层不设激活函数。
+:::
+
+## 常见错误
+
+**错误 1 · `validation_split` 在未打乱数据上产生误导性指标**
+
+原因:`validation_split = 0.2` 取数据末尾 20% 作为验证集。若数据按类别排序(如先全部阳性再全部阴性),验证集分布严重偏离训练集;若是时间序列,验证集包含训练集的未来信息。
+
+解决:分类任务先 `sample()` 打乱数据再拆分,或显式提供 `validation_data`。时间序列任务设置 `shuffle = FALSE`,按时间顺序切分训练集与验证集。
+
+**错误 2 · 输入形状不匹配报错**
+
+原因:`input_shape` 参数容易写错。常见错误是误加 batch 维度(写成 `c(1, 20)` 而非 `c(20)`),或把一维特征的形状写成二维。CNN 的 `input_shape` 需要包含通道维度(如灰度图为 `c(128, 128, 1)`)。
+
+解决:用 `summary(model)` 检查每层输出形状,确认与预期一致。`input_shape` 不含 batch 维度,Keras 自动推断。图像数据是 `(height, width, channels)` 格式,与 Python 的 NCHW 或 NHWC 布局无关。
+
+**错误 3 · 微调时学习率过大破坏预训练权重**
+
+原因:微调阶段仍使用训练新分类头时的学习率(如 1e-3),大梯度快速更新预训练卷积层的权重,破坏了在大规模数据上学到的通用特征,验证损失迅速上升。
+
+解决:微调时把学习率降到 1e-5 或更小,配合 `callback_early_stopping` 监控验证损失。一旦发现训练损失下降而验证损失上升,立即停止微调并降低学习率。
+
+**错误 4 · 未设随机种子导致训练结果不可复现**
+
+原因:深度学习涉及权重随机初始化、Dropout 随机失活、数据随机打乱等多个随机过程,不设种子每次训练结果不同,无法对比实验或调试问题。
+
+解决:在脚本开头调用 `set.seed(42)` 控制 R 的随机数,再用 `tensorflow::tf$random$set_seed(42)` 控制 TensorFlow 的随机数。GPU 训练时还需设置环境变量 `PYTHONHASHSEED=0` 与 `TF_DETERMINISTIC_OPS=1`,但会牺牲部分性能。
