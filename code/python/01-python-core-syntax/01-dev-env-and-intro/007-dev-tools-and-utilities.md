@@ -71,9 +71,9 @@ my_script.py:8:1: F401 'os' imported but unused
 
 ### pylint 的使用
 
-pylint 比 flake8 更严格，检查范围更广，包括命名规范、文档完整性、代码重复度等。pylint 最大的特点是会给代码打分，满分 10 分，扣分项写在报告里。这种打分机制让 pylint 在团队代码质量追踪中很有用，可以设置 CI 门槛，分数低于 8 分则拒绝合并。
+pylint 比 flake8 更严格，检查范围更广，包括命名规范、文档完整性、代码重复度等。pylint 的特点是会给代码打分，满分 10 分，扣分项写在报告里。这种打分机制让 pylint 在团队代码质量追踪中很有用，可以设置 CI 门槛，分数低于 8 分则拒绝合并。
 
-pylint 的严格也带来一个副作用：误报较多。初学者看到 pylint 报告一堆问题会很沮丧，实际上很多是风格偏好，可以关闭。建议在项目根目录放一个 `.pylintrc` 配置文件，关闭不关心的规则。
+pylint 的严格也带来一个副作用：误报较多。初学者看到 pylint 报告一堆问题会很沮丧，很多是风格偏好，可以关闭。建议在项目根目录放一个 `.pylintrc` 配置文件，关闭不关心的规则。
 
 ```bash
 pip install pylint
@@ -105,7 +105,7 @@ calculate_amount(70, 10)
 
 ### 常用 pdb 命令
 
-进入 pdb 后，你可以用单字母命令控制程序执行。最常用的四个命令是 n、s、c、p。n 是 next 的缩写，执行当前行，遇到函数调用不进入。s 是 step 的缩写，执行当前行，遇到函数调用会进入函数内部。c 是 continue 的缩写，继续执行直到下一个断点。p 是 print 的缩写，打印变量值。
+进入 pdb 后，你可以用单字母命令控制程序执行。常用的四个命令是 n、s、c、p。n 是 next 的缩写，执行当前行，遇到函数调用不进入。s 是 step 的缩写，执行当前行，遇到函数调用会进入函数内部。c 是 continue 的缩写，继续执行直到下一个断点。p 是 print 的缩写，打印变量值。
 
 ```text
 (Pdb) n            # 执行下一行，不进入函数
@@ -162,7 +162,7 @@ print(f"精确耗时: {end - start:.6f} 秒")
 
 ## 1.7.5 环境管理工具 conda
 
-conda 是 Anaconda 和 Miniconda 提供的包与环境管理器，在数据科学和科学计算领域极为流行。它的核心能力是创建隔离的 Python 环境，让不同项目使用不同的 Python 版本和依赖包，互不干扰。这一点对开发者尤其重要，因为不同项目常常要求不同的库版本。
+conda 是 Anaconda 和 Miniconda 提供的包与环境管理器，在数据科学和科学计算领域很流行。它的核心能力是创建隔离的 Python 环境，让不同项目使用不同的 Python 版本和依赖包，互不干扰。这一点对开发者尤其重要，因为不同项目常常要求不同的库版本。
 
 ### conda 的基本命令
 
@@ -259,7 +259,7 @@ conda env export 会包含平台特定的包版本，从 Windows 导出的 yml �
 
 ## 1.7.9 使用 jupyter notebook 生成配置文件
 
-Jupyter Notebook 是数据科学领域最常用的交互式环境，开发者用它分析数据、可视化指标趋势非常方便。默认配置在大多数场景下够用，但有时需要修改默认目录、监听端口、密码等。Jupyter 提供了 `jupyter notebook --generate-config` 命令生成配置文件。
+Jupyter Notebook 是数据科学领域常用的交互式环境，开发者用它分析数据、可视化指标趋势非常方便。默认配置在大多数场景下够用，但有时需要修改默认目录、监听端口、密码等。Jupyter 提供了 `jupyter notebook --generate-config` 命令生成配置文件。
 
 ```bash
 jupyter notebook --generate-config

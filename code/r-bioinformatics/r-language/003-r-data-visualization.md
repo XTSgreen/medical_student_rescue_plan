@@ -10,7 +10,7 @@ sidebar:
 
 ## 1.3.1 图形的语法：ggplot2 的设计哲学
 
-ggplot2 由 Hadley Wickham 在 2005 年的博士论文中提出，其理论根源是 Leland Wilkinson 在 1999 年出版的 *The Grammar of Graphics*。Wilkinson 试图回答一个看似简单实则深刻的问题：一张统计图能否被分解为一组可复用的、正交的组件？他给出的答案是肯定的，并把这套组件体系称为图形语法。Wickham 把这套思想引入 R，简化掉一些数学细节，形成了一个工程上可用的实现，即 ggplot2。
+ggplot2 由 Hadley Wickham 在 2005 年的博士论文中提出，其理论根源是 Leland Wilkinson 在 1999 年出版的 *The Grammar of Graphics*。Wilkinson 试图回答一个看似简单实则重要的问题：一张统计图能否被分解为一组可复用的、正交的组件？他给出的答案是肯定的，并把这套组件体系称为图形语法。Wickham 把这套思想引入 R，简化掉一些数学细节，形成了一个工程上可用的实现，即 ggplot2。
 
 Wilkinson 的图形语法把一张图拆分为若干独立的组件。最底层的组件是**数据**与**变量代数**，描述数据如何被引用与变换；其上是**标度**与**坐标**，描述数据值到几何空间的映射；再上是**几何对象**与**统计变换**，决定图层呈现为何种形状以及如何被汇总；最上层是**引导**与**美学**，控制图例、标题、颜色等修饰。每一层都是独立的，可以单独替换或重组。这种正交设计意味着改变一个组件不会牵动其他组件，从而让图形具备了可组合性。
 
@@ -24,7 +24,7 @@ ggplot2 的分层结构在代码上对应着 `+` 的链式调用。这里的 `+`
 
 理解 ggplot2 的最佳入口是它的最小骨架：一个 `ggplot()` 调用加上一个 `geom_*()` 图层，就足以产出第一张图。本节后续所有内容都是对这个骨架在不同方向上的扩展。这一扩展过程的真正目的，是逐步揭开每一层组件背后的设计意图：为什么需要映射、为什么需要标度、为什么需要统计变换。只有理解了意图，才能在面对新数据时知道该调哪个组件、不该调哪个组件。
 
-下面这段代码展示了一个 ggplot2 最小可运行示例：调用 `ggplot()` 传入数据与映射，叠加 `geom_point()` 画散点。代码很短，但它已经包含 ggplot2 最重要的两类组件：数据来源与映射声明。
+下面这段代码展示了一个 ggplot2 最小可运行示例：调用 `ggplot()` 传入数据与映射，叠加 `geom_point()` 画散点。代码很短，但它已经包含 ggplot2 重要的两类组件：数据来源与映射声明。
 
 ```r
 library(ggplot2)
@@ -45,7 +45,7 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
 
 **映射**通过 `aes()` 函数声明。`aes(x = displ, y = hwy, color = class)` 的含义是：把数据框的 `displ` 列映射到 x 位置，`hwy` 列映射到 y 位置，`class` 列映射到颜色。映射区别于直接设置：在 `aes()` 里写 `color = "blue"` 会得到一条名为 `blue` 的图例，而把 `color = "blue"` 写在 `geom_point()` 外面则会把所有点染成蓝色。这是初学者最常踩的坑之一，记住一个原则即可避开：**变量进 aes，常量出 aes**。
 
-下面这段代码用 ggplot2 内置的 `mpg` 数据集演示一个完整的散点图。`mpg` 描述了 1999 至 2008 年间部分车型的油耗与排量，是 ggplot2 教学最常用的样本之一。
+下面这段代码用 ggplot2 内置的 `mpg` 数据集演示一个完整的散点图。`mpg` 描述了 1999 至 2008 年间部分车型的油耗与排量，是 ggplot2 教学常用的样本之一。
 
 ```r
 library(ggplot2)
@@ -226,7 +226,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   theme_minimal()
 ```
 
-当条件变量取值差异较大时，`free` 与 `fixed` 的对比尤为明显。下面的例子把同一份数据用两种 `scales` 设置画出来：左图所有子图共用坐标轴，便于看到 `compact` 与 `pickup` 在油耗分布上的绝对差异；右图各子图独立缩放，便于看到每一类内部的形状特征。
+当条件变量取值差异较大时，`free` 与 `fixed` 的对比明显。下面的例子把同一份数据用两种 `scales` 设置画出来：左图所有子图共用坐标轴，便于看到 `compact` 与 `pickup` 在油耗分布上的绝对差异；右图各子图独立缩放，便于看到每一类内部的形状特征。
 
 ```r
 library(patchwork)
@@ -259,12 +259,12 @@ ggplot(mpg, aes(x = hwy)) +
 ```
 
 ::: note
-分面是探索性数据分析的利器。当一张图信息量过大、曲线互相覆盖时，第一反应应当是分面而不是改颜色。分面把噪声从一张图分散到多张图，让规律自然浮现。这一思路在生信分析中尤为有用：把基因表达按组织类型或疾病状态分面，往往能立刻看出组织特异性与状态特异性的差异。
+分面是探索性数据分析的利器。当一张图信息量过大、曲线互相覆盖时，第一反应应当是分面而不是改颜色。分面把噪声从一张图分散到多张图，让规律自然浮现。这一思路在生信分析中有用：把基因表达按组织类型或疾病状态分面，往往能立刻看出组织特异性与状态特异性的差异。
 :::
 
 ## 1.3.4 统计图层：平滑线与汇总
 
-ggplot2 的图层可以画原始数据，也可以画统计变换后的结果。两个最常用的统计图层是 `geom_smooth()` 与 `stat_summary()`。它们体现了 ggplot2 的一个核心理念：把统计计算嵌入图形。这样数据更新时图自动更新，统计变换与可视化保持一致，避免传统流程中先汇总再画的脱节。
+ggplot2 的图层可以画原始数据，也可以画统计变换后的结果。两个常用的统计图层是 `geom_smooth()` 与 `stat_summary()`。它们体现了 ggplot2 的一个核心理念：把统计计算嵌入图形。这样数据更新时图自动更新，统计变换与可视化保持一致，避免传统流程中先汇总再画的脱节。
 
 `geom_smooth()` 在散点图上叠加一条平滑曲线，默认使用 LOESS 局部多项式回归，样本量较大时自动切换为 GAM。它同时画出置信区间带，由 `se = TRUE` 控制。`method` 参数可以切换为线性回归 `"lm"`、广义线性模型 `"glm"`、稳健回归 `"rlm"`、分位数回归 `"rq"` 等。这一层把散点图从一锅散乱的点提升为一条带置信区间的趋势线，让眼睛立刻抓住主方向。
 
@@ -336,7 +336,7 @@ ggplot(mpg, aes(x = class, y = hwy)) +
 默认的 `geom_smooth(method = "loess")` 在样本量超过 1000 时会被自动降级为 `gam`。如果你需要严格可控的平滑结果，请显式指定 `method` 与 `formula`，并设置 `n`、`span` 等参数。否则同一份代码在不同样本量下可能产出肉眼可辨的差异，导致结果不可复现。
 :::
 
-置信区间的可视化是统计图层的一个副产品。`geom_smooth` 的色带、`stat_summary` 的误差条都是置信区间的视觉表达。在生信场景中，这种表达对基因表达差异、生存曲线、剂量响应曲线都至关重要。下面这段代码用 `geom_smooth` 演示按分组分别拟合线性回归并显示 95% 置信带。
+置信区间的可视化是统计图层的一个副产品。`geom_smooth` 的色带、`stat_summary` 的误差条都是置信区间的视觉表达。在生信场景中，这种表达适用于基因表达差异、生存曲线、剂量响应曲线等分析。下面这段代码用 `geom_smooth` 演示按分组分别拟合线性回归并显示 95% 置信带。
 
 ```r
 ggplot(mpg, aes(x = displ, y = hwy, color = drv, fill = drv)) +
@@ -393,7 +393,7 @@ p_clb <- base +
 
 ## 1.3.5 主题与坐标系统
 
-主题控制所有与数据无关的视觉元素：背景色、网格线、字体、刻度长短、图例位置、边距。ggplot2 内置了几套预设主题，最常用的是 `theme_gray()`（默认）、`theme_bw()`、`theme_minimal()` 与 `theme_classic()`。预设主题的差异主要在于背景色与网格线密度，选择哪一种取决于出版要求与个人审美。生物医学论文通常偏好 `theme_classic()` 与 `theme_bw()`，因其去除多余装饰，更接近期刊风格。
+主题控制所有与数据无关的视觉元素：背景色、网格线、字体、刻度长短、图例位置、边距。ggplot2 内置了几套预设主题，常用的是 `theme_gray()`（默认）、`theme_bw()`、`theme_minimal()` 与 `theme_classic()`。预设主题的差异主要在于背景色与网格线密度，选择哪一种取决于出版要求与个人审美。生物医学论文通常偏好 `theme_classic()` 与 `theme_bw()`，因其去除多余装饰，更接近期刊风格。
 
 当预设主题不够用时，可以通过 `theme()` 函数逐项定制。`theme()` 接受大量参数，每一个对应一类视觉元素。常见的是 `plot.title`、`axis.text`、`legend.position`、`panel.grid`、`plot.margin`。每个元素通过 `element_text()`、`element_rect()`、`element_line()` 或 `element_blank()` 来描述。`element_blank()` 把元素完全删除，常用于去除多余网格线或边框。
 
@@ -413,7 +413,7 @@ ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
 
 `theme()` 的参数体系庞大但有序。文本类元素通过 `element_text()` 描述字体属性（family、face、size、color、hjust、vjust、angle、lineheight）；矩形类元素通过 `element_rect()` 描述填充与边框（fill、color、size、linetype）；线条类元素通过 `element_line()` 描述线条属性（color、size、linetype、lineend）。所有元素都可以传 `inherit.blank = TRUE` 来从父元素继承空白。
 
-`theme()` 中最常用的元素参数包括：`plot.title`、`plot.subtitle`、`plot.caption`（标题、副标题、说明）、`axis.title`、`axis.text`、`axis.ticks`、`axis.line`（轴标题、轴文字、轴刻度、轴线）、`panel.background`、`panel.grid.major`、`panel.grid.minor`、`panel.border`（面板背景、网格、边框）、`legend.position`、`legend.title`、`legend.text`、`legend.key`（图例位置、标题、文字、色块）、`strip.text`、`strip.background`（分面标题、背景）。掌握这套命名规则就掌握了 `theme()` 的全部能力。
+`theme()` 中常用的元素参数包括：`plot.title`、`plot.subtitle`、`plot.caption`（标题、副标题、说明）、`axis.title`、`axis.text`、`axis.ticks`、`axis.line`（轴标题、轴文字、轴刻度、轴线）、`panel.background`、`panel.grid.major`、`panel.grid.minor`、`panel.border`（面板背景、网格、边框）、`legend.position`、`legend.title`、`legend.text`、`legend.key`（图例位置、标题、文字、色块）、`strip.text`、`strip.background`（分面标题、背景）。掌握这套命名规则就掌握了 `theme()` 的全部能力。
 
 下面这段代码演示图例位置与样式的完整定制。`legend.position` 接受 "none"（隐藏）、"left"、"right"（默认）、"bottom"、"top"，或者形如 `c(0.8, 0.2)` 的归一化坐标放在图内任意位置。`guide_legend()` 与 `guide_colorbar()` 提供更细粒度的图例控制。
 
@@ -466,7 +466,7 @@ ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   my_theme()
 ```
 
-坐标系决定了图层最终被投射到什么空间。最常用的是笛卡尔坐标系 `coord_cartesian()`，它支持 `xlim` 与 `ylim` 来限定视野但不丢弃数据，这与 `xlim()` 标度函数的截断行为不同：`coord_cartesian(xlim = c(0, 10))` 仍会绘制超出范围的点（在视觉边界外），而 `xlim(0, 10)` 会把超出范围的点从数据中删除，可能影响 `geom_smooth` 的拟合结果。这是初学者常忽略的细节。
+坐标系决定了图层最终被投射到什么空间。常用的是笛卡尔坐标系 `coord_cartesian()`，它支持 `xlim` 与 `ylim` 来限定视野但不丢弃数据，这与 `xlim()` 标度函数的截断行为不同：`coord_cartesian(xlim = c(0, 10))` 仍会绘制超出范围的点（在视觉边界外），而 `xlim(0, 10)` 会把超出范围的点从数据中删除，可能影响 `geom_smooth` 的拟合结果。这是初学者常忽略的细节。
 
 `coord_flip()` 把 x 与 y 轴对调，常用于把垂直柱状图转成水平柱状图，让长标签可读。`coord_polar()` 把笛卡尔坐标映射到极坐标，是饼图与小提琴图背后的实现机制。`coord_fixed()` 固定纵横比，对地图与几何图形很关键。`coord_trans()` 在坐标系层面做变换，与标度层面的变换有所不同：标度变换先变换数据再绘图，坐标系变换先绘图再变换坐标。
 
@@ -493,7 +493,7 @@ ggplot(mpg, aes(x = "", fill = class)) +
   theme(legend.position = "right")
 ```
 
-`coord_fixed` 固定纵横比，让一个数据单位在 x 与 y 方向上占据相同的视觉长度。这在地图、基因覆盖图、PCA 散点图等场景中至关重要：纵横比不一致会让距离与角度被视觉扭曲。`coord_fixed(ratio = 1)` 是最常用的取值，等价于强制单位长度一致。
+`coord_fixed` 固定纵横比，让一个数据单位在 x 与 y 方向上占据相同的视觉长度。在地图、基因覆盖图、PCA 散点图等场景中，纵横比不一致会让距离与角度被视觉扭曲。`coord_fixed(ratio = 1)` 是常用的取值，等价于强制单位长度一致。
 
 ```r
 ggplot(mpg, aes(x = cty, y = hwy)) +
@@ -520,7 +520,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 ## 1.3.6 扩展生态
 
-ggplot2 本身只是一个内核。围绕它生长出的扩展包构成了 R 可视化生态的真正规模。这里只介绍三个最常用的扩展：patchwork、plotly 与 ggsave，并简要提及若干其他值得关注的扩展。
+ggplot2 本身只是一个内核。围绕它生长出的扩展包构成了 R 可视化生态的真正规模。这里只介绍三个常用的扩展：patchwork、plotly 与 ggsave，并简要提及若干其他值得关注的扩展。
 
 **patchwork** 解决多图拼接问题。在 patchwork 出现之前，拼接多张 ggplot2 图需要 gridExtra 或 cowplot，语法相对繁琐。patchwork 引入运算符重载，让多个图通过 `+`、`|` 与 `/` 像代数表达式一样组合：`p1 + p2` 横向拼接，`p1 / p2` 纵向拼接，`(p1 | p2) / p3` 先横后纵。`plot_layout()` 控制宽高比例，`plot_annotation()` 添加整体标题与子图编号。
 
@@ -609,7 +609,7 @@ dev.off()
 :::
 
 ::: note
-生态中还有大量其他扩展包值得一提：ggpubr 提供科研论文风格的统计检验标注，ggrepel 解决标签重叠问题，ggbeeswarm 改善分类散点的密集显示，ggdist 与 distributional 把贝叶斯后验可视化提升到新高度，gganimate 把静态图扩展为动画，ggiraph 提供 SVG 交互式输出，GGally 提供 `ggpairs` 矩阵图。这些包都是 ggplot2 图层模型的成功证据：只要遵守图层协议，扩展就能与原系统无缝协作。
+生态中还有大量其他扩展包：ggpubr 提供科研论文风格的统计检验标注，ggrepel 解决标签重叠问题，ggbeeswarm 改善分类散点的密集显示，ggdist 与 distributional 把贝叶斯后验可视化提升到新高度，gganimate 把静态图扩展为动画，ggiraph 提供 SVG 交互式输出，GGally 提供 `ggpairs` 矩阵图。这些包都是 ggplot2 图层模型的成功证据：只要遵守图层协议，扩展就能与原系统无缝协作。
 :::
 
 ggrepel 是处理标签重叠的利器。当数据点很多且每个点都需要文字标签时，`geom_text()` 的标签会互相覆盖；`geom_text_repel()` 通过简单的物理仿真让标签互相排斥，自动调整位置并加上连接线，使标签可读。
@@ -724,7 +724,7 @@ ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
 
 ## 1.3.7 常见图表类型与应用场景
 
-前面几节从 ggplot2 的设计哲学出发，逐层拆解了图层、标度、分面、统计变换与主题。本节把这些组件重新组合，聚焦于实际分析中最常用的图表类型。每一种图表都有其擅长的数据结构与表达意图，选错图表类型是数据可视化中最常见的错误。
+前面几节从 ggplot2 的设计哲学出发，逐层拆解了图层、标度、分面、统计变换与主题。本节把这些组件重新组合，聚焦于实际分析中常用的图表类型。每一种图表都有其擅长的数据结构与表达意图，选错图表类型是数据可视化中常见的错误。
 
 需要注意的是，由于该架构不支持R语言运行并插入图片，以下图形仅用于展示，与配套代码毫无关联，以下图片是使用html写的，你可以在整个项目的主文件下找到一个名为R语言.exe的压缩包，加压后里面有对应的rst源码和html文件，这些文件是上一个版本，其中包含大量可运行示例R示例代码与运行结果和生成的图表，如果你注意到了这里，强烈推荐你打开看一看
 
@@ -788,7 +788,7 @@ ggplot(mpg, aes(x = hwy, fill = drv)) +
 
 ### 箱线图
 
-箱线图用五数概括（最小值、Q1、中位数、Q3、最大值）展示分组数据的分布摘要，是科研论文最常用的图表之一。箱体高度代表四分位距，须线延伸至 1.5 倍 IQR 范围内的极值，超出此范围的点标记为异常值。
+箱线图用五数概括（最小值、Q1、中位数、Q3、最大值）展示分组数据的分布摘要，是科研论文常用的图表之一。箱体高度代表四分位距，须线延伸至 1.5 倍 IQR 范围内的极值，超出此范围的点标记为异常值。
 
 <div style="max-width:50%;margin:1em 0;"><svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" style="width:100%"><rect width="400" height="260" fill="#fff"/><line x1="45" y1="220" x2="380" y2="220" stroke="#333"/><line x1="45" y1="20" x2="45" y2="220" stroke="#333"/><g stroke="#333" fill="none"><line x1="100" y1="50" x2="100" y2="80"/><rect x="85" y="80" width="30" height="80" fill="#b0c4de"/><line x1="85" y1="120" x2="115" y2="120" stroke-width="2"/><line x1="100" y1="160" x2="100" y2="200"/><line x1="92" y1="50" x2="108" y2="50"/><line x1="92" y1="200" x2="108" y2="200"/><line x1="180" y1="60" x2="180" y2="90"/><rect x="165" y="90" width="30" height="60" fill="#b0c4de"/><line x1="165" y1="110" x2="195" y2="110" stroke-width="2"/><line x1="180" y1="150" x2="180" y2="190"/><line x1="172" y1="60" x2="188" y2="60"/><line x1="172" y1="190" x2="188" y2="190"/><line x1="260" y1="40" x2="260" y2="70"/><rect x="245" y="70" width="30" height="90" fill="#b0c4de"/><line x1="245" y1="100" x2="275" y2="100" stroke-width="2"/><line x1="260" y1="160" x2="260" y2="210"/><line x1="252" y1="40" x2="268" y2="40"/><line x1="252" y1="210" x2="268" y2="210"/><line x1="340" y1="70" x2="340" y2="100"/><rect x="325" y="100" width="30" height="50" fill="#b0c4de"/><line x1="325" y1="125" x2="355" y2="125" stroke-width="2"/><line x1="340" y1="150" x2="340" y2="180"/><line x1="332" y1="70" x2="348" y2="70"/><line x1="332" y1="180" x2="348" y2="180"/></g><circle cx="100" cy="35" r="2.5" fill="#333"/><circle cx="260" cy="25" r="2.5" fill="#333"/><text x="210" y="245" text-anchor="middle" font-size="10" fill="#333">class</text><text x="15" y="120" text-anchor="middle" font-size="10" fill="#333" transform="rotate(-90,15,120)">hwy</text></svg></div>
 
@@ -851,7 +851,7 @@ ggplot(mpg, aes(x = "", fill = class)) +
 
 ### 热图
 
-热图用颜色深浅表示矩阵中数值的大小，是生物信息学中最常用的多维数据可视化方式。ggplot2 可以通过 geom_tile 实现热图，但复杂热图通常使用 pheatmap 或 ComplexHeatmap 包，因为它们内置了聚类、注释条与分块切割功能。
+热图用颜色深浅表示矩阵中数值的大小，是生物信息学中常用的多维数据可视化方式。ggplot2 可以通过 geom_tile 实现热图，但复杂热图通常使用 pheatmap 或 ComplexHeatmap 包，因为它们内置了聚类、注释条与分块切割功能。
 
 <div style="max-width:50%;margin:1em 0;"><svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" style="width:100%"><rect width="400" height="260" fill="#fff"/><rect x="50" y="20" width="40" height="30" fill="#2166ac"/><rect x="90" y="20" width="40" height="30" fill="#67a9cf"/><rect x="130" y="20" width="40" height="30" fill="#f7f7f7"/><rect x="170" y="20" width="40" height="30" fill="#ef8a62"/><rect x="210" y="20" width="40" height="30" fill="#b2182b"/><rect x="250" y="20" width="40" height="30" fill="#b2182b"/><rect x="290" y="20" width="40" height="30" fill="#ef8a62"/><rect x="330" y="20" width="40" height="30" fill="#f7f7f7"/><rect x="50" y="50" width="40" height="30" fill="#67a9cf"/><rect x="90" y="50" width="40" height="30" fill="#2166ac"/><rect x="130" y="50" width="40" height="30" fill="#67a9cf"/><rect x="170" y="50" width="40" height="30" fill="#f7f7f7"/><rect x="210" y="50" width="40" height="30" fill="#ef8a62"/><rect x="250" y="50" width="40" height="30" fill="#b2182b"/><rect x="290" y="50" width="40" height="30" fill="#b2182b"/><rect x="330" y="50" width="40" height="30" fill="#ef8a62"/><rect x="50" y="80" width="40" height="30" fill="#f7f7f7"/><rect x="90" y="80" width="40" height="30" fill="#67a9cf"/><rect x="130" y="80" width="40" height="30" fill="#2166ac"/><rect x="170" y="80" width="40" height="30" fill="#67a9cf"/><rect x="210" y="80" width="40" height="30" fill="#f7f7f7"/><rect x="250" y="80" width="40" height="30" fill="#ef8a62"/><rect x="290" y="80" width="40" height="30" fill="#b2182b"/><rect x="330" y="80" width="40" height="30" fill="#b2182b"/><rect x="50" y="110" width="40" height="30" fill="#ef8a62"/><rect x="90" y="110" width="40" height="30" fill="#f7f7f7"/><rect x="130" y="110" width="40" height="30" fill="#67a9cf"/><rect x="170" y="110" width="40" height="30" fill="#2166ac"/><rect x="210" y="110" width="40" height="30" fill="#67a9cf"/><rect x="250" y="110" width="40" height="30" fill="#f7f7f7"/><rect x="290" y="110" width="40" height="30" fill="#ef8a62"/><rect x="330" y="110" width="40" height="30" fill="#b2182b"/><rect x="50" y="140" width="40" height="30" fill="#b2182b"/><rect x="90" y="140" width="40" height="30" fill="#ef8a62"/><rect x="130" y="140" width="40" height="30" fill="#f7f7f7"/><rect x="170" y="140" width="40" height="30" fill="#67a9cf"/><rect x="210" y="140" width="40" height="30" fill="#2166ac"/><rect x="250" y="140" width="40" height="30" fill="#67a9cf"/><rect x="290" y="140" width="40" height="30" fill="#f7f7f7"/><rect x="330" y="140" width="40" height="30" fill="#ef8a62"/><rect x="50" y="170" width="40" height="30" fill="#b2182b"/><rect x="90" y="170" width="40" height="30" fill="#b2182b"/><rect x="130" y="170" width="40" height="30" fill="#ef8a62"/><rect x="170" y="170" width="40" height="30" fill="#f7f7f7"/><rect x="210" y="170" width="40" height="30" fill="#67a9cf"/><rect x="250" y="170" width="40" height="30" fill="#2166ac"/><rect x="290" y="170" width="40" height="30" fill="#67a9cf"/><rect x="330" y="170" width="40" height="30" fill="#f7f7f7"/></svg></div>
 
@@ -974,7 +974,7 @@ ggplot(mpg, aes(x = displ, y = hwy, color = cty)) +
 
 原因:`xlim(0, 10)` 会把超出范围的点从数据中删除,`geom_smooth()` 在剩余数据上重新拟合,曲线形状会改变。这是标度层面的截断。
 
-解决:只想缩放视野而不影响数据,用 `coord_cartesian(xlim = c(0, 10))`。它在视觉层面限制坐标轴范围,数据仍参与统计计算。两者的区别在含平滑层或汇总层的图中尤为关键。
+解决:只想缩放视野而不影响数据,用 `coord_cartesian(xlim = c(0, 10))`。它在视觉层面限制坐标轴范围,数据仍参与统计计算。两者的区别在含平滑层或汇总层的图中关键。
 
 **错误 4 · `ggsave` 保存 PDF 中文显示为方框**
 

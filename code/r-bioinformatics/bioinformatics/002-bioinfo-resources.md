@@ -13,9 +13,9 @@ sidebar:
 
 ### NCBI
 
-美国国家生物技术信息中心（National Center for Biotechnology Information，NCBI）成立于 1988 年，隶属美国国立卫生研究院（NIH）的国家医学图书馆（NLM）。NCBI 是全球使用频率最高的生物信息数据中心，维护着数十个公开数据库，其中最常用的包括文献库 PubMed、核酸库 GenBank、蛋白库 Protein、变异库 dbSNP 与 ClinVar、表达库 GEO、测序原始数据库 SRA 等。
+美国国家生物技术信息中心（National Center for Biotechnology Information，NCBI）成立于 1988 年，隶属美国国立卫生研究院（NIH）的国家医学图书馆（NLM）。NCBI 是全球使用频率最高的生物信息数据中心，维护着数十个公开数据库，其中常用的包括文献库 PubMed、核酸库 GenBank、蛋白库 Protein、变异库 dbSNP 与 ClinVar、表达库 GEO、测序原始数据库 SRA 等。
 
-NCBI 的数据组织以 Entrez 为核心。Entrez 是一个跨库检索系统，允许用户用同一查询语句同时搜索多个数据库，并通过预计算的邻接关系在不同记录之间跳转。例如，从一条 GenBank 核酸记录可以链接到对应的蛋白序列、文献、结构以及基因注释，这种网状关联大幅简化了信息检索流程。Entrez 系统维护的数据库包括 PubMed（文献）、GenBank（核酸）、Protein（蛋白）、Gene（基因）、Structure（结构）、OMIM（遗传病）、SNP（变异）、GEO（表达）、SRA（测序原始数据）、Taxonomy（物种分类）等数十个，覆盖了生信分析的多数场景。除网页入口外，NCBI 还提供 BLAST 序列比对工具和 E-utilities 编程接口，前者用于基于序列相似性的功能注释，后者用于自动化批量检索，是生信分析中最常用的两类入口。
+NCBI 的数据组织以 Entrez 为核心。Entrez 是一个跨库检索系统，允许用户用同一查询语句同时搜索多个数据库，并通过预计算的邻接关系在不同记录之间跳转。例如，从一条 GenBank 核酸记录可以链接到对应的蛋白序列、文献、结构以及基因注释，这种网状关联大幅简化了信息检索流程。Entrez 系统维护的数据库包括 PubMed（文献）、GenBank（核酸）、Protein（蛋白）、Gene（基因）、Structure（结构）、OMIM（遗传病）、SNP（变异）、GEO（表达）、SRA（测序原始数据）、Taxonomy（物种分类）等数十个，覆盖了生信分析的多数场景。除网页入口外，NCBI 还提供 BLAST 序列比对工具和 E-utilities 编程接口，前者用于基于序列相似性的功能注释，后者用于自动化批量检索，是生信分析中常用的两类入口。
 
 NCBI 的数据版本管理需要注意。GenBank 和 RefSeq 的数据持续更新，同一 accession 在不同时间访问可能得到不同内容。RefSeq 采用版本号机制（如 NM_000546.5 表示第 5 版），引用时应标注版本号以保证可重复性。NCBI 还维护历史归档，可以在需要时访问特定时间点的数据。
 
@@ -119,7 +119,7 @@ fasterq-dump --split-files --threads 8 SRR123456
 
 ### 蛋白质序列数据库
 
-UniProt 是蛋白质功能研究中最常用的数据库，由 EBI、SIB（瑞士生物信息学研究所）和 PIR（美国蛋白质信息资源）联合维护，整合了人工审校的 Swiss-Prot 和自动注释的 TrEMBL 两部分。
+UniProt 是蛋白质功能研究中常用的数据库，由 EBI、SIB（瑞士生物信息学研究所）和 PIR（美国蛋白质信息资源）联合维护，整合了人工审校的 Swiss-Prot 和自动注释的 TrEMBL 两部分。
 
 **UniProtKB/Swiss-Prot** 收录人工审校的高质量注释记录，每条记录的注释都经过文献核查和计算分析验证，虽然数据量较小，但注释准确，适合作为功能研究的权威参考。
 
@@ -211,13 +211,13 @@ print(f"残基间CA距离: {distance:.2f} Å")
 
 ### 基因组数据库
 
-基因组数据库提供完整基因组序列和注释，是基因组学研究的参考基础。Ensembl 和 UCSC Genome Browser 因丰富的注释轨道和可视化功能，成为基因组研究中最常用的两个工具。
+基因组数据库提供完整基因组序列和注释，是基因组学研究的参考基础。Ensembl 和 UCSC Genome Browser 因丰富的注释轨道和可视化功能，成为基因组研究中常用的两个工具。
 
 **Ensembl** 由 EBI 和 Sanger Institute 联合维护，始于 1999 年人类基因组计划，目前覆盖脊椎动物和部分非动物物种。Ensembl 提供基因组序列、基因注释、变异信息、比较基因组学数据，并通过 REST API 和 BioMart 支持批量下载。Ensembl 的基因注释由自动化流程生成，与 GENCODE 的人工审校注释互补。Ensembl 的 ID 体系规范清晰：基因以 `ENSG` 开头（如 ENSG00000141510 对应 TP53），转录本以 `ENST` 开头，蛋白以 `ENSP` 开头，这些 ID 在版本间保持稳定，适合作为分析中的主键。BioMart 是 Ensembl 的批量查询工具，支持按属性（如染色体位置、基因名、GO 术语）筛选并导出多个字段，适合一次性获取大批量基因的注释信息。
 
 **UCSC Genome Browser** 由加州大学圣克鲁斯分校维护，以丰富的可视化轨道著称。UCSC 的轨道分为几大类：映射与测序轨道展示覆盖度和比对质量，基因与预测注释轨道展示多种注释来源（如 GENCODE、RefSeq、Ensembl），表观调控轨道展示组蛋白修饰和染色质状态，变异轨道展示 dbSNP 和结构变异。UCSC 支持用户自定义轨道，可以将自己的分析结果（如 BED、WIG、BigWig 文件）叠加到参考基因组上查看，这一功能在探索性分析中非常实用。UCSC 还提供 Table Browser 工具，支持按区间和字段批量导出轨道数据，适合需要提取特定区间注释的分析。
 
-**GENCODE** 是人类和小鼠基因组注释的黄金标准，由 Sanger Institute 和 EBI 联合维护，分为基础注释（Comprehensive，包含所有注释）和基础蛋白编码注释（Basic，仅包含主要转录本）两个层级。GENCODE 的注释经过人工审校和实验验证，是转录组分析中常用的参考注释集。GENCODE 的转录本分类体系包括：蛋白编码（protein_coding）、长链非编码 RNA（lncRNA）、小 RNA（miRNA、snoRNA、snRNA）、假基因（pseudogene）等，每个转录本还标注证据等级（如KNOWN、NOVEL、PUTATIVE），帮助研究人员评估注释的可靠性。GENCODE 与 Ensembl 共享部分注释流程，但 GENCODE 经过更多人工审校，质量更高。
+**GENCODE** 是人类和小鼠基因组注释的标准参考，由 Sanger Institute 和 EBI 联合维护，分为基础注释（Comprehensive，包含所有注释）和基础蛋白编码注释（Basic，仅包含主要转录本）两个层级。GENCODE 的注释经过人工审校和实验验证，是转录组分析中常用的参考注释集。GENCODE 的转录本分类体系包括：蛋白编码（protein_coding）、长链非编码 RNA（lncRNA）、小 RNA（miRNA、snoRNA、snRNA）、假基因（pseudogene）等，每个转录本还标注证据等级（如KNOWN、NOVEL、PUTATIVE），帮助研究人员评估注释的可靠性。GENCODE 与 Ensembl 共享部分注释流程，但 GENCODE 经过更多人工审校，质量更高。
 
 **1000 Genomes Project** 完成了对全球 26 个人群的基因组变异图谱构建，提供了人类群体遗传变异的基准数据，是群体遗传学和医学遗传学研究的重要参考。1000 Genomes 数据集的等位基因频率数据常用于判断新发现变异的稀有程度，其相位数据用于构建参考单倍型，是 imputation 分析（如 Beagle、Minimac）的输入。1000 Genomes 的样本经过匿名化处理，可用于无限制的公开研究。
 
@@ -314,7 +314,7 @@ if response.ok:
 
 表达数据库存储基因表达谱数据，是转录组学研究的基础。这些数据库覆盖了从微阵列到高通量测序的不同技术平台，数据量和注释深度各有差异。
 
-**GEO**（Gene Expression Omnibus）是 NCBI 维护的最大基因表达库，采用 Platform-Series-Sample 三层结构组织数据。Platform 描述芯片或测序平台，Series 描述一个实验研究，Sample 描述单个样本的表达数据。GEO 数据可以通过 accession 编号（GSE 表示系列，GSM 表示样本，GPL 表示平台）直接访问。GEO 的数据格式包括原始的 SOFT 格式和 MINiML 格式，以及整理好的表达矩阵，分析时通常使用后者。GEO 数据的元数据存储在 Series 和 Sample 记录中，包括实验设计、处理条件、对照设置等，这些信息对结果的解释至关重要。
+**GEO**（Gene Expression Omnibus）是 NCBI 维护的最大基因表达库，采用 Platform-Series-Sample 三层结构组织数据。Platform 描述芯片或测序平台，Series 描述一个实验研究，Sample 描述单个样本的表达数据。GEO 数据可以通过 accession 编号（GSE 表示系列，GSM 表示样本，GPL 表示平台）直接访问。GEO 的数据格式包括原始的 SOFT 格式和 MINiML 格式，以及整理好的表达矩阵，分析时通常使用后者。GEO 数据的元数据存储在 Series 和 Sample 记录中，包括实验设计、处理条件、对照设置等，这些信息对解释结果是必要的。
 
 **ArrayExpress** 是 EBI 维护的表达实验数据库，与 GEO 类似，但更强调 MIAME（Minimum Information About a Microarray Experiment）规范的元数据完整性。MIAME 规范要求提交者提供实验设计、样本、杂交、测量和归一化方法的详细信息，ArrayExpress 在提交时强制校验这些字段。对于需要严格元数据的分析（如 meta 分析），ArrayExpress 的数据质量更有保障。
 
@@ -376,7 +376,7 @@ if response.ok:
 
 变异与疾病数据库收录基因组变异及其与表型的关联，是医学遗传学和精准医学研究的基础。
 
-**dbSNP** 是 NCBI 维护的单核苷酸多态性库，收录短变异（SNP 和小的 indel），每条记录以 `rs` 开头的 ID 唯一标识。dbSNP 是变异注释中最常用的参考库，注释 VCF 文件时常会关联 dbSNP 的 rs ID。dbSNP 的 ID 在版本间保持稳定，但记录的详细信息（如等位基因频率、临床意义）会随数据更新而变化，引用时建议标注版本号。
+**dbSNP** 是 NCBI 维护的单核苷酸多态性库，收录短变异（SNP 和小的 indel），每条记录以 `rs` 开头的 ID 唯一标识。dbSNP 是变异注释中常用的参考库，注释 VCF 文件时常会关联 dbSNP 的 rs ID。dbSNP 的 ID 在版本间保持稳定，但记录的详细信息（如等位基因频率、临床意义）会随数据更新而变化，引用时建议标注版本号。
 
 **ClinVar** 是 NCBI 维护的临床意义变异库，收录变异与疾病关联的提交记录，并给出临床意义分级（致病、可能致病、意义未明、可能良性、良性）。ClinVar 的提交来自不同实验室，可能存在冲突判定，分析时需要查看证据等级和评审状态。ClinVar 采用星标系统表示记录的可信度：零星表示无冲突但证据有限，一星表示多提交者且无冲突，二星及以上表示有专业小组评审。临床报告中引用 ClinVar 时应优先选择高星标记录。
 
@@ -419,7 +419,7 @@ if response.ok:
 
 ## 2.2.3 数据检索与提交
 
-数据检索与提交是生信分析的入口和出口。检索是从公共数据库获取已有数据用于分析，提交是将分析或实验产生的数据归还数据库供他人使用。本节介绍最常用的检索工具和数据提交流程。
+数据检索与提交是生信分析的入口和出口。检索是从公共数据库获取已有数据用于分析，提交是将分析或实验产生的数据归还数据库供他人使用。本节介绍常用的检索工具和数据提交流程。
 
 ### Entrez 系统与 E-utilities
 
@@ -573,7 +573,7 @@ with open("submission.gb", "w") as f:
 
 ### Gene Ontology (GO)
 
-Gene Ontology 是使用最广泛的本体，旨在为不同物种的基因功能提供统一描述。GO 包含三个分支：**分子功能**（Molecular Function，描述基因产物在分子层面的活性，如激酶活性、DNA 结合）、**生物过程**（Biological Process，描述基因产物参与的生物学过程，如细胞凋亡、DNA 修复）、**细胞组分**（Cellular Component，描述基因产物作用的细胞位置，如细胞核、线粒体）。
+Gene Ontology 是使用广泛的本体，旨在为不同物种的基因功能提供统一描述。GO 包含三个分支：**分子功能**（Molecular Function，描述基因产物在分子层面的活性，如激酶活性、DNA 结合）、**生物过程**（Biological Process，描述基因产物参与的生物学过程，如细胞凋亡、DNA 修复）、**细胞组分**（Cellular Component，描述基因产物作用的细胞位置，如细胞核、线粒体）。
 
 GO 术语之间通过关系连接成有向无环图（DAG），例如 DNA 修复 `is_a` 细胞过程，核仁 `part_of` 细胞核。这种结构允许分析时考虑术语的层级关系，进行富集结果的简化或扩展。
 
@@ -623,7 +623,7 @@ print(f"GO:0006915 富集 p 值: {pval:.4e}")
 
 ## 2.2.5 数据标准与交换格式
 
-统一的数据格式使不同软件和数据库之间可以无歧义地交换数据。本节按数据类型归纳生信分析中最常用的格式规范，重点说明字段含义和常见变体。
+统一的数据格式使不同软件和数据库之间可以无歧义地交换数据。本节按数据类型归纳生信分析中常用的格式规范，重点说明字段含义和常见变体。
 
 ### FASTA / FASTQ
 
@@ -647,7 +647,7 @@ GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
 !''*((((***+))%%%++)(%%%%).1***-+*''))**55CCF>>>>>>CCCCCCC65
 ```
 
-常见的质量编码有两种：**Phred+33**（Sanger/Illumina 1.8+，ASCII 码范围 33-126）和 **Phred+64**（Illumina 1.3-1.7，ASCII 码范围 64-126）。Phred+33 是当前主流标准，分析前需要确认数据来源以避免错误解码。质量值字符 `!` 对应 Q0（错误率 100%），`I` 对应 Q40（错误率 0.01%）。常用质量阈值参考：Q20（错误率 1%）是基础质控线，Q30（错误率 0.1%）是高质量标准，Q40（错误率 0.01%）代表接近完美的碱基识别。现代 Illumina 测序仪多数碱基可达到 Q30 以上。
+常见的质量编码有两种：**Phred+33**（Sanger/Illumina 1.8+，ASCII 码范围 33-126）和 **Phred+64**（Illumina 1.3-1.7，ASCII 码范围 64-126）。Phred+33 是当前主流标准，分析前需要确认数据来源以避免错误解码。质量值字符 `!` 对应 Q0（错误率 100%），`I` 对应 Q40（错误率 0.01%）。常用质量阈值参考：Q20（错误率 1%）是基础质控线，Q30（错误率 0.1%）是高质量标准，Q40（错误率 0.01%）代表极高准确度的碱基识别。现代 Illumina 测序仪多数碱基可达到 Q30 以上。
 
 FASTQ 文件通常需要经过质控（如使用 FastQC 检查质量分布、GC 含量、接头序列等）、接头去除（如使用 Trimmomatic 或 fastp）和低质量裁剪后，才能用于后续比对分析。
 
@@ -772,7 +772,7 @@ for variant in VCF("variants.vcf"):
 
 ### GFF / GTF / GFF3
 
-GFF（Generic Feature Format）系列存储基因组注释信息，描述序列上的特征（基因、外显子、CDS 等）位置和属性。GFF3 是目前最常用的版本。
+GFF（Generic Feature Format）系列存储基因组注释信息，描述序列上的特征（基因、外显子、CDS 等）位置和属性。GFF3 是目前常用的版本。
 
 GFF3 文件由 9 列组成，以制表符分隔：
 
@@ -796,7 +796,7 @@ chr1	NCBI	exon	1000	1500	.	+	.	ID=exon001;Parent=transcript001
 chr1	NCBI	CDS	1200	1500	.	+	0	ID=cds001;Parent=transcript001
 ```
 
-phase 字段对 CDS 特征至关重要，表示该 CDS 在编码序列中的阅读框位置。phase 取值 0、1 或 2，分别表示 CDS 的第一个碱基是密码子的第 1、2、3 个碱基。拼接多个外显子 CDS 时，后一个 CDS 的 phase 由前一个 CDS 的长度决定，正确设置 phase 才能保证翻译结果的正确性。
+phase 字段对 CDS 特征是必要的，表示该 CDS 在编码序列中的阅读框位置。phase 取值 0、1 或 2，分别表示 CDS 的第一个碱基是密码子的第 1、2、3 个碱基。拼接多个外显子 CDS 时，后一个 CDS 的 phase 由前一个 CDS 的长度决定，正确设置 phase 才能保证翻译结果的正确性。
 
 GTF（Gene Transfer Format）与 GFF 类似，但属性字段使用 `gene_id "value"; transcript_id "value";` 语法，且不强制使用 `Parent` 关系。GTF 在转录组分析工具（如 HISAT2、StringTie）中仍被广泛使用。GTF 与 GFF3 的主要区别在于：GTF 的 type 列仅限于 gene、transcript、exon、CDS、UTR、start_codon、stop_codon 等固定类型，而 GFF3 可以使用任意 SO 术语；GTF 的属性字段必须以 `;` 结尾。
 

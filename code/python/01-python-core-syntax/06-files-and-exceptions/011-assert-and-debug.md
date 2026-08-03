@@ -86,7 +86,7 @@ python script.py
 python -O script.py
 ```
 
-在正常模式下，`divide(10, 0)` 在断言处就抛出 `AssertionError`，提示除数不能为零。在优化模式下，assert 被完全跳过，程序继续执行到 `return a / b`，触发 `ZeroDivisionError`。两种模式下的行为完全不同，这正是 assert 不能用于生产环境校验的原因。
+在正常模式下，`divide(10, 0)` 在断言处就抛出 `AssertionError`，提示除数不能为零。在优化模式下，assert 被完全跳过，程序继续执行到 `return a / b`，触发 `ZeroDivisionError`。两种模式下的行为完全不同，这是 assert 不能用于生产环境校验的原因。
 
 ::: warning 不要依赖 assert 做安全检查
 凡是涉及外部输入、权限校验、业务规则约束的检查，都要写成普通的 if 加 raise，不要用 assert。一旦程序以优化模式运行，所有 assert 都会失效，可能导致严重的安全或数据问题。
@@ -178,7 +178,7 @@ except ZeroDivisionError:
 
 ## 6.11.9 traceback 模块简介
 
-`traceback` 模块提供了格式化和打印异常调用栈的工具。在日志记录中，把完整的异常调用栈写入日志文件，比只记录异常消息更有助于排查问题。本节简要介绍两个最常用的函数。
+`traceback` 模块提供了格式化和打印异常调用栈的工具。在日志记录中，把完整的异常调用栈写入日志文件，比只记录异常消息更有助于排查问题。本节简要介绍两个常用的函数。
 
 ### traceback.print_exc()
 
@@ -221,7 +221,7 @@ except Exception:
 
 把 `format_exc()` 的结果写入日志，保留了完整的调用栈信息，事后排查时能看到异常发生的确切位置和调用路径。这是生产环境异常日志的标准做法。
 
-`traceback` 模块还提供了 `print_exception()`、`format_exception()` 等更底层的函数，可以精细控制输出格式。这些函数的详细用法在调试相关章节展开，本节仅介绍最常用的两个便捷函数。
+`traceback` 模块还提供了 `print_exception()`、`format_exception()` 等更底层的函数，可以精细控制输出格式。这些函数的详细用法在调试相关章节展开，本节仅介绍常用的两个便捷函数。
 
 ## 6.11.10 综合示例：任务管理器的调试辅助
 

@@ -45,7 +45,7 @@ print(f"是否连通: {nx.is_connected(G)}, 直径: {nx.diameter(G)}")
 
 **代谢网络**：节点为代谢物、反应或酶，边代表参与或转化关系，常用二分图或超图表示。KEGG、MetaCyc 提供通路数据，ModelSEED 支持从基因组注释重建模型。
 
-**共表达网络**：基于表达数据构建，边表示表达相关性。WGCNA 是最广泛使用的方法，使用软阈值将相关矩阵转为邻接矩阵，识别共表达模块。
+**共表达网络**：基于表达数据构建，边表示表达相关性。WGCNA 是广泛使用的方法，使用软阈值将相关矩阵转为邻接矩阵，识别共表达模块。
 
 **其他常见网络**：信号转导网络（有向，Pathway Commons、SignaLink）、miRNA-靶基因网络（TargetScan、miRDB）、疾病-基因网络（DisGeNET、OMIM）、药物-靶点网络（DrugBank、TTD）、ceRNA 网络（竞争结合 miRNA）。
 
