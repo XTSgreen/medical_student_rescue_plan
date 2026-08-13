@@ -66,6 +66,14 @@
   padding-left: var(--vp-sidebar-width) !important;
 }
 
+/* 移动端（<960px）侧边栏为抽屉浮层，正文需占满全宽，
+   避免被桌面端让位规则误推到右侧 */
+@media (max-width: 959.98px) {
+  .VPContent.has-sidebar {
+    padding-left: 0 !important;
+  }
+}
+
 @media (min-width: 1440px) {
   .VPSidebar {
     padding-left: 0 !important;
