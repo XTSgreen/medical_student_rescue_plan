@@ -267,9 +267,28 @@ export default defineConfig({
               ]
             },
             {
-              text: '第二层 · 数据科学与AI工具箱（建设中）',
+              text: '第二层 · 数据科学与AI工具箱',
               collapsed: true,
-              items: []
+              items: [
+                {
+                  text: 'NumPy 数值计算基础',
+                  collapsed: true,
+                  items: [
+                    { text: '1.1 NumPy 基础与数组对象', link: '/code/python/02-data-science/01-numpy-foundation/001-numpy-basics-and-array-object' },
+                    { text: '1.2 索引、切片与花式索引', link: '/code/python/02-data-science/01-numpy-foundation/002-indexing-slicing-fancy-indexing' },
+                    { text: '1.3 数组形状操作', link: '/code/python/02-data-science/01-numpy-foundation/003-array-shape-operations' },
+                    { text: '1.4 通用函数(ufunc)与向量化运算', link: '/code/python/02-data-science/01-numpy-foundation/004-ufunc-and-vectorization' },
+                    { text: '1.5 聚合统计与矩阵运算', link: '/code/python/02-data-science/01-numpy-foundation/005-aggregation-and-matrix-operations' },
+                    { text: '1.6 广播机制', link: '/code/python/02-data-science/01-numpy-foundation/006-broadcasting' },
+                    { text: '1.7 高级数组操作', link: '/code/python/02-data-science/01-numpy-foundation/007-advanced-array-operations' },
+                    { text: '1.8 数组输入输出(I/O)', link: '/code/python/02-data-science/01-numpy-foundation/008-io' },
+                    { text: '1.9 随机数生成(numpy.random)', link: '/code/python/02-data-science/01-numpy-foundation/009-random-number-generation' },
+                    { text: '1.10 性能与内存优化', link: '/code/python/02-data-science/01-numpy-foundation/010-performance-and-memory' },
+                    { text: '1.11 实用辅助函数', link: '/code/python/02-data-science/01-numpy-foundation/011-utility-functions' },
+                    { text: '1.12 版本与兼容性', link: '/code/python/02-data-science/01-numpy-foundation/012-version-and-compatibility' }
+                  ]
+                }
+              ]
             },
             {
               text: '第三层 · 医学数据处理专向技能（建设中）',

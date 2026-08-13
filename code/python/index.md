@@ -12,8 +12,8 @@ aside: false
   <h3>第一层 · Python 核心语法基础</h3>
 </a>
 
-<a class="module-card" href="/code/python/02-data-science-ai-toolkit/">
-  <h3>第二层 · 数据科学（建设中）</h3>
+<a class="module-card" href="/code/python/02-data-science/01-numpy-foundation/001-numpy-basics-and-array-object">
+  <h3>第二层 · 数据科学（NumPy 数值计算基础）</h3>
 </a>
 
 <a class="module-card" href="/code/python/03-medical-data-processing/">
