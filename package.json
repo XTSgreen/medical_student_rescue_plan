@@ -1,7 +1,7 @@
 {
   "name": "ai-math-foundation",
   "version": "0.1.0",
-  "description": "人工智能的数理基础 - 医学生自救计划数理基础章节",
+  "description": "人工智能的数理基础 - 教程数理基础章节",
   "private": true,
   "type": "module",
   "scripts": {

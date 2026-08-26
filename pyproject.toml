@@ -1,7 +1,7 @@
 [project]
 name = "medical-student-rescue-plan"
 version = "0.1.0"
-description = "医学生逃亡计划 - 帮助医学生/计算机初学者入门互联网开发、R语言与生信分析等领域的教程合集"
+description = "教程 - 帮助医学生/计算机初学者入门互联网开发、R语言与生信分析等领域的教程合集"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [

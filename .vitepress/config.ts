@@ -36,8 +36,8 @@ function registerAdmonitionContainers(md: any) {
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: '医学生自救计划',
-  description: '医学生自救计划 · 互联网开发 / R语言与生信分析 / Python编程 / 人工智能的数学基础',
+  title: '教程',
+  description: '教程 · 互联网开发 / R语言与生信分析 / Python编程 / 人工智能的数学基础',
 
 
   base: '/medical_student_rescue_plan/',
