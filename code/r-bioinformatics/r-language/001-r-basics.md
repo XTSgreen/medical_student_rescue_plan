@@ -614,10 +614,6 @@ standardize(c(1, 2, 3, 4, 5), scale = FALSE)
 
 R 的扩展包从 CRAN 安装，用 `install.packages()` 一次性下载并安装。生物信息学相关的包从 Bioconductor 安装，需要先安装 BiocManager。
 
-::: warning 浏览器中无法运行
-以下代码使用了 `DESeq2`，依赖 Python/TensorFlow/系统环境或 Bioconductor 工具链，无法在浏览器内的 WebR 沙箱中运行。请在本地 R 环境中执行。
-:::
-
 ```r
 # 从 CRAN 安装
 install.packages("ggplot2")
