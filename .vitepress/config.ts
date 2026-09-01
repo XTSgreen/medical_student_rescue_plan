@@ -331,18 +331,6 @@ export default defineConfig({
               ]
             }
           ]
-        },
-
-        {
-          text: '医疗执业环境与职业风险',
-          collapsed: false,
-          items: [
-            { text: '1.1 医疗系统面临的挑战', link: '/code/medical-practice-environment/01-challenges-facing-medical-system' },
-            { text: '1.2 医护人员遭受的多方施压', link: '/code/medical-practice-environment/02-pressure-on-healthcare-workers' },
-            { text: '1.3 医护人员心理健康与自杀预防', link: '/code/medical-practice-environment/03-mental-health-and-suicide-prevention' },
-            { text: '1.4 暴力伤害的犯罪学分析', link: '/code/medical-practice-environment/04-criminological-analysis-of-violence' },
-            { text: '1.5 自杀行为的流行病学分析', link: '/code/medical-practice-environment/05-epidemiological-analysis-of-suicide' }
-          ]
         }
       ]
     },
