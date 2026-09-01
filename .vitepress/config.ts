@@ -287,6 +287,102 @@ export default defineConfig({
                     { text: '1.11 实用辅助函数', link: '/code/python/02-data-science/01-numpy-foundation/011-utility-functions' },
                     { text: '1.12 版本与兼容性', link: '/code/python/02-data-science/01-numpy-foundation/012-version-and-compatibility' }
                   ]
+                },
+                {
+                  text: 'Pandas 数据分析',
+                  collapsed: true,
+                  items: [
+                    { text: '1.1 Pandas 概述与核心数据结构', link: '/code/python/02-data-science/02-pandas-data-analysis/001-pandas-overview-and-core-structures' },
+                    { text: '1.2 数据查看与探索', link: '/code/python/02-data-science/02-pandas-data-analysis/002-data-inspection-and-exploration' },
+                    { text: '1.3 索引与选择', link: '/code/python/02-data-science/02-pandas-data-analysis/003-indexing-and-selection' },
+                    { text: '1.4 数据选择与过滤进阶', link: '/code/python/02-data-science/02-pandas-data-analysis/004-advanced-selection-and-filtering' },
+                    { text: '1.5 数据清洗与预处理', link: '/code/python/02-data-science/02-pandas-data-analysis/005-data-cleaning-and-preprocessing' },
+                    { text: '1.6 数据转换与变形', link: '/code/python/02-data-science/02-pandas-data-analysis/006-data-transformation-and-reshaping' },
+                    { text: '1.7 分组聚合与转换', link: '/code/python/02-data-science/02-pandas-data-analysis/007-groupby-aggregation-and-transformation' },
+                    { text: '1.8 时间序列处理', link: '/code/python/02-data-science/02-pandas-data-analysis/008-time-series-processing' },
+                    { text: '1.9 输入输出(I/O)', link: '/code/python/02-data-science/02-pandas-data-analysis/009-input-output' },
+                    { text: '1.10 窗口与滚动操作', link: '/code/python/02-data-science/02-pandas-data-analysis/010-rolling-and-window-operations' },
+                    { text: '1.11 性能优化与内存管理', link: '/code/python/02-data-science/02-pandas-data-analysis/011-performance-optimization-and-memory' },
+                    { text: '1.12 高级索引与层次化', link: '/code/python/02-data-science/02-pandas-data-analysis/012-advanced-indexing-and-hierarchical' },
+                    { text: '1.13 可视化集成', link: '/code/python/02-data-science/02-pandas-data-analysis/013-visualization-integration' },
+                    { text: '1.14 数据处理管道', link: '/code/python/02-data-science/02-pandas-data-analysis/014-data-processing-pipeline' },
+                    { text: '1.15 分类数据与有序分类', link: '/code/python/02-data-science/02-pandas-data-analysis/015-categorical-data' },
+                    { text: '1.16 稀疏数据', link: '/code/python/02-data-science/02-pandas-data-analysis/016-sparse-data' },
+                    { text: '1.17 字符串处理进阶', link: '/code/python/02-data-science/02-pandas-data-analysis/017-string-processing-advanced' },
+                    { text: '1.18 缺失值表示与插值', link: '/code/python/02-data-science/02-pandas-data-analysis/018-missing-data-and-interpolation' },
+                    { text: '1.19 分组与窗口高级功能', link: '/code/python/02-data-science/02-pandas-data-analysis/019-advanced-groupby-and-window' },
+                    { text: '1.20 合并连接详解', link: '/code/python/02-data-science/02-pandas-data-analysis/020-merge-join-options' },
+                    { text: '1.21 时间序列高级特性', link: '/code/python/02-data-science/02-pandas-data-analysis/021-time-series-advanced' },
+                    { text: '1.22 选项与设置', link: '/code/python/02-data-science/02-pandas-data-analysis/022-options-and-settings' },
+                    { text: '1.23 测试工具', link: '/code/python/02-data-science/02-pandas-data-analysis/023-testing-tools' },
+                    { text: '1.24 兼容性与版本', link: '/code/python/02-data-science/02-pandas-data-analysis/024-compatibility-and-version' }
+                  ]
+                },
+                {
+                  text: 'Matplotlib 可视化',
+                  collapsed: true,
+                  items: [
+                    { text: '1.1 Matplotlib 基础架构', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/001-matplotlib-basics-and-architecture' },
+                    { text: '1.2 图形容器与面向对象接口', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/002-figure-and-axes-objects' },
+                    { text: '1.3 基本图表类型', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/003-basic-chart-types' },
+                    { text: '1.4 高级图表类型', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/004-advanced-chart-types' },
+                    { text: '1.5 子图与布局管理', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/005-subplots-and-layout' },
+                    { text: '1.6 坐标轴与刻度控制', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/006-axis-and-tick-control' },
+                    { text: '1.7 脊柱与边框控制', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/007-spines-and-border-control' },
+                    { text: '1.8 图例与注释', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/008-legend-and-annotation' },
+                    { text: '1.9 颜色与色彩映射', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/009-colors-and-colormaps' },
+                    { text: '1.10 样式与主题', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/010-styles-and-themes' },
+                    { text: '1.11 网格与辅助线', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/011-grid-and-reference-lines' },
+                    { text: '1.12 填充与图形对象', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/012-fill-and-patches' },
+                    { text: '1.13 交互与事件', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/013-interaction-and-events' },
+                    { text: '1.14 动画', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/014-animation' },
+                    { text: '1.15 输入输出与保存', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/015-input-output-and-saving' },
+                    { text: '1.16 文本与字体管理', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/016-text-and-font-management' },
+                    { text: '1.17 路径与变换', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/017-paths-and-transforms' }
+                  ]
+                },
+                {
+                  text: 'Seaborn 统计绘图',
+                  collapsed: true,
+                  items: [
+                    { text: '1.1 Seaborn 基础与主题', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/018-seaborn-basics-and-themes' },
+                    { text: '1.2 调色板', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/019-seaborn-palettes' },
+                    { text: '1.3 统计关系绘图', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/020-relational-plots' },
+                    { text: '1.4 分类数据绘图', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/021-categorical-plots' },
+                    { text: '1.5 分布绘图', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/022-distribution-plots' },
+                    { text: '1.6 回归与模型绘图', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/023-regression-and-model-plots' },
+                    { text: '1.7 矩阵图与热图', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/024-matrix-plots-and-heatmaps' },
+                    { text: '1.8 多图网格系统', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/025-facetgrid-system' },
+                    { text: '1.9 绘图美学与参数细化', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/026-aesthetics-and-tuning' },
+                    { text: '1.10 工具函数与辅助', link: '/code/python/02-data-science/03-matplotlib-seaborn-visualization/027-utility-functions' }
+                  ]
+                },
+                {
+                  text: 'Scikit-learn 机器学习',
+                  collapsed: true,
+                  items: [
+                    { text: '1.1 基础类与工具', link: '/code/python/02-data-science/04-scikit-learn-ml/001-scikit-learn-basics-and-estimators' },
+                    { text: '1.2 线性模型', link: '/code/python/02-data-science/04-scikit-learn-ml/002-linear-models' },
+                    { text: '1.3 支持向量机与判别分析', link: '/code/python/02-data-science/04-scikit-learn-ml/003-svm-and-discriminant-analysis' },
+                    { text: '1.4 最近邻', link: '/code/python/02-data-science/04-scikit-learn-ml/004-nearest-neighbors' },
+                    { text: '1.5 内核岭回归与高斯过程', link: '/code/python/02-data-science/04-scikit-learn-ml/005-kernel-ridge-and-gaussian-process' },
+                    { text: '1.6 朴素贝叶斯与交叉分解', link: '/code/python/02-data-science/04-scikit-learn-ml/006-naive-bayes-and-cross-decomposition' },
+                    { text: '1.7 决策树', link: '/code/python/02-data-science/04-scikit-learn-ml/007-decision-trees' },
+                    { text: '1.8 集成方法', link: '/code/python/02-data-science/04-scikit-learn-ml/008-ensemble-methods' },
+                    { text: '1.9 多类多标签分类', link: '/code/python/02-data-science/04-scikit-learn-ml/009-multiclass-and-multilabel' },
+                    { text: '1.10 特征选择', link: '/code/python/02-data-science/04-scikit-learn-ml/010-feature-selection' },
+                    { text: '1.11 半监督学习与概率校准', link: '/code/python/02-data-science/04-scikit-learn-ml/011-semi-supervised-and-calibration' },
+                    { text: '1.12 神经网络与保序回归', link: '/code/python/02-data-science/04-scikit-learn-ml/012-neural-networks-and-isotonic' },
+                    { text: '1.13 聚类', link: '/code/python/02-data-science/04-scikit-learn-ml/013-clustering' },
+                    { text: '1.14 矩阵分解与流形学习', link: '/code/python/02-data-science/04-scikit-learn-ml/014-decomposition-and-manifold' },
+                    { text: '1.15 协方差估计与异常检测', link: '/code/python/02-data-science/04-scikit-learn-ml/015-covariance-and-anomaly-detection' },
+                    { text: '1.16 数据转换与预处理', link: '/code/python/02-data-science/04-scikit-learn-ml/016-preprocessing-and-imputation' },
+                    { text: '1.17 数据集', link: '/code/python/02-data-science/04-scikit-learn-ml/017-datasets' },
+                    { text: '1.18 模型选择与交叉验证', link: '/code/python/02-data-science/04-scikit-learn-ml/018-model-selection-and-cross-validation' },
+                    { text: '1.19 模型评估指标', link: '/code/python/02-data-science/04-scikit-learn-ml/019-model-evaluation-metrics' },
+                    { text: '1.20 管道与组合估计器', link: '/code/python/02-data-science/04-scikit-learn-ml/020-pipeline-and-compose' },
+                    { text: '1.21 模型检查、实用工具与配置', link: '/code/python/02-data-science/04-scikit-learn-ml/021-model-inspection-and-utility-tools' }
+                  ]
                 }
               ]
             },

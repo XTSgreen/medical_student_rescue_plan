@@ -1,8 +1,9 @@
----
+***
+
 title: 教程
 layout: doc
 aside: false
----
+------------
 
 # 教程
 
@@ -11,7 +12,6 @@ aside: false
 ## 项目概览
 
 本教程目前包含多个模块，左侧侧边栏可以层层展开，按章节阅读。
-
 
 ## 项目介绍
 
@@ -23,9 +23,9 @@ aside: false
 
 **教程站点**：[VitePress](https://vitepress.dev/) 构建的静态文档站点
 
-**数学公式**：MathJax 3 
+**数学公式**：MathJax 3
 
-**交互演示**：Three.js 实现 
+**交互演示**：Three.js 实现
 
 **教程文本文件**：.md
 
@@ -48,3 +48,4 @@ npm run build
 # 预览构建产物
 npm run preview
 ```
+
