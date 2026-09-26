@@ -413,10 +413,36 @@ export default defineConfig({
               ]
             },
             {
-              text: '第二章 · 概率与统计',
+              text: '第二章 · 概率论与统计推断',
               collapsed: false,
               items: [
-                { text: '2.1 概率论基础（建设中）', link: '/code/ai-math/ch2-probability-statistics/' }
+                { text: '本章导览', link: '/code/ai-math/ch2-probability-statistics/' },
+                {
+                  text: '概率论',
+                  collapsed: false,
+                  items: [
+                    { text: '2.1 概率的公理化与条件概率', link: '/code/ai-math/ch2-probability-statistics/ch2_1-probability-space' },
+                    { text: '2.2 随机变量与分布函数', link: '/code/ai-math/ch2-probability-statistics/ch2_2-random-variables' },
+                    { text: '2.3 数字特征与矩', link: '/code/ai-math/ch2-probability-statistics/ch2_3-moments' },
+                    { text: '2.4 常见离散分布', link: '/code/ai-math/ch2-probability-statistics/ch2_4-discrete-distributions' },
+                    { text: '2.5 常见连续分布', link: '/code/ai-math/ch2-probability-statistics/ch2_5-continuous-distributions' },
+                    { text: '2.6 多维随机变量与多元正态分布', link: '/code/ai-math/ch2-probability-statistics/ch2_6-multivariate-normal' },
+                    { text: '2.7 极限定理与集中不等式', link: '/code/ai-math/ch2-probability-statistics/ch2_7-limit-theorems' },
+                    { text: '2.8 随机过程与概率图模型', link: '/code/ai-math/ch2-probability-statistics/ch2_8-stochastic-processes' }
+                  ]
+                },
+                {
+                  text: '统计推断',
+                  collapsed: false,
+                  items: [
+                    { text: '2.9 统计推断的基本框架', link: '/code/ai-math/ch2-probability-statistics/ch2_9-inference-framework' },
+                    { text: '2.10 点估计与区间估计', link: '/code/ai-math/ch2-probability-statistics/ch2_10-point-and-interval-estimation' },
+                    { text: '2.11 假设检验与多重比较', link: '/code/ai-math/ch2-probability-statistics/ch2_11-hypothesis-testing' },
+                    { text: '2.12 贝叶斯统计推断与计算', link: '/code/ai-math/ch2-probability-statistics/ch2_12-bayesian-inference' },
+                    { text: '2.13 回归分析与线性模型', link: '/code/ai-math/ch2-probability-statistics/ch2_13-regression' },
+                    { text: '2.14 高维统计与因果推断', link: '/code/ai-math/ch2-probability-statistics/ch2_14-high-dimensional-and-causal' }
+                  ]
+                }
               ]
             },
             {

@@ -14,11 +14,15 @@ aside: false
 </a>
 
 <a class="module-card" href="/code/ai-math/ch2-probability-statistics/">
-  <h3>概率与统计</h3>
+  <h3>概率论与统计推断</h3>
 
 </a>
 
 <a class="module-card" href="/code/ai-math/ch3-optimization/">
   <h3>最优化</h3>
 
+</a>
+
+<a class="module-card" href="/code/ai-math/ch4-information-theory/">
+  <h3>信息论</h3>
 </a>
