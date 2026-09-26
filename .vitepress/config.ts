@@ -449,7 +449,23 @@ export default defineConfig({
               text: '第三章 · 最优化',
               collapsed: false,
               items: [
-                { text: '3.1 凸优化基础（建设中）', link: '/code/ai-math/ch3-optimization/' }
+                { text: '本章导览', link: '/code/ai-math/ch3-optimization/' },
+                { text: '3.1 优化问题的语言与分类', link: '/code/ai-math/ch3-optimization/ch3_1-optimization-problems' }
+              ]
+            },
+            {
+              text: '第四章 · 信息论',
+              collapsed: false,
+              items: [
+                { text: '本章导览', link: '/code/ai-math/ch4-information-theory/' },
+                { text: '4.1 基础熵与互信息', link: '/code/ai-math/ch4-information-theory/ch4_1-entropy-and-mutual-information' },
+                { text: '4.2 散度、距离与信息不等式', link: '/code/ai-math/ch4-information-theory/ch4_2-divergences' },
+                { text: '4.3 最大熵、指数族与信息几何', link: '/code/ai-math/ch4-information-theory/ch4_3-maxent-and-information-geometry' },
+                { text: '4.4 信源编码与率失真理论', link: '/code/ai-math/ch4-information-theory/ch4_4-source-coding' },
+                { text: '4.5 信道容量与编码定理', link: '/code/ai-math/ch4-information-theory/ch4_5-channel-capacity' },
+                { text: '4.6 信息论与假设检验、大偏差', link: '/code/ai-math/ch4-information-theory/ch4_6-hypothesis-testing-large-deviations' },
+                { text: '4.7 信息论与机器学习', link: '/code/ai-math/ch4-information-theory/ch4_7-information-theory-in-ml' },
+                { text: '4.8 算法信息论与前沿方向', link: '/code/ai-math/ch4-information-theory/ch4_8-algorithmic-information-and-frontiers' }
               ]
             }
           ]
