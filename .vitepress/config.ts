@@ -455,7 +455,8 @@ export default defineConfig({
                 { text: '3.3 无约束优化的最优性条件与梯度法', link: '/code/ai-math/ch3-optimization/ch3_3-unconstrained-descent' },
                 { text: '3.4 一阶方法的进展', link: '/code/ai-math/ch3-optimization/ch3_4-first-order-methods' },
                 { text: '3.5 二阶方法与拟牛顿法', link: '/code/ai-math/ch3-optimization/ch3_5-second-order-methods' },
-                { text: '3.6 约束优化与对偶理论', link: '/code/ai-math/ch3-optimization/ch3_6-constrained-duality' }
+                { text: '3.6 约束优化与对偶理论', link: '/code/ai-math/ch3-optimization/ch3_6-constrained-duality' },
+                { text: '3.7 近端方法与稀疏优化', link: '/code/ai-math/ch3-optimization/ch3_7-proximal-splitting' }
               ]
             },
             {
