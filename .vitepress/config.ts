@@ -457,7 +457,8 @@ export default defineConfig({
                 { text: '3.5 二阶方法与拟牛顿法', link: '/code/ai-math/ch3-optimization/ch3_5-second-order-methods' },
                 { text: '3.6 约束优化与对偶理论', link: '/code/ai-math/ch3-optimization/ch3_6-constrained-duality' },
                 { text: '3.7 近端方法与稀疏优化', link: '/code/ai-math/ch3-optimization/ch3_7-proximal-splitting' },
-                { text: '3.8 非凸优化与机器学习', link: '/code/ai-math/ch3-optimization/ch3_8-nonconvex-ml' }
+                { text: '3.8 非凸优化与机器学习', link: '/code/ai-math/ch3-optimization/ch3_8-nonconvex-ml' },
+                { text: '3.9 无梯度优化与贝叶斯优化', link: '/code/ai-math/ch3-optimization/ch3_9-derivative-free-bayesian' }
               ]
             },
             {

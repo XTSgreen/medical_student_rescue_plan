@@ -23,7 +23,7 @@ aside: false
 | [3.6 约束优化与对偶理论](/code/ai-math/ch3-optimization/ch3_6-constrained-duality) | 拉格朗日函数、KKT 条件、对偶问题、强弱对偶、Slater 条件、罚函数与增广拉格朗日、内点法、锥规划 |
 | [3.7 近端方法与稀疏优化](/code/ai-math/ch3-optimization/ch3_7-proximal-splitting) | 近端算子与 Moreau 包络、近端梯度与 ISTA/FISTA、算子分裂、ADMM、Frank-Wolfe、Lasso 的求解 |
 | [3.8 非凸优化与机器学习](/code/ai-math/ch3-optimization/ch3_8-nonconvex-ml) | 鞍点与逃逸、损失景观、过参数化与插值、双下降、隐式正则、平坦极小值、深度学习优化实践 |
-| 3.9 无梯度优化与贝叶斯优化 | 网格与随机搜索、Nelder-Mead 与模式搜索、进化策略与 CMA-ES、贝叶斯优化与采集函数、超参数调优 |
+| [3.9 无梯度优化与贝叶斯优化](/code/ai-math/ch3-optimization/ch3_9-derivative-free-bayesian) | 网格与随机搜索、Nelder-Mead 与模式搜索、进化策略与 CMA-ES、贝叶斯优化与采集函数、超参数调优 |
 
 ## 学习路径
 
