@@ -450,7 +450,10 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: '本章导览', link: '/code/ai-math/ch3-optimization/' },
-                { text: '3.1 优化问题的语言与分类', link: '/code/ai-math/ch3-optimization/ch3_1-optimization-problems' }
+                { text: '3.1 优化问题的语言与分类', link: '/code/ai-math/ch3-optimization/ch3_1-optimization-problems' },
+                { text: '3.2 凸集与凸函数', link: '/code/ai-math/ch3-optimization/ch3_2-convexity' },
+                { text: '3.3 无约束优化的最优性条件与梯度法', link: '/code/ai-math/ch3-optimization/ch3_3-unconstrained-descent' },
+                { text: '3.4 一阶方法的进展', link: '/code/ai-math/ch3-optimization/ch3_4-first-order-methods' }
               ]
             },
             {
