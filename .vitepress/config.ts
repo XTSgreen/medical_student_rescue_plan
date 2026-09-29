@@ -475,6 +475,14 @@ export default defineConfig({
                 { text: '4.7 信息论与机器学习', link: '/code/ai-math/ch4-information-theory/ch4_7-information-theory-in-ml' },
                 { text: '4.8 算法信息论与前沿方向', link: '/code/ai-math/ch4-information-theory/ch4_8-algorithmic-information-and-frontiers' }
               ]
+            },
+            {
+              text: '第五章 · 数学分析',
+              collapsed: false,
+              items: [
+                { text: '本章导览', link: '/code/ai-math/ch5-analysis/' },
+                { text: '5.1 实数、完备性与极限的语言', link: '/code/ai-math/ch5-analysis/ch5_1-real-numbers-limits' }
+              ]
             }
           ]
         }

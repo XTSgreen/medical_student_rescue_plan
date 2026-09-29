@@ -25,4 +25,10 @@ aside: false
 
 <a class="module-card" href="/code/ai-math/ch4-information-theory/">
   <h3>信息论</h3>
+
+</a>
+
+<a class="module-card" href="/code/ai-math/ch5-analysis/">
+  <h3>数学分析</h3>
+
 </a>
