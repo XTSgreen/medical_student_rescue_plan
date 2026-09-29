@@ -15,19 +15,19 @@ aside: false
 
 ## 结构
 
-| 节 | 主题 |
-|------|------|
-| [4.1 基础熵与互信息](/code/ai-math/ch4-information-theory/ch4_1-entropy-and-mutual-information) | 自信息与熵、联合熵与条件熵、链式法则、互信息、数据处理不等式与 Fano 不等式、熵率、渐近均分与典型性 |
-| [4.2 散度、距离与信息不等式](/code/ai-math/ch4-information-theory/ch4_2-divergences) | KL 散度及其性质、交叉熵与 JS 散度、f 散度、Rényi 与 Tsallis 散度、Bregman 散度、总变差、Hellinger、Wasserstein、最大均值差异 |
-| [4.3 最大熵、指数族与信息几何](/code/ai-math/ch4-information-theory/ch4_3-maxent-and-information-geometry) | 最大熵原理、最小交叉熵、最大熵模型、指数族与充分统计量、Fisher 度量、信息投影、自然梯度 |
-| [4.4 信源编码与率失真理论](/code/ai-math/ch4-information-theory/ch4_4-source-coding) | 香农第一定理、Kraft 不等式、Huffman 与算术编码、LZ 编码、微分熵、率失真函数、熵功率不等式 |
-| [4.5 信道容量与编码定理](/code/ai-math/ch4-information-theory/ch4_5-channel-capacity) | 香农第二定理、信道容量、高斯信道与功率约束、注水算法、MIMO 容量、反馈容量与多用户信道 |
-| [4.6 信息论与假设检验、大偏差](/code/ai-math/ch4-information-theory/ch4_6-hypothesis-testing-large-deviations) | 信息不等式与 Cramér-Rao 下界、Chernoff 信息、Hoeffding 界、大偏差原理、Sanov 定理、Chernoff-Stein 引理 |
-| [4.7 信息论与机器学习](/code/ai-math/ch4-information-theory/ch4_7-information-theory-in-ml) | 信息瓶颈、互信息估计与 MINE、InfoNCE 与对比学习、KL 正则与 ELBO、PAC-Bayes 与泛化界 |
-| [4.8 算法信息论与前沿方向](/code/ai-math/ch4-information-theory/ch4_8-algorithmic-information-and-frontiers) | 柯尔莫哥洛夫复杂度、最小描述长度与奥卡姆剃刀、差分隐私、量子信息论初步 |
+| 节                                                                                                            | 主题                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [4.1 基础熵与互信息](/code/ai-math/ch4-information-theory/ch4_1-entropy-and-mutual-information)                | 自信息与熵、联合熵与条件熵、链式法则、互信息、数据处理不等式与 Fano 不等式、熵率、渐近均分与典型性                            |
+| [4.2 散度、距离与信息不等式](/code/ai-math/ch4-information-theory/ch4_2-divergences)                           | KL 散度及其性质、交叉熵与 JS 散度、f 散度、Rényi 与 Tsallis 散度、Bregman 散度、总变差、Hellinger、Wasserstein、最大均值差异 |
+| [4.3 最大熵、指数族与信息几何](/code/ai-math/ch4-information-theory/ch4_3-maxent-and-information-geometry)     | 最大熵原理、最小交叉熵、最大熵模型、指数族与充分统计量、Fisher 度量、信息投影、自然梯度                                       |
+| [4.4 信源编码与率失真理论](/code/ai-math/ch4-information-theory/ch4_4-source-coding)                           | 香农第一定理、Kraft 不等式、Huffman 与算术编码、LZ 编码、微分熵、率失真函数、熵功率不等式                                     |
+| [4.5 信道容量与编码定理](/code/ai-math/ch4-information-theory/ch4_5-channel-capacity)                          | 香农第二定理、信道容量、高斯信道与功率约束、注水算法、MIMO 容量、反馈容量与多用户信道                                         |
+| [4.6 信息论与假设检验、大偏差](/code/ai-math/ch4-information-theory/ch4_6-hypothesis-testing-large-deviations) | 信息不等式与 Cramér-Rao 下界、Chernoff 信息、Hoeffding 界、大偏差原理、Sanov 定理、Chernoff-Stein 引理                       |
+| [4.7 信息论与机器学习](/code/ai-math/ch4-information-theory/ch4_7-information-theory-in-ml)                    | 信息瓶颈、互信息估计与 MINE、InfoNCE 与对比学习、KL 正则与 ELBO、PAC-Bayes 与泛化界                                           |
+| [4.8 算法信息论与前沿方向](/code/ai-math/ch4-information-theory/ch4_8-algorithmic-information-and-frontiers)   | 柯尔莫哥洛夫复杂度、最小描述长度与奥卡姆剃刀、差分隐私、量子信息论初步                                                        |
 
 ## 学习路径
 
 4.1 与 4.2 是语言层：熵与互信息的定义、性质与相互关系，以及各类散度的性质差别。这两节读完应当能够对给定的分布计算熵与互信息，并判断该用哪个度量。4.3 把散度与参数空间结合，得到信息几何的框架，它为理解自然梯度与变分推断提供几何图像。4.4 与 4.5 是信息论的两条经典主线，分别处理压缩与传输，它们的结论（率失真函数与信道容量）是衡量任何实际系统效率的基准。4.6 建立与统计推断的连接，大偏差理论给出的误差指数与第二章的假设检验直接对应。4.7 与 4.8 面向应用与前沿，把前面的工具用到表示学习、生成模型与隐私保护上。
 
-与前几章的接口有三处。Fisher 信息在 2.9 节以 Cramér-Rao 下界的形式出现，在本章 4.3 节以度量张量的形式重新出现，两者是同一个量在推断与几何两个视角下的表述。最大熵原理给出的优化问题（4.3 节）属于第三章讨论的凸优化问题，指数族对数配分函数的凸性决定了求解方法。变分推断的证据下界（2.12 节）在本章 4.7 节被解释为互信息与 KL 散度的组合。
+与前几章的联系有三处。Fisher 信息在 2.9 节以 Cramér-Rao 下界的形式出现，在本章 4.3 节以度量张量的形式重新出现，两者是同一个量在推断与几何两个视角下的表述。最大熵原理给出的优化问题（4.3 节）属于第三章讨论的凸优化问题，指数族对数配分函数的凸性决定了求解方法。变分推断的证据下界（2.12 节）在本章 4.7 节被解释为互信息与 KL 散度的组合。
