@@ -487,7 +487,8 @@ export default defineConfig({
                 { text: '5.4 一元微分学与局部近似', link: '/code/ai-math/ch5-analysis/ch5_4-differentiation' },
                 { text: '5.5 一元积分学与微积分基本定理', link: '/code/ai-math/ch5-analysis/ch5_5-integration' },
                 { text: '5.6 函数列、函数项级数与一致收敛', link: '/code/ai-math/ch5-analysis/ch5_6-uniform-convergence' },
-                { text: '5.7 幂级数、Fourier 分析与正交展开', link: '/code/ai-math/ch5-analysis/ch5_7-power-fourier-series' }
+                { text: '5.7 幂级数、Fourier 分析与正交展开', link: '/code/ai-math/ch5-analysis/ch5_7-power-fourier-series' },
+                { text: '5.8 多元微分学与微分形式初步', link: '/code/ai-math/ch5-analysis/ch5_8-multivariable-calculus' }
               ]
             }
           ]
