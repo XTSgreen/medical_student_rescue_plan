@@ -17,8 +17,8 @@ aside: false
 | [5.2 数列、级数与无穷过程](/code/ai-math/ch5-analysis/ch5_2-sequences-series) | 极限运算、渐近记号、级数判别法、条件收敛、求和加速、浮点求和误差 |
 | [5.3 函数的极限、连续与初等函数](/code/ai-math/ch5-analysis/ch5_3-continuity-elementary) | ε-δ 语言、一致连续、间断点、连续函数性质、连续模与数值稳定性 |
 | [5.4 一元微分学与局部近似](/code/ai-math/ch5-analysis/ch5_4-differentiation) | 导数与微分、中值定理、Taylor 公式、数值微分、迭代收敛阶、自动微分 |
-| 5.5 一元积分学与微积分基本定理 | Riemann 可积性、微积分基本定理、反常积分、Gamma 与 Beta 函数、数值求积 |
-| 5.6 函数列、函数项级数与一致收敛 | 一致收敛、极限交换、Arzelà-Ascoli、多项式逼近与 Runge 现象 |
+| [5.5 一元积分学与微积分基本定理](/code/ai-math/ch5-analysis/ch5_5-integration) | Riemann 可积性、微积分基本定理、反常积分、Gamma 与 Beta 函数、数值求积 |
+| [5.6 函数列、函数项级数与一致收敛](/code/ai-math/ch5-analysis/ch5_6-uniform-convergence) | 一致收敛、极限交换、Arzelà-Ascoli、多项式逼近与 Runge 现象 |
 | 5.7 幂级数、Fourier 分析与正交展开 | 收敛半径、Taylor 级数、Fourier 级数、Gibbs 现象、DFT 与 FFT、正交多项式 |
 | 5.8 多元微分学与微分形式初步 | 全微分与梯度、Hesse 矩阵、隐函数与反函数定理、Lagrange 乘子、外微分 |
 | 5.9 重积分、曲线曲面积分与向量分析 | Fubini 与换元、曲线曲面积分、Green 与 Gauss 与 Stokes 公式、Monte Carlo 积分 |
