@@ -23,7 +23,7 @@ aside: false
 | [5.8 多元微分学与微分形式初步](/code/ai-math/ch5-analysis/ch5_8-multivariable-calculus) | 全微分与梯度、Hesse 矩阵、隐函数与反函数定理、Lagrange 乘子、外微分 |
 | [5.9 重积分、曲线曲面积分与向量分析](/code/ai-math/ch5-analysis/ch5_9-multiple-integrals-vector-analysis) | Fubini 与换元、曲线曲面积分、Green 与 Gauss 与 Stokes 公式、Monte Carlo 积分 |
 | [5.10 测度与 Lebesgue 积分初步](/code/ai-math/ch5-analysis/ch5_10-measure-lebesgue) | 可测集与可测函数、三大收敛定理、Lp 空间、Radon-Nikodym 与绝对连续 |
-| 5.11 曲线曲面几何与变分法初步 | 曲率与测地线、Euler-Lagrange 方程、Sobolev 空间与弱解、有限元初步 |
+| [5.11 曲线曲面几何与变分法初步](/code/ai-math/ch5-analysis/ch5_11-geometry-variational) | 曲率与测地线、Euler-Lagrange 方程、Sobolev 空间与弱解、有限元初步 |
 | 5.12 渐近分析与特殊函数 | Laplace 方法与鞍点法、摄动与边界层、特殊函数、渐近在算法分析中的用法 |
 | 5.13 选读：常微分方程与动力系统视角 | 存在唯一性、相平面与稳定性、数值解法与刚性方程 |
 
