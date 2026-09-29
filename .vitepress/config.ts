@@ -489,7 +489,8 @@ export default defineConfig({
                 { text: '5.6 函数列、函数项级数与一致收敛', link: '/code/ai-math/ch5-analysis/ch5_6-uniform-convergence' },
                 { text: '5.7 幂级数、Fourier 分析与正交展开', link: '/code/ai-math/ch5-analysis/ch5_7-power-fourier-series' },
                 { text: '5.8 多元微分学与微分形式初步', link: '/code/ai-math/ch5-analysis/ch5_8-multivariable-calculus' },
-                { text: '5.9 重积分、曲线曲面积分与向量分析', link: '/code/ai-math/ch5-analysis/ch5_9-multiple-integrals-vector-analysis' }
+                { text: '5.9 重积分、曲线曲面积分与向量分析', link: '/code/ai-math/ch5-analysis/ch5_9-multiple-integrals-vector-analysis' },
+                { text: '5.10 测度与 Lebesgue 积分初步', link: '/code/ai-math/ch5-analysis/ch5_10-measure-lebesgue' }
               ]
             }
           ]
