@@ -486,7 +486,8 @@ export default defineConfig({
                 { text: '5.3 函数的极限、连续与初等函数', link: '/code/ai-math/ch5-analysis/ch5_3-continuity-elementary' },
                 { text: '5.4 一元微分学与局部近似', link: '/code/ai-math/ch5-analysis/ch5_4-differentiation' },
                 { text: '5.5 一元积分学与微积分基本定理', link: '/code/ai-math/ch5-analysis/ch5_5-integration' },
-                { text: '5.6 函数列、函数项级数与一致收敛', link: '/code/ai-math/ch5-analysis/ch5_6-uniform-convergence' }
+                { text: '5.6 函数列、函数项级数与一致收敛', link: '/code/ai-math/ch5-analysis/ch5_6-uniform-convergence' },
+                { text: '5.7 幂级数、Fourier 分析与正交展开', link: '/code/ai-math/ch5-analysis/ch5_7-power-fourier-series' }
               ]
             }
           ]
