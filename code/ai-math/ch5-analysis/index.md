@@ -25,7 +25,7 @@ aside: false
 | [5.10 测度与 Lebesgue 积分初步](/code/ai-math/ch5-analysis/ch5_10-measure-lebesgue) | 可测集与可测函数、三大收敛定理、Lp 空间、Radon-Nikodym 与绝对连续 |
 | [5.11 曲线曲面几何与变分法初步](/code/ai-math/ch5-analysis/ch5_11-geometry-variational) | 曲率与测地线、Euler-Lagrange 方程、Sobolev 空间与弱解、有限元初步 |
 | [5.12 渐近分析与特殊函数](/code/ai-math/ch5-analysis/ch5_12-asymptotics-special-functions) | Laplace 方法与鞍点法、摄动与边界层、特殊函数、渐近在算法分析中的用法 |
-| 5.13 选读：常微分方程与动力系统视角 | 存在唯一性、相平面与稳定性、数值解法与刚性方程 |
+| [5.13 选读：常微分方程与动力系统视角](/code/ai-math/ch5-analysis/ch5_13-odes-dynamical-systems) | 存在唯一性、相平面与稳定性、数值解法与刚性方程 |
 
 ## 学习路径
 

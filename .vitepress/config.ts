@@ -492,7 +492,8 @@ export default defineConfig({
                 { text: '5.9 重积分、曲线曲面积分与向量分析', link: '/code/ai-math/ch5-analysis/ch5_9-multiple-integrals-vector-analysis' },
                 { text: '5.10 测度与 Lebesgue 积分初步', link: '/code/ai-math/ch5-analysis/ch5_10-measure-lebesgue' },
                 { text: '5.11 曲线曲面几何与变分法初步', link: '/code/ai-math/ch5-analysis/ch5_11-geometry-variational' },
-                { text: '5.12 渐近分析与特殊函数', link: '/code/ai-math/ch5-analysis/ch5_12-asymptotics-special-functions' }
+                { text: '5.12 渐近分析与特殊函数', link: '/code/ai-math/ch5-analysis/ch5_12-asymptotics-special-functions' },
+                { text: '5.13 选读：常微分方程与动力系统视角', link: '/code/ai-math/ch5-analysis/ch5_13-odes-dynamical-systems' }
               ]
             }
           ]
