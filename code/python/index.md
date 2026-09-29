@@ -16,9 +16,6 @@ aside: false
   <h3>第二层 · 数据科学（NumPy 数值计算基础）</h3>
 </a>
 
-<a class="module-card" href="/code/python/03-medical-data-processing/">
-  <h3>第三层 · 科研专向技能（建设中）</h3>
-</a>
 
 ## 贯穿教程的实战项目
 
