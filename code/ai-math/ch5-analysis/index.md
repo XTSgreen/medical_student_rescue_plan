@@ -21,7 +21,7 @@ aside: false
 | [5.6 函数列、函数项级数与一致收敛](/code/ai-math/ch5-analysis/ch5_6-uniform-convergence) | 一致收敛、极限交换、Arzelà-Ascoli、多项式逼近与 Runge 现象 |
 | [5.7 幂级数、Fourier 分析与正交展开](/code/ai-math/ch5-analysis/ch5_7-power-fourier-series) | 收敛半径、Taylor 级数、Fourier 级数、Gibbs 现象、DFT 与 FFT、正交多项式 |
 | [5.8 多元微分学与微分形式初步](/code/ai-math/ch5-analysis/ch5_8-multivariable-calculus) | 全微分与梯度、Hesse 矩阵、隐函数与反函数定理、Lagrange 乘子、外微分 |
-| 5.9 重积分、曲线曲面积分与向量分析 | Fubini 与换元、曲线曲面积分、Green 与 Gauss 与 Stokes 公式、Monte Carlo 积分 |
+| [5.9 重积分、曲线曲面积分与向量分析](/code/ai-math/ch5-analysis/ch5_9-multiple-integrals-vector-analysis) | Fubini 与换元、曲线曲面积分、Green 与 Gauss 与 Stokes 公式、Monte Carlo 积分 |
 | 5.10 测度与 Lebesgue 积分初步 | 可测集与可测函数、三大收敛定理、Lp 空间、Radon-Nikodym 与绝对连续 |
 | 5.11 曲线曲面几何与变分法初步 | 曲率与测地线、Euler-Lagrange 方程、Sobolev 空间与弱解、有限元初步 |
 | 5.12 渐近分析与特殊函数 | Laplace 方法与鞍点法、摄动与边界层、特殊函数、渐近在算法分析中的用法 |
