@@ -482,7 +482,9 @@ export default defineConfig({
               items: [
                 { text: '本章导览', link: '/code/ai-math/ch5-analysis/' },
                 { text: '5.1 实数、完备性与极限的语言', link: '/code/ai-math/ch5-analysis/ch5_1-real-numbers-limits' },
-                { text: '5.2 数列、级数与无穷过程', link: '/code/ai-math/ch5-analysis/ch5_2-sequences-series' }
+                { text: '5.2 数列、级数与无穷过程', link: '/code/ai-math/ch5-analysis/ch5_2-sequences-series' },
+                { text: '5.3 函数的极限、连续与初等函数', link: '/code/ai-math/ch5-analysis/ch5_3-continuity-elementary' },
+                { text: '5.4 一元微分学与局部近似', link: '/code/ai-math/ch5-analysis/ch5_4-differentiation' }
               ]
             }
           ]
