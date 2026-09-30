@@ -387,10 +387,11 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: '本章导览', link: '/code/ai-math/ch0-just-enough-math/' },
-                { text: '0.1 把胸片和报告变成向量', link: '/code/ai-math/ch0-just-enough-math/ch0_1-vectors-and-similarity' },
-                { text: '0.2 让向量自己变好', link: '/code/ai-math/ch0-just-enough-math/ch0_2-gradients-and-chain-rule' },
-                { text: '0.3 那个 loss 在做什么', link: '/code/ai-math/ch0-just-enough-math/ch0_3-loss-and-information' },
-                { text: '0.4 公式背后的假设', link: '/code/ai-math/ch0-just-enough-math/ch0_4-assumptions-behind-the-loss' }
+                { text: '0.1 怎么让胸片和报告可以比较', link: '/code/ai-math/ch0-just-enough-math/ch0_1-vectors-and-similarity' },
+                { text: '0.2 怎么判断模型配得对不对', link: '/code/ai-math/ch0-just-enough-math/ch0_2-from-similarity-to-loss' },
+                { text: '0.3 知道错了以后模型怎么改', link: '/code/ai-math/ch0-just-enough-math/ch0_3-gradients-and-chain-rule' },
+                { text: '0.4 为什么这个 loss 和信息有关系', link: '/code/ai-math/ch0-just-enough-math/ch0_4-information-in-the-loss' },
+                { text: '0.5 数学上的成功不代表临床上的成功', link: '/code/ai-math/ch0-just-enough-math/ch0_5-assumptions-behind-the-loss' }
               ]
             },
             {
