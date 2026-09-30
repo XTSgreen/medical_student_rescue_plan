@@ -45,3 +45,6 @@ inline_dollar_results.txt
 .cache/
 .venv/
 历史1.md
+
+# 撰写参考资料（本地留档，不入库）
+references/

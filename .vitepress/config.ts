@@ -98,27 +98,11 @@ export default defineConfig({
           items: [
             {
               text: '前端开发',
-              collapsed: true,
-              items: [
-                { text: '001 · 前端开发', link: '/code/web-dev/frontend/001-frontend' },
-                { text: '002 · HTML 语言的简单应用与网页框架结构', link: '/code/web-dev/frontend/002-html-basics' },
-                { text: '003 · HTML 语言与网页框架进阶', link: '/code/web-dev/frontend/003-html-advanced' },
-                { text: '004 · 网页可访问性与现代 HTML 特性', link: '/code/web-dev/frontend/004-html-accessibility' },
-                { text: '005 · CSS 语言与界面美化基础', link: '/code/web-dev/frontend/005-css-basics' },
-                { text: '006 · CSS 语言与界面美化进阶', link: '/code/web-dev/frontend/006-css-advanced' },
-                { text: '007 · CSS 语言与高效开发和性能管控', link: '/code/web-dev/frontend/007-css-performance' },
-                { text: '008 · JavaScript 基础', link: '/code/web-dev/frontend/008-javascript-basics' },
-                { text: '009 · JavaScript 核心深入与基础拓展', link: '/code/web-dev/frontend/009-javascript-core' },
-                { text: '010 · JavaScript 与 ES6 新特性', link: '/code/web-dev/frontend/010-javascript-es6' },
-                { text: '011 · JavaScript 中的异步编程与错误调试', link: '/code/web-dev/frontend/011-javascript-async' }
-              ]
+              link: '/code/web-dev/frontend/'
             },
             {
               text: '后端开发',
-              collapsed: true,
-              items: [
-                { text: '1 · 后端开发', link: '/code/web-dev/backend/1-backend' }
-              ]
+              link: '/code/web-dev/backend/'
             }
           ]
         },
@@ -398,6 +382,17 @@ export default defineConfig({
           text: '人工智能的数学基础',
           collapsed: false,
           items: [
+            {
+              text: '第零章 · 够用数学',
+              collapsed: false,
+              items: [
+                { text: '本章导览', link: '/code/ai-math/ch0-just-enough-math/' },
+                { text: '0.1 把胸片和报告变成向量', link: '/code/ai-math/ch0-just-enough-math/ch0_1-vectors-and-similarity' },
+                { text: '0.2 让向量自己变好', link: '/code/ai-math/ch0-just-enough-math/ch0_2-gradients-and-chain-rule' },
+                { text: '0.3 那个 loss 在做什么', link: '/code/ai-math/ch0-just-enough-math/ch0_3-loss-and-information' },
+                { text: '0.4 公式背后的假设', link: '/code/ai-math/ch0-just-enough-math/ch0_4-assumptions-behind-the-loss' }
+              ]
+            },
             {
               text: '第一章 · 线性代数',
               collapsed: false,
