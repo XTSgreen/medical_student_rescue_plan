@@ -1,48 +1,62 @@
+本项目采用代码与内容分开授权的双许可模式。
 
-授权条款
+版权所有 (c) 2026 小天使格礼（XTS-green）、木辰辰辰辰辰辰辰 及本项目贡献者
+
+一、代码许可
 --------
 
-本项目（教程）由小天使格礼（XTS-green）、木辰辰辰辰辰辰辰等创建并维护。
+本仓库中的源代码，包括但不限于 .vitepress/ 目录下的主题、组件、脚本与样式，各章节中的示例代码，以及构建脚本和配置文件，采用 MIT 许可证授权。全文如下：
 
-**使用授权**
+MIT License
 
-如您希望在商业项目、教育目的、研究项目或其他任何场景中使用、复制、修改、分发本项目的代码、内容或文档，请通过以下方式联系项目组获得明确授权：
+Copyright (c) 2026 小天使格礼（XTS-green）、木辰辰辰辰辰辰辰
 
-    邮箱：dh411424@163.com
-    QQ群：965751576
-    小天使格礼个人qq：563818131
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-在获得授权时，请注明：
-1. 您的使用目的
-2. 您计划如何使用本项目
-3. 您的项目或组织名称
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-**来源标注**
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-获得授权后，您在使用本项目时必须注明来源，包括：
-
-1. 明确标注本项目的名称"教程"
-2. 提供本项目的原始链接
-3. 注明"经项目组授权使用"
-
-**开源声明**
-
-本项目为开源项目，但不采用标准的开源协议（如 MIT、Apache、GPL 等）。本项目的开源性质仅意味着源代码和文档是公开可获取的，其使用仍需遵循上述授权条款。
-
-**免责条款**
-
-本项目按原样提供，不提供任何明示或暗示的保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，项目组不对因使用本项目而产生的任何直接、间接、偶然、特殊或后果性损害承担责任。
-
-联系方式
+二、内容许可
 --------
 
-如需授权或有任何问题，请通过以下邮箱联系项目组：
+本仓库中的教程正文与文档内容，包括但不限于 code/ 目录下的 Markdown 教程文本、图表与说明文字，采用 知识共享 署名-相同方式共享 4.0 国际许可协议（CC BY-SA 4.0）授权。
 
-    邮箱：dh411424@163.com
-    QQ群：965751576
-    小天使格礼个人qq：563818131
+协议全文：https://creativecommons.org/licenses/by-sa/4.0/legalcode
+中文说明：https://creativecommons.org/licenses/by-sa/4.0/deed.zh
+
+分享或改编本内容时，请遵守以下条件：
+
+1. 署名：注明来源为本项目（医学生自救计划，站点名“教程”）并提供原始链接
+   https://github.com/XTSgreen/medical_student_rescue_plan
+2. 相同方式共享：若基于本内容创作衍生作品，需以相同的 CC BY-SA 4.0 协议分发
+3. 允许商业使用：本内容可用于商业目的，无需单独申请授权
+
+三、免责声明
+--------
+
+本项目按“原样”提供，不提供任何明示或暗示的保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，项目组不对因使用本项目而产生的任何直接、间接、偶然、特殊或后果性损害承担责任。
+
+四、联系方式
+--------
+
+邮箱：dh411424@163.com
+QQ群：965751576
+小天使格礼个人qq：563818131
 
 最后更新日期
 -----------
 
-2026-05-06
+2026-09-29
