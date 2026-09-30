@@ -10,7 +10,7 @@ aside: false
 
 ## 子章节
 
-<a class="module-card" href="/code/web-dev/frontend/">
+<a class="module-card" href="/medical_student_rescue_plan/code/web-dev/frontend/">
   <h3>前端开发</h3>
   <p>从 HTML 的语义结构、CSS 的样式设计，到 JavaScript 的交互逻辑与 ES6 新特性。本部分共 11 节，是入门互联网开发的第一站。</p>
   <div class="module-meta">
@@ -19,7 +19,7 @@ aside: false
   </div>
 </a>
 
-<a class="module-card" href="/code/web-dev/backend/">
+<a class="module-card" href="/medical_student_rescue_plan/code/web-dev/backend/">
   <h3>后端开发</h3>
   <p>服务器端的开发实践，包含请求处理、数据存储、接口设计等基础内容。</p>
   <div class="module-meta">

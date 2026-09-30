@@ -9,12 +9,12 @@ aside: false
 
 ## 子章节
 
-<a class="module-card" href="/code/r-bioinformatics/r-language/001-r-basics">
+<a class="module-card" href="/medical_student_rescue_plan/code/r-bioinformatics/r-language/001-r-basics">
   <h3>R 语言</h3>
  
 </a>
 
-<a class="module-card" href="/code/r-bioinformatics/bioinformatics/001-computer-basics">
+<a class="module-card" href="/medical_student_rescue_plan/code/r-bioinformatics/bioinformatics/001-computer-basics">
   <h3>生物信息技术</h3>
 
 </a>

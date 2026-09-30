@@ -8,11 +8,11 @@ aside: false
 
 ## 结构
 
-<a class="module-card" href="/code/python/01-python-core-syntax/01-dev-env-and-intro/001-python-overview-and-env-setup">
+<a class="module-card" href="/medical_student_rescue_plan/code/python/01-python-core-syntax/01-dev-env-and-intro/001-python-overview-and-env-setup">
   <h3>第一层 · Python 核心语法基础</h3>
 </a>
 
-<a class="module-card" href="/code/python/02-data-science/01-numpy-foundation/001-numpy-basics-and-array-object">
+<a class="module-card" href="/medical_student_rescue_plan/code/python/02-data-science/01-numpy-foundation/001-numpy-basics-and-array-object">
   <h3>第二层 · 数据科学（NumPy 数值计算基础）</h3>
 </a>
 
