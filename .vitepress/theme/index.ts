@@ -50,6 +50,10 @@ import ConditionNumberIllusion from './components/ch1_8-数值计算与稳定性
 import MatrixFactorizationCost from './components/ch1_8-数值计算与稳定性/MatrixFactorizationCost.vue'
 import BackpropComputingGraph from './components/ch1_8-数值计算与稳定性/BackpropComputingGraph.vue'
 
+import DecisionBoundaryDemo from './components/ch1_深度学习/DecisionBoundaryDemo.vue'
+import TrainingDemo from './components/ch1_深度学习/TrainingDemo.vue'
+import HiddenLayerDemo from './components/ch1_深度学习/HiddenLayerDemo.vue'
+
 export default {
   extends: DefaultTheme,
   Layout: () => {
@@ -95,5 +99,9 @@ export default {
     app.component('ConditionNumberIllusion', ConditionNumberIllusion)
     app.component('MatrixFactorizationCost', MatrixFactorizationCost)
     app.component('BackpropComputingGraph', BackpropComputingGraph)
+
+    app.component('DecisionBoundaryDemo', DecisionBoundaryDemo)
+    app.component('TrainingDemo', TrainingDemo)
+    app.component('HiddenLayerDemo', HiddenLayerDemo)
   }
 } satisfies Theme

@@ -38,6 +38,10 @@ aside: false
 
 [向量与基本运算](/code/ai-math/ch1-linear-algebra/ch1_1-vectors) → [概率的公理化与条件概率](/code/ai-math/ch2-probability-statistics/ch2_1-probability-space) → [优化问题的语言与分类](/code/ai-math/ch3-optimization/ch3_1-optimization-problems) → [基础熵与互信息](/code/ai-math/ch4-information-theory/ch4_1-entropy-and-mutual-information) → [实数、完备性与极限的语言](/code/ai-math/ch5-analysis/ch5_1-real-numbers-limits)
 
+**想系统学习深度学习**
+
+[第 1 章 一个神经元究竟有多聪明](/code/deeplearning/ch1-how-smart-is-a-neuron)
+
 **想做网站与互联网开发**
 
 [前端开发](/code/web-dev/frontend/) → [后端开发](/code/web-dev/backend/)
@@ -66,6 +70,11 @@ Python 模块中的“医学数据处理专向技能”一层仍在建设中，�
 <a class="module-card" href="/medical_student_rescue_plan/code/ai-math/">
   <h3>人工智能的数学基础</h3>
   <p>线性代数、概率论与统计推断、最优化、信息论、数学分析五个部分，讲清算法背后的数学。</p>
+</a>
+
+<a class="module-card" href="/medical_student_rescue_plan/code/deeplearning/">
+  <h3>深度学习</h3>
+  <p>视频《从问题到模型》的配套教程，一集一章，沿原始论文展开定义、推导与数值核验。</p>
 </a>
 
 ## 关于本项目

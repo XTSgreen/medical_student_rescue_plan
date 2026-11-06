@@ -37,7 +37,7 @@ function registerAdmonitionContainers(md: any) {
 export default defineConfig({
   lang: 'zh-CN',
   title: '教程',
-  description: '教程 · 互联网开发 / R语言与生信分析 / Python编程 / 人工智能的数学基础',
+  description: '教程 · 互联网开发 / R语言与生信分析 / Python编程 / 人工智能的数学基础 / 深度学习',
 
 
   base: '/medical_student_rescue_plan/',
@@ -491,6 +491,17 @@ export default defineConfig({
                 { text: '5.12 渐近分析与特殊函数', link: '/code/ai-math/ch5-analysis/ch5_12-asymptotics-special-functions' },
                 { text: '5.13 选读：常微分方程与动力系统视角', link: '/code/ai-math/ch5-analysis/ch5_13-odes-dynamical-systems' }
               ]
+            }
+          ]
+        },
+
+        {
+          text: '深度学习',
+          collapsed: false,
+          items: [
+            {
+              text: '第一章 · 一个神经元究竟有多聪明',
+              link: '/code/deeplearning/ch1-how-smart-is-a-neuron'
             }
           ]
         }
